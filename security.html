@@ -62,18 +62,13 @@
 <p>The principles below decide every design dispute in the codebase. The architecture decision record (software-architecture-decisions.md) carries the reasoning per decision when you want the history.</p>
 <ul>
 <li>Zero-server, zero-knowledge. Keys are generated, used, and destroyed on your devices. No ciphertext ever passes through infrastructure I control, because no such infrastructure exists.</li>
-<ul>
 <li>Least trust in the remote. The sync backend is treated as hostile at every layer: it stores only padded ciphertext, and on enrolled vaults every commit carries a device signature that the receiving side verifies before accepting.</li>
-<ul>
 <li>Least privilege at every boundary. Unlocked sessions hold capability tokens, not key material. The browser extension holds a narrower token than the desktop app. Local automation tools hold narrower grants still, and none of them can receive key material.</li>
-<ul>
 <li>Fail closed. Missing keys, unknown formats, mismatched hardware, expired grants, and torn writes all refuse the operation. Every unlock path verifies the master password before any optional work runs.</li>
-<ul>
 <li>One credential. The app collects exactly one secret in its life: your master password. Any second password prompt is treated as phishing-shaped and is forbidden in the UI.</li>
-<ul>
 <li>Memory hygiene. Key material is zeroized when it is no longer needed, the vault root key is kept out of swap where the OS allows it, and lock purges keys from every active session.</li>
-<ul>
 <li>Readable source over attestations. The full source is public under GPL-3.0. Section 12 is explicit about the assurance work still owed.</li>
+</ul>
 <h2 id="3-protecting-the-vault">3. Protecting the vault</h2>
 <h3>The master password</h3>
 <p>Your master password is the only secret Baluard asks you to keep during normal use. It is never logged and never sent anywhere, since there is no one to send it to. It can touch disk in exactly one opt-in place: quick unlock, which stores it in the OS credential store (macOS keychain, Linux Secret Service, Windows Credential Manager). Only the macOS store gates every read behind biometry; the Linux and Windows stores are readable by any process running as your user, and the desktop app warns about exactly that before you enable quick unlock there. Everywhere else the password lives only in memory. Unlock derives a key encryption key (KEK) from it; the KEK exists in memory only for the duration of the unlock operation, unless you enable the session PIN, which keeps it in daemon memory for the session by design (that escrow is the feature). Afterwards the session holds derived capability tokens, and the password is gone from memory.</p>
@@ -100,12 +95,10 @@
 <p>One password bootstraps everything, through a chain where each layer only ever sees the layer above it:</p>
 <ul>
 <li>Master password, stretched through Argon2id into a 256-bit key encryption key (KEK).</li>
-<ul>
 <li>The KEK derives the subkey that seals the device private key file, an X25519 key identifying this device in the vault. This is the file hardware sealing protects.</li>
-<ul>
 <li>The device key unwraps, through HPKE (X25519 key exchange, HKDF-SHA256, AES-256-GCM), the vault's root key: 512 bits of randomness, one per vault, locked against swap while in memory.</li>
-<ul>
 <li>The root key derives the space key (for vaults shared with family or a team) and per-item keys are derived from those with HKDF-SHA256, so no two entries ever share a key.</li>
+</ul>
 <p>Every entry, folder, and attachment is sealed with AES-256-GCM under its own key, with a fresh 96-bit random nonce per write of entry data (fixed nonces were an early design; multi-device editing killed them). A few fixed-plaintext bookkeeping files, the password canary among them, use deterministic nonces, which is safe for data whose plaintext never varies. Associated data binds each ciphertext to its purpose, format version, padding tier, and, for hardware seals, the consent and handshake material, so ciphertext cannot be quietly moved between files or roles.</p>
 <p>Device keys live in epochs. Rotation (a password change, a revoked device, a suspected compromise) moves the vault to a new epoch, re-wraps the root key for every device that should survive, and stages the whole operation as a crash-safe transaction with rollback, so a dead battery mid-rotation leaves you a recoverable state rather than a bricked vault.</p>
 <h3>Recovery</h3>

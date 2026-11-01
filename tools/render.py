@@ -83,10 +83,19 @@ def slug(text):
 
 def render(md_lines):
     body, para, rows = [], [], []
+    list_open = False
+
+    def close_list():
+        nonlocal list_open
+        if list_open:
+            body.append("</ul>")
+            list_open = False
+
     def flush_para():
         if para:
             body.append("<p>" + inline(" ".join(para)) + "</p>")
             para.clear()
+
     def flush_rows():
         if not rows:
             return
@@ -106,32 +115,26 @@ def render(md_lines):
     for line in md_lines:
         s = line.rstrip("\n")
         if s.startswith("#"):
-            flush_para(); flush_rows()
+            close_list(); flush_para(); flush_rows()
             level = len(s) - len(s.lstrip("#"))
             text = s.lstrip("#").strip()
             tag = min(level, 3)
             idattr = f' id="{slug(text)}"' if level <= 2 else ""
             body.append(f"<h{tag}{idattr}>{inline(text)}</h{tag}>")
         elif s.startswith("|"):
-            flush_para(); rows.append(s)
+            close_list(); flush_para(); rows.append(s)
         elif s.startswith("- "):
             flush_para()
-            if not (body and body[-1] == "<ul>"):
+            if not list_open:
                 flush_rows()
                 body.append("<ul>")
+                list_open = True
             body.append(f"<li>{inline(s[2:])}</li>")
         elif not s.strip():
-            if para or rows:
-                flush_para(); flush_rows()
-            elif body and body[-1] == "</ul>":
-                body.append("</ul>")
+            flush_para(); flush_rows(); close_list()
         else:
-            if body and body[-1] == "<ul>":
-                body.append("</ul>")
-            para.append(s.strip())
-    flush_para(); flush_rows()
-    if body and body[-1] == "<ul>":
-        body.append("</ul>")
+            close_list(); flush_rows(); para.append(s.strip())
+    flush_para(); flush_rows(); close_list()
     return "\n".join(body)
 
 
