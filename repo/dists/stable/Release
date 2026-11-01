@@ -1,0 +1,17 @@
+Origin: Baluard
+Label: Baluard
+Suite: stable
+Codename: stable
+Architectures: amd64
+Components: main
+Description: Baluard package repository
+Date: Sun, 01 Nov 2026 23:40:34 UTC
+MD5Sum:
+ 3f88aadb45055ab92ec17120777ef508 688 main/binary-amd64/Packages
+ 713ef51fe737b8bb7a567bad0bfd15e0 455 main/binary-amd64/Packages.gz
+SHA256:
+ 3f91cccacf69f0b18a19b5e4e9be7fb19d871538c28cf4fd24aa6abfea6d235b 688 main/binary-amd64/Packages
+ 52459033f8f68e7bd246000def0f3fe525fbac7692a38921725234107a40b210 455 main/binary-amd64/Packages.gz
+SHA512:
+ 4c8281cfd9ad56548da4a5a2ec9b5e4e0224035d1f92a6d49a22463280a269430f91d082f19f4ac7a379117dccb21b434cef689027f0209cb32697e7fabfe2ed 688 main/binary-amd64/Packages
+ 9766a75e619dca23999043674a3534122b9037a3cc689d26243e4a3ee5580190d4f5bd0f94964a510ff9c584134c40cd595fb2679a8e91ac19797db4057a0199 455 main/binary-amd64/Packages.gz
