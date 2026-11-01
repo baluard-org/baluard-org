@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baluard — a password manager that answers to you, not to a server</title>
+<meta name="description" content="Baluard keeps your passwords on your devices. No account, no cloud, no subscription. Free and open source.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%232f6feb' d='M12 2l8 3v6c0 5-3.5 9.5-8 11-4.5-1.5-8-6-8-11V5l8-3z'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #ffffff; --bg-soft: #f6f8fa; --text: #1f2328; --muted: #59636e;
+    --border: #d1d9e0; --accent: #2f6feb; --accent-soft: #eaf1fe;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117; --bg-soft: #161b22; --text: #e6edf3; --muted: #9198a1;
+      --border: #30363d; --accent: #58a6ff; --accent-soft: #12233d;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.6;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 1.25rem; }
+
+  header { border-bottom: 1px solid var(--border); }
+  .nav { display: flex; align-items: center; gap: 1.5rem; padding: 0.9rem 0; }
+  .brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 1.15rem; color: var(--text); }
+  .brand:hover { text-decoration: none; }
+  .brand svg { width: 22px; height: 22px; fill: var(--accent); }
+  .nav nav { margin-left: auto; display: flex; gap: 1.25rem; }
+  .nav nav a { color: var(--muted); font-size: 0.95rem; }
+  .nav nav a:hover { color: var(--text); text-decoration: none; }
+
+  .hero { padding: 4.5rem 0 3.5rem; }
+  .hero h1 { font-size: clamp(1.9rem, 5vw, 2.9rem); line-height: 1.15; letter-spacing: -0.02em; max-width: 46rem; }
+  .hero p { margin: 1.1rem 0 1.8rem; font-size: 1.15rem; color: var(--muted); max-width: 42rem; }
+  .cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 0.65rem 1.3rem; border-radius: 8px;
+    font-weight: 600; font-size: 1rem; border: 1px solid var(--border);
+  }
+  .btn:hover { text-decoration: none; filter: brightness(1.06); }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn-ghost { color: var(--text); background: var(--bg-soft); }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; padding-bottom: 3.5rem; }
+  .card { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem 1.2rem; }
+  .card h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+  .card p { color: var(--muted); font-size: 0.92rem; }
+
+  section { padding: 2.5rem 0; border-top: 1px solid var(--border); }
+  section > .wrap > h2 { font-size: 1.6rem; letter-spacing: -0.01em; margin-bottom: 0.5rem; }
+  section > .wrap > p.lede { color: var(--muted); margin-bottom: 1.5rem; max-width: 44rem; }
+
+  .dl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; }
+  .dl {
+    display: block; background: var(--bg-soft); border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.9rem 1.1rem; color: var(--text);
+  }
+  .dl:hover { border-color: var(--accent); text-decoration: none; }
+  .dl strong { display: block; font-size: 1rem; }
+  .dl span { color: var(--muted); font-size: 0.85rem; }
+  .dl-soon { opacity: 0.55; }
+  .dl-soon strong::after { content: " · soon"; color: var(--muted); font-weight: 400; font-size: 0.85rem; }
+  .dl-note { margin-top: 0.9rem; font-size: 0.88rem; color: var(--muted); }
+
+  details { border: 1px solid var(--border); border-radius: 10px; margin-top: 1.25rem; background: var(--bg-soft); }
+  summary { cursor: pointer; padding: 0.85rem 1.1rem; font-weight: 600; }
+  details .body { padding: 0 1.1rem 1.1rem; }
+  pre {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    padding: 0.8rem 1rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.5;
+  }
+  code { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; }
+  details p, details li { font-size: 0.92rem; color: var(--muted); }
+  details ul { margin: 0.5rem 0 0; padding-left: 1.2rem; }
+
+  .sec { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1.25rem; }
+  .sec .card h3 a { color: var(--text); }
+
+  footer { border-top: 1px solid var(--border); padding: 1.5rem 0 2.5rem; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 1rem; color: var(--muted); font-size: 0.9rem; }
+  footer .wrap > :last-child { margin-left: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.5-8 11-4.5-1.5-8-6-8-11V5l8-3z"/></svg>
+      Baluard
+    </a>
+    <nav>
+      <a href="#download">Download</a>
+      <a href="#security">Security</a>
+      <a href="https://github.com/baluard-org/baluard">Source</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap hero">
+  <h1>A password manager that answers to you, not to a server.</h1>
+  <p>Baluard keeps your passwords on your devices. No account. No cloud. No subscription
+     standing between you and your data. It works offline today and it will keep working
+     offline in ten years, because everything it needs is already on your machine.</p>
+  <div class="cta">
+    <a class="btn btn-primary" href="https://github.com/baluard-org/baluard/releases/download/0.1.0/Baluard_0.1.0_amd64.AppImage">Download for Linux</a>
+    <a class="btn btn-ghost" href="security.html">How it protects you</a>
+  </div>
+</div>
+
+<div class="wrap cards">
+  <div class="card">
+    <h3>No account, no server</h3>
+    <p>Your vault lives on your device. Baluard cannot leak or lose your data because it never holds it.</p>
+  </div>
+  <div class="card">
+    <h3>Optional YubiKey seal</h3>
+    <p>Tie your vault to a hardware key so it cannot open without a physical touch, even with your password stolen.</p>
+  </div>
+  <div class="card">
+    <h3>Sync you control</h3>
+    <p>Want your vault on every device? Point Baluard at storage you own. Nobody in the middle can read it.</p>
+  </div>
+  <div class="card">
+    <h3>Free and open source</h3>
+    <p>GPL-3.0. Read the code, audit it, build it yourself. Trust is earned in public.</p>
+  </div>
+</div>
+
+<section id="download">
+  <div class="wrap">
+    <h2>Download</h2>
+    <p class="lede">Version 0.1.0, the first public beta. Links go straight to the release files.</p>
+    <div class="dl-grid">
+      <a class="dl" href="https://github.com/baluard-org/baluard/releases/download/0.1.0/Baluard_0.1.0_amd64.AppImage">
+        <strong>AppImage</strong><span>Recommended. Runs on any Linux, updates itself.</span>
+      </a>
+      <a class="dl" href="https://github.com/baluard-org/baluard/releases/download/0.1.0/Baluard_0.1.0_amd64.deb">
+        <strong>.deb</strong><span>Ubuntu and Debian</span>
+      </a>
+      <a class="dl" href="https://github.com/baluard-org/baluard/releases/download/0.1.0/Baluard-0.1.0-1.x86_64.rpm">
+        <strong>.rpm</strong><span>Fedora and openSUSE</span>
+      </a>
+      <a class="dl" href="https://github.com/baluard-org/baluard/releases/download/0.1.0/baluard-cli-0.1.0-linux-x86_64.tar.gz">
+        <strong>Command line</strong><span>baluard CLI and daemon</span>
+      </a>
+      <div class="dl dl-soon"><strong>Windows</strong><span>In development</span></div>
+      <div class="dl dl-soon"><strong>macOS</strong><span>In development</span></div>
+    </div>
+    <p class="dl-note">
+      Every file has a <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/SHA256SUMS">signed checksum manifest</a>
+      so you can verify what you downloaded.
+    </p>
+
+    <details>
+      <summary>Prefer your package manager? (Ubuntu, Debian, Fedora)</summary>
+      <div class="body">
+        <p>Install from the Baluard repository and updates arrive with your usual system updates.
+           Ubuntu and Debian:</p>
+        <pre><code>curl -fsSL https://baluard.app/repo/baluard-release.asc | sudo gpg --dearmor -o /usr/share/keyrings/baluard-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/baluard-archive-keyring.gpg] https://baluard.app/repo stable main" | sudo tee /etc/apt/sources.list.d/baluard.list
+sudo apt update &amp;&amp; sudo apt install baluard</code></pre>
+        <p>Fedora:</p>
+        <pre><code>sudo tee /etc/yum.repos.d/baluard.repo &lt;&lt;'EOF'
+[baluard]
+name=Baluard
+baseurl=https://baluard.app/repo/rpms
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://baluard.app/repo/baluard-release.asc
+EOF
+sudo dnf install baluard</code></pre>
+        <p>The repository signing key fingerprint is
+           <code>223310EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804</code>. Your system shows it
+           on first use; check it before trusting the repository.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section id="security">
+  <div class="wrap">
+    <h2>Security</h2>
+    <p class="lede">Baluard is built on a simple rule: your secrets are encrypted on your device,
+       and the keys to open them never leave it. There is no server to breach, no database of
+       everyone's passwords, no breach headline waiting to happen.</p>
+    <div class="sec">
+      <div class="card">
+        <h3>Only your master password can open your vault</h3>
+        <p>It is never sent anywhere, because there is nowhere to send it. Everything inside is
+           encrypted before it touches the disk.</p>
+      </div>
+      <div class="card">
+        <h3>A hardware key can seal the whole vault</h3>
+        <p>Enroll a YubiKey and your vault refuses to open without a physical tap, even if someone
+           learns your master password.</p>
+      </div>
+      <div class="card">
+        <h3>The whole design is written down</h3>
+        <p><a href="security.html">Read the security white paper</a>: how the encryption works, what
+           Baluard protects against, and where the honest limits are.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Baluard is free software under <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE">GPL-3.0</a>.</span>
+    <span><a href="https://github.com/baluard-org/baluard">Source code</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
