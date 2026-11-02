@@ -1113,7 +1113,7 @@
 
   /* ── Security White Paper Banner ─────────────────────────── */
   .security-feature-card {
-    background: linear-gradient(135deg, rgba(14, 18, 26, 0.95) 0%, rgba(9, 19, 21, 0.95) 100%);
+    background: var(--site-bg-surface);
     border: 1px solid var(--site-border);
     border-radius: var(--radius-xl);
     padding: 3rem;
@@ -1742,6 +1742,16 @@
             <span>Instant domain matching and one-click TOTP code filling</span>
           </li>
         </ul>
+        <div style="display: flex; gap: 0.75rem; margin-top: 1.25rem; flex-wrap: wrap;">
+          <span class="btn btn-ghost btn-sm" style="opacity: 0.75; cursor: default;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 2.18c5.42 0 9.82 4.4 9.82 9.82 0 1.95-.57 3.77-1.56 5.31l-4.57-7.91h-3.69l4.57 7.91a9.78 9.78 0 0 1-4.57 1.13c-5.42 0-9.82-4.4-9.82-9.82 0-2.31.8-4.44 2.14-6.13l3.69 6.39h3.69l-3.69-6.39a9.74 9.74 0 0 1 3.99-.31z"/></svg>
+            <span>Chromium Extension (Listing pending)</span>
+          </span>
+          <span class="btn btn-ghost btn-sm" style="opacity: 0.75; cursor: default;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 6.628 5.373 12 12 12s12-5.372 12-12c0-6.627-5.373-12-12-12zm7.74 8.58c-.375 1.547-1.144 3.013-2.144 4.143-1.077 1.217-2.476 2.062-4.04 2.443-1.564.38-3.208.232-4.686-.423a6.837 6.837 0 0 1-3.238-3.084 7.026 7.026 0 0 1-.84-3.79c.14-1.332.697-2.584 1.583-3.56.886-.977 2.072-1.636 3.37-1.874 1.298-.238 2.637-.024 3.805.607 1.168.631 2.115 1.624 2.69 2.824.288.6.48 1.242.57 1.902a4.42 4.42 0 0 1-.03 1.408c-.12.593-.38 1.15-.75 1.62-.37.47-.85.83-1.39 1.05a3.17 3.17 0 0 1-1.63.19 3.04 3.04 0 0 1-1.42-.64 2.87 2.87 0 0 1-.88-1.3 3.02 3.02 0 0 1-.08-1.57c.12-.52.39-.99.78-1.35.39-.36.88-.58 1.4-.64.52-.06 1.05.05 1.5.31.45.26.79.67.97 1.16.09.25.13.51.12.77a1.67 1.67 0 0 1-.41 1.03c-.2.22-.48.36-.78.41-.3.05-.62-.01-.88-.16a1.44 1.44 0 0 1-.55-.65 1.55 1.55 0 0 1-.08-.85c.07-.3.23-.57.47-.76.24-.19.54-.28.84-.26.3.02.58.15.78.36.2.21.3.49.28.78a1.05 1.05 0 0 1-.36.72c-.18.15-.42.22-.66.19a.88.88 0 0 1-.56-.37.94.94 0 0 1-.14-.66c.05-.24.2-.44.41-.56.21-.12.47-.13.7-.03.23.1.39.3.44.54.05.24-.03.49-.2.67-.17.18-.42.26-.66.21-.24-.05-.44-.21-.53-.44a.58.58 0 0 1 .05-.56c.09-.15.25-.23.42-.23.17 0 .33.08.42.23z"/></svg>
+            <span>Firefox Add-on (Listing pending)</span>
+          </span>
+        </div>
       </div>
     </div>
 
@@ -1821,7 +1831,7 @@
         </a>
       </div>
 
-      <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid var(--site-border); border-radius: 10px; padding: 1.25rem;">
+      <div style="background: var(--site-bg-elevated); border: 1px solid var(--site-border); border-radius: 10px; padding: 1.25rem;">
         <table class="crypto-spec-table">
           <tr>
             <td class="spec-name">Vault Cipher</td>
@@ -1978,6 +1988,42 @@ sudo dnf install baluard</code></pre>
         </p>
       </div>
     </details>
+
+    <!-- Browser Extensions Section -->
+    <div style="margin-top: 3rem;">
+      <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--site-text); margin-bottom: 0.5rem;">Browser Extensions</h3>
+      <p style="color: var(--site-text-secondary); font-size: 0.95rem; margin-bottom: 1.25rem;">
+        MV3 companions that talk directly to the local `baluard-daemon` via native messaging. Strict origin matching, zero remote telemetry.
+      </p>
+
+      <div class="dl-options-grid">
+        <!-- Firefox Extension -->
+        <div class="dl-card dl-card-disabled">
+          <div>
+            <div class="dl-card-tag">Firefox / LibreWolf / Floorp</div>
+            <div class="dl-card-name">Firefox Add-on</div>
+            <div class="dl-card-desc">MV3 extension with native messaging host bridge and origin matching.</div>
+          </div>
+          <div class="dl-card-footer">
+            <span style="color: var(--site-text-muted);">Add-on store listing pending</span>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem;">MV3</span>
+          </div>
+        </div>
+
+        <!-- Chrome / Chromium Extension -->
+        <div class="dl-card dl-card-disabled">
+          <div>
+            <div class="dl-card-tag">Chrome / Brave / Edge / Vivaldi</div>
+            <div class="dl-card-name">Chromium Extension</div>
+            <div class="dl-card-desc">MV3 companion with inline autofill and local capability-token authentication.</div>
+          </div>
+          <div class="dl-card-footer">
+            <span style="color: var(--site-text-muted);">Web Store listing pending</span>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem;">MV3</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div style="margin-top: 1.5rem; text-align: center; font-size: 0.9rem; color: #64748b;">
       Every release includes a <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/SHA256SUMS" target="_blank" rel="noopener noreferrer">signed SHA256SUMS manifest</a> with cryptographic signatures.
