@@ -3,7 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ config.title }}</title>
+  {%- set og_title = config.title -%}
+  {%- set og_description = config.description -%}
+  {%- set og_url = current_url -%}
+  {%- if page -%}{%- set og_title = page.title | default(value=config.title) -%}{%- set og_description = page.description | default(value=config.description) -%}{%- set og_url = page.permalink -%}{%- endif -%}
+  {%- if section -%}{%- set og_title = section.title -%}{%- set og_url = section.permalink -%}{%- endif %}
+  <title>{{ og_title }}</title>
   <meta name="description" content="{{ config.description }}">
 
   <!-- Resolves the display language before first paint; the deferred i18n.js swap would otherwise flash English -->
@@ -38,11 +43,20 @@
 
   <!-- Open Graph / Meta -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ config.base_url }}/">
-  <meta property="og:title" content="{{ config.title }}">
-  <meta property="og:description" content="{{ config.description }}">
-  <meta property="og:image" content="{{ config.base_url }}/assets/baluard-lock-l4-svg-512.png">
+  <meta property="og:site_name" content="Baluard">
+  <meta property="og:url" content="{{ og_url }}">
+  <meta property="og:title" content="{{ og_title }}">
+  <meta property="og:description" content="{{ og_description }}">
+  <meta property="og:image" content="{{ config.base_url }}/assets/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Baluard: blackletter wordmark beside a lime padlock emblem on a dark teal background.">
+  <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ og_title }}">
+  <meta name="twitter:description" content="{{ og_description }}">
+  <meta name="twitter:image" content="{{ config.base_url }}/assets/social-card.png">
+  <meta name="twitter:image:alt" content="Baluard: blackletter wordmark beside a lime padlock emblem on a dark teal background.">
   <link rel="help" type="text/plain" href="/llms.txt" title="LLM context">
 
   <style>

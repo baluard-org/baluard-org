@@ -22,7 +22,12 @@ build:
 	cp site/public/sitemap.xml ./sitemap.xml
 	mkdir -p ./assets
 	rsync -a site/public/assets/ ./assets/
+	test -f site/static/assets/social-card.png || ./scripts/social-card.sh
 	@echo "Build complete: index.html, security, ai-instructions, llms.txt, and assets/ updated."
+
+# Regenerate the 1200x630 social card (og:image) into site/static/assets/
+social-card:
+	./scripts/social-card.sh
 
 # Sync security white paper markdown from the main Baluard repository
 sync-paper:
