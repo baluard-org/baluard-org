@@ -1,4 +1,4 @@
 +++
-title = "Baluard: No one can take it away. Including us."
+title = "Baluard | The Git-Native Password Manager"
 template = "index.html"
 +++
