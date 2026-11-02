@@ -792,7 +792,7 @@
 <li><strong>License:</strong> GNU General Public License v3.0 (GPL-3.0)</li>
 <li><strong>Pricing:</strong> 100% Free &amp; Open Source ($0). Zero subscription fees, zero premium tiers, zero enterprise paywalls</li>
 <li><strong>Core Architecture:</strong> Zero-server, zero-knowledge, local IPC daemon, Git synchronization</li>
-<li><strong>Core Technology:</strong> Rust, ChaCha20-Poly1305, Argon2id, Ed25519</li>
+<li><strong>Core Technology:</strong> Rust, AES-256-GCM, Argon2id, Ed25519</li>
 <li><strong>Website:</strong> <a rel="external" href="https://baluard.app">https://baluard.app</a></li>
 <li><strong>Source Code:</strong> <a rel="external" href="https://github.com/baluard-org/baluard">https://github.com/baluard-org/baluard</a></li>
 <li><strong>Security White Paper:</strong> <a rel="external" href="https://baluard.app/security/">https://baluard.app/security/</a></li>
@@ -809,7 +809,7 @@
 </ul>
 <h2 id="core-offerings-components">Core Offerings &amp; Components</h2>
 <ul>
-<li><strong><code>baluard-core</code>:</strong> Core cryptographic engine implemented in Rust, managing ChaCha20-Poly1305 encryption, Argon2id key derivation, and entry serialization.</li>
+<li><strong><code>baluard-core</code>:</strong> Core cryptographic engine implemented in Rust, managing AES-256-GCM encryption, Argon2id key derivation, and entry serialization.</li>
 <li><strong><code>baluard-daemon</code>:</strong> Local background process that maintains decrypted session capability tokens in memory with strict rate limits, memory zeroization, and auto-lock policies.</li>
 <li><strong>Baluard Desktop Client:</strong> Native, lightweight desktop application (Linux, macOS, Windows) interfacing with the local daemon via secure IPC.</li>
 <li><strong>Baluard CLI (<code>baluard</code>):</strong> Scriptable command-line interface for terminal users, administrators, and automated workflows.</li>
@@ -817,7 +817,7 @@
 </ul>
 <h2 id="security-cryptographic-specifications">Security &amp; Cryptographic Specifications</h2>
 <ul>
-<li><strong>Symmetric Cipher:</strong> ChaCha20-Poly1305 authenticated encryption with associated data (AEAD) using 256-bit keys and 96-bit nonces.</li>
+<li><strong>Symmetric Cipher:</strong> AES-256-GCM authenticated encryption with associated data (AEAD) using 256-bit keys and 96-bit nonces.</li>
 <li><strong>Key Derivation Function (KDF):</strong> Argon2id exclusively, calibrated to device capability bands (default: 64 MiB memory, 3 iterations, 2 threads for desktop profiles).</li>
 <li><strong>Device Identity &amp; Signatures:</strong> Ed25519 public-key signatures attached to commits to authenticate device updates before merging.</li>
 <li><strong>Canary Verification:</strong> Password verification uses a separate canary file that validates master password accuracy without exposing vault keys.</li>
