@@ -632,15 +632,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2.25rem;
+    gap: 2.5rem;
     transform-style: preserve-3d;
     transform-origin: center center;
-    transform: rotateY(-15deg) rotateX(4deg);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .showcase-pivot:hover {
-    transform: rotateY(-12deg) rotateX(2deg);
   }
 
   /* Linux Desktop Window */
@@ -652,8 +646,12 @@
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 28px 70px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(179, 229, 92, 0.05);
-    transform: translateZ(0);
-    transition: box-shadow 0.3s ease;
+    transform: rotateY(14deg) rotateX(3deg);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  }
+
+  .showcase-desktop:hover {
+    transform: rotateY(10deg) rotateX(1deg);
   }
 
   .desktop-titlebar {
@@ -734,8 +732,12 @@
   .showcase-mobile {
     flex: 0 0 270px;
     width: 270px;
-    transform: translateZ(40px) translateY(14px);
-    transition: transform 0.3s ease;
+    transform: rotateY(-15deg) rotateX(4deg) translateZ(30px) translateY(14px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  }
+
+  .showcase-mobile:hover {
+    transform: rotateY(-11deg) rotateX(2deg) translateZ(40px) translateY(10px);
   }
 
   .pixel-phone {
@@ -1181,6 +1183,7 @@
       flex: 0 0 auto;
       width: 100%;
       max-width: 100%;
+      transform: none !important;
     }
     .showcase-mobile {
       flex: 0 0 auto;
