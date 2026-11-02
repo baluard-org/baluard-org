@@ -1,0 +1,1745 @@
+{% extends "base.html" %}
+
+{% block head_extra %}
+<style>
+  /* ── Hero Section ────────────────────────────────────────── */
+  .hero-section {
+    padding: 5rem 0 3.5rem;
+    position: relative;
+  }
+
+  .hero-content {
+    max-width: 820px;
+    margin: 0 auto 3.5rem;
+    text-align: center;
+  }
+
+  .hero-badge-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.35rem 0.9rem;
+    background: var(--site-bg-surface);
+    border: 1px solid var(--site-border);
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    color: var(--site-text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--app-primary);
+    box-shadow: 0 0 8px var(--app-primary);
+  }
+
+  .hero-title {
+    font-size: clamp(2.3rem, 5.2vw, 3.8rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    color: var(--site-text);
+    margin-bottom: 1.25rem;
+    text-wrap: balance;
+  }
+
+  .hero-description {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    line-height: 1.6;
+    color: var(--site-text-secondary);
+    max-width: 44rem;
+    margin: 0 auto 2.25rem;
+    text-wrap: pretty;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .trust-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.8rem;
+    flex-wrap: wrap;
+    font-size: 0.88rem;
+    color: var(--site-text-muted);
+  }
+
+  .trust-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .trust-item svg {
+    color: var(--app-primary);
+  }
+
+  /* ── Interactive App Showcase ────────────────────────────── */
+  .app-preview-wrapper {
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto;
+    border-radius: var(--radius-xl);
+    padding: 2px;
+    background: linear-gradient(180deg, #1d3a3d 0%, rgba(29, 58, 61, 0.2) 100%);
+    box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px rgba(179, 229, 92, 0.04);
+  }
+
+  .app-frame {
+    background: var(--app-bg);
+    border-radius: calc(var(--radius-xl) - 2px);
+    overflow: hidden;
+    color: var(--app-text);
+    display: flex;
+    flex-direction: column;
+    min-height: 560px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* App Window Titlebar */
+  .app-titlebar {
+    background: var(--app-sidebar);
+    border-bottom: 1px solid var(--app-border);
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    user-select: none;
+  }
+
+  .window-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .control-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+  }
+  .dot-red { background: #ef4444; opacity: 0.85; }
+  .dot-yellow { background: #facc15; opacity: 0.85; }
+  .dot-green { background: #10b981; opacity: 0.85; }
+
+  .app-titlebar-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--app-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .app-titlebar-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--app-primary);
+  }
+
+  .app-sync-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--app-primary);
+    animation: pulse-green 2.5s infinite;
+  }
+
+  @keyframes pulse-green {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.9); }
+  }
+
+  /* 3-Column App Body */
+  .app-body {
+    display: grid;
+    grid-template-columns: 210px 310px 1fr;
+    flex: 1;
+    min-height: 520px;
+    background: var(--app-bg);
+  }
+
+  /* Pane 1: Sidebar */
+  .app-sidebar {
+    background: var(--app-sidebar);
+    border-right: 1px solid var(--app-border);
+    padding: 1rem 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .vault-selector-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    background: var(--app-card);
+    border: 1px solid var(--app-border);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--app-text);
+  }
+
+  .sidebar-section h5 {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--app-text-muted);
+    margin-bottom: 0.4rem;
+    padding: 0 0.5rem;
+  }
+
+  .sidebar-nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sidebar-nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.4rem 0.6rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    color: var(--app-text-secondary);
+    cursor: default;
+    transition: background 0.12s;
+  }
+
+  .sidebar-nav-item.active {
+    background: rgba(179, 229, 92, 0.12);
+    color: var(--app-primary);
+    font-weight: 600;
+  }
+
+  .sidebar-nav-item .count {
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--app-text-muted);
+  }
+
+  .sidebar-footer {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--app-border);
+    font-size: 0.78rem;
+    color: var(--app-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  /* Pane 2: Cipher List */
+  .app-cipher-list {
+    background: var(--app-list);
+    border-right: 1px solid var(--app-border);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cipher-search-bar {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--app-border);
+  }
+
+  .search-input-mock {
+    width: 100%;
+    padding: 0.45rem 0.7rem;
+    background: var(--app-bg);
+    border: 1px solid var(--app-border);
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem;
+    color: var(--app-text);
+  }
+
+  .cipher-items-scroll {
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .cipher-card {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+    border: none;
+    border-bottom: 1px solid rgba(29, 58, 61, 0.5);
+    background: transparent;
+    padding: 0.75rem 0.9rem;
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+
+  .cipher-card:hover {
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .cipher-card.active {
+    background: var(--app-detail);
+    border-left: 2px solid var(--app-primary);
+  }
+
+  .cipher-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.2rem;
+  }
+
+  .cipher-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--app-text);
+  }
+
+  .cipher-badge {
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    background: rgba(252, 211, 77, 0.15);
+    color: var(--app-warning);
+    border: 1px solid rgba(252, 211, 77, 0.3);
+  }
+
+  .badge-totp {
+    background: rgba(179, 229, 92, 0.15);
+    color: var(--app-primary);
+    border-color: rgba(179, 229, 92, 0.3);
+  }
+
+  .badge-key {
+    background: rgba(207, 198, 249, 0.15);
+    color: var(--app-accent);
+    border-color: rgba(207, 198, 249, 0.3);
+  }
+
+  .cipher-subtext {
+    font-size: 0.8rem;
+    color: var(--app-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Pane 3: Detail View */
+  .app-detail-view {
+    background: var(--app-detail);
+    padding: 1.5rem 1.75rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .detail-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--app-border);
+  }
+
+  .detail-brand-lockup {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .detail-icon-box {
+    width: 44px;
+    height: 44px;
+    background: var(--app-card);
+    border: 1px solid var(--app-border);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--app-primary);
+  }
+
+  .detail-title-area h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--app-text);
+  }
+
+  .detail-title-area p {
+    font-size: 0.84rem;
+    color: var(--app-text-muted);
+  }
+
+  .field-row {
+    background: var(--app-card);
+    border: 1px solid var(--app-border);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .field-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--app-text-muted);
+    font-weight: 600;
+  }
+
+  .field-val-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .field-val {
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    color: var(--app-text);
+    word-break: break-all;
+  }
+
+  .copy-action-btn {
+    background: rgba(29, 58, 61, 0.6);
+    border: 1px solid var(--app-border);
+    border-radius: 4px;
+    color: var(--app-text-secondary);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.12s;
+  }
+
+  .copy-action-btn:hover {
+    background: var(--app-primary);
+    color: var(--app-primary-text);
+  }
+
+  /* TOTP Live Countdown Box */
+  .totp-box {
+    background: rgba(179, 229, 92, 0.06);
+    border: 1px solid rgba(179, 229, 92, 0.3);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .totp-digits {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--app-primary);
+  }
+
+  .totp-timer-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    color: var(--app-text-secondary);
+  }
+
+  .timer-ring {
+    width: 22px;
+    height: 22px;
+    transform: rotate(-90deg);
+  }
+
+  .timer-ring circle {
+    fill: transparent;
+    stroke: var(--app-primary);
+    stroke-width: 3;
+    stroke-dasharray: 56;
+    stroke-dashoffset: 14;
+    transition: stroke-dashoffset 1s linear;
+  }
+
+  /* Security Invariant Bar */
+  .commit-proof-bar {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--app-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--app-text-muted);
+    font-family: var(--font-mono);
+  }
+
+  .commit-badge {
+    color: var(--app-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  /* ── Core Architecture Section ───────────────────────────── */
+  section.content-section {
+    padding: 5.5rem 0;
+    border-top: 1px solid var(--site-border);
+  }
+
+  .section-intro {
+    max-width: 720px;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-eyebrow {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--site-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-heading {
+    font-size: clamp(1.8rem, 3.8vw, 2.6rem);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+    color: var(--site-text);
+    margin-bottom: 1rem;
+    text-wrap: balance;
+  }
+
+  .section-lede {
+    font-size: 1.12rem;
+    line-height: 1.6;
+    color: var(--site-text-secondary);
+    text-wrap: pretty;
+  }
+
+  .arch-diagram-card {
+    background: var(--site-bg-surface);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .arch-flow-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    position: relative;
+  }
+
+  @media (max-width: 860px) {
+    .arch-flow-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .arch-node {
+    background: var(--site-bg-elevated);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .arch-node-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--app-primary);
+    font-weight: 600;
+  }
+
+  .arch-node h4 {
+    font-size: 1.15rem;
+    color: var(--site-text);
+    font-weight: 700;
+  }
+
+  .arch-node p {
+    font-size: 0.92rem;
+    color: var(--site-text-secondary);
+    line-height: 1.55;
+  }
+
+  /* ── Deep Capabilities (Asymmetrical) ────────────────────── */
+  .capabilities-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 1.75rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .capabilities-grid-reverse {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 1.75rem;
+  }
+
+  @media (max-width: 860px) {
+    .capabilities-grid, .capabilities-grid-reverse {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .feature-panel {
+    background: var(--site-bg-surface);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .feature-panel-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .feature-panel-header h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--site-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-panel-header p {
+    color: var(--site-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .feature-spec-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .spec-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    color: var(--site-text-secondary);
+  }
+
+  .spec-item svg {
+    color: var(--app-primary);
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+  }
+
+  /* ── Interactive CLI Section ─────────────────────────────── */
+  .terminal-wrapper {
+    background: #050608;
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    font-family: var(--font-mono);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  }
+
+  .terminal-tabs {
+    display: flex;
+    align-items: center;
+    background: #090c12;
+    border-bottom: 1px solid var(--site-border);
+    overflow-x: auto;
+  }
+
+  .term-tab {
+    padding: 0.65rem 1.1rem;
+    background: transparent;
+    border: none;
+    border-right: 1px solid var(--site-border);
+    color: var(--site-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.12s;
+    white-space: nowrap;
+  }
+
+  .term-tab:hover {
+    color: var(--site-text);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .term-tab.active {
+    color: var(--app-primary);
+    background: #050608;
+    border-bottom: 1px solid #050608;
+    font-weight: 600;
+  }
+
+  .terminal-screen {
+    padding: 1.5rem;
+    min-height: 280px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #e2e8f0;
+    overflow-x: auto;
+  }
+
+  .term-line {
+    margin-bottom: 0.25rem;
+  }
+
+  .term-prompt {
+    color: var(--app-primary);
+    font-weight: 700;
+  }
+
+  .term-out-dim {
+    color: #64748b;
+  }
+
+  .term-out-highlight {
+    color: var(--app-primary);
+  }
+
+  .term-out-warning {
+    color: var(--app-warning);
+  }
+
+  /* ── Security White Paper Banner ─────────────────────────── */
+  .security-feature-card {
+    background: linear-gradient(135deg, rgba(14, 18, 26, 0.95) 0%, rgba(9, 19, 21, 0.95) 100%);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-xl);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (max-width: 860px) {
+    .security-feature-card {
+      grid-template-columns: 1fr;
+      padding: 2rem;
+    }
+  }
+
+  .crypto-spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .crypto-spec-table td {
+    padding: 0.65rem 0.75rem;
+    border-bottom: 1px solid var(--site-border-subtle);
+  }
+
+  .crypto-spec-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .crypto-spec-table .spec-name {
+    color: var(--site-text-muted);
+    font-weight: 500;
+  }
+
+  .crypto-spec-table .spec-value {
+    font-family: var(--font-mono);
+    color: var(--app-primary);
+    text-align: right;
+  }
+
+  /* ── Download Hub ────────────────────────────────────────── */
+  .dl-options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .dl-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--site-bg-surface);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-md);
+    padding: 1.3rem;
+    color: var(--site-text);
+    transition: all 0.15s ease;
+  }
+
+  .dl-card:hover {
+    border-color: var(--site-accent);
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  .dl-card-tag {
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    color: var(--site-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+
+  .dl-card-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .dl-card-desc {
+    font-size: 0.85rem;
+    color: var(--site-text-secondary);
+    margin-bottom: 1rem;
+  }
+
+  .dl-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--site-accent);
+  }
+
+  .dl-card-disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  .dl-card-disabled:hover {
+    border-color: var(--site-border);
+    transform: none;
+  }
+
+  /* Package Manager Details */
+  .repo-accordion {
+    background: var(--site-bg-surface);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-lg);
+    margin-top: 1.5rem;
+    overflow: hidden;
+  }
+
+  .repo-accordion summary {
+    padding: 1.1rem 1.4rem;
+    font-weight: 600;
+    font-size: 0.98rem;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .repo-accordion summary:hover {
+    background: var(--site-bg-elevated);
+  }
+
+  .repo-accordion-body {
+    padding: 0 1.4rem 1.5rem;
+    border-top: 1px solid var(--site-border-subtle);
+  }
+
+  .repo-snippet-box {
+    margin: 1rem 0;
+    position: relative;
+  }
+
+  .repo-snippet-box pre {
+    background: #050608;
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.1rem;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: #e2e8f0;
+    overflow-x: auto;
+  }
+
+  /* ── Comprehensive Responsive Breakpoints ────────────────── */
+  @media (max-width: 860px) {
+    .app-body {
+      grid-template-columns: 260px 1fr;
+    }
+    .app-sidebar {
+      display: none !important;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .app-preview-wrapper {
+      padding: 1px;
+      border-radius: var(--radius-lg);
+    }
+    .app-frame {
+      border-radius: calc(var(--radius-lg) - 1px);
+      min-height: auto;
+    }
+    .app-titlebar {
+      height: auto;
+      padding: 0.6rem 0.85rem;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .app-titlebar-title {
+      font-size: 0.72rem;
+    }
+    .app-body {
+      display: flex;
+      flex-direction: column;
+      min-height: auto;
+    }
+    .app-sidebar {
+      display: none !important;
+    }
+    .app-cipher-list {
+      border-right: none;
+      border-bottom: 1px solid var(--app-border);
+      max-height: 190px;
+    }
+    .app-detail-view {
+      padding: 1.25rem 1rem;
+      gap: 1.1rem;
+    }
+    .totp-digits {
+      font-size: 1.25rem;
+    }
+    .hero-cta-group .btn {
+      width: 100%;
+    }
+    .trust-strip {
+      flex-direction: column;
+      gap: 0.6rem;
+      align-items: flex-start;
+      margin: 0 auto;
+      display: inline-flex;
+    }
+    .arch-diagram-card {
+      padding: 1.5rem 1.25rem;
+    }
+    .feature-panel {
+      padding: 1.5rem 1.25rem;
+    }
+    .terminal-screen {
+      padding: 1.1rem 0.9rem;
+      font-size: 0.8rem;
+    }
+    .security-feature-card {
+      padding: 1.75rem 1.25rem;
+    }
+  }
+</style>
+{% endblock head_extra %}
+
+{% block content %}
+<!-- ── HERO SECTION ────────────────────────────────────────── -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        No one can take it away. Including us.
+      </h1>
+
+      <p class="hero-description">
+        We don't want custody of your passwords; and we don't want anyone else having it either. Your vault stays encrypted on the hardware you own, versioned with git, on your server of choice. No Baluard account to lock, no servers to breach, no middleman.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#download" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Download for Linux (v{{ config.extra.version }})</span>
+        </a>
+        <a href="/security.html" class="btn btn-ghost">
+          <span>Read Security White Paper &rarr;</span>
+        </a>
+      </div>
+
+      <div class="trust-strip">
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>100% Offline Capable</span>
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>GPL-3.0 Free Software</span>
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Size-Padded Buckets</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── INTERACTIVE APP PREVIEW ─────────────────────────── -->
+    <div class="app-preview-wrapper" id="app-demo-window">
+      <div class="app-frame" role="region" aria-label="Baluard App Interface Preview">
+        <!-- Titlebar -->
+        <div class="app-titlebar">
+          <div class="window-controls" aria-hidden="true">
+            <span class="control-dot dot-red"></span>
+            <span class="control-dot dot-yellow"></span>
+            <span class="control-dot dot-green"></span>
+          </div>
+          <div class="app-titlebar-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color: #b3e55c;" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.5-8 11-4.5-1.5-8-6-8-11V5l8-3z"/></svg>
+            <span>Baluard: personal-vault.git</span>
+          </div>
+          <div class="app-titlebar-status">
+            <span class="app-sync-dot"></span>
+            <span>SYNCED (HEAD 4f29a0b)</span>
+          </div>
+        </div>
+
+        <!-- 3-Column Layout -->
+        <div class="app-body">
+          <!-- Pane 1: Sidebar -->
+          <div class="app-sidebar">
+            <div class="vault-selector-btn">
+              <span>Personal Vault</span>
+              <span style="font-size: 0.7rem; color: #b3e55c;">ACTIVE</span>
+            </div>
+
+            <div class="sidebar-section">
+              <h5>Categories</h5>
+              <ul class="sidebar-nav-list">
+                <li class="sidebar-nav-item active">
+                  <span>Logins</span>
+                  <span class="count">64</span>
+                </li>
+                <li class="sidebar-nav-item">
+                  <span>Passkeys</span>
+                  <span class="count">16</span>
+                </li>
+                <li class="sidebar-nav-item">
+                  <span>Cards</span>
+                  <span class="count">4</span>
+                </li>
+                <li class="sidebar-nav-item">
+                  <span>Secure Notes</span>
+                  <span class="count">8</span>
+                </li>
+                <li class="sidebar-nav-item">
+                  <span>SSH Keys</span>
+                  <span class="count">3</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="sidebar-section">
+              <h5>Folders</h5>
+              <ul class="sidebar-nav-list">
+                <li class="sidebar-nav-item">
+                  <span>Finance</span>
+                  <span class="count">14</span>
+                </li>
+                <li class="sidebar-nav-item">
+                  <span>Infrastructure</span>
+                  <span class="count">9</span>
+                </li>
+                <li class="sidebar-nav-item">
+                  <span>Family Space</span>
+                  <span class="count">7</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="sidebar-footer">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              <span>Daemon IPC / Auto-lock: 60m</span>
+            </div>
+          </div>
+
+          <!-- Pane 2: Cipher List (Interactive) -->
+          <div class="app-cipher-list">
+            <div class="cipher-search-bar">
+              <input type="text" class="search-input-mock" value="Filter ciphers (100 total)..." readonly>
+            </div>
+
+            <div class="cipher-items-scroll" id="cipher-items-container">
+              <!-- Item 1: GitHub -->
+              <button type="button" class="cipher-card active" data-id="github" onclick="selectCipher('github')">
+                <div class="cipher-card-header">
+                  <span class="cipher-name">GitHub Production</span>
+                  <span class="cipher-badge badge-totp">TOTP</span>
+                </div>
+                <div class="cipher-subtext">octocat_dev / github.com</div>
+              </button>
+
+              <!-- Item 2: ProtonMail -->
+              <button type="button" class="cipher-card" data-id="proton" onclick="selectCipher('proton')">
+                <div class="cipher-card-header">
+                  <span class="cipher-name">Proton Mail Secure</span>
+                  <span class="cipher-badge badge-key">PASSKEY</span>
+                </div>
+                <div class="cipher-subtext">user@example.com</div>
+              </button>
+
+              <!-- Item 3: AWS Root -->
+              <button type="button" class="cipher-card" data-id="aws" onclick="selectCipher('aws')">
+                <div class="cipher-card-header">
+                  <span class="cipher-name">AWS Infra Root</span>
+                  <span class="cipher-badge badge-totp">FIDO2 SEALED</span>
+                </div>
+                <div class="cipher-subtext">admin@infra.internal</div>
+              </button>
+
+              <!-- Item 4: Server LUKS -->
+              <button type="button" class="cipher-card" data-id="luks" onclick="selectCipher('luks')">
+                <div class="cipher-card-header">
+                  <span class="cipher-name">Homelab Backup LUKS</span>
+                  <span class="cipher-badge">NOTE</span>
+                </div>
+                <div class="cipher-subtext">Raw AES-XTS disk key</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Pane 3: Detail View -->
+          <div class="app-detail-view" id="cipher-detail-view">
+            <div class="detail-header">
+              <div class="detail-brand-lockup">
+                <div class="detail-icon-box" id="detail-icon">GH</div>
+                <div class="detail-title-area">
+                  <h3 id="detail-title">GitHub Production</h3>
+                  <p id="detail-url">https://github.com</p>
+                </div>
+              </div>
+              <div class="detail-actions">
+                <button type="button" class="btn btn-lime btn-sm" id="copy-pass-btn" onclick="triggerCopy('password', this)">Copy Password</button>
+              </div>
+            </div>
+
+            <!-- Username Field -->
+            <div class="field-row">
+              <span class="field-label">Username</span>
+              <div class="field-val-wrap">
+                <span class="field-val" id="detail-user">octocat_dev</span>
+                <button type="button" class="copy-action-btn" onclick="triggerCopy('username', this)">Copy</button>
+              </div>
+            </div>
+
+            <!-- Password Field -->
+            <div class="field-row">
+              <span class="field-label">Password</span>
+              <div class="field-val-wrap">
+                <span class="field-val" id="detail-pass">************************</span>
+                <button type="button" class="copy-action-btn" id="reveal-btn" onclick="togglePasswordReveal()">Reveal</button>
+              </div>
+            </div>
+
+            <!-- TOTP Field -->
+            <div class="totp-box" id="detail-totp-box">
+              <div>
+                <div class="field-label" style="color: #b3e55c; margin-bottom: 0.2rem;">One-Time Password (TOTP)</div>
+                <div class="totp-digits" id="totp-value">749 204</div>
+              </div>
+              <div class="totp-timer-indicator">
+                <svg class="timer-ring" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="9"></circle>
+                </svg>
+                <span id="totp-seconds">18s</span>
+              </div>
+            </div>
+
+            <!-- Commit Proof -->
+            <div class="commit-proof-bar">
+              <span class="commit-badge">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Signed commit by device dc1a3f4
+              </span>
+              <span>Argon2id + AES-256-GCM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ARCHITECTURE SECTION ────────────────────────────────── -->
+<section id="architecture" class="content-section">
+  <div class="container">
+    <div class="section-intro">
+      <div class="section-eyebrow">Zero-Server Architecture</div>
+      <h2 class="section-heading">Why the architecture is the security model.</h2>
+      <p class="section-lede">
+        Hosted password managers concentrate risk into a single vendor database; and venture capital can change the rules, alter licenses, or take your workflow away without prior notice. Baluard keeps your vault in an encrypted git repository on hardware you control, with no central database to breach and no investors between you and your data.
+      </p>
+    </div>
+
+    <div class="arch-diagram-card">
+      <div class="arch-flow-grid">
+        <div class="arch-node">
+          <div class="arch-node-tag">LAYER 1 / CRYPTOGRAPHIC STORAGE</div>
+          <h4>Padded-Bucket Git Vault</h4>
+          <p>
+            Your vault entries are padded into 5 fixed size tiers (5 KB, 30 KB, 100 KB, 250 KB, 2 MB) to prevent traffic analysis and ciphertext-length deduction. Every commit is cryptographically signed by your device identity.
+          </p>
+        </div>
+
+        <div class="arch-node">
+          <div class="arch-node-tag">LAYER 2 / LOCAL IPC DAEMON</div>
+          <h4>Zero-Privilege Daemon</h4>
+          <p>
+            A background orchestration daemon in Rust (`baluard-daemon`) maintains state over a local Unix domain socket. Clients receive short-lived capability tokens, never raw vault root keys.
+          </p>
+        </div>
+
+        <div class="arch-node">
+          <div class="arch-node-tag">LAYER 3 / HOSTILE REMOTE SYNC</div>
+          <h4>Untrusted Git Providers</h4>
+          <p>
+            Sync to GitHub, GitLab, Codeberg, or your private SSH server. The remote host sees only opaque hashed paths and encrypted bytes. Even a complete breach of the git host reveals zero credentials.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CORE CAPABILITIES ───────────────────────────────────── -->
+<section id="features" class="content-section">
+  <div class="container">
+    <div class="section-intro">
+      <div class="section-eyebrow">Sovereign Capabilities</div>
+      <h2 class="section-heading">Engineered for sovereignty and longevity.</h2>
+      <p class="section-lede">
+        Built for autonomy, durability, and device-level custody.
+      </p>
+    </div>
+
+    <!-- Capability 1 -->
+    <div class="capabilities-grid">
+      <div class="feature-panel">
+        <div class="feature-panel-header">
+          <h3>Hardware Key Vault Sealing</h3>
+          <p>
+            Enroll a YubiKey or FIDO2 hardware token to seal the entire vault. Even if an adversary extracts your master password, the vault refuses to decrypt without a physical touch on your security key.
+          </p>
+        </div>
+        <ul class="feature-spec-list">
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Hardware challenge-response via FIDO2 hmac-secret</span>
+          </li>
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Canary verification validates authentication state without exposing master keys</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="feature-panel">
+        <div class="feature-panel-header">
+          <h3>All 9 Cipher Types + Passkeys</h3>
+          <p>
+            Store logins (with embedded passkeys), cards, identities, SSH keys, bank accounts, driver licenses, passports, secure notes, and code signing keys.
+          </p>
+        </div>
+        <ul class="feature-spec-list">
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>RFC 6238 compliant integrated TOTP code generator</span>
+          </li>
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Native SSH and code signing key storage with public key export</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Capability 2 -->
+    <div class="capabilities-grid-reverse">
+      <div class="feature-panel">
+        <div class="feature-panel-header">
+          <h3>Spaces &amp; Family Collaboration</h3>
+          <p>
+            Share specific credential collections with family or team members without a central identity provider. Uses cryptographic invite codes and device-to-device grants.
+          </p>
+        </div>
+        <ul class="feature-spec-list">
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Phrase-only emergency recovery kit for estate and family continuity</span>
+          </li>
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Role-based access grants: Owner, Admin, Editor, and Viewer</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="feature-panel">
+        <div class="feature-panel-header">
+          <h3>Browser Extension &amp; Autofill</h3>
+          <p>
+            Native browser integration for Firefox, Chrome, and Chromium-based browsers. Autofill credentials, capture new logins, and sign into WebAuthn passkeys directly through local daemon IPC.
+          </p>
+        </div>
+        <ul class="feature-spec-list">
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Direct local socket communication with zero cloud telemetry or analytics</span>
+          </li>
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Instant domain matching and one-click TOTP code filling</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Capability 3 -->
+    <div class="capabilities-grid" style="margin-top: 1.5rem;">
+      <div class="feature-panel" style="grid-column: 1 / -1;">
+        <div class="feature-panel-header">
+          <h3>Git 3-Way Merge Conflict Resolution</h3>
+          <p>
+            Because Baluard is built on Git, concurrent edits on two offline devices never overwrite each other. When divergent changes occur, Baluard lets you inspect and resolve discrepancies field-by-field.
+          </p>
+        </div>
+        <ul class="feature-spec-list">
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Preserves divergent offline edits without silent overwrites</span>
+          </li>
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Full commit history preservation for audit and rollback</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── INTERACTIVE TERMINAL SECTION ────────────────────────── -->
+<section id="cli" class="content-section">
+  <div class="container">
+    <div class="section-intro">
+      <div class="section-eyebrow">First-Class CLI</div>
+      <h2 class="section-heading">Scriptable, daemon-backed terminal client.</h2>
+      <p class="section-lede">
+        The `baluard` CLI gives you 35 commands with daemon-first speed and an offline `&#45;&#45;direct` fallback. Perfect for dev environments, headless servers, and CI pipelines.
+      </p>
+    </div>
+
+    <div class="terminal-wrapper">
+      <div class="terminal-tabs" role="tablist">
+        <button type="button" class="term-tab active" role="tab" aria-selected="true" onclick="switchTermTab('init', this)">baluard init</button>
+        <button type="button" class="term-tab" role="tab" aria-selected="false" onclick="switchTermTab('add', this)">baluard add login</button>
+        <button type="button" class="term-tab" role="tab" aria-selected="false" onclick="switchTermTab('totp', this)">baluard totp</button>
+        <button type="button" class="term-tab" role="tab" aria-selected="false" onclick="switchTermTab('health', this)">baluard health</button>
+      </div>
+
+      <div class="terminal-screen" id="term-output-area">
+        <div class="term-line"><span class="term-prompt">$</span> baluard init &#45;&#45;slug personal &#45;&#45;name "Personal Vault"</div>
+        <div class="term-line term-out-dim">Creating vault at ~/.local/share/baluard/vaults/personal...</div>
+        <div class="term-line term-out-highlight">&check; Vault created successfully. (ID: 59f73ad5-047d-8cb7-7635)</div>
+        <div class="term-line term-out-warning">=== RECOVERY PHRASE (Write on paper; never stored on servers) ===</div>
+        <div class="term-line term-out-dim">damp bean volume uncover census awesome</div>
+        <div class="term-line term-out-dim">hood under taxi ranch profit onion</div>
+        <div class="term-line term-out-dim">grace afford minimum shy invest face</div>
+        <div class="term-line term-out-dim">search say evoke merry slush finish</div>
+        <div class="term-line term-out-warning">=== END RECOVERY PHRASE ===</div>
+        <div class="term-line">Trust fingerprint: <span class="term-out-highlight">933b91a8f07c57e348b5f642766da756cac7c8ad</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECURITY WHITE PAPER SUMMARY ────────────────────────── -->
+<section id="security" class="content-section">
+  <div class="container">
+    <div class="security-feature-card">
+      <div>
+        <div class="section-eyebrow" style="color: #b3e55c;">Auditable Assurance</div>
+        <h2 style="font-size: 2rem; color: var(--site-text); margin-bottom: 1rem; font-weight: 800;">
+          Read the Security White Paper
+        </h2>
+        <p style="color: var(--site-text-secondary); line-height: 1.6; margin-bottom: 1.75rem;">
+          Baluard publishes its complete cryptographic architecture and threat model. Everything claimed on this site can be verified in public source code and audited directly.
+        </p>
+        <a href="/security.html" class="btn btn-primary">
+          <span>Read the White Paper (Full 13 Sections) &rarr;</span>
+        </a>
+      </div>
+
+      <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid var(--site-border); border-radius: 10px; padding: 1.25rem;">
+        <table class="crypto-spec-table">
+          <tr>
+            <td class="spec-name">Vault Cipher</td>
+            <td class="spec-value">AES-256-GCM (Authenticated)</td>
+          </tr>
+          <tr>
+            <td class="spec-name">Key Derivation (KDF)</td>
+            <td class="spec-value">Argon2id (m=64 MiB, t=3, p=2)</td>
+          </tr>
+          <tr>
+            <td class="spec-name">Asymmetric Sealing</td>
+            <td class="spec-value">HPKE (RFC 9180, DHKEM-X25519)</td>
+          </tr>
+          <tr>
+            <td class="spec-name">Commit Integrity</td>
+            <td class="spec-value">Ed25519 Device Signatures</td>
+          </tr>
+          <tr>
+            <td class="spec-name">Memory Hygiene</td>
+            <td class="spec-value">Zeroize on Drop &amp; Lock</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DOWNLOAD & REPOSITORY SECTION ───────────────────────── -->
+<section id="download" class="content-section">
+  <div class="container">
+    <div class="section-intro">
+      <div class="section-eyebrow">Download Center</div>
+      <h2 class="section-heading">Get Baluard for your platforms.</h2>
+      <p class="section-lede">
+        Release 0.1.0 (Public Beta). Direct binaries, signed checksums, and official APT / DNF distribution repositories.
+      </p>
+    </div>
+
+    <!-- Download Options Grid -->
+    <div class="dl-options-grid">
+      <!-- AppImage -->
+      <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/Baluard_0.1.0_amd64.AppImage" class="dl-card">
+        <div>
+          <div class="dl-card-tag">Recommended / Linux</div>
+          <div class="dl-card-name">AppImage</div>
+          <div class="dl-card-desc">Single universal executable for any modern Linux distribution. Self-contained.</div>
+        </div>
+        <div class="dl-card-footer">
+          <span>Download &darr;</span>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem;">118 MB</span>
+        </div>
+      </a>
+
+      <!-- Debian / Ubuntu -->
+      <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/Baluard_0.1.0_amd64.deb" class="dl-card">
+        <div>
+          <div class="dl-card-tag">Debian / Ubuntu</div>
+          <div class="dl-card-name">.deb Package</div>
+          <div class="dl-card-desc">Native package installer with desktop menu integration and system dependencies.</div>
+        </div>
+        <div class="dl-card-footer">
+          <span>Download &darr;</span>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem;">16.4 MB</span>
+        </div>
+      </a>
+
+      <!-- Fedora / RHEL -->
+      <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/Baluard-0.1.0-1.x86_64.rpm" class="dl-card">
+        <div>
+          <div class="dl-card-tag">Fedora / openSUSE</div>
+          <div class="dl-card-name">.rpm Package</div>
+          <div class="dl-card-desc">Signed RPM package for Fedora 38+, RHEL 9+, and openSUSE systems.</div>
+        </div>
+        <div class="dl-card-footer">
+          <span>Download &darr;</span>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem;">16.4 MB</span>
+        </div>
+      </a>
+
+      <!-- CLI Tarball -->
+      <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/baluard-cli-0.1.0-linux-x86_64.tar.gz" class="dl-card">
+        <div>
+          <div class="dl-card-tag">Command Line / Daemon</div>
+          <div class="dl-card-name">CLI Tarball</div>
+          <div class="dl-card-desc">Standalone `baluard` and `baluard-daemon` binaries for servers and terminal use.</div>
+        </div>
+        <div class="dl-card-footer">
+          <span>Download &darr;</span>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem;">3.3 MB</span>
+        </div>
+      </a>
+
+      <!-- Windows -->
+      <div class="dl-card dl-card-disabled">
+        <div>
+          <div class="dl-card-tag">Windows</div>
+          <div class="dl-card-name">Windows Client</div>
+          <div class="dl-card-desc">Windows Hello keychain integration and native tray client.</div>
+        </div>
+        <div class="dl-card-footer">
+          <span style="color: var(--site-text-muted);">In development</span>
+        </div>
+      </div>
+
+      <!-- macOS -->
+      <div class="dl-card dl-card-disabled">
+        <div>
+          <div class="dl-card-tag">macOS</div>
+          <div class="dl-card-name">macOS Client</div>
+          <div class="dl-card-desc">Touch ID keychain integration and native Apple Silicon build.</div>
+        </div>
+        <div class="dl-card-footer">
+          <span style="color: var(--site-text-muted);">In development</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Package Manager Setup Details -->
+    <details class="repo-accordion" id="download-repo">
+      <summary>
+        <span>Prefer system updates via APT or DNF? (Ubuntu, Debian, Fedora)</span>
+        <span style="color: #38bdf8; font-size: 0.88rem;">View repository instructions &darr;</span>
+      </summary>
+      <div class="repo-accordion-body">
+        <p style="color: #94a3b8; margin: 1rem 0 0.5rem; font-size: 0.92rem;">
+          Install from the official repository to pull updates directly through your system package manager.
+        </p>
+
+        <!-- APT -->
+        <div class="repo-snippet-box">
+          <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;">Ubuntu / Debian (APT):</div>
+          <pre><code>curl -fsSL https://baluard.app/repo/baluard-release.asc | sudo gpg &#45;&#45;dearmor -o /usr/share/keyrings/baluard-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/baluard-archive-keyring.gpg] https://baluard.app/repo stable main" | sudo tee /etc/apt/sources.list.d/baluard.list
+sudo apt update &amp;&amp; sudo apt install baluard</code></pre>
+        </div>
+
+        <!-- DNF -->
+        <div class="repo-snippet-box">
+          <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;">Fedora / RHEL / openSUSE (DNF):</div>
+          <pre><code>sudo tee /etc/yum.repos.d/baluard.repo &lt;&lt;'EOF'
+[baluard]
+name=Baluard
+baseurl=https://baluard.app/repo/rpms
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://baluard.app/repo/baluard-release.asc
+EOF
+sudo dnf install baluard</code></pre>
+        </div>
+
+        <p style="font-size: 0.85rem; color: #64748b;">
+          Repository signing key fingerprint: <code style="color: #b3e55c;">223310EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804</code>. Always verify this fingerprint before trusting repository imports.
+        </p>
+      </div>
+    </details>
+
+    <div style="margin-top: 1.5rem; text-align: center; font-size: 0.9rem; color: #64748b;">
+      Every release includes a <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/SHA256SUMS" target="_blank" rel="noopener noreferrer">signed SHA256SUMS manifest</a> with cryptographic signatures.
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+  // Interactive App Showcase Data
+  const ciphersData = {
+    github: {
+      name: "GitHub Production",
+      icon: "GH",
+      url: "https://github.com",
+      user: "octocat_dev",
+      pass: "d9e8f7a6b5c4!99_sec",
+      totp: "749 204",
+      hasTotp: true
+    },
+    proton: {
+      name: "Proton Mail Secure",
+      icon: "PM",
+      url: "https://mail.proton.me",
+      user: "user@example.com",
+      pass: "phrase-iron-castle-ridge-2026",
+      totp: "",
+      hasTotp: false
+    },
+    aws: {
+      name: "AWS Infra Root",
+      icon: "AWS",
+      url: "https://console.aws.amazon.com",
+      user: "admin@infra.internal",
+      pass: "88a9-f01b-c743-42e1-99b",
+      totp: "392 105",
+      hasTotp: true
+    },
+    luks: {
+      name: "Homelab Backup LUKS",
+      icon: "LK",
+      url: "Local Disk /dev/nvme0n1p3",
+      user: "root",
+      pass: "59f73ad5-047d-8cb7-7635-ada6a2f036b4",
+      totp: "",
+      hasTotp: false
+    }
+  };
+
+  let activeCipherKey = "github";
+  let isPasswordRevealed = false;
+
+  function selectCipher(key) {
+    activeCipherKey = key;
+    isPasswordRevealed = false;
+    const data = ciphersData[key];
+
+    // Update list active states
+    document.querySelectorAll('.cipher-card').forEach(el => {
+      el.classList.toggle('active', el.getAttribute('data-id') === key);
+    });
+
+    // Update detail view
+    document.getElementById('detail-icon').textContent = data.icon;
+    document.getElementById('detail-title').textContent = data.name;
+    document.getElementById('detail-url').textContent = data.url;
+    document.getElementById('detail-user').textContent = data.user;
+    document.getElementById('detail-pass').textContent = '************************';
+    document.getElementById('reveal-btn').textContent = 'Reveal';
+
+    // Update TOTP
+    const totpBox = document.getElementById('detail-totp-box');
+    if (data.hasTotp) {
+      totpBox.style.display = 'flex';
+      document.getElementById('totp-value').textContent = data.totp;
+    } else {
+      totpBox.style.display = 'none';
+    }
+  }
+
+  function togglePasswordReveal() {
+    const passEl = document.getElementById('detail-pass');
+    const btn = document.getElementById('reveal-btn');
+    const data = ciphersData[activeCipherKey];
+
+    if (isPasswordRevealed) {
+      passEl.textContent = '************************';
+      btn.textContent = 'Reveal';
+      isPasswordRevealed = false;
+    } else {
+      passEl.textContent = data.pass;
+      btn.textContent = 'Hide';
+      isPasswordRevealed = true;
+    }
+  }
+
+  function triggerCopy(type, btnEl) {
+    const data = ciphersData[activeCipherKey];
+    const val = (type === 'username') ? data.user : data.pass;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(val).catch(() => {});
+    }
+    if (btnEl) {
+      const orig = btnEl.textContent;
+      btnEl.textContent = 'Copied!';
+      setTimeout(() => {
+        btnEl.textContent = orig;
+      }, 1500);
+    }
+  }
+
+  // TOTP countdown and dynamic code rollover
+  let secondsRemaining = 18;
+  const sampleCodes = ['749 204', '829 411', '503 192', '614 830', '920 451'];
+  let codeIdx = 0;
+  setInterval(() => {
+    secondsRemaining = (secondsRemaining <= 1) ? 30 : secondsRemaining - 1;
+    const secEl = document.getElementById('totp-seconds');
+    if (secEl) secEl.textContent = secondsRemaining + 's';
+
+    const ring = document.querySelector('.timer-ring circle');
+    if (ring) {
+      const offset = 56 - (secondsRemaining / 30) * 56;
+      ring.style.strokeDashoffset = offset;
+    }
+
+    if (secondsRemaining === 30) {
+      codeIdx = (codeIdx + 1) % sampleCodes.length;
+      const totpValEl = document.getElementById('totp-value');
+      if (totpValEl && ciphersData[activeCipherKey].hasTotp) {
+        totpValEl.textContent = sampleCodes[codeIdx];
+      }
+    }
+  }, 1000);
+
+  // Terminal Tab Switching
+  const termSnippets = {
+    init: [
+      '<div class="term-line"><span class="term-prompt">$</span> baluard init &#45;&#45;slug personal &#45;&#45;name "Personal Vault"</div>',
+      '<div class="term-line term-out-dim">Creating vault at ~/.local/share/baluard/vaults/personal...</div>',
+      '<div class="term-line term-out-highlight">&check; Vault created successfully. (ID: 59f73ad5-047d-8cb7-7635)</div>',
+      '<div class="term-line term-out-warning">=== RECOVERY PHRASE (Write on paper; never stored on servers) ===</div>',
+      '<div class="term-line term-out-dim">damp bean volume uncover census awesome</div>',
+      '<div class="term-line term-out-dim">hood under taxi ranch profit onion</div>',
+      '<div class="term-line term-out-dim">grace afford minimum shy invest face</div>',
+      '<div class="term-line term-out-dim">search say evoke merry slush finish</div>',
+      '<div class="term-line term-out-warning">=== END RECOVERY PHRASE ===</div>',
+      '<div class="term-line">Trust fingerprint: <span class="term-out-highlight">933b91a8f07c57e348b5f642766da756cac7c8ad</span></div>'
+    ],
+    add: [
+      '<div class="term-line"><span class="term-prompt">$</span> baluard add login &#45;&#45;name "GitLab Self-Hosted" &#45;&#45;username "sysadmin" &#45;&#45;uri "https://gitlab.internal"</div>',
+      '<div class="term-line term-out-dim">Connecting to daemon socket at /run/user/1000/baluard/baluard.sock...</div>',
+      '<div class="term-line term-out-dim">Enter Password: [hidden]</div>',
+      '<div class="term-line term-out-dim">Padded bucket: Tier 1 (allocated 5,120 bytes)</div>',
+      '<div class="term-line term-out-highlight">&check; Entry committed and sealed: 052d88ba-b91f-40b3-9a17-0621d32e540d</div>',
+      '<div class="term-line term-out-dim">Signed git commit created with device key: 83447d37-e3e5</div>'
+    ],
+    totp: [
+      '<div class="term-line"><span class="term-prompt">$</span> baluard totp "GitHub Production"</div>',
+      '<div class="term-line term-out-dim">Deriving current 30s timestep for HMAC-SHA1...</div>',
+      '<div class="term-line term-out-highlight" style="font-size: 1.25rem; font-weight: 700; margin: 0.5rem 0;">829 411</div>',
+      '<div class="term-line term-out-dim">Valid for 22 seconds remaining.</div>'
+    ],
+    health: [
+      '<div class="term-line"><span class="term-prompt">$</span> baluard health</div>',
+      '<div class="term-line term-out-dim">Checking vault integrity and credential health...</div>',
+      '<div class="term-line">- Ciphers scanned: 100 entries</div>',
+      '<div class="term-line">- Reused passwords: <span class="term-out-highlight">0</span></div>',
+      '<div class="term-line">- Weak passwords: <span class="term-out-highlight">0</span></div>',
+      '<div class="term-line">- Missing 2FA: <span class="term-out-warning">3 logins</span></div>',
+      '<div class="term-line term-out-highlight">&check; Vault health check completed. No critical vulnerabilities found.</div>'
+    ]
+  };
+
+  function switchTermTab(tabKey, targetEl) {
+    document.querySelectorAll('.term-tab').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+    });
+    if (targetEl) {
+      targetEl.classList.add('active');
+      targetEl.setAttribute('aria-selected', 'true');
+    }
+
+    const outputEl = document.getElementById('term-output-area');
+    if (outputEl && termSnippets[tabKey]) {
+      outputEl.innerHTML = termSnippets[tabKey].join('');
+    }
+  }
+</script>
+{% endblock scripts %}

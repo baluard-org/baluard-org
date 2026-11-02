@@ -1,0 +1,11 @@
+base_url = "https://baluard.app"
+title = "Baluard: No one can take it away. Including us."
+description = "Git-native password manager with padded-bucket encrypted storage, device-identity bootstrapping, and multi-platform clients. No server, no account, no subscription."
+default_language = "en"
+compile_sass = false
+minify_html = false
+
+[extra]
+version = "0.1.0"
+github_repo = "https://github.com/baluard-org/baluard"
+repo_signing_fingerprint = "223310EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804"
