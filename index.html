@@ -391,9 +391,15 @@
     position: relative;
   }
 
-  .hero-content {
+  .hero-header {
     max-width: 820px;
-    margin: 0 auto 3.5rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-footer {
+    max-width: 820px;
+    margin: 3rem auto 0;
     text-align: center;
   }
 
@@ -433,7 +439,7 @@
     line-height: 1.6;
     color: var(--site-text-secondary);
     max-width: 44rem;
-    margin: 0 auto 2.25rem;
+    margin: 0 auto;
     text-wrap: pretty;
   }
 
@@ -466,32 +472,46 @@
     color: var(--app-primary);
   }
 
-  /* ── Interactive App Showcase ────────────────────────────── */
-  .app-preview-wrapper {
+  /* ── Multi-Platform Device Showcase (Desktop + Mobile) ────── */
+  .showcase-scene {
     position: relative;
-    max-width: 1080px;
-    margin: 0 auto;
-    border-radius: var(--radius-xl);
-    padding: 2px;
-    background: linear-gradient(180deg, #1d3a3d 0%, rgba(29, 58, 61, 0.2) 100%);
-    box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px rgba(179, 229, 92, 0.04);
+    max-width: 1140px;
+    margin: 3rem auto 0;
+    perspective: 1800px;
+    perspective-origin: 50% 50%;
   }
 
-  .app-frame {
-    background: var(--app-bg);
-    border-radius: calc(var(--radius-xl) - 2px);
-    overflow: hidden;
-    color: var(--app-text);
+  .showcase-pivot {
     display: flex;
-    flex-direction: column;
-    min-height: 560px;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    align-items: center;
+    justify-content: center;
+    gap: 2.25rem;
+    transform-style: preserve-3d;
+    transform-origin: center center;
+    transform: rotateY(-15deg) rotateX(4deg);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* App Window Titlebar */
-  .app-titlebar {
-    background: var(--app-sidebar);
-    border-bottom: 1px solid var(--app-border);
+  .showcase-pivot:hover {
+    transform: rotateY(-12deg) rotateX(2deg);
+  }
+
+  /* Linux Desktop Window */
+  .showcase-desktop {
+    flex: 1 1 760px;
+    max-width: 800px;
+    background: #0d1719;
+    border: 1px solid rgba(179, 229, 92, 0.18);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 28px 70px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(179, 229, 92, 0.05);
+    transform: translateZ(0);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .desktop-titlebar {
+    background: #0b1416;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     height: 38px;
     display: flex;
     align-items: center;
@@ -500,7 +520,7 @@
     user-select: none;
   }
 
-  .window-controls {
+  .linux-controls {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -515,30 +535,34 @@
   .dot-yellow { background: #facc15; opacity: 0.85; }
   .dot-green { background: #10b981; opacity: 0.85; }
 
-  .app-titlebar-title {
+  .desktop-titlebar-title {
     font-size: 0.78rem;
     font-weight: 600;
     letter-spacing: 0.02em;
-    color: var(--app-text-muted);
+    color: var(--site-text-secondary);
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.45rem;
   }
 
-  .app-titlebar-status {
+  .titlebar-shield-icon {
+    color: var(--site-accent);
+  }
+
+  .desktop-titlebar-status {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.75rem;
+    gap: 0.45rem;
+    font-size: 0.74rem;
     font-family: var(--font-mono);
-    color: var(--app-primary);
+    color: var(--site-accent);
   }
 
-  .app-sync-dot {
+  .sync-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--app-primary);
+    background: var(--site-accent);
     animation: pulse-green 2.5s infinite;
   }
 
@@ -547,340 +571,61 @@
     50% { opacity: 0.4; transform: scale(0.9); }
   }
 
-  /* 3-Column App Body */
-  .app-body {
-    display: grid;
-    grid-template-columns: 210px 310px 1fr;
-    flex: 1;
-    min-height: 520px;
-    background: var(--app-bg);
+  .desktop-screen {
+    position: relative;
+    background: #080f11;
+    line-height: 0;
   }
 
-  /* Pane 1: Sidebar */
-  .app-sidebar {
-    background: var(--app-sidebar);
-    border-right: 1px solid var(--app-border);
-    padding: 1rem 0.85rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  .vault-selector-btn {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 0.75rem;
-    background: var(--app-card);
-    border: 1px solid var(--app-border);
-    border-radius: var(--radius-sm);
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--app-text);
-  }
-
-  .sidebar-section h5 {
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--app-text-muted);
-    margin-bottom: 0.4rem;
-    padding: 0 0.5rem;
-  }
-
-  .sidebar-nav-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .sidebar-nav-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.4rem 0.6rem;
-    border-radius: var(--radius-sm);
-    font-size: 0.85rem;
-    color: var(--app-text-secondary);
-    cursor: default;
-    transition: background 0.12s;
-  }
-
-  .sidebar-nav-item.active {
-    background: rgba(179, 229, 92, 0.12);
-    color: var(--app-primary);
-    font-weight: 600;
-  }
-
-  .sidebar-nav-item .count {
-    font-size: 0.75rem;
-    font-family: var(--font-mono);
-    color: var(--app-text-muted);
-  }
-
-  .sidebar-footer {
-    margin-top: auto;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--app-border);
-    font-size: 0.78rem;
-    color: var(--app-text-muted);
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  /* Pane 2: Cipher List */
-  .app-cipher-list {
-    background: var(--app-list);
-    border-right: 1px solid var(--app-border);
-    display: flex;
-    flex-direction: column;
-  }
-
-  .cipher-search-bar {
-    padding: 0.75rem;
-    border-bottom: 1px solid var(--app-border);
-  }
-
-  .search-input-mock {
+  .desktop-screen-img {
     width: 100%;
-    padding: 0.45rem 0.7rem;
-    background: var(--app-bg);
-    border: 1px solid var(--app-border);
-    border-radius: var(--radius-sm);
-    font-size: 0.82rem;
-    color: var(--app-text);
-  }
-
-  .cipher-items-scroll {
-    overflow-y: auto;
-    flex: 1;
-  }
-
-  .cipher-card {
+    height: auto;
     display: block;
-    width: 100%;
-    text-align: left;
-    font-family: inherit;
-    border: none;
-    border-bottom: 1px solid rgba(29, 58, 61, 0.5);
-    background: transparent;
-    padding: 0.75rem 0.9rem;
-    cursor: pointer;
-    transition: background 0.12s;
   }
 
-  .cipher-card:hover {
-    background: rgba(255, 255, 255, 0.02);
+  /* Pixel Smartphone Chassis */
+  .showcase-mobile {
+    flex: 0 0 270px;
+    width: 270px;
+    transform: translateZ(40px) translateY(14px);
+    transition: transform 0.3s ease;
   }
 
-  .cipher-card.active {
-    background: var(--app-detail);
-    border-left: 2px solid var(--app-primary);
+  .pixel-phone {
+    background: #000000;
+    border: 2.5px solid #203035;
+    border-radius: 36px;
+    padding: 5px;
+    line-height: 0;
+    box-shadow: 0 32px 75px -10px rgba(0, 0, 0, 0.85), 0 0 35px rgba(179, 229, 92, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.15);
   }
 
-  .cipher-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.2rem;
-  }
-
-  .cipher-name {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--app-text);
-  }
-
-  .cipher-badge {
-    font-size: 0.7rem;
-    font-family: var(--font-mono);
-    padding: 0.1rem 0.4rem;
-    border-radius: 4px;
-    background: rgba(252, 211, 77, 0.15);
-    color: var(--app-warning);
-    border: 1px solid rgba(252, 211, 77, 0.3);
-  }
-
-  .badge-totp {
-    background: rgba(179, 229, 92, 0.15);
-    color: var(--app-primary);
-    border-color: rgba(179, 229, 92, 0.3);
-  }
-
-  .badge-key {
-    background: rgba(207, 198, 249, 0.15);
-    color: var(--app-accent);
-    border-color: rgba(207, 198, 249, 0.3);
-  }
-
-  .cipher-subtext {
-    font-size: 0.8rem;
-    color: var(--app-text-muted);
-    white-space: nowrap;
+  .pixel-screen {
+    position: relative;
+    border-radius: 31px;
     overflow: hidden;
-    text-overflow: ellipsis;
+    line-height: 0;
+    background: #000000;
   }
 
-  /* Pane 3: Detail View */
-  .app-detail-view {
-    background: var(--app-detail);
-    padding: 1.5rem 1.75rem;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  .pixel-camera {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #04080a;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), inset 0 0 2px rgba(255, 255, 255, 0.15);
+    z-index: 2;
+    pointer-events: none;
   }
 
-  .detail-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px solid var(--app-border);
-  }
-
-  .detail-brand-lockup {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-  }
-
-  .detail-icon-box {
-    width: 44px;
-    height: 44px;
-    background: var(--app-card);
-    border: 1px solid var(--app-border);
-    border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: var(--app-primary);
-  }
-
-  .detail-title-area h3 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--app-text);
-  }
-
-  .detail-title-area p {
-    font-size: 0.84rem;
-    color: var(--app-text-muted);
-  }
-
-  .field-row {
-    background: var(--app-card);
-    border: 1px solid var(--app-border);
-    border-radius: var(--radius-sm);
-    padding: 0.75rem 0.9rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-  }
-
-  .field-label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--app-text-muted);
-    font-weight: 600;
-  }
-
-  .field-val-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-  }
-
-  .field-val {
-    font-family: var(--font-mono);
-    font-size: 0.92rem;
-    color: var(--app-text);
-    word-break: break-all;
-  }
-
-  .copy-action-btn {
-    background: rgba(29, 58, 61, 0.6);
-    border: 1px solid var(--app-border);
-    border-radius: 4px;
-    color: var(--app-text-secondary);
-    padding: 0.25rem 0.5rem;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: all 0.12s;
-  }
-
-  .copy-action-btn:hover {
-    background: var(--app-primary);
-    color: var(--app-primary-text);
-  }
-
-  /* TOTP Live Countdown Box */
-  .totp-box {
-    background: rgba(179, 229, 92, 0.06);
-    border: 1px solid rgba(179, 229, 92, 0.3);
-    border-radius: var(--radius-sm);
-    padding: 0.85rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .totp-digits {
-    font-family: var(--font-mono);
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    color: var(--app-primary);
-  }
-
-  .totp-timer-indicator {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.78rem;
-    color: var(--app-text-secondary);
-  }
-
-  .timer-ring {
-    width: 22px;
-    height: 22px;
-    transform: rotate(-90deg);
-  }
-
-  .timer-ring circle {
-    fill: transparent;
-    stroke: var(--app-primary);
-    stroke-width: 3;
-    stroke-dasharray: 56;
-    stroke-dashoffset: 14;
-    transition: stroke-dashoffset 1s linear;
-  }
-
-  /* Security Invariant Bar */
-  .commit-proof-bar {
-    margin-top: auto;
-    padding-top: 1rem;
-    border-top: 1px solid var(--app-border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 0.75rem;
-    color: var(--app-text-muted);
-    font-family: var(--font-mono);
-  }
-
-  .commit-badge {
-    color: var(--app-primary);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
+  .mobile-screen-img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   /* ── Core Architecture Section ───────────────────────────── */
@@ -1269,51 +1014,29 @@
 
   /* ── Comprehensive Responsive Breakpoints ────────────────── */
   @media (max-width: 860px) {
-    .app-body {
-      grid-template-columns: 260px 1fr;
+    .showcase-pivot {
+      flex-direction: column;
+      transform: none !important;
+      gap: 2rem;
     }
-    .app-sidebar {
-      display: none !important;
+    .showcase-desktop {
+      flex: 0 0 auto;
+      width: 100%;
+      max-width: 100%;
+    }
+    .showcase-mobile {
+      flex: 0 0 auto;
+      width: 260px;
+      transform: none !important;
     }
   }
 
   @media (max-width: 680px) {
-    .app-preview-wrapper {
-      padding: 1px;
-      border-radius: var(--radius-lg);
+    .showcase-scene {
+      margin-top: 1.5rem;
     }
-    .app-frame {
-      border-radius: calc(var(--radius-lg) - 1px);
-      min-height: auto;
-    }
-    .app-titlebar {
-      height: auto;
-      padding: 0.6rem 0.85rem;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-    .app-titlebar-title {
-      font-size: 0.72rem;
-    }
-    .app-body {
-      display: flex;
-      flex-direction: column;
-      min-height: auto;
-    }
-    .app-sidebar {
-      display: none !important;
-    }
-    .app-cipher-list {
-      border-right: none;
-      border-bottom: 1px solid var(--app-border);
-      max-height: 190px;
-    }
-    .app-detail-view {
-      padding: 1.25rem 1rem;
-      gap: 1.1rem;
-    }
-    .totp-digits {
-      font-size: 1.25rem;
+    .showcase-mobile {
+      width: 240px;
     }
     .hero-cta-group .btn {
       width: 100%;
@@ -1337,6 +1060,59 @@
     }
     .security-feature-card {
       padding: 1.75rem 1.25rem;
+    }
+  }
+
+  /* ── Apple-Style Scroll Reveal System ─────────────────────── */
+  @media (prefers-reduced-motion: no-preference) {
+    html.js-reveal-ready .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    html.js-reveal-ready .reveal-on-scroll.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+      will-change: auto;
+    }
+
+    /* Hero section: 500ms initial delay before entrance cascade */
+    html.js-reveal-ready .hero-reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    html.js-reveal-ready .hero-reveal.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+      will-change: auto;
+    }
+
+    html.js-reveal-ready .hero-title.hero-reveal { transition-delay: 0s; }
+    html.js-reveal-ready .hero-description.hero-reveal { transition-delay: 0.12s; }
+    html.js-reveal-ready .showcase-scene.hero-reveal { transition-delay: 0.24s; }
+    html.js-reveal-ready .hero-cta-group.hero-reveal { transition-delay: 0.36s; }
+    html.js-reveal-ready .trust-strip.hero-reveal { transition-delay: 0.48s; }
+
+    /* Staggered cascades for grouped cards */
+    html.js-reveal-ready .reveal-group > .reveal-on-scroll:nth-child(1) { transition-delay: 0.04s; }
+    html.js-reveal-ready .reveal-group > .reveal-on-scroll:nth-child(2) { transition-delay: 0.12s; }
+    html.js-reveal-ready .reveal-group > .reveal-on-scroll:nth-child(3) { transition-delay: 0.20s; }
+    html.js-reveal-ready .reveal-group > .reveal-on-scroll:nth-child(4) { transition-delay: 0.28s; }
+    html.js-reveal-ready .reveal-group > .reveal-on-scroll:nth-child(5) { transition-delay: 0.36s; }
+    html.js-reveal-ready .reveal-group > .reveal-on-scroll:nth-child(6) { transition-delay: 0.44s; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-on-scroll,
+    .hero-reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
     }
   }
 </style>
@@ -1390,16 +1166,55 @@
 <!-- ── HERO SECTION ────────────────────────────────────────── -->
 <section class="hero-section">
   <div class="container">
-    <div class="hero-content">
-      <h1 class="hero-title">
+    <div class="hero-header">
+      <h1 class="hero-title hero-reveal">
         No one can take it away. Including us.
       </h1>
 
-      <p class="hero-description">
+      <p class="hero-description hero-reveal">
         We don't want custody of your passwords; and we don't want anyone else having it either. Your vault stays encrypted on the hardware you own, versioned with git, on your server of choice. No Baluard account to lock, no servers to breach, no middleman.
       </p>
+    </div>
 
-      <div class="hero-cta-group">
+    <!-- ── DUAL PLATFORM SHOWCASE (DESKTOP + MOBILE) ─────────── -->
+    <div class="showcase-scene hero-reveal" id="app-showcase" aria-label="Baluard Desktop and Mobile Applications Preview">
+      <div class="showcase-pivot">
+        <!-- Linux Desktop Window -->
+        <div class="showcase-desktop">
+          <div class="desktop-titlebar" aria-hidden="true">
+            <div class="linux-controls">
+              <span class="control-dot dot-red"></span>
+              <span class="control-dot dot-yellow"></span>
+              <span class="control-dot dot-green"></span>
+            </div>
+            <div class="desktop-titlebar-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="titlebar-shield-icon" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.5-8 11-4.5-1.5-8-6-8-11V5l8-3z"/></svg>
+              <span>Baluard: personal-vault.git</span>
+            </div>
+            <div class="desktop-titlebar-status">
+              <span class="sync-dot"></span>
+              <span>SYNCED (HEAD 4f29a0b)</span>
+            </div>
+          </div>
+          <div class="desktop-screen">
+            <img src="assets/desktop-vault-dark.png" alt="Baluard desktop password vault application interface" width="1200" height="700" loading="lazy" decoding="async" class="desktop-screen-img">
+          </div>
+        </div>
+
+        <!-- Pixel Smartphone Frame -->
+        <div class="showcase-mobile">
+          <div class="pixel-phone">
+            <div class="pixel-screen">
+              <div class="pixel-camera" aria-hidden="true"></div>
+              <img src="assets/mobile-vault-dark.png" alt="Baluard mobile password vault application interface" width="1080" height="2340" loading="lazy" decoding="async" class="mobile-screen-img">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-footer">
+      <div class="hero-cta-group hero-reveal">
         <a href="#download" class="btn btn-primary">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span>Download for Linux (v0.1.0)</span>
@@ -1409,7 +1224,7 @@
         </a>
       </div>
 
-      <div class="trust-strip">
+      <div class="trust-strip hero-reveal">
         <div class="trust-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
           <span>100% Offline Capable</span>
@@ -1424,197 +1239,13 @@
         </div>
       </div>
     </div>
-
-    <!-- ── INTERACTIVE APP PREVIEW ─────────────────────────── -->
-    <div class="app-preview-wrapper" id="app-demo-window">
-      <div class="app-frame" role="region" aria-label="Baluard App Interface Preview">
-        <!-- Titlebar -->
-        <div class="app-titlebar">
-          <div class="window-controls" aria-hidden="true">
-            <span class="control-dot dot-red"></span>
-            <span class="control-dot dot-yellow"></span>
-            <span class="control-dot dot-green"></span>
-          </div>
-          <div class="app-titlebar-title">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color: #b3e55c;" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.5-8 11-4.5-1.5-8-6-8-11V5l8-3z"/></svg>
-            <span>Baluard: personal-vault.git</span>
-          </div>
-          <div class="app-titlebar-status">
-            <span class="app-sync-dot"></span>
-            <span>SYNCED (HEAD 4f29a0b)</span>
-          </div>
-        </div>
-
-        <!-- 3-Column Layout -->
-        <div class="app-body">
-          <!-- Pane 1: Sidebar -->
-          <div class="app-sidebar">
-            <div class="vault-selector-btn">
-              <span>Personal Vault</span>
-              <span style="font-size: 0.7rem; color: #b3e55c;">ACTIVE</span>
-            </div>
-
-            <div class="sidebar-section">
-              <h5>Categories</h5>
-              <ul class="sidebar-nav-list">
-                <li class="sidebar-nav-item active">
-                  <span>Logins</span>
-                  <span class="count">64</span>
-                </li>
-                <li class="sidebar-nav-item">
-                  <span>Passkeys</span>
-                  <span class="count">16</span>
-                </li>
-                <li class="sidebar-nav-item">
-                  <span>Cards</span>
-                  <span class="count">4</span>
-                </li>
-                <li class="sidebar-nav-item">
-                  <span>Secure Notes</span>
-                  <span class="count">8</span>
-                </li>
-                <li class="sidebar-nav-item">
-                  <span>SSH Keys</span>
-                  <span class="count">3</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="sidebar-section">
-              <h5>Folders</h5>
-              <ul class="sidebar-nav-list">
-                <li class="sidebar-nav-item">
-                  <span>Finance</span>
-                  <span class="count">14</span>
-                </li>
-                <li class="sidebar-nav-item">
-                  <span>Infrastructure</span>
-                  <span class="count">9</span>
-                </li>
-                <li class="sidebar-nav-item">
-                  <span>Family Space</span>
-                  <span class="count">7</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="sidebar-footer">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-              <span>Daemon IPC / Auto-lock: 60m</span>
-            </div>
-          </div>
-
-          <!-- Pane 2: Cipher List (Interactive) -->
-          <div class="app-cipher-list">
-            <div class="cipher-search-bar">
-              <input type="text" class="search-input-mock" value="Filter ciphers (100 total)..." readonly>
-            </div>
-
-            <div class="cipher-items-scroll" id="cipher-items-container">
-              <!-- Item 1: GitHub -->
-              <button type="button" class="cipher-card active" data-id="github" onclick="selectCipher('github')">
-                <div class="cipher-card-header">
-                  <span class="cipher-name">GitHub Production</span>
-                  <span class="cipher-badge badge-totp">TOTP</span>
-                </div>
-                <div class="cipher-subtext">octocat_dev / github.com</div>
-              </button>
-
-              <!-- Item 2: ProtonMail -->
-              <button type="button" class="cipher-card" data-id="proton" onclick="selectCipher('proton')">
-                <div class="cipher-card-header">
-                  <span class="cipher-name">Proton Mail Secure</span>
-                  <span class="cipher-badge badge-key">PASSKEY</span>
-                </div>
-                <div class="cipher-subtext">user@example.com</div>
-              </button>
-
-              <!-- Item 3: AWS Root -->
-              <button type="button" class="cipher-card" data-id="aws" onclick="selectCipher('aws')">
-                <div class="cipher-card-header">
-                  <span class="cipher-name">AWS Infra Root</span>
-                  <span class="cipher-badge badge-totp">FIDO2 SEALED</span>
-                </div>
-                <div class="cipher-subtext">admin@infra.internal</div>
-              </button>
-
-              <!-- Item 4: Server LUKS -->
-              <button type="button" class="cipher-card" data-id="luks" onclick="selectCipher('luks')">
-                <div class="cipher-card-header">
-                  <span class="cipher-name">Homelab Backup LUKS</span>
-                  <span class="cipher-badge">NOTE</span>
-                </div>
-                <div class="cipher-subtext">Raw AES-XTS disk key</div>
-              </button>
-            </div>
-          </div>
-
-          <!-- Pane 3: Detail View -->
-          <div class="app-detail-view" id="cipher-detail-view">
-            <div class="detail-header">
-              <div class="detail-brand-lockup">
-                <div class="detail-icon-box" id="detail-icon">GH</div>
-                <div class="detail-title-area">
-                  <h3 id="detail-title">GitHub Production</h3>
-                  <p id="detail-url">https://github.com</p>
-                </div>
-              </div>
-              <div class="detail-actions">
-                <button type="button" class="btn btn-lime btn-sm" id="copy-pass-btn" onclick="triggerCopy('password', this)">Copy Password</button>
-              </div>
-            </div>
-
-            <!-- Username Field -->
-            <div class="field-row">
-              <span class="field-label">Username</span>
-              <div class="field-val-wrap">
-                <span class="field-val" id="detail-user">octocat_dev</span>
-                <button type="button" class="copy-action-btn" onclick="triggerCopy('username', this)">Copy</button>
-              </div>
-            </div>
-
-            <!-- Password Field -->
-            <div class="field-row">
-              <span class="field-label">Password</span>
-              <div class="field-val-wrap">
-                <span class="field-val" id="detail-pass">************************</span>
-                <button type="button" class="copy-action-btn" id="reveal-btn" onclick="togglePasswordReveal()">Reveal</button>
-              </div>
-            </div>
-
-            <!-- TOTP Field -->
-            <div class="totp-box" id="detail-totp-box">
-              <div>
-                <div class="field-label" style="color: #b3e55c; margin-bottom: 0.2rem;">One-Time Password (TOTP)</div>
-                <div class="totp-digits" id="totp-value">749 204</div>
-              </div>
-              <div class="totp-timer-indicator">
-                <svg class="timer-ring" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="9"></circle>
-                </svg>
-                <span id="totp-seconds">18s</span>
-              </div>
-            </div>
-
-            <!-- Commit Proof -->
-            <div class="commit-proof-bar">
-              <span class="commit-badge">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Signed commit by device dc1a3f4
-              </span>
-              <span>Argon2id + AES-256-GCM</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
 <!-- ── ARCHITECTURE SECTION ────────────────────────────────── -->
 <section id="architecture" class="content-section">
   <div class="container">
-    <div class="section-intro">
+    <div class="section-intro reveal-on-scroll">
       <div class="section-eyebrow">Zero-Server Architecture</div>
       <h2 class="section-heading">Why the architecture is the security model.</h2>
       <p class="section-lede">
@@ -1622,9 +1253,9 @@
       </p>
     </div>
 
-    <div class="arch-diagram-card">
-      <div class="arch-flow-grid">
-        <div class="arch-node">
+    <div class="arch-diagram-card reveal-on-scroll">
+      <div class="arch-flow-grid reveal-group">
+        <div class="arch-node reveal-on-scroll">
           <div class="arch-node-tag">LAYER 1 / CRYPTOGRAPHIC STORAGE</div>
           <h4>Padded-Bucket Git Vault</h4>
           <p>
@@ -1632,7 +1263,7 @@
           </p>
         </div>
 
-        <div class="arch-node">
+        <div class="arch-node reveal-on-scroll">
           <div class="arch-node-tag">LAYER 2 / LOCAL IPC DAEMON</div>
           <h4>Zero-Privilege Daemon</h4>
           <p>
@@ -1640,7 +1271,7 @@
           </p>
         </div>
 
-        <div class="arch-node">
+        <div class="arch-node reveal-on-scroll">
           <div class="arch-node-tag">LAYER 3 / HOSTILE REMOTE SYNC</div>
           <h4>Untrusted Git Providers</h4>
           <p>
@@ -1655,7 +1286,7 @@
 <!-- ── CORE CAPABILITIES ───────────────────────────────────── -->
 <section id="features" class="content-section">
   <div class="container">
-    <div class="section-intro">
+    <div class="section-intro reveal-on-scroll">
       <div class="section-eyebrow">Sovereign Capabilities</div>
       <h2 class="section-heading">Engineered for sovereignty and longevity.</h2>
       <p class="section-lede">
@@ -1664,8 +1295,8 @@
     </div>
 
     <!-- Capability 1 -->
-    <div class="capabilities-grid">
-      <div class="feature-panel">
+    <div class="capabilities-grid reveal-group">
+      <div class="feature-panel reveal-on-scroll">
         <div class="feature-panel-header">
           <h3>Hardware Key Vault Sealing</h3>
           <p>
@@ -1684,7 +1315,7 @@
         </ul>
       </div>
 
-      <div class="feature-panel">
+      <div class="feature-panel reveal-on-scroll">
         <div class="feature-panel-header">
           <h3>All 9 Cipher Types + Passkeys</h3>
           <p>
@@ -1705,8 +1336,8 @@
     </div>
 
     <!-- Capability 2 -->
-    <div class="capabilities-grid-reverse">
-      <div class="feature-panel">
+    <div class="capabilities-grid-reverse reveal-group">
+      <div class="feature-panel reveal-on-scroll">
         <div class="feature-panel-header">
           <h3>Spaces &amp; Family Collaboration</h3>
           <p>
@@ -1725,7 +1356,7 @@
         </ul>
       </div>
 
-      <div class="feature-panel">
+      <div class="feature-panel reveal-on-scroll">
         <div class="feature-panel-header">
           <h3>Browser Extension &amp; Autofill</h3>
           <p>
@@ -1757,7 +1388,7 @@
 
     <!-- Capability 3 -->
     <div class="capabilities-grid" style="margin-top: 1.5rem;">
-      <div class="feature-panel" style="grid-column: 1 / -1;">
+      <div class="feature-panel reveal-on-scroll" style="grid-column: 1 / -1;">
         <div class="feature-panel-header">
           <h3>Git 3-Way Merge Conflict Resolution</h3>
           <p>
@@ -1782,7 +1413,7 @@
 <!-- ── INTERACTIVE TERMINAL SECTION ────────────────────────── -->
 <section id="cli" class="content-section">
   <div class="container">
-    <div class="section-intro">
+    <div class="section-intro reveal-on-scroll">
       <div class="section-eyebrow">First-Class CLI</div>
       <h2 class="section-heading">Scriptable, daemon-backed terminal client.</h2>
       <p class="section-lede">
@@ -1790,7 +1421,7 @@
       </p>
     </div>
 
-    <div class="terminal-wrapper">
+    <div class="terminal-wrapper reveal-on-scroll">
       <div class="terminal-tabs" role="tablist">
         <button type="button" class="term-tab active" role="tab" aria-selected="true" onclick="switchTermTab('init', this)">baluard init</button>
         <button type="button" class="term-tab" role="tab" aria-selected="false" onclick="switchTermTab('add', this)">baluard add login</button>
@@ -1817,7 +1448,7 @@
 <!-- ── SECURITY WHITE PAPER SUMMARY ────────────────────────── -->
 <section id="security" class="content-section">
   <div class="container">
-    <div class="security-feature-card">
+    <div class="security-feature-card reveal-on-scroll">
       <div>
         <div class="section-eyebrow" style="color: #b3e55c;">Auditable Assurance</div>
         <h2 style="font-size: 2rem; color: var(--site-text); margin-bottom: 1rem; font-weight: 800;">
@@ -1862,7 +1493,7 @@
 <!-- ── DOWNLOAD & REPOSITORY SECTION ───────────────────────── -->
 <section id="download" class="content-section">
   <div class="container">
-    <div class="section-intro">
+    <div class="section-intro reveal-on-scroll">
       <div class="section-eyebrow">Download Center</div>
       <h2 class="section-heading">Get Baluard for your platforms.</h2>
       <p class="section-lede">
@@ -1871,9 +1502,9 @@
     </div>
 
     <!-- Download Options Grid -->
-    <div class="dl-options-grid">
+    <div class="dl-options-grid reveal-group">
       <!-- AppImage -->
-      <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/Baluard_0.1.0_amd64.AppImage" class="dl-card">
+      <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/Baluard_0.1.0_amd64.AppImage" class="dl-card reveal-on-scroll">
         <div>
           <div class="dl-card-tag">Recommended / Linux</div>
           <div class="dl-card-name">AppImage</div>
@@ -1886,7 +1517,7 @@
       </a>
 
       <!-- Debian / Ubuntu -->
-      <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/Baluard_0.1.0_amd64.deb" class="dl-card">
+      <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/Baluard_0.1.0_amd64.deb" class="dl-card reveal-on-scroll">
         <div>
           <div class="dl-card-tag">Debian / Ubuntu</div>
           <div class="dl-card-name">.deb Package</div>
@@ -1899,7 +1530,7 @@
       </a>
 
       <!-- Fedora / RHEL -->
-      <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/Baluard-0.1.0-1.x86_64.rpm" class="dl-card">
+      <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/Baluard-0.1.0-1.x86_64.rpm" class="dl-card reveal-on-scroll">
         <div>
           <div class="dl-card-tag">Fedora / openSUSE</div>
           <div class="dl-card-name">.rpm Package</div>
@@ -1912,7 +1543,7 @@
       </a>
 
       <!-- CLI Tarball -->
-      <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/baluard-cli-0.1.0-linux-x86_64.tar.gz" class="dl-card">
+      <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/baluard-cli-0.1.0-linux-x86_64.tar.gz" class="dl-card reveal-on-scroll">
         <div>
           <div class="dl-card-tag">Command Line / Daemon</div>
           <div class="dl-card-name">CLI Tarball</div>
@@ -1925,7 +1556,7 @@
       </a>
 
       <!-- Windows -->
-      <div class="dl-card dl-card-disabled">
+      <div class="dl-card dl-card-disabled reveal-on-scroll">
         <div>
           <div class="dl-card-tag">Windows</div>
           <div class="dl-card-name">Windows Client</div>
@@ -1937,7 +1568,7 @@
       </div>
 
       <!-- macOS -->
-      <div class="dl-card dl-card-disabled">
+      <div class="dl-card dl-card-disabled reveal-on-scroll">
         <div>
           <div class="dl-card-tag">macOS</div>
           <div class="dl-card-name">macOS Client</div>
@@ -1950,7 +1581,7 @@
     </div>
 
     <!-- Package Manager Setup Details -->
-    <details class="repo-accordion" id="download-repo">
+    <details class="repo-accordion reveal-on-scroll" id="download-repo">
       <summary>
         <span>Prefer system updates via APT or DNF? (Ubuntu, Debian, Fedora)</span>
         <span style="color: #38bdf8; font-size: 0.88rem;">View repository instructions &darr;</span>
@@ -1990,15 +1621,15 @@ sudo dnf install baluard</code></pre>
     </details>
 
     <!-- Browser Extensions Section -->
-    <div style="margin-top: 3rem;">
+    <div class="reveal-on-scroll" style="margin-top: 3rem;">
       <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--site-text); margin-bottom: 0.5rem;">Browser Extensions</h3>
       <p style="color: var(--site-text-secondary); font-size: 0.95rem; margin-bottom: 1.25rem;">
         MV3 companions that talk directly to the local `baluard-daemon` via native messaging. Strict origin matching, zero remote telemetry.
       </p>
 
-      <div class="dl-options-grid">
+      <div class="dl-options-grid reveal-group">
         <!-- Firefox Extension -->
-        <div class="dl-card dl-card-disabled">
+        <div class="dl-card dl-card-disabled reveal-on-scroll">
           <div>
             <div class="dl-card-tag">Firefox / LibreWolf / Floorp</div>
             <div class="dl-card-name">Firefox Add-on</div>
@@ -2011,7 +1642,7 @@ sudo dnf install baluard</code></pre>
         </div>
 
         <!-- Chrome / Chromium Extension -->
-        <div class="dl-card dl-card-disabled">
+        <div class="dl-card dl-card-disabled reveal-on-scroll">
           <div>
             <div class="dl-card-tag">Chrome / Brave / Edge / Vivaldi</div>
             <div class="dl-card-name">Chromium Extension</div>
@@ -2095,132 +1726,38 @@ sudo dnf install baluard</code></pre>
 
   
 <script>
-  // Interactive App Showcase Data
-  const ciphersData = {
-    github: {
-      name: "GitHub Production",
-      icon: "GH",
-      url: "https://github.com",
-      user: "octocat_dev",
-      pass: "d9e8f7a6b5c4!99_sec",
-      totp: "749 204",
-      hasTotp: true
-    },
-    proton: {
-      name: "Proton Mail Secure",
-      icon: "PM",
-      url: "https://mail.proton.me",
-      user: "user@example.com",
-      pass: "phrase-iron-castle-ridge-2026",
-      totp: "",
-      hasTotp: false
-    },
-    aws: {
-      name: "AWS Infra Root",
-      icon: "AWS",
-      url: "https://console.aws.amazon.com",
-      user: "admin@infra.internal",
-      pass: "88a9-f01b-c743-42e1-99b",
-      totp: "392 105",
-      hasTotp: true
-    },
-    luks: {
-      name: "Homelab Backup LUKS",
-      icon: "LK",
-      url: "Local Disk /dev/nvme0n1p3",
-      user: "root",
-      pass: "59f73ad5-047d-8cb7-7635-ada6a2f036b4",
-      totp: "",
-      hasTotp: false
+  // Apple-Style Scroll Reveal Observer & Hero Entrance Timer
+  (function() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    document.documentElement.classList.add('js-reveal-ready');
+
+    // 500ms initial wait so users clearly experience the hero entrance
+    setTimeout(() => {
+      document.querySelectorAll('.hero-reveal').forEach(el => {
+        el.classList.add('is-revealed');
+      });
+    }, 500);
+
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal-on-scroll').forEach(el => el.classList.add('is-revealed'));
+      return;
     }
-  };
 
-  let activeCipherKey = "github";
-  let isPasswordRevealed = false;
-
-  function selectCipher(key) {
-    activeCipherKey = key;
-    isPasswordRevealed = false;
-    const data = ciphersData[key];
-
-    // Update list active states
-    document.querySelectorAll('.cipher-card').forEach(el => {
-      el.classList.toggle('active', el.getAttribute('data-id') === key);
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.08
     });
 
-    // Update detail view
-    document.getElementById('detail-icon').textContent = data.icon;
-    document.getElementById('detail-title').textContent = data.name;
-    document.getElementById('detail-url').textContent = data.url;
-    document.getElementById('detail-user').textContent = data.user;
-    document.getElementById('detail-pass').textContent = '************************';
-    document.getElementById('reveal-btn').textContent = 'Reveal';
-
-    // Update TOTP
-    const totpBox = document.getElementById('detail-totp-box');
-    if (data.hasTotp) {
-      totpBox.style.display = 'flex';
-      document.getElementById('totp-value').textContent = data.totp;
-    } else {
-      totpBox.style.display = 'none';
-    }
-  }
-
-  function togglePasswordReveal() {
-    const passEl = document.getElementById('detail-pass');
-    const btn = document.getElementById('reveal-btn');
-    const data = ciphersData[activeCipherKey];
-
-    if (isPasswordRevealed) {
-      passEl.textContent = '************************';
-      btn.textContent = 'Reveal';
-      isPasswordRevealed = false;
-    } else {
-      passEl.textContent = data.pass;
-      btn.textContent = 'Hide';
-      isPasswordRevealed = true;
-    }
-  }
-
-  function triggerCopy(type, btnEl) {
-    const data = ciphersData[activeCipherKey];
-    const val = (type === 'username') ? data.user : data.pass;
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(val).catch(() => {});
-    }
-    if (btnEl) {
-      const orig = btnEl.textContent;
-      btnEl.textContent = 'Copied!';
-      setTimeout(() => {
-        btnEl.textContent = orig;
-      }, 1500);
-    }
-  }
-
-  // TOTP countdown and dynamic code rollover
-  let secondsRemaining = 18;
-  const sampleCodes = ['749 204', '829 411', '503 192', '614 830', '920 451'];
-  let codeIdx = 0;
-  setInterval(() => {
-    secondsRemaining = (secondsRemaining <= 1) ? 30 : secondsRemaining - 1;
-    const secEl = document.getElementById('totp-seconds');
-    if (secEl) secEl.textContent = secondsRemaining + 's';
-
-    const ring = document.querySelector('.timer-ring circle');
-    if (ring) {
-      const offset = 56 - (secondsRemaining / 30) * 56;
-      ring.style.strokeDashoffset = offset;
-    }
-
-    if (secondsRemaining === 30) {
-      codeIdx = (codeIdx + 1) % sampleCodes.length;
-      const totpValEl = document.getElementById('totp-value');
-      if (totpValEl && ciphersData[activeCipherKey].hasTotp) {
-        totpValEl.textContent = sampleCodes[codeIdx];
-      }
-    }
-  }, 1000);
-
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+  })();
   // Terminal Tab Switching
   const termSnippets = {
     init: [
