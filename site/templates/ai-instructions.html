@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block head_extra %}
+<link rel="help" type="text/plain" href="/llms.txt" title="LLM context">
+<style>
+  .article-container {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 6rem;
+  }
+
+  .article-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.88rem;
+    color: var(--site-accent);
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
+
+  .article-back-link:hover {
+    text-decoration: underline;
+  }
+
+  .article-body {
+    color: var(--site-text);
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  .article-body h1 {
+    font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: var(--site-text);
+  }
+
+  .article-body h2 {
+    font-size: clamp(1.35rem, 2.5vw, 1.8rem);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    margin: 3.5rem 0 1.25rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--site-border);
+    color: var(--site-text);
+  }
+
+  .article-body h3 {
+    font-size: 1.2rem;
+    line-height: 1.35;
+    font-weight: 700;
+    margin: 2rem 0 0.85rem;
+    color: var(--site-text);
+  }
+
+  .article-body p {
+    margin-bottom: 1.35rem;
+    color: var(--site-text-secondary);
+  }
+
+  .article-body ul, .article-body ol {
+    margin: 0 0 1.5rem;
+    padding-left: 1.5rem;
+    color: var(--site-text-secondary);
+  }
+
+  .article-body li {
+    margin-bottom: 0.5rem;
+    line-height: 1.65;
+  }
+
+  .article-body code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--site-bg-surface);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-sm);
+    padding: 0.15em 0.4em;
+    color: var(--app-primary);
+  }
+
+  .article-body pre {
+    background: #050608;
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  .article-body pre code {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: #e2e8f0;
+  }
+
+  .article-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.92rem;
+  }
+
+  .article-body th, .article-body td {
+    border: 1px solid var(--site-border);
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+
+  .article-body th {
+    background: var(--site-bg-surface);
+    font-weight: 600;
+    color: var(--site-text);
+  }
+
+  .article-body td {
+    color: var(--site-text-secondary);
+  }
+
+  .article-body blockquote {
+    border-left: 3px solid var(--site-accent);
+    padding-left: 1.25rem;
+    margin: 1.5rem 0;
+    color: var(--site-text-muted);
+    font-style: italic;
+  }
+</style>
+{% endblock head_extra %}
+
+{% block content %}
+<div class="article-container">
+  <a href="/" class="article-back-link">&larr; Back to baluard.app</a>
+  <article class="article-body">
+    {{ page.content | safe }}
+  </article>
+</div>
+{% endblock content %}
