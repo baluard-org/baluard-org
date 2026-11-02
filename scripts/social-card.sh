@@ -47,8 +47,8 @@ magick "$WORK/bg.png" \
   -font "$SANS_FONT" -pointsize 42 -fill '#94a3b8' \
   -annotate +565+335 'No one can take it away.' \
   -annotate +565+400 'Including us.' \
-  -pointsize 26 -fill '#64748b' -kerning 2 \
-  -annotate +115+540 'git-native  ·  no server  ·  no account  ·  no subscription' \
+  -pointsize 26 -fill '#64748b' -kerning 2 -gravity center \
+  -annotate +0+225 'git-native  ·  no server  ·  no account  ·  no subscription' \
   site/static/assets/social-card.png
 
 identify site/static/assets/social-card.png
