@@ -71,7 +71,7 @@
       'dl-macwin-desc': 'Universal binary for Apple Silicon / Intel and Windows 10/11 installers with native DPAPI keystore backing.',
       'dl-macwin-btn': 'Build from Source',
 
-      'footer-desc': 'Git-native, sovereign password manager with padded-bucket encryption and device-identity bootstrapping. Built so your credentials stay on your machines, where no one can take them away.',
+      'footer-desc': "Git-native, sovereign password manager with padded-bucket encryption and device-identity bootstrapping. Built so your credentials stay on your machines, where no one can take them away. Synced under your terms.<br>The password manager 2016 Kyle would have fallen in love with.",
       'footer-col-project': 'Project',
       'footer-link-dl': 'Download Release',
       'footer-link-sec': 'Security White Paper',
@@ -154,7 +154,7 @@
       'dl-macwin-desc': 'Binario universal para Apple Silicon / Intel e instaladores de Windows 10/11 con respaldo de almacén de claves DPAPI.',
       'dl-macwin-btn': 'Compilar desde Código Fuente',
 
-      'footer-desc': 'Gestor de contraseñas soberano nativo en git con cifrado en cubetas con relleno y arranque por identidad de dispositivo. Construido para que tus credenciales permanezcan en tus máquinas, donde nadie te las puede quitar.',
+      'footer-desc': 'Gestor de contraseñas soberano nativo en git con cifrado en cubetas con relleno y arranque por identidad de dispositivo. Construido para que tus credenciales permanezcan en tus máquinas, donde nadie te las puede quitar. Sincronizado bajo tus términos.<br>El gestor de contraseñas del que el Kyle de 2016 se habría enamorado.',
       'footer-col-project': 'Proyecto',
       'footer-link-dl': 'Descargar Versión',
       'footer-link-sec': 'Libro Blanco de Seguridad',
@@ -237,7 +237,7 @@
       'dl-macwin-desc': 'Binaire universel Apple Silicon / Intel et installateurs Windows 10/11 adossés à DPAPI.',
       'dl-macwin-btn': 'Compiler depuis les Sources',
 
-      'footer-desc': 'Gestionnaire de mots de passe souverain natif sous git avec chiffrement par buckets rembourrés et identité par appareil. Conçu pour que vos identifiants restent sur vos machines, où nul ne peut vous les enlever.',
+      'footer-desc': 'Gestionnaire de mots de passe souverain natif sous git avec chiffrement par buckets rembourrés et identité par appareil. Conçu pour que vos identifiants restent sur vos machines, où nul ne peut vous les enlever. Synchronisé selon vos propres conditions.<br>Le gestionnaire de mots de passe dont le Kyle de 2016 serait tombé amoureux.',
       'footer-col-project': 'Projet',
       'footer-link-dl': 'Télécharger la Version',
       'footer-link-sec': 'Livre Blanc de Sécurité',
@@ -320,7 +320,7 @@
       'dl-macwin-desc': 'Binário universal Apple Silicon / Intel e instaladores para Windows 10/11 integrados ao DPAPI.',
       'dl-macwin-btn': 'Compilar a partir do Código',
 
-      'footer-desc': 'Gerenciador de senhas soberano nativo em git com criptografia em buckets preenchidos e identidade de dispositivo. Construído para que suas credenciais permaneçam em suas máquinas, onde ninguém pode tirá-las.',
+      'footer-desc': 'Gerenciador de senhas soberano nativo em git com criptografia em buckets preenchidos e identidade de dispositivo. Construído para que suas credenciais permaneçam em suas máquinas, onde ninguém pode tirá-las. Sincronizado sob seus próprios termos.<br>O gerenciador de senhas pelo qual o Kyle de 2016 teria se apaixonado.',
       'footer-col-project': 'Projeto',
       'footer-link-dl': 'Baixar Versão',
       'footer-link-sec': 'Relatório de Segurança',
@@ -382,6 +382,70 @@
     }
   }
 
+  function resolveLatestReleases() {
+    var CACHE_KEY = 'baluard_latest_release_cache';
+    var CACHE_TTL = 3600000; // 1 hour
+
+    function applyReleaseData(release) {
+      if (!release || !release.assets) return;
+
+      var typeMap = {
+        appimage: /\.AppImage$/i,
+        deb: /\.deb$/i,
+        rpm: /\.rpm$/i,
+        cli: /baluard-cli.*\.tar\.gz$/i,
+        manifest: /SHA256SUMS$/i
+      };
+
+      for (var type in typeMap) {
+        var regex = typeMap[type];
+        for (var i = 0; i < release.assets.length; i++) {
+          var asset = release.assets[i];
+          if (regex.test(asset.name)) {
+            var card = document.querySelector('[data-dl-type="' + type + '"]');
+            if (card) {
+              card.href = asset.browser_download_url;
+              var sizeEl = card.querySelector('.dl-size');
+              if (sizeEl && asset.size) {
+                var mb = (asset.size / (1024 * 1024)).toFixed(1);
+                sizeEl.textContent = mb + ' MB';
+              }
+            }
+            break;
+          }
+        }
+      }
+    }
+
+    try {
+      var cached = sessionStorage.getItem(CACHE_KEY);
+      if (cached) {
+        var parsed = JSON.parse(cached);
+        if (Date.now() - parsed.timestamp < CACHE_TTL) {
+          applyReleaseData(parsed.data);
+          return;
+        }
+      }
+    } catch (e) {}
+
+    fetch('https://api.github.com/repos/baluard-org/baluard/releases/latest', {
+      headers: { 'Accept': 'application/vnd.github.v3+json' }
+    })
+      .then(function (res) {
+        if (!res.ok) throw new Error('Release fetch status: ' + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        applyReleaseData(data);
+        try {
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data: data }));
+        } catch (e) {}
+      })
+      .catch(function () {
+        // Fallback: stay with native /releases/latest/download/ URLs
+      });
+  }
+
   function initLangSwitcher() {
     var btn = document.getElementById('lang-btn');
     var dropdown = document.getElementById('lang-dropdown');
@@ -433,6 +497,7 @@
 
     var current = getSavedLanguage();
     setLanguage(current);
+    resolveLatestReleases();
   }
 
   if (document.readyState === 'loading') {
