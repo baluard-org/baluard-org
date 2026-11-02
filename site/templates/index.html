@@ -563,6 +563,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
     background: var(--site-bg-surface);
     border: 1px solid var(--site-border);
     border-radius: var(--radius-md);
@@ -615,6 +616,42 @@
   .dl-card-disabled:hover {
     border-color: var(--site-border);
     transform: none;
+  }
+
+  /* Releases pending: blur every card and badge it until CI ships */
+  .dl-options-grid.is-pending-releases .dl-card {
+    pointer-events: none;
+  }
+
+  .dl-options-grid.is-pending-releases .dl-card:hover {
+    border-color: var(--site-border);
+    transform: none;
+  }
+
+  .dl-options-grid.is-pending-releases .dl-card > *:not(.dl-soon-overlay) {
+    filter: blur(6px);
+    user-select: none;
+  }
+
+  .dl-soon-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dl-soon-overlay span {
+    padding: 0.45rem 1rem;
+    border: 1px solid var(--site-accent);
+    border-radius: 999px;
+    background: rgba(7, 9, 13, 0.78);
+    color: var(--site-accent);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
   }
 
   /* Package Manager Details */
@@ -1175,9 +1212,9 @@
     </div>
 
     <!-- Download Options Grid -->
-    <div class="dl-options-grid reveal-group">
+    <div class="dl-options-grid reveal-group is-pending-releases">
       <!-- AppImage -->
-      <a href="https://github.com/baluard-org/baluard/releases/latest/download/Baluard-x86_64.AppImage" class="dl-card reveal-on-scroll" data-dl-type="appimage">
+      <a href="https://github.com/baluard-org/baluard/releases/latest/download/Baluard-x86_64.AppImage" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="appimage">
         <div>
           <div class="dl-card-tag">Recommended / Linux</div>
           <div class="dl-card-name">AppImage</div>
@@ -1187,10 +1224,11 @@
           <span>Download &darr;</span>
           <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">118 MB</span>
         </div>
+        <div class="dl-soon-overlay"><span data-i18n="dl-coming-soon">Coming soon</span></div>
       </a>
 
       <!-- Debian / Ubuntu -->
-      <a href="https://github.com/baluard-org/baluard/releases/latest/download/baluard_amd64.deb" class="dl-card reveal-on-scroll" data-dl-type="deb">
+      <a href="https://github.com/baluard-org/baluard/releases/latest/download/baluard_amd64.deb" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="deb">
         <div>
           <div class="dl-card-tag">Debian / Ubuntu</div>
           <div class="dl-card-name">.deb Package</div>
@@ -1200,10 +1238,11 @@
           <span>Download &darr;</span>
           <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">16.4 MB</span>
         </div>
+        <div class="dl-soon-overlay"><span data-i18n="dl-coming-soon">Coming soon</span></div>
       </a>
 
       <!-- Fedora / RHEL -->
-      <a href="https://github.com/baluard-org/baluard/releases/latest/download/baluard.x86_64.rpm" class="dl-card reveal-on-scroll" data-dl-type="rpm">
+      <a href="https://github.com/baluard-org/baluard/releases/latest/download/baluard.x86_64.rpm" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="rpm">
         <div>
           <div class="dl-card-tag">Fedora / openSUSE</div>
           <div class="dl-card-name">.rpm Package</div>
@@ -1213,10 +1252,11 @@
           <span>Download &darr;</span>
           <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">16.4 MB</span>
         </div>
+        <div class="dl-soon-overlay"><span data-i18n="dl-coming-soon">Coming soon</span></div>
       </a>
 
       <!-- CLI Tarball -->
-      <a href="https://github.com/baluard-org/baluard/releases/latest/download/baluard-cli-linux-x86_64.tar.gz" class="dl-card reveal-on-scroll" data-dl-type="cli">
+      <a href="https://github.com/baluard-org/baluard/releases/latest/download/baluard-cli-linux-x86_64.tar.gz" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="cli">
         <div>
           <div class="dl-card-tag">Command Line / Daemon</div>
           <div class="dl-card-name">CLI Tarball</div>
@@ -1226,6 +1266,7 @@
           <span>Download &darr;</span>
           <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">3.3 MB</span>
         </div>
+        <div class="dl-soon-overlay"><span data-i18n="dl-coming-soon">Coming soon</span></div>
       </a>
 
       <!-- Windows -->
@@ -1238,6 +1279,7 @@
         <div class="dl-card-footer">
           <span style="color: var(--site-text-muted);">In development</span>
         </div>
+        <div class="dl-soon-overlay"><span data-i18n="dl-coming-soon">Coming soon</span></div>
       </div>
 
       <!-- macOS -->
@@ -1250,6 +1292,7 @@
         <div class="dl-card-footer">
           <span style="color: var(--site-text-muted);">In development</span>
         </div>
+        <div class="dl-soon-overlay"><span data-i18n="dl-coming-soon">Coming soon</span></div>
       </div>
     </div>
 
@@ -1300,7 +1343,7 @@ sudo dnf install baluard</code></pre>
         MV3 companions that talk directly to the local `baluard-daemon` via native messaging. Strict origin matching, zero remote telemetry.
       </p>
 
-      <div class="dl-options-grid reveal-group">
+      <div class="dl-options-grid reveal-group is-pending-releases">
         <!-- Firefox Extension -->
         <div class="dl-card dl-card-disabled reveal-on-scroll">
           <div>
@@ -1312,6 +1355,7 @@ sudo dnf install baluard</code></pre>
             <span style="color: var(--site-text-muted);">Add-on store listing pending</span>
             <span style="font-family: var(--font-mono); font-size: 0.75rem;">MV3</span>
           </div>
+          <div class="dl-soon-overlay"><span data-i18n="dl-coming-soon">Coming soon</span></div>
         </div>
 
         <!-- Chrome / Chromium Extension -->
@@ -1325,6 +1369,7 @@ sudo dnf install baluard</code></pre>
             <span style="color: var(--site-text-muted);">Web Store listing pending</span>
             <span style="font-family: var(--font-mono); font-size: 0.75rem;">MV3</span>
           </div>
+          <div class="dl-soon-overlay"><span data-i18n="dl-coming-soon">Coming soon</span></div>
         </div>
       </div>
     </div>

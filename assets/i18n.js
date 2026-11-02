@@ -66,6 +66,7 @@
       'spec-t5': 'Memory Hygiene',
 
       'dl-eyebrow': 'Download Center',
+      'dl-coming-soon': 'Coming soon',
       'dl-heading': 'Get Baluard for your platforms.',
       'dl-lede': 'Stand-alone binaries with cryptographic release checksums. No account creation, no cloud activation.',
       'dl-linux-title': 'Linux Desktop &amp; CLI',
@@ -160,6 +161,7 @@
       'spec-t5': 'Higiene de Memoria',
 
       'dl-eyebrow': 'Centro de Descargas',
+      'dl-coming-soon': 'Próximamente',
       'dl-heading': 'Obtén Baluard para tus plataformas.',
       'dl-lede': 'Binarios independientes con sumas de comprobación criptográficas. Sin creación de cuenta, sin activación en la nube.',
       'dl-linux-title': 'Linux Desktop y CLI',
@@ -254,6 +256,7 @@
       'spec-t5': 'Hygiène de la Mémoire',
 
       'dl-eyebrow': 'Centre de Téléchargement',
+      'dl-coming-soon': 'Bientôt disponible',
       'dl-heading': 'Obtenez Baluard pour vos plateformes.',
       'dl-lede': 'Binaires autonomes avec sommes de contrôle cryptographiques. Aucune création de compte, aucune activation cloud.',
       'dl-linux-title': 'Linux Desktop et CLI',
@@ -348,6 +351,7 @@
       'spec-t5': 'Higiene de Memória',
 
       'dl-eyebrow': 'Central de Downloads',
+      'dl-coming-soon': 'Em breve',
       'dl-heading': 'Obtenha o Baluard para suas plataformas.',
       'dl-lede': 'Binários autônomos com somas de verificação criptográficas. Sem criação de conta, sem ativação na nuvem.',
       'dl-linux-title': 'Linux Desktop e CLI',
