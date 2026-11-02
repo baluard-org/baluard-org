@@ -485,16 +485,26 @@
     border-radius: var(--radius-xl);
     padding: 3rem;
     display: grid;
-    grid-template-columns: 1.4fr 1fr;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
     gap: 2.5rem;
     align-items: center;
   }
 
   @media (max-width: 860px) {
     .security-feature-card {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       padding: 2rem;
     }
+  }
+
+  .crypto-spec-card {
+    background: var(--site-bg-elevated);
+    border: 1px solid var(--site-border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
   }
 
   .crypto-spec-table {
@@ -521,6 +531,7 @@
     font-family: var(--font-mono);
     color: var(--app-primary);
     text-align: right;
+    word-break: break-word;
   }
 
   /* ── Download Hub ────────────────────────────────────────── */
@@ -657,11 +668,21 @@
     .showcase-scene {
       margin-top: 1.5rem;
     }
+    .desktop-titlebar-status {
+      display: none;
+    }
+    .desktop-titlebar-title {
+      font-size: 0.74rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     .showcase-mobile {
       width: 240px;
     }
     .hero-cta-group .btn {
       width: 100%;
+      min-width: 0;
     }
     .trust-strip {
       flex-direction: column;
@@ -681,7 +702,35 @@
       font-size: 0.8rem;
     }
     .security-feature-card {
-      padding: 1.75rem 1.25rem;
+      padding: 1.5rem 1.15rem;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+      overflow: hidden;
+    }
+    .security-feature-card > div {
+      min-width: 0;
+      max-width: 100%;
+    }
+    .security-feature-card h2 {
+      font-size: 1.65rem !important;
+    }
+    .security-feature-card .btn {
+      width: 100%;
+      min-width: 0;
+      white-space: normal;
+      text-align: center;
+      padding: 0.8rem 1rem;
+      font-size: 0.9rem;
+      line-height: 1.35;
+    }
+    .crypto-spec-card {
+      padding: 0.85rem 0.65rem;
+    }
+    .crypto-spec-table {
+      font-size: 0.78rem;
+    }
+    .crypto-spec-table td {
+      padding: 0.55rem 0.35rem;
     }
   }
 
@@ -1040,7 +1089,7 @@
         </a>
       </div>
 
-      <div style="background: var(--site-bg-elevated); border: 1px solid var(--site-border); border-radius: 10px; padding: 1.25rem;">
+      <div class="crypto-spec-card">
         <table class="crypto-spec-table">
           <tr>
             <td class="spec-name">Vault Cipher</td>
