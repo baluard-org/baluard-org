@@ -21,7 +21,12 @@
   <style>
     @font-face {
       font-family: 'Morris Roman';
-      src: url('assets/baluard-morris-roman.black.ttf') format('truetype');
+      src: url('/assets/baluard-morris-roman.black.woff2') format('woff2'),
+           url('assets/baluard-morris-roman.black.woff2') format('woff2'),
+           url('/assets/baluard-morris-roman.black.woff') format('woff'),
+           url('assets/baluard-morris-roman.black.woff') format('woff'),
+           url('/assets/baluard-morris-roman.black.ttf') format('truetype'),
+           url('assets/baluard-morris-roman.black.ttf') format('truetype');
       font-weight: normal;
       font-style: normal;
       font-display: swap;
@@ -273,8 +278,11 @@
     }
 
     .brand-title {
-      letter-spacing: -0.01em;
-      font-weight: 700;
+      font-family: var(--font-logo);
+      font-size: 1.45rem;
+      letter-spacing: 0.02em;
+      font-weight: normal;
+      line-height: 1;
       color: var(--site-text);
     }
 

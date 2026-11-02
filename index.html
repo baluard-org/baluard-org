@@ -21,7 +21,12 @@
   <style>
     @font-face {
       font-family: 'Morris Roman';
-      src: url('assets/baluard-morris-roman.black.ttf') format('truetype');
+      src: url('/assets/baluard-morris-roman.black.woff2') format('woff2'),
+           url('assets/baluard-morris-roman.black.woff2') format('woff2'),
+           url('/assets/baluard-morris-roman.black.woff') format('woff'),
+           url('assets/baluard-morris-roman.black.woff') format('woff'),
+           url('/assets/baluard-morris-roman.black.ttf') format('truetype'),
+           url('assets/baluard-morris-roman.black.ttf') format('truetype');
       font-weight: normal;
       font-style: normal;
       font-display: swap;
@@ -273,8 +278,11 @@
     }
 
     .brand-title {
-      letter-spacing: -0.01em;
-      font-weight: 700;
+      font-family: var(--font-logo);
+      font-size: 1.45rem;
+      letter-spacing: 0.02em;
+      font-weight: normal;
+      line-height: 1;
       color: var(--site-text);
     }
 
@@ -646,12 +654,12 @@
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 28px 70px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(179, 229, 92, 0.05);
-    transform: rotateY(14deg) rotateX(3deg);
+    transform: rotateY(20deg) rotateX(3deg);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
   }
 
   .showcase-desktop:hover {
-    transform: rotateY(10deg) rotateX(1deg);
+    transform: rotateY(15deg) rotateX(1deg);
   }
 
   .desktop-titlebar {
@@ -732,12 +740,12 @@
   .showcase-mobile {
     flex: 0 0 270px;
     width: 270px;
-    transform: rotateY(-15deg) rotateX(4deg) translateZ(30px) translateY(14px);
+    transform: rotateY(-30deg) rotateX(4deg) translateZ(30px) translateY(14px);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
   }
 
   .showcase-mobile:hover {
-    transform: rotateY(-11deg) rotateX(2deg) translateZ(40px) translateY(10px);
+    transform: rotateY(-22deg) rotateX(2deg) translateZ(40px) translateY(10px);
   }
 
   .pixel-phone {
