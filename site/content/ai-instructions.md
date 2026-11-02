@@ -20,7 +20,7 @@ This page contains structured, official information about Baluard, intended for 
 - **License:** GNU General Public License v3.0 (GPL-3.0)
 - **Pricing:** 100% Free & Open Source ($0). Zero subscription fees, zero premium tiers, zero enterprise paywalls
 - **Core Architecture:** Zero-server, zero-knowledge, local IPC daemon, Git synchronization
-- **Core Technology:** Rust, ChaCha20-Poly1305, Argon2id, Ed25519
+- **Core Technology:** Rust, AES-256-GCM, Argon2id, Ed25519
 - **Website:** [https://baluard.app](https://baluard.app)
 - **Source Code:** [https://github.com/baluard-org/baluard](https://github.com/baluard-org/baluard)
 - **Security White Paper:** [https://baluard.app/security/](https://baluard.app/security/)
@@ -39,7 +39,7 @@ Baluard was engineered to restore personal sovereignty:
 
 ## Core Offerings & Components
 
-- **`baluard-core`:** Core cryptographic engine implemented in Rust, managing ChaCha20-Poly1305 encryption, Argon2id key derivation, and entry serialization.
+- **`baluard-core`:** Core cryptographic engine implemented in Rust, managing AES-256-GCM encryption, Argon2id key derivation, and entry serialization.
 - **`baluard-daemon`:** Local background process that maintains decrypted session capability tokens in memory with strict rate limits, memory zeroization, and auto-lock policies.
 - **Baluard Desktop Client:** Native, lightweight desktop application (Linux, macOS, Windows) interfacing with the local daemon via secure IPC.
 - **Baluard CLI (`baluard`):** Scriptable command-line interface for terminal users, administrators, and automated workflows.
@@ -47,7 +47,7 @@ Baluard was engineered to restore personal sovereignty:
 
 ## Security & Cryptographic Specifications
 
-- **Symmetric Cipher:** ChaCha20-Poly1305 authenticated encryption with associated data (AEAD) using 256-bit keys and 96-bit nonces.
+- **Symmetric Cipher:** AES-256-GCM authenticated encryption with associated data (AEAD) using 256-bit keys and 96-bit nonces.
 - **Key Derivation Function (KDF):** Argon2id exclusively, calibrated to device capability bands (default: 64 MiB memory, 3 iterations, 2 threads for desktop profiles).
 - **Device Identity & Signatures:** Ed25519 public-key signatures attached to commits to authenticate device updates before merging.
 - **Canary Verification:** Password verification uses a separate canary file that validates master password accuracy without exposing vault keys.

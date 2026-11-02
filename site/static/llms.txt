@@ -2,7 +2,7 @@
 
 > Git-native, sovereign password manager with padded-bucket encryption and device-identity bootstrapping. Built so your credentials stay on your machines, where no one can take them away.
 
-Baluard is an open-source, local-first password manager engineered in Rust. It eliminates centralized cloud infrastructure, vendor-hosted databases, and subscription lock-in by utilizing Git as its distributed synchronization backend. Vault data is encrypted locally using ChaCha20-Poly1305 AEAD and Argon2id key derivation, with sizes normalized into padded power-of-two buckets to prevent traffic analysis and metadata leakage. Devices authenticate and sign commits using Ed25519 cryptographic keypairs.
+Baluard is an open-source, local-first password manager engineered in Rust. It eliminates centralized cloud infrastructure, vendor-hosted databases, and subscription lock-in by utilizing Git as its distributed synchronization backend. Vault data is encrypted locally using AES-256-GCM AEAD and Argon2id key derivation, with sizes normalized into padded power-of-two buckets to prevent traffic analysis and metadata leakage. Devices authenticate and sign commits using Ed25519 cryptographic keypairs.
 
 ## Core Documentation
 

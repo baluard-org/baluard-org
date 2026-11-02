@@ -39,14 +39,14 @@ sync-paper:
 	slug = "security"\n\
 	path = "security"\n\
 	+++\n\n"""; \
-	with open("../Baluard/docs/security-white-paper.md") as src, open("site/content/security.md", "w") as dst: \
+	with open("../baluard/docs/security/security-white-paper.md") as src, open("site/content/security.md", "w") as dst: \
 	    dst.write(fm + src.read())'
 	@just build
-	@echo "Security white paper synchronized from ../Baluard/docs/security-white-paper.md."
+	@echo "Security white paper synchronized from ../baluard/docs/security/security-white-paper.md."
 
-# Validate links and templates
+# External links are skipped: ai-instructions.md targets the main repo, which stays private until launch
 check:
-	cd site && zola check
+	cd site && zola check --skip-external-links
 
 # Clean temporary Zola build cache
 clean:
