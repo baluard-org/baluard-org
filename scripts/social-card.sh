@@ -43,13 +43,13 @@ rsvg-convert "$WORK/bg.svg" -o "$WORK/bg.png"
 magick "$WORK/bg.png" \
   \( "$WORK/lock.png" \) -geometry +110+115 -composite \
   -font site/static/assets/baluard-morris-roman.black.ttf -pointsize 150 -fill '#f1f5f9' \
-  -annotate +500+175 'Baluard' \
+  -annotate +475+175 'Baluard' \
   -font "$SANS_FONT" -pointsize 45 -fill '#c5f279' -kerning 4 \
-  -annotate +508+285 'THE GIT-NATIVE' \
-  -annotate +508+344 'PASSWORD MANAGER' \
+  -annotate +482+285 'THE GIT-NATIVE' \
+  -annotate +482+344 'PASSWORD MANAGER' \
   -pointsize 42 -fill '#94a3b8' -kerning 0 \
-  -annotate +508+410 'No one can take it away.' \
-  -annotate +508+465 'Including us.' \
+  -annotate +482+410 'No one can take it away.' \
+  -annotate +482+465 'Including us.' \
   -pointsize 26 -fill '#64748b' -kerning 2 -gravity center \
   -annotate +0+225 'no server  ·  no account  ·  no subscription  ·  zero telemetry' \
   site/static/assets/social-card.png
