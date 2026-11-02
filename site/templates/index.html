@@ -1131,7 +1131,7 @@
     <!-- Download Options Grid -->
     <div class="dl-options-grid reveal-group">
       <!-- AppImage -->
-      <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/Baluard_0.1.0_amd64.AppImage" class="dl-card reveal-on-scroll">
+      <a href="https://github.com/baluard-org/baluard/releases/latest/download/Baluard-x86_64.AppImage" class="dl-card reveal-on-scroll" data-dl-type="appimage">
         <div>
           <div class="dl-card-tag">Recommended / Linux</div>
           <div class="dl-card-name">AppImage</div>
@@ -1139,12 +1139,12 @@
         </div>
         <div class="dl-card-footer">
           <span>Download &darr;</span>
-          <span style="font-family: var(--font-mono); font-size: 0.75rem;">118 MB</span>
+          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">118 MB</span>
         </div>
       </a>
 
       <!-- Debian / Ubuntu -->
-      <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/Baluard_0.1.0_amd64.deb" class="dl-card reveal-on-scroll">
+      <a href="https://github.com/baluard-org/baluard/releases/latest/download/baluard_amd64.deb" class="dl-card reveal-on-scroll" data-dl-type="deb">
         <div>
           <div class="dl-card-tag">Debian / Ubuntu</div>
           <div class="dl-card-name">.deb Package</div>
@@ -1152,12 +1152,12 @@
         </div>
         <div class="dl-card-footer">
           <span>Download &darr;</span>
-          <span style="font-family: var(--font-mono); font-size: 0.75rem;">16.4 MB</span>
+          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">16.4 MB</span>
         </div>
       </a>
 
       <!-- Fedora / RHEL -->
-      <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/Baluard-0.1.0-1.x86_64.rpm" class="dl-card reveal-on-scroll">
+      <a href="https://github.com/baluard-org/baluard/releases/latest/download/baluard.x86_64.rpm" class="dl-card reveal-on-scroll" data-dl-type="rpm">
         <div>
           <div class="dl-card-tag">Fedora / openSUSE</div>
           <div class="dl-card-name">.rpm Package</div>
@@ -1165,12 +1165,12 @@
         </div>
         <div class="dl-card-footer">
           <span>Download &darr;</span>
-          <span style="font-family: var(--font-mono); font-size: 0.75rem;">16.4 MB</span>
+          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">16.4 MB</span>
         </div>
       </a>
 
       <!-- CLI Tarball -->
-      <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/baluard-cli-0.1.0-linux-x86_64.tar.gz" class="dl-card reveal-on-scroll">
+      <a href="https://github.com/baluard-org/baluard/releases/latest/download/baluard-cli-linux-x86_64.tar.gz" class="dl-card reveal-on-scroll" data-dl-type="cli">
         <div>
           <div class="dl-card-tag">Command Line / Daemon</div>
           <div class="dl-card-name">CLI Tarball</div>
@@ -1178,7 +1178,7 @@
         </div>
         <div class="dl-card-footer">
           <span>Download &darr;</span>
-          <span style="font-family: var(--font-mono); font-size: 0.75rem;">3.3 MB</span>
+          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">3.3 MB</span>
         </div>
       </a>
 
@@ -1284,7 +1284,7 @@ sudo dnf install baluard</code></pre>
     </div>
 
     <div style="margin-top: 1.5rem; text-align: center; font-size: 0.9rem; color: #64748b;">
-      Every release includes a <a href="https://github.com/baluard-org/baluard/releases/download/0.1.0/SHA256SUMS" target="_blank" rel="noopener noreferrer">signed SHA256SUMS manifest</a> with cryptographic signatures.
+      Every release includes a <a href="https://github.com/baluard-org/baluard/releases/latest/download/SHA256SUMS" target="_blank" rel="noopener noreferrer" data-dl-type="manifest">signed SHA256SUMS manifest</a> with cryptographic signatures.
     </div>
   </div>
 </section>
