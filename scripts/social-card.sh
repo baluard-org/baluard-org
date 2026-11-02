@@ -51,7 +51,7 @@ magick "$WORK/bg.png" \
   -annotate +482+410 'No one can take it away.' \
   -annotate +482+465 'Including us.' \
   -pointsize 26 -fill '#64748b' -kerning 2 -gravity center \
-  -annotate +0+225 'no server  ·  no account  ·  no subscription  ·  zero telemetry' \
+  -annotate +0+225 'no server  ·  no account  ·  zero telemetry' \
   site/static/assets/social-card.png
 
 identify site/static/assets/social-card.png
