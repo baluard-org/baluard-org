@@ -44,11 +44,13 @@ magick "$WORK/bg.png" \
   \( "$WORK/lock.png" \) -geometry +110+115 -composite \
   -font site/static/assets/baluard-morris-roman.black.ttf -pointsize 150 -fill '#f1f5f9' \
   -annotate +556+175 'Baluard' \
-  -font "$SANS_FONT" -pointsize 42 -fill '#94a3b8' \
-  -annotate +565+335 'No one can take it away.' \
-  -annotate +565+400 'Including us.' \
+  -font "$SANS_FONT" -pointsize 22 -fill '#c5f279' -kerning 4 \
+  -annotate +565+295 'THE GIT-NATIVE PASSWORD MANAGER' \
+  -pointsize 42 -fill '#94a3b8' -kerning 0 \
+  -annotate +565+355 'No one can take it away.' \
+  -annotate +565+410 'Including us.' \
   -pointsize 26 -fill '#64748b' -kerning 2 -gravity center \
-  -annotate +0+225 'git-native  ·  no server  ·  no account  ·  no subscription' \
+  -annotate +0+225 'no server  ·  no account  ·  no subscription  ·  zero telemetry' \
   site/static/assets/social-card.png
 
 identify site/static/assets/social-card.png
