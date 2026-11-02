@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Baluard Security White Paper</title>
-  <meta name="description" content="Git-native password manager with padded-bucket encrypted storage, device-identity bootstrapping, and multi-platform clients. No server, no account, no subscription.">
+  <meta name="description" content="Git-native password manager with padded-bucket encryption, device-identity bootstrapping, and multi-platform clients. No server, no account, no subscription.">
 
   <!-- Resolves the display language before first paint; the deferred i18n.js swap would otherwise flash English -->
   <script>
@@ -32,9 +32,14 @@
     })();
   </script>
 
+  <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="assets/baluard-lock-only.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="64x64" href="assets/baluard-lock-l4-svg-64.png">
   <link rel="apple-touch-icon" href="assets/baluard-lock-l4-svg-512.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="canonical" href="https://baluard.app/security/">
+  <meta name="theme-color" content="#07090d">
 
   <!-- Open Graph / Meta -->
   <meta property="og:type" content="website">
@@ -47,11 +52,24 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Baluard, the git-native password manager: lime padlock emblem on a dark teal background, with the tagline: No one can take it away. Including us.">
   <meta property="og:locale" content="en_US">
+  <meta name="twitter:site" content="@BaluardApp">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Baluard Security White Paper">
   <meta name="twitter:description" content="How Baluard protects your data: the security white paper.">
   <meta name="twitter:image" content="https://baluard.app/assets/social-card.png">
   <meta name="twitter:image:alt" content="Baluard, the git-native password manager: lime padlock emblem on a dark teal background, with the tagline: No one can take it away. Including us.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Baluard",
+    "applicationCategory": "SecurityApplication",
+    "operatingSystem": "Linux, macOS, Windows",
+    "url": "https://baluard.app/",
+    "description": "Git-native password manager with padded-bucket encryption, device-identity bootstrapping, and multi-platform clients. No server, no account, no subscription.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
   <link rel="help" type="text/plain" href="/llms.txt" title="LLM context">
 
   <style>

@@ -11,6 +11,8 @@ serve:
 
 # Build the site with Zola and stage static files to repository root for GitHub Pages
 build:
+	test -f site/static/assets/social-card.png || ./scripts/social-card.sh
+	test -f site/static/favicon.ico || ./scripts/favicon.sh
 	cd site && zola build
 	cp site/public/index.html ./index.html
 	mkdir -p ./security
@@ -18,11 +20,12 @@ build:
 	mkdir -p ./ai-instructions
 	cp site/public/ai-instructions/index.html ./ai-instructions/index.html
 	cp site/public/llms.txt ./llms.txt
+	cp site/public/favicon.ico ./favicon.ico
+	cp site/public/manifest.webmanifest ./manifest.webmanifest
 	cp site/public/robots.txt ./robots.txt
 	cp site/public/sitemap.xml ./sitemap.xml
 	mkdir -p ./assets
 	rsync -a site/public/assets/ ./assets/
-	test -f site/static/assets/social-card.png || ./scripts/social-card.sh
 	@echo "Build complete: index.html, security, ai-instructions, llms.txt, and assets/ updated."
 
 # Regenerate the 1200x630 social card (og:image) into site/static/assets/
