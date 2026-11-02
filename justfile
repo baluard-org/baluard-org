@@ -13,12 +13,18 @@ serve:
 build:
 	cd site && zola build
 	cp site/public/index.html ./index.html
+	mkdir -p ./security
 	cp site/public/security/index.html ./security.html
+	cp site/public/security/index.html ./security/index.html
+	mkdir -p ./ai-instructions
+	cp site/public/ai-instructions/index.html ./ai-instructions.html
+	cp site/public/ai-instructions/index.html ./ai-instructions/index.html
+	cp site/public/llms.txt ./llms.txt
 	cp site/public/robots.txt ./robots.txt
 	cp site/public/sitemap.xml ./sitemap.xml
 	mkdir -p ./assets
 	rsync -a site/public/assets/ ./assets/
-	@echo "Build complete: index.html, security.html, and assets/ updated."
+	@echo "Build complete: index.html, security, ai-instructions, llms.txt, and assets/ updated."
 
 # Sync security white paper markdown from the main Baluard repository
 sync-paper:
