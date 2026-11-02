@@ -149,7 +149,7 @@
       'cli-heading': 'Cliente de terminal programable respaldado por demonio.',
       'cli-lede': 'El CLI de baluard te ofrece 35 comandos con velocidad basada en demonio y respaldo fuera de línea --direct. Ideal para entornos dev, servidores sin pantalla y pipelines de CI.',
 
-      'sec-eyebrow': 'Garantía Auditabile',
+      'sec-eyebrow': 'Garantía Auditable',
       'sec-heading': 'Lee el Libro Blanco de Seguridad',
       'sec-lede': 'Baluard publica su arquitectura criptográfica completa y modelo de amenazas. Todo lo afirmado en este sitio puede verificarse en código abierto público y auditarse directamente.',
       'sec-btn': 'Leer el Libro Blanco (13 Secciones) &rarr;',
@@ -383,6 +383,11 @@
   var SUPPORTED = ['en', 'es', 'fr', 'pt'];
 
   function getSavedLanguage() {
+    var early = window.__baluardLang;
+    if (early && SUPPORTED.indexOf(early) !== -1) {
+      return early;
+    }
+
     try {
       var saved = localStorage.getItem(STORAGE_KEY);
       if (saved && SUPPORTED.indexOf(saved) !== -1) {
@@ -424,6 +429,8 @@
       opt.classList.toggle('active', isCurrent);
       opt.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
     }
+
+    document.documentElement.classList.remove('i18n-pending');
   }
 
   function resolveLatestReleases() {
