@@ -337,6 +337,21 @@
     font-size: 0.92rem;
     color: var(--site-text-secondary);
     line-height: 1.55;
+    flex-grow: 1;
+  }
+
+  .arch-node-spec {
+    display: inline-block;
+    align-self: flex-start;
+    margin-top: 0.85rem;
+    padding: 0.25rem 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--site-accent);
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: var(--radius-sm);
+    line-height: 1.4;
   }
 
   /* ── Deep Capabilities (Asymmetrical) ────────────────────── */
@@ -827,7 +842,7 @@
       </h1>
 
       <p class="hero-description hero-reveal" data-i18n="hero-pitch">
-        We don't want custody of your passwords; and we don't want anyone else having it either. Your vault stays encrypted on the hardware you own, versioned with git, on your server of choice. No Baluard account to lock, no servers to breach, no middleman.
+        Your passwords stay on your devices and sync through storage you control. No accounts to lock, no central database to breach, and no middleman reading along.
       </p>
     </div>
 
@@ -886,11 +901,11 @@
         </div>
         <div class="trust-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          <span data-i18n="trust-license">GPL-3.0 Free Software</span>
+          <span data-i18n="trust-noserver">Zero Central Servers</span>
         </div>
         <div class="trust-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          <span data-i18n="trust-buckets">Size-Padded Buckets</span>
+          <span data-i18n="trust-license">GPL-3.0 Free Software</span>
         </div>
       </div>
     </div>
@@ -904,34 +919,37 @@
       <div class="section-eyebrow" data-i18n="arch-eyebrow">Zero-Server Architecture</div>
       <h2 class="section-heading" data-i18n="arch-heading">Why the architecture is the security model.</h2>
       <p class="section-lede" data-i18n="arch-lede">
-        Hosted password managers concentrate risk into a single vendor database; and venture capital can change the rules, alter licenses, or take your workflow away without prior notice. Baluard keeps your vault in an encrypted git repository on hardware you control, with no central database to breach and no investors between you and your data.
+        Most password managers store everyone's vaults in one giant cloud database. If that company gets breached or sold, your passwords are exposed. Baluard works like a personal safe in your home: your passwords stay on your own hardware, so there is no central database to break into.
       </p>
     </div>
 
     <div class="arch-diagram-card reveal-on-scroll">
       <div class="arch-flow-grid reveal-group">
         <div class="arch-node reveal-on-scroll">
-          <div class="arch-node-tag">LAYER 1 / CRYPTOGRAPHIC STORAGE</div>
-          <h4>Padded-Bucket Git Vault</h4>
-          <p>
-            Your vault entries are padded into 5 fixed size tiers (5 KB, 30 KB, 100 KB, 250 KB, 2 MB) to prevent traffic analysis and ciphertext-length deduction. Every commit is cryptographically signed by your device identity.
+          <div class="arch-node-tag" data-i18n="arch-node-tag-1">LAYER 1 / WHERE YOUR DATA LIVES</div>
+          <h4 data-i18n="arch-node-h4-1">A Safe in Your Home</h4>
+          <p data-i18n="arch-node-p-1">
+            Your vault stays on your physical phone and computer, encrypted with a key only you hold. Every entry is padded to identical size so observers cannot guess what is inside.
           </p>
+          <div class="arch-node-spec">ChaCha20-Poly1305 &bull; Argon2id &bull; Size-Padded</div>
         </div>
 
         <div class="arch-node reveal-on-scroll">
-          <div class="arch-node-tag">LAYER 2 / LOCAL IPC DAEMON</div>
-          <h4>Zero-Privilege Daemon</h4>
-          <p>
-            A background orchestration daemon in Rust (`baluard-daemon`) maintains state over a local Unix domain socket. Clients receive short-lived capability tokens, never raw vault root keys.
+          <div class="arch-node-tag" data-i18n="arch-node-tag-2">LAYER 2 / HOW DEVICES CONNECT</div>
+          <h4 data-i18n="arch-node-h4-2">Keys Exchanged in Person</h4>
+          <p data-i18n="arch-node-p-2">
+            Your phone and computer pair directly with each other like two people swapping keys face-to-face. No central account, no corporate sign-in, and no company server in the middle.
           </p>
+          <div class="arch-node-spec">Ed25519 Device Keys &bull; Local IPC Tokens</div>
         </div>
 
         <div class="arch-node reveal-on-scroll">
-          <div class="arch-node-tag">LAYER 3 / HOSTILE REMOTE SYNC</div>
-          <h4>Untrusted Git Providers</h4>
-          <p>
-            Sync to GitHub, GitLab, Codeberg, or your private SSH server. The remote host sees only opaque hashed paths and encrypted bytes. Even a complete breach of the git host reveals zero credentials.
+          <div class="arch-node-tag" data-i18n="arch-node-tag-3">LAYER 3 / HOW VAULTS SYNC</div>
+          <h4 data-i18n="arch-node-h4-3">Sync Through Your Own Notebook</h4>
+          <p data-i18n="arch-node-p-3">
+            Sync your vault through a private Git repo, your home server, or a USB drive. The remote host sees only scrambled ciphertext. Even a total breach of the sync host exposes zero passwords.
           </p>
+          <div class="arch-node-spec">Git-Native Transport &bull; Signed Commits</div>
         </div>
       </div>
     </div>
