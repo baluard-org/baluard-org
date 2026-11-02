@@ -794,11 +794,11 @@
 <section class="hero-section">
   <div class="container">
     <div class="hero-header">
-      <h1 class="hero-title hero-reveal">
+      <h1 class="hero-title hero-reveal" data-i18n="hero-title">
         No one can take it away. Including us.
       </h1>
 
-      <p class="hero-description hero-reveal">
+      <p class="hero-description hero-reveal" data-i18n="hero-pitch">
         We don't want custody of your passwords; and we don't want anyone else having it either. Your vault stays encrypted on the hardware you own, versioned with git, on your server of choice. No Baluard account to lock, no servers to breach, no middleman.
       </p>
     </div>
@@ -824,7 +824,7 @@
             </div>
           </div>
           <div class="desktop-screen">
-            <img src="assets/desktop-vault-dark.png" alt="Baluard desktop password vault application interface" width="1200" height="700" loading="lazy" decoding="async" class="desktop-screen-img">
+            <img src="assets/desktop-totp-dark.png" alt="Baluard desktop password vault application interface" width="1200" height="700" loading="lazy" decoding="async" class="desktop-screen-img">
           </div>
         </div>
 
@@ -844,25 +844,25 @@
       <div class="hero-cta-group hero-reveal">
         <a href="#download" class="btn btn-primary">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Download</span>
+          <span data-i18n="hero-btn-download">Download</span>
         </a>
         <a href="/security.html" class="btn btn-ghost">
-          <span>Security White Paper &rarr;</span>
+          <span data-i18n="hero-btn-paper">Security White Paper &rarr;</span>
         </a>
       </div>
 
       <div class="trust-strip hero-reveal">
         <div class="trust-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>100% Offline Capable</span>
+          <span data-i18n="trust-offline">100% Offline Capable</span>
         </div>
         <div class="trust-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>GPL-3.0 Free Software</span>
+          <span data-i18n="trust-license">GPL-3.0 Free Software</span>
         </div>
         <div class="trust-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>Size-Padded Buckets</span>
+          <span data-i18n="trust-buckets">Size-Padded Buckets</span>
         </div>
       </div>
     </div>
@@ -873,9 +873,9 @@
 <section id="architecture" class="content-section">
   <div class="container">
     <div class="section-intro reveal-on-scroll">
-      <div class="section-eyebrow">Zero-Server Architecture</div>
-      <h2 class="section-heading">Why the architecture is the security model.</h2>
-      <p class="section-lede">
+      <div class="section-eyebrow" data-i18n="arch-eyebrow">Zero-Server Architecture</div>
+      <h2 class="section-heading" data-i18n="arch-heading">Why the architecture is the security model.</h2>
+      <p class="section-lede" data-i18n="arch-lede">
         Hosted password managers concentrate risk into a single vendor database; and venture capital can change the rules, alter licenses, or take your workflow away without prior notice. Baluard keeps your vault in an encrypted git repository on hardware you control, with no central database to breach and no investors between you and your data.
       </p>
     </div>
@@ -1041,9 +1041,9 @@
 <section id="cli" class="content-section">
   <div class="container">
     <div class="section-intro reveal-on-scroll">
-      <div class="section-eyebrow">First-Class CLI</div>
-      <h2 class="section-heading">Scriptable, daemon-backed terminal client.</h2>
-      <p class="section-lede">
+      <div class="section-eyebrow" data-i18n="cli-eyebrow">First-Class CLI</div>
+      <h2 class="section-heading" data-i18n="cli-heading">Scriptable, daemon-backed terminal client.</h2>
+      <p class="section-lede" data-i18n="cli-lede">
         The `baluard` CLI gives you 35 commands with daemon-first speed and an offline `&#45;&#45;direct` fallback. Perfect for dev environments, headless servers, and CI pipelines.
       </p>
     </div>
@@ -1077,38 +1077,38 @@
   <div class="container">
     <div class="security-feature-card reveal-on-scroll">
       <div>
-        <div class="section-eyebrow" style="color: #b3e55c;">Auditable Assurance</div>
-        <h2 style="font-size: 2rem; color: var(--site-text); margin-bottom: 1rem; font-weight: 800;">
+        <div class="section-eyebrow" style="color: #b3e55c;" data-i18n="sec-eyebrow">Auditable Assurance</div>
+        <h2 style="font-size: 2rem; color: var(--site-text); margin-bottom: 1rem; font-weight: 800;" data-i18n="sec-heading">
           Read the Security White Paper
         </h2>
-        <p style="color: var(--site-text-secondary); line-height: 1.6; margin-bottom: 1.75rem;">
+        <p style="color: var(--site-text-secondary); line-height: 1.6; margin-bottom: 1.75rem;" data-i18n="sec-lede">
           Baluard publishes its complete cryptographic architecture and threat model. Everything claimed on this site can be verified in public source code and audited directly.
         </p>
         <a href="/security.html" class="btn btn-primary">
-          <span>Read the White Paper (Full 13 Sections) &rarr;</span>
+          <span data-i18n="sec-btn">Read the White Paper (Full 13 Sections) &rarr;</span>
         </a>
       </div>
 
       <div class="crypto-spec-card">
         <table class="crypto-spec-table">
           <tr>
-            <td class="spec-name">Vault Cipher</td>
+            <td class="spec-name" data-i18n="spec-t1">Vault Cipher</td>
             <td class="spec-value">AES-256-GCM (Authenticated)</td>
           </tr>
           <tr>
-            <td class="spec-name">Key Derivation (KDF)</td>
+            <td class="spec-name" data-i18n="spec-t2">Key Derivation (KDF)</td>
             <td class="spec-value">Argon2id (m=64 MiB, t=3, p=2)</td>
           </tr>
           <tr>
-            <td class="spec-name">Asymmetric Sealing</td>
+            <td class="spec-name" data-i18n="spec-t3">Asymmetric Sealing</td>
             <td class="spec-value">HPKE (RFC 9180, DHKEM-X25519)</td>
           </tr>
           <tr>
-            <td class="spec-name">Commit Integrity</td>
+            <td class="spec-name" data-i18n="spec-t4">Commit Integrity</td>
             <td class="spec-value">Ed25519 Device Signatures</td>
           </tr>
           <tr>
-            <td class="spec-name">Memory Hygiene</td>
+            <td class="spec-name" data-i18n="spec-t5">Memory Hygiene</td>
             <td class="spec-value">Zeroize on Drop &amp; Lock</td>
           </tr>
         </table>
@@ -1121,10 +1121,10 @@
 <section id="download" class="content-section">
   <div class="container">
     <div class="section-intro reveal-on-scroll">
-      <div class="section-eyebrow">Download Center</div>
-      <h2 class="section-heading">Get Baluard for your platforms.</h2>
-      <p class="section-lede">
-        Release 0.1.0 (Public Beta). Direct binaries, signed checksums, and official APT / DNF distribution repositories.
+      <div class="section-eyebrow" data-i18n="dl-eyebrow">Download Center</div>
+      <h2 class="section-heading" data-i18n="dl-heading">Get Baluard for your platforms.</h2>
+      <p class="section-lede" data-i18n="dl-lede">
+        Stand-alone binaries with cryptographic release checksums. No account creation, no cloud activation.
       </p>
     </div>
 

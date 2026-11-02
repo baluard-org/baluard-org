@@ -301,6 +301,130 @@
       gap: 0.75rem;
     }
 
+    /* Language Switcher */
+    .lang-switcher {
+      position: relative;
+      display: inline-block;
+    }
+
+    .lang-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--site-border);
+      color: var(--site-text-secondary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .lang-btn:hover,
+    .lang-btn[aria-expanded="true"] {
+      background: var(--site-bg-surface);
+      border-color: var(--site-text-muted);
+      color: var(--site-text);
+    }
+
+    .lang-btn:focus-visible {
+      outline: 2px solid var(--site-accent);
+      outline-offset: 2px;
+    }
+
+    .lang-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 195px;
+      background: #11151c;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 12px;
+      padding: 0.4rem;
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(0, 0, 0, 0.3);
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+    }
+
+    .lang-dropdown.is-open {
+      display: flex;
+      animation: langDropdownIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes langDropdownIn {
+      from {
+        opacity: 0;
+        transform: translateY(-6px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .lang-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      border: none;
+      background: transparent;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      font-weight: 500;
+      font-family: inherit;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.12s ease, color 0.12s ease;
+    }
+
+    .lang-option:hover {
+      background: rgba(255, 255, 255, 0.07);
+      color: #ffffff;
+    }
+
+    .lang-option.active {
+      background: rgba(245, 158, 11, 0.12);
+      color: #ffffff;
+    }
+
+    .lang-option .lang-check {
+      color: #f59e0b;
+      display: none;
+      flex-shrink: 0;
+    }
+
+    .lang-option.active .lang-check {
+      display: block;
+    }
+
+    @media (max-width: 680px) {
+      .lang-dropdown {
+        left: 0;
+        right: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .lang-btn {
+        width: 32px;
+        height: 32px;
+      }
+      .nav-actions {
+        gap: 0.45rem;
+      }
+      .btn-text-source {
+        display: none;
+      }
+    }
+
     @media (max-width: 768px) {
       .site-nav {
         display: none;
@@ -1215,18 +1339,46 @@
       </a>
 
       <nav class="site-nav" aria-label="Main Navigation">
-        <a href="#architecture" class="nav-link">Architecture</a>
-        <a href="#features" class="nav-link">Capabilities</a>
-        <a href="#security" class="nav-link">Security Model</a>
-        <a href="#download" class="nav-link">Download</a>
+        <a href="#architecture" class="nav-link" data-i18n="nav-arch">Architecture</a>
+        <a href="#features" class="nav-link" data-i18n="nav-features">Capabilities</a>
+        <a href="#security" class="nav-link" data-i18n="nav-security">Security Model</a>
+        <a href="#download" class="nav-link" data-i18n="nav-download">Download</a>
       </nav>
 
       <div class="nav-actions">
+        <div class="lang-switcher" id="lang-switcher">
+          <button type="button" class="lang-btn" id="lang-btn" aria-expanded="false" aria-haspopup="listbox" aria-label="Change language">
+            <svg class="globe-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+              <path d="M2 12h20"></path>
+            </svg>
+          </button>
+          <div class="lang-dropdown" id="lang-dropdown" role="listbox" aria-label="Select language">
+            <button type="button" class="lang-option active" role="option" aria-selected="true" data-lang="en">
+              <span class="lang-name">English</span>
+              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <button type="button" class="lang-option" role="option" aria-selected="false" data-lang="es">
+              <span class="lang-name">Español</span>
+              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <button type="button" class="lang-option" role="option" aria-selected="false" data-lang="fr">
+              <span class="lang-name">Français</span>
+              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <button type="button" class="lang-option" role="option" aria-selected="false" data-lang="pt">
+              <span class="lang-name">Português (Brasil)</span>
+              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+          </div>
+        </div>
+
         <a href="https://github.com/baluard-org/baluard" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" aria-label="GitHub Repository">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          <span>Source</span>
+          <span class="btn-text-source" data-i18n="nav-source">Source</span>
         </a>
-        <a href="#download" class="btn btn-primary btn-sm">Get Baluard</a>
+        <a href="#download" class="btn btn-primary btn-sm"><span data-i18n="nav-get-baluard">Get Baluard</span></a>
       </div>
     </div>
   </header>
@@ -1237,11 +1389,11 @@
 <section class="hero-section">
   <div class="container">
     <div class="hero-header">
-      <h1 class="hero-title hero-reveal">
+      <h1 class="hero-title hero-reveal" data-i18n="hero-title">
         No one can take it away. Including us.
       </h1>
 
-      <p class="hero-description hero-reveal">
+      <p class="hero-description hero-reveal" data-i18n="hero-pitch">
         We don't want custody of your passwords; and we don't want anyone else having it either. Your vault stays encrypted on the hardware you own, versioned with git, on your server of choice. No Baluard account to lock, no servers to breach, no middleman.
       </p>
     </div>
@@ -1267,7 +1419,7 @@
             </div>
           </div>
           <div class="desktop-screen">
-            <img src="assets/desktop-vault-dark.png" alt="Baluard desktop password vault application interface" width="1200" height="700" loading="lazy" decoding="async" class="desktop-screen-img">
+            <img src="assets/desktop-totp-dark.png" alt="Baluard desktop password vault application interface" width="1200" height="700" loading="lazy" decoding="async" class="desktop-screen-img">
           </div>
         </div>
 
@@ -1287,25 +1439,25 @@
       <div class="hero-cta-group hero-reveal">
         <a href="#download" class="btn btn-primary">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Download</span>
+          <span data-i18n="hero-btn-download">Download</span>
         </a>
         <a href="/security.html" class="btn btn-ghost">
-          <span>Security White Paper &rarr;</span>
+          <span data-i18n="hero-btn-paper">Security White Paper &rarr;</span>
         </a>
       </div>
 
       <div class="trust-strip hero-reveal">
         <div class="trust-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>100% Offline Capable</span>
+          <span data-i18n="trust-offline">100% Offline Capable</span>
         </div>
         <div class="trust-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>GPL-3.0 Free Software</span>
+          <span data-i18n="trust-license">GPL-3.0 Free Software</span>
         </div>
         <div class="trust-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>Size-Padded Buckets</span>
+          <span data-i18n="trust-buckets">Size-Padded Buckets</span>
         </div>
       </div>
     </div>
@@ -1316,9 +1468,9 @@
 <section id="architecture" class="content-section">
   <div class="container">
     <div class="section-intro reveal-on-scroll">
-      <div class="section-eyebrow">Zero-Server Architecture</div>
-      <h2 class="section-heading">Why the architecture is the security model.</h2>
-      <p class="section-lede">
+      <div class="section-eyebrow" data-i18n="arch-eyebrow">Zero-Server Architecture</div>
+      <h2 class="section-heading" data-i18n="arch-heading">Why the architecture is the security model.</h2>
+      <p class="section-lede" data-i18n="arch-lede">
         Hosted password managers concentrate risk into a single vendor database; and venture capital can change the rules, alter licenses, or take your workflow away without prior notice. Baluard keeps your vault in an encrypted git repository on hardware you control, with no central database to breach and no investors between you and your data.
       </p>
     </div>
@@ -1484,9 +1636,9 @@
 <section id="cli" class="content-section">
   <div class="container">
     <div class="section-intro reveal-on-scroll">
-      <div class="section-eyebrow">First-Class CLI</div>
-      <h2 class="section-heading">Scriptable, daemon-backed terminal client.</h2>
-      <p class="section-lede">
+      <div class="section-eyebrow" data-i18n="cli-eyebrow">First-Class CLI</div>
+      <h2 class="section-heading" data-i18n="cli-heading">Scriptable, daemon-backed terminal client.</h2>
+      <p class="section-lede" data-i18n="cli-lede">
         The `baluard` CLI gives you 35 commands with daemon-first speed and an offline `&#45;&#45;direct` fallback. Perfect for dev environments, headless servers, and CI pipelines.
       </p>
     </div>
@@ -1520,38 +1672,38 @@
   <div class="container">
     <div class="security-feature-card reveal-on-scroll">
       <div>
-        <div class="section-eyebrow" style="color: #b3e55c;">Auditable Assurance</div>
-        <h2 style="font-size: 2rem; color: var(--site-text); margin-bottom: 1rem; font-weight: 800;">
+        <div class="section-eyebrow" style="color: #b3e55c;" data-i18n="sec-eyebrow">Auditable Assurance</div>
+        <h2 style="font-size: 2rem; color: var(--site-text); margin-bottom: 1rem; font-weight: 800;" data-i18n="sec-heading">
           Read the Security White Paper
         </h2>
-        <p style="color: var(--site-text-secondary); line-height: 1.6; margin-bottom: 1.75rem;">
+        <p style="color: var(--site-text-secondary); line-height: 1.6; margin-bottom: 1.75rem;" data-i18n="sec-lede">
           Baluard publishes its complete cryptographic architecture and threat model. Everything claimed on this site can be verified in public source code and audited directly.
         </p>
         <a href="/security.html" class="btn btn-primary">
-          <span>Read the White Paper (Full 13 Sections) &rarr;</span>
+          <span data-i18n="sec-btn">Read the White Paper (Full 13 Sections) &rarr;</span>
         </a>
       </div>
 
       <div class="crypto-spec-card">
         <table class="crypto-spec-table">
           <tr>
-            <td class="spec-name">Vault Cipher</td>
+            <td class="spec-name" data-i18n="spec-t1">Vault Cipher</td>
             <td class="spec-value">AES-256-GCM (Authenticated)</td>
           </tr>
           <tr>
-            <td class="spec-name">Key Derivation (KDF)</td>
+            <td class="spec-name" data-i18n="spec-t2">Key Derivation (KDF)</td>
             <td class="spec-value">Argon2id (m=64 MiB, t=3, p=2)</td>
           </tr>
           <tr>
-            <td class="spec-name">Asymmetric Sealing</td>
+            <td class="spec-name" data-i18n="spec-t3">Asymmetric Sealing</td>
             <td class="spec-value">HPKE (RFC 9180, DHKEM-X25519)</td>
           </tr>
           <tr>
-            <td class="spec-name">Commit Integrity</td>
+            <td class="spec-name" data-i18n="spec-t4">Commit Integrity</td>
             <td class="spec-value">Ed25519 Device Signatures</td>
           </tr>
           <tr>
-            <td class="spec-name">Memory Hygiene</td>
+            <td class="spec-name" data-i18n="spec-t5">Memory Hygiene</td>
             <td class="spec-value">Zeroize on Drop &amp; Lock</td>
           </tr>
         </table>
@@ -1564,10 +1716,10 @@
 <section id="download" class="content-section">
   <div class="container">
     <div class="section-intro reveal-on-scroll">
-      <div class="section-eyebrow">Download Center</div>
-      <h2 class="section-heading">Get Baluard for your platforms.</h2>
-      <p class="section-lede">
-        Release 0.1.0 (Public Beta). Direct binaries, signed checksums, and official APT / DNF distribution repositories.
+      <div class="section-eyebrow" data-i18n="dl-eyebrow">Download Center</div>
+      <h2 class="section-heading" data-i18n="dl-heading">Get Baluard for your platforms.</h2>
+      <p class="section-lede" data-i18n="dl-lede">
+        Stand-alone binaries with cryptographic release checksums. No account creation, no cloud activation.
       </p>
     </div>
 
@@ -1757,43 +1909,44 @@ sudo dnf install baluard</code></pre>
             </svg>
             <span class="brand-title">Baluard</span>
           </div>
-          <p>
+          <p data-i18n="footer-desc">
             Git-native, sovereign password manager with padded-bucket encryption and device-identity bootstrapping. Built so your credentials stay on your machines, where no one can take them away.
           </p>
         </div>
 
         <div class="footer-col">
-          <h4>Project</h4>
+          <h4 data-i18n="footer-col-project">Project</h4>
           <ul class="footer-links">
-            <li><a href="#download">Download Release</a></li>
-            <li><a href="/security.html">Security White Paper</a></li>
-            <li><a href="https://github.com/baluard-org/baluard" target="_blank" rel="noopener noreferrer">Source Code (GitHub)</a></li>
-            <li><a href="https://github.com/baluard-org/baluard/releases" target="_blank" rel="noopener noreferrer">Release Notes &amp; Checksums</a></li>
+            <li><a href="#download" data-i18n="footer-link-dl">Download Release</a></li>
+            <li><a href="/security.html" data-i18n="footer-link-sec">Security White Paper</a></li>
+            <li><a href="https://github.com/baluard-org/baluard" target="_blank" rel="noopener noreferrer" data-i18n="footer-link-src">Source Code (GitHub)</a></li>
+            <li><a href="https://github.com/baluard-org/baluard/releases" target="_blank" rel="noopener noreferrer" data-i18n="footer-link-rel">Release Notes &amp; Checksums</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h4>Integrity &amp; Freedom</h4>
+          <h4 data-i18n="footer-col-integrity">Integrity &amp; Freedom</h4>
           <ul class="footer-links">
-            <li><a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">License (GPL-3.0)</a></li>
-            <li><a href="https://github.com/baluard-org/baluard/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer">Vulnerability Reporting</a></li>
-            <li><a href="#download-repo">APT &amp; DNF Packages</a></li>
+            <li><a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" data-i18n="footer-link-lic">License (GPL-3.0)</a></li>
+            <li><a href="https://github.com/baluard-org/baluard/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer" data-i18n="footer-link-vuln">Vulnerability Reporting</a></li>
+            <li><a href="#download-repo" data-i18n="footer-link-pkg">APT &amp; DNF Packages</a></li>
             <li><span style="color: #64748b; font-size: 0.88rem;">Fingerprint: 2233 10EA BF1A...</span></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div>
+        <div data-i18n="footer-bottom-lic">
           Free software under <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0</a>. No trackers, no telemetry, no cloud lock-in.
         </div>
-        <div class="footer-credit">
+        <div class="footer-credit" data-i18n="footer-built-by">
           Built by <a href="https://github.com/EstebanForge" target="_blank" rel="noopener noreferrer">Esteban</a>
         </div>
       </div>
     </div>
   </footer>
 
+  <script src="assets/i18n.js" defer></script>
   
 <script>
   // Apple-Style Scroll Reveal Observer & Hero Entrance Timer
