@@ -1,3 +1,30 @@
+# Zola build artifacts
 site/public/
+
+# Package binaries and installers (distributed via GitHub Releases, not git tree)
+*.deb
+*.rpm
+*.AppImage
+*.exe
+*.msi
+*.dmg
+*.pkg
+*.apk
+*.tar.gz
+*.tar.xz
+*.tar.bz2
+*.zip
+*.7z
+
+# Compiled binaries and libraries
+*.bin
+*.so
+*.dylib
+*.dll
+
+# OS noise and editor temp files
 .DS_Store
+Thumbs.db
 *.tmp
+*~
+
