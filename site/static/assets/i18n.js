@@ -94,7 +94,7 @@
       'footer-link-vuln': 'Vulnerability Reporting',
       'footer-link-pkg': 'APT &amp; DNF Packages',
       'footer-bottom-lic': 'Free software under <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0</a>. No trackers, no telemetry, no cloud lock-in.',
-      'footer-built-by': 'Built by <a href="https://github.com/EstebanForge" target="_blank" rel="noopener noreferrer">Esteban</a>'
+      'footer-built-by': 'Built by <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">Esteban</a>'
     },
 
     es: {
@@ -189,7 +189,7 @@
       'footer-link-vuln': 'Reporte de Vulnerabilidades',
       'footer-link-pkg': 'Paquetes APT y DNF',
       'footer-bottom-lic': 'Software libre bajo <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0</a>. Sin rastreadores, sin telemetría, sin dependencia de la nube.',
-      'footer-built-by': 'Construido por <a href="https://github.com/EstebanForge" target="_blank" rel="noopener noreferrer">Esteban</a>'
+      'footer-built-by': 'Construido por <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">Esteban</a>'
     },
 
     fr: {
@@ -284,7 +284,7 @@
       'footer-link-vuln': 'Signalement de Vulnérabilités',
       'footer-link-pkg': 'Paquets APT &amp; DNF',
       'footer-bottom-lic': 'Logiciel libre sous <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0</a>. Aucun traqueur, aucune télémétrie, aucun verrouillage cloud.',
-      'footer-built-by': 'Conçu par <a href="https://github.com/EstebanForge" target="_blank" rel="noopener noreferrer">Esteban</a>'
+      'footer-built-by': 'Conçu par <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">Esteban</a>'
     },
 
     pt: {
@@ -379,7 +379,7 @@
       'footer-link-vuln': 'Relatório de Vulnerabilidades',
       'footer-link-pkg': 'Pacotes APT e DNF',
       'footer-bottom-lic': 'Software livre sob licença <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0</a>. Sem rastreadores, sem telemetria, sem bloqueio de nuvem.',
-      'footer-built-by': 'Construído por <a href="https://github.com/EstebanForge" target="_blank" rel="noopener noreferrer">Esteban</a>'
+      'footer-built-by': 'Construído por <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">Esteban</a>'
     }
   };
 
