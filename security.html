@@ -373,6 +373,23 @@
       color: var(--site-text-muted);
     }
 
+    .footer-credit {
+      margin-left: auto;
+      text-align: right;
+    }
+
+    @media (max-width: 680px) {
+      .footer-bottom {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+      }
+      .footer-credit {
+        text-align: right;
+        align-self: flex-end;
+      }
+    }
+
     /* Motion Accessibility */
     @media (prefers-reduced-motion: reduce) {
       * {
@@ -731,7 +748,7 @@
         <div>
           Free software under <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0</a>. No trackers, no telemetry, no cloud lock-in.
         </div>
-        <div>
+        <div class="footer-credit">
           Built by <a href="https://github.com/EstebanForge" target="_blank" rel="noopener noreferrer">Esteban</a>
         </div>
       </div>
