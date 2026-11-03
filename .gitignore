@@ -29,3 +29,6 @@ Thumbs.db
 *.tmp
 *~
 
+
+# F-Droid index signature jars (the global git ignore excludes *.jar)
+!fdroid/repo/*.jar
