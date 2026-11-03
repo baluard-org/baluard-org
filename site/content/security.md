@@ -22,7 +22,7 @@ This choice has honest costs, and the paper names them where they exist. Sync co
 
 ## 2. Security principles
 
-The principles below decide every design dispute in the codebase. The architecture decision record (software-architecture-decisions.md) carries the reasoning per decision when you want the history.
+The principles below decide every design dispute in the codebase. The [architecture decision records](../adr/index.md) carry the reasoning per decision when you want the history.
 
 - Zero-server, zero-knowledge. Keys are generated, used, and destroyed on your devices. No ciphertext ever passes through infrastructure we control, because no such infrastructure exists.
 - Least trust in the remote. The sync backend is treated as hostile at every layer: it stores only padded ciphertext, and on enrolled vaults every commit carries a device signature that the receiving side verifies before accepting.
@@ -42,15 +42,15 @@ Verification uses a canary: an encrypted, password-bound file that proves a deri
 
 ### Key derivation
 
-Baluard uses Argon2id, the memory-hard key derivation function, exclusively. You pick a profile at vault creation and the parameters calibrate to your hardware within fixed security bands:
+Baluard uses Argon2id, the memory-hard key derivation function, exclusively. You pick a profile at vault creation, and the profile's parameters are fixed constants, identical on every machine:
 
-| Profile | Memory | Iterations | Parallelism | Target latency |
-|---|---|---|---|---|
-| Mobile low | 19 MiB | 2 | 1 | 300 to 500 ms |
-| Desktop standard | 64 MiB | 3 | 2 | 300 to 500 ms |
-| Desktop high | 256 MiB | 4 | 4 | 500 to 800 ms |
+| Profile | Memory | Iterations | Parallelism |
+|---|---|---|---|
+| Mobile low | 32 MiB | 6 | 4 |
+| Desktop standard | 64 MiB | 3 | 2 |
+| Desktop high | 256 MiB | 4 | 4 |
 
-Calibration tunes parameters toward the latency target but never below the 19 MiB security floor, so the table shows starting points, not necessarily the values your machine settled on. The profile name is kept out of the stored parameters; the calibrated numbers themselves are stored in plaintext inside the vault, so a determined observer of a sync remote can still infer a device class from them. Hiding the label raises the cost of that inference, and the parameters stay public because unlocking requires them.
+The parameters travel in plaintext inside the vault, so an observer of a sync remote can read your profile from the numbers. That is deliberate: unlocking requires them, and the profile label itself is not stored. Vault and reveal derivations bound attacker-controlled parameters to hard limits (19 to 256 MiB of memory, 1 to 10 iterations, 1 to 8 lanes), so a tampered remote cannot make the app allocate itself to death the moment you type your password.
 
 ### Quick unlock
 
@@ -171,7 +171,7 @@ Clients talk to a background daemon over a Unix domain socket created with 0600 
 
 ## 10. Software supply chain
 
-What is signed, precisely: the desktop self-update artifacts carry minisign signatures whose trusted comment binds the signed version to the manifest version, so a downgrade or version-substitution attack fails verification, and update manifests live on fixed channel tags with the mutable manifest published last over immutable versioned releases. The Linux deb and rpm packages carry detached minisign signatures and a signed checksum manifest, and the Baluard package repository (apt and dnf) verifies everything with GPG before install, which is the recommended install path on Linux (setup in docs/linux-repositories.md); the CLI archives carry the same signatures; macOS builds are ad-hoc signed until a Developer ID is configured, so Gatekeeper warns on first launch; and Windows has an Authenticode placeholder, so SmartScreen will warn on first launch too. The updater installs only when you click install, locks your vaults first, hands the daemon a clean shutdown, and rolls back to the running daemon if the download or install fails. Update checks are opt-out and jittered, because even a version check tells the network something about you.
+What is signed, precisely: the desktop self-update artifacts carry minisign signatures whose trusted comment binds the signed version to the manifest version, so a downgrade or version-substitution attack fails verification, and update manifests live on fixed channel tags with the mutable manifest published last over immutable versioned releases. The Linux deb and rpm packages carry detached minisign signatures and a signed checksum manifest, and the Baluard package repository (apt and dnf) verifies everything with GPG before install, which is the recommended install path on Linux (setup in docs/dev/linux-repositories.md); the CLI archives carry the same signatures; macOS builds are ad-hoc signed until a Developer ID is configured, so Gatekeeper warns on first launch; and Windows has an Authenticode placeholder, so SmartScreen will warn on first launch too. The updater installs only when you click install, locks your vaults first, hands the daemon a clean shutdown, and rolls back to the running daemon if the download or install fails. Update checks are opt-out and jittered, because even a version check tells the network something about you.
 
 Dependencies are held by lockfiles and bumped deliberately, an audit tool checks them for known advisories (opt-in locally today; CI enforcement is on the same checklist as the signing gaps), and optional integrations (hardware keys, git providers) are feature-gated so a dependency you never use is a dependency you never build. All of it is ordinary hygiene, and the same pipeline produces every release.
 

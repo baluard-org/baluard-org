@@ -49,7 +49,7 @@ Baluard was engineered to restore personal sovereignty:
 ## Security & Cryptographic Specifications
 
 - **Symmetric Cipher:** AES-256-GCM authenticated encryption with associated data (AEAD) using 256-bit keys and 96-bit nonces.
-- **Key Derivation Function (KDF):** Argon2id exclusively, calibrated to device capability bands (default: 64 MiB memory, 3 iterations, 2 threads for desktop profiles).
+- **Key Derivation Function (KDF):** Argon2id exclusively, fixed per-profile constants (mobile: 32 MiB / 6 iterations / 4 threads; desktop standard: 64 MiB / 3 / 2; desktop high: 256 MiB / 4 / 4). Stored parameters are bounds-checked (19-256 MiB, 1-10 iterations, 1-8 lanes).
 - **Key Wrapping & Asymmetric Exchange:** HPKE (RFC 9180, DHKEM-X25519, HKDF-SHA256, AES-256-GCM) to seal and unwrap the vault root key to device X25519 identity keys.
 - **Device Identity & Signatures:** Ed25519 public-key signatures attached to commits to authenticate device updates before merging.
 - **Canary Verification:** Password verification uses a separate canary file that validates master password accuracy without exposing vault keys.

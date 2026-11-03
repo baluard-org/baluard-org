@@ -837,7 +837,7 @@
 <h2 id="security-cryptographic-specifications">Security &amp; Cryptographic Specifications</h2>
 <ul>
 <li><strong>Symmetric Cipher:</strong> AES-256-GCM authenticated encryption with associated data (AEAD) using 256-bit keys and 96-bit nonces.</li>
-<li><strong>Key Derivation Function (KDF):</strong> Argon2id exclusively, calibrated to device capability bands (default: 64 MiB memory, 3 iterations, 2 threads for desktop profiles).</li>
+<li><strong>Key Derivation Function (KDF):</strong> Argon2id exclusively, fixed per-profile constants (mobile: 32 MiB / 6 iterations / 4 threads; desktop standard: 64 MiB / 3 / 2; desktop high: 256 MiB / 4 / 4). Stored parameters are bounds-checked (19-256 MiB, 1-10 iterations, 1-8 lanes).</li>
 <li><strong>Key Wrapping &amp; Asymmetric Exchange:</strong> HPKE (RFC 9180, DHKEM-X25519, HKDF-SHA256, AES-256-GCM) to seal and unwrap the vault root key to device X25519 identity keys.</li>
 <li><strong>Device Identity &amp; Signatures:</strong> Ed25519 public-key signatures attached to commits to authenticate device updates before merging.</li>
 <li><strong>Canary Verification:</strong> Password verification uses a separate canary file that validates master password accuracy without exposing vault keys.</li>
