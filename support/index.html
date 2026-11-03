@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Baluard Support</title>
+  <meta name="description" content="Git-native password manager with padded-bucket encryption. Zero server, zero telemetry, zero trust.">
+
+  <!-- Resolves the display language before first paint; the deferred i18n.js swap would otherwise flash English -->
+  <script>
+    (function () {
+      'use strict';
+      var SUPPORTED = ['en', 'es', 'fr', 'pt'];
+      var lang = 'en';
+      try {
+        var saved = localStorage.getItem('baluard_lang');
+        if (saved && SUPPORTED.indexOf(saved) !== -1) {
+          lang = saved;
+        }
+      } catch (e) {}
+      if (lang === 'en') {
+        var nav = (navigator.language || navigator.userLanguage || 'en').slice(0, 2).toLowerCase();
+        if (SUPPORTED.indexOf(nav) !== -1) {
+          lang = nav;
+        }
+      }
+      if (lang !== 'en') {
+        document.documentElement.lang = lang;
+        document.documentElement.classList.add('i18n-pending');
+      }
+      window.__baluardLang = lang;
+    })();
+  </script>
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="assets/baluard-lock-only.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/baluard-lock-l4-svg-64.png">
+  <link rel="apple-touch-icon" href="assets/baluard-lock-l4-svg-512.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="canonical" href="https://baluard.app/support/">
+  <meta name="theme-color" content="#07090d">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Baluard">
+  <meta property="og:url" content="https://baluard.app/support/">
+  <meta property="og:title" content="Baluard Support">
+  <meta property="og:description" content="Get help with Baluard: desktop app, browser extension, mobile, and CLI. Contact, debug logs, and where to report security issues.">
+  <meta property="og:image" content="https://baluard.app/assets/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Baluard, the git-native password manager: lime padlock emblem on a dark teal background, with the tagline: No one can take it away. Including us.">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:site" content="@BaluardApp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Baluard Support">
+  <meta name="twitter:description" content="Get help with Baluard: desktop app, browser extension, mobile, and CLI. Contact, debug logs, and where to report security issues.">
+  <meta name="twitter:image" content="https://baluard.app/assets/social-card.png">
+  <meta name="twitter:image:alt" content="Baluard, the git-native password manager: lime padlock emblem on a dark teal background, with the tagline: No one can take it away. Including us.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Baluard",
+    "applicationCategory": "SecurityApplication",
+    "operatingSystem": "Linux, macOS, Windows",
+    "url": "https://baluard.app/",
+    "description": "Git-native password manager with padded-bucket encryption. Zero server, zero telemetry, zero trust.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <link rel="help" type="text/plain" href="/llms.txt" title="LLM context">
+
+  <style>
+    @font-face {
+      font-family: 'Morris Roman';
+      src: url('/assets/baluard-morris-roman.black.woff2') format('woff2'),
+           url('assets/baluard-morris-roman.black.woff2') format('woff2'),
+           url('/assets/baluard-morris-roman.black.woff') format('woff'),
+           url('assets/baluard-morris-roman.black.woff') format('woff'),
+           url('/assets/baluard-morris-roman.black.ttf') format('truetype'),
+           url('assets/baluard-morris-roman.black.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      /* Website Theme: Deep Obsidian & Electric Blue Sovereign Contrast */
+      --site-bg: #07090d;
+      --site-bg-surface: #0d1118;
+      --site-bg-elevated: #131924;
+      --site-border: #1e2638;
+      --site-border-subtle: #171d2c;
+      --site-border-glow: #2563eb;
+      --site-text: #f1f5f9;
+      --site-text-secondary: #94a3b8;
+      --site-text-muted: #64748b;
+      --site-accent: #38bdf8;
+      --site-accent-btn: #0284c7;
+      --site-accent-btn-hover: #0369a1;
+
+      /* App-specific tokens (Matrix Deep Teal + Lime + Terminal Amber) */
+      --app-bg: #091315;
+      --app-sidebar: #0f2022;
+      --app-list: #14292c;
+      --app-detail: #193236;
+      --app-card: #0b1517;
+      --app-border: #1d3a3d;
+      --app-border-focus: #b3e55c;
+      --app-text: #f3f4f6;
+      --app-text-secondary: #d3ddde;
+      --app-text-muted: #8fa3a6;
+      --app-primary: #b3e55c;
+      --app-primary-hover: #c5f279;
+      --app-primary-text: #102427;
+      --app-accent: #cfc6f9;
+      --app-warning: #fcd34d;
+      --app-success: #10b981;
+      --app-danger: #ef4444;
+
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+      --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --font-logo: 'Morris Roman', serif;
+
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --radius-xl: 20px;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --site-bg: #f8fafc;
+        --site-bg-surface: #ffffff;
+        --site-bg-elevated: #f1f5f9;
+        --site-border: #e2e8f0;
+        --site-border-subtle: #cbd5e1;
+        --site-border-glow: #0284c7;
+        --site-text: #0f172a;
+        --site-text-secondary: #475569;
+        --site-text-muted: #64748b;
+        --site-accent: #0284c7;
+        --site-accent-btn: #0284c7;
+        --site-accent-btn-hover: #0369a1;
+      }
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--site-bg);
+      color: var(--site-text);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--site-accent);
+      text-decoration: none;
+      transition: color 0.15s ease, opacity 0.15s ease;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    code, pre {
+      font-family: var(--font-mono);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Skip Link for Accessibility */
+    .skip-link {
+      position: absolute;
+      top: -999px;
+      left: 1rem;
+      background: var(--app-primary);
+      color: var(--app-primary-text);
+      padding: 0.5rem 1rem;
+      font-weight: 700;
+      z-index: 1000;
+      border-radius: var(--radius-sm);
+    }
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.4rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 0.95rem;
+      line-height: 1.2;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--site-accent-btn);
+      color: #ffffff;
+      border-color: var(--site-accent-btn);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary:hover {
+      background: var(--site-accent-btn-hover);
+      border-color: var(--site-accent-btn-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: var(--site-bg-surface);
+      color: var(--site-text);
+      border-color: var(--site-border);
+    }
+
+    .btn-ghost:hover {
+      background: var(--site-bg-elevated);
+      border-color: var(--site-text-muted);
+      transform: translateY(-1px);
+    }
+
+    .btn-lime {
+      background: var(--app-primary);
+      color: var(--app-primary-text);
+      border-color: var(--app-primary);
+      font-weight: 700;
+    }
+
+    .btn-lime:hover {
+      background: var(--app-primary-hover);
+      border-color: var(--app-primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-sm {
+      padding: 0.45rem 0.85rem;
+      font-size: 0.85rem;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Header & Navigation */
+    header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 13, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--site-border);
+    }
+
+    @media (prefers-color-scheme: light) {
+      header.site-header {
+        background: rgba(248, 250, 252, 0.9);
+      }
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4.25rem;
+    }
+
+    @media (max-width: 480px) {
+      .nav-inner {
+        height: 3.75rem;
+      }
+      .brand-title {
+        font-size: 1.1rem;
+      }
+      .nav-actions .btn {
+        padding: 0.4rem 0.65rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--site-text);
+      font-weight: 700;
+      font-size: 1.25rem;
+      text-decoration: none;
+    }
+
+    .brand-wrap:hover {
+      text-decoration: none;
+    }
+
+    .brand-logo-img {
+      width: 32px;
+      height: 32px;
+      display: block;
+    }
+
+    .brand-title {
+      font-family: var(--font-logo);
+      font-size: 1.45rem;
+      letter-spacing: 0.02em;
+      font-weight: normal;
+      line-height: 1;
+      color: var(--site-text);
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      color: var(--site-text-secondary);
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--site-text);
+      text-decoration: none;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* Language Switcher */
+    html.i18n-pending [data-i18n] {
+      visibility: hidden;
+    }
+
+    .lang-switcher {
+      position: relative;
+      display: inline-block;
+    }
+
+    .lang-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--site-border);
+      color: var(--site-text-secondary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .lang-btn:hover,
+    .lang-btn[aria-expanded="true"] {
+      background: var(--site-bg-surface);
+      border-color: var(--site-text-muted);
+      color: var(--site-text);
+    }
+
+    .lang-btn:focus-visible {
+      outline: 2px solid var(--site-accent);
+      outline-offset: 2px;
+    }
+
+    .lang-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 195px;
+      background: #11151c;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 12px;
+      padding: 0.4rem;
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(0, 0, 0, 0.3);
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+    }
+
+    .lang-dropdown.is-open {
+      display: flex;
+      animation: langDropdownIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes langDropdownIn {
+      from {
+        opacity: 0;
+        transform: translateY(-6px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .lang-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      border: none;
+      background: transparent;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      font-weight: 500;
+      font-family: inherit;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.12s ease, color 0.12s ease;
+    }
+
+    .lang-option:hover {
+      background: rgba(255, 255, 255, 0.07);
+      color: #ffffff;
+    }
+
+    .lang-option.active {
+      background: rgba(245, 158, 11, 0.12);
+      color: #ffffff;
+    }
+
+    .lang-option .lang-check {
+      color: #f59e0b;
+      display: none;
+      flex-shrink: 0;
+    }
+
+    .lang-option.active .lang-check {
+      display: block;
+    }
+
+    @media (max-width: 680px) {
+      .lang-dropdown {
+        left: 0;
+        right: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .lang-btn {
+        width: 32px;
+        height: 32px;
+      }
+      .nav-actions {
+        gap: 0.45rem;
+      }
+      .btn-text-source {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .site-nav {
+        display: none;
+      }
+    }
+
+    /* Footer */
+    footer.site-footer {
+      border-top: 1px solid var(--site-border);
+      background: var(--site-bg);
+      padding: 3.5rem 0 2.5rem;
+      margin-top: auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    .footer-brand p {
+      color: var(--site-text-secondary);
+      font-size: 0.92rem;
+      margin-top: 0.75rem;
+      max-width: 26rem;
+    }
+
+    .footer-col h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--site-text-muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .footer-links a {
+      color: var(--site-text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--site-text);
+      text-decoration: none;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--site-border-subtle);
+      padding-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--site-text-muted);
+    }
+
+    .footer-credit {
+      margin-left: auto;
+      text-align: right;
+    }
+
+    @media (max-width: 680px) {
+      .footer-bottom {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+      }
+      .footer-credit {
+        text-align: right;
+        align-self: flex-end;
+      }
+    }
+
+    /* Motion Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+  
+<style>
+  .white-paper-container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 6rem;
+  }
+
+  .paper-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.88rem;
+    color: var(--site-accent);
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
+
+  .paper-back-link:hover {
+    text-decoration: underline;
+  }
+
+  .white-paper-article {
+    color: var(--site-text);
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  .white-paper-article h1 {
+    font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: var(--site-text);
+  }
+
+  .white-paper-article h2 {
+    font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    margin: 3.5rem 0 1.25rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--site-border);
+    color: var(--site-text);
+  }
+
+  .white-paper-article p {
+    margin-bottom: 1.35rem;
+    color: var(--site-text-secondary);
+  }
+
+  .white-paper-article ul, .white-paper-article ol {
+    margin: 0 0 1.5rem;
+    padding-left: 1.5rem;
+    color: var(--site-text-secondary);
+  }
+
+  .white-paper-article li {
+    margin-bottom: 0.5rem;
+    line-height: 1.65;
+  }
+
+  .white-paper-article code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--site-bg-surface);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-sm);
+    padding: 0.15em 0.4em;
+    color: var(--app-primary);
+  }
+
+  .white-paper-article a {
+    color: var(--site-accent);
+  }
+
+  .white-paper-article a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a href="/" class="brand-wrap" aria-label="Baluard Homepage">
+        <svg class="brand-logo-img" viewBox="0 0 512 512" width="34" height="34" aria-hidden="true">
+          <defs>
+            <linearGradient id="shackle-grad-hdr" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ded8fc" />
+              <stop offset="100%" stop-color="#cfc6f9" />
+            </linearGradient>
+            <linearGradient id="body-grad-hdr" x1="20%" y1="0%" x2="80%" y2="100%">
+              <stop offset="0%" stop-color="#c5f279" />
+              <stop offset="50%" stop-color="#b3e55c" />
+              <stop offset="100%" stop-color="#9dce47" />
+            </linearGradient>
+          </defs>
+          <path d="M 172 205 V 150 C 172 103 209 66 256 66 C 303 66 340 103 340 150 V 205 H 294 V 150 C 294 128 277 111 256 111 C 235 111 218 128 218 150 V 205 Z" fill="url(#shackle-grad-hdr)" />
+          <path d="M 136 205 H 184 V 228 H 228 V 205 H 284 V 228 H 328 V 205 H 376 C 384 205 388 209 388 217 V 405 C 388 424 374 438 355 438 H 157 C 138 438 124 424 124 405 V 217 C 124 209 128 205 136 205 Z" fill="url(#body-grad-hdr)" />
+          <path d="M317.8351477449456 361.56298600311044Q317.8351477449456 347.19284603421465 304.98911353032656 337.6127527216174L281.6920684292379 320.4121306376361L295.6267496111975 309.5256609642302Q303.02954898911355 303.646967340591 303.02954898911355 294.50233281493Q303.02954898911355 280.56765163297047 288.8771384136858 272.07620528771383Q276.68429237947123 264.89113530326597 262.0964230171073 264.89113530326597Q248.59720062208396 264.89113530326597 226.82426127527214 273.38258164852255Q211.800933125972 279.04354587869364 203.09175738724727 282.3094867807154Q194.38258164852255 285.5754276827372 191.98755832037324 286.01088646967344V291.0186625194401Q205.05132192846034 296.8973561430793 205.05132192846034 315.6220839813375V377.45723172628306Q205.05132192846034 383.9891135303266 199.17262830482113 394.0046656298601L193.51166407465007 403.8024883359254V408.37480559875587Q202.00311041990668 404.67340590979785 204.18040435458786 404.0202177293935Q208.09953343701397 402.27838258164854 216.3732503888025 402.27838258164854Q223.12286158631414 402.27838258164854 237.71073094867805 405.3265940902022Q252.29860031104198 408.37480559875587 259.04821150855366 408.37480559875587Q276.248833592535 408.37480559875587 296.27993779160187 393.78693623639197Q317.8351477449456 377.8926905132193 317.8351477449456 361.56298600311044ZM278.6438569206843 294.50233281493Q278.6438569206843 302.99377916018665 269.71695178849143 311.9206842923795Q264.7091757387247 316.9284603421462 250.3390357698289 325.2021772939347Q244.67807153965785 328.4681181959565 240.3234836702955 331.40746500777607Q235.96889580093313 334.3468118195957 232.92068429237946 336.74183514774495Q232.48522550544322 336.3063763608087 231.61430793157075 336.3063763608087Q231.61430793157075 336.3063763608087 229.43701399688956 336.74183514774495L229.00155520995332 319.5412130637636L228.7838258164852 302.1228615863142Q228.34836702954897 290.58320373250393 238.14618973561429 282.3094867807154Q247.50855365474337 274.68895800933126 259.04821150855366 274.68895800933126Q262.9673405909798 274.68895800933126 266.55987558320373 276.3219284603422Q270.15241057542767 277.95489891135304 272.7651632970451 280.67651632970455Q275.3779160186625 283.398133748056 277.01088646967344 286.99066874027994Q278.6438569206843 290.58320373250393 278.6438569206843 294.50233281493ZM288.4416796267496 372.8849144634526Q288.4416796267496 382.4650077760498 279.29704510108866 389.8678071539658Q269.93468118195955 397.48833592534993 260.57231726283044 397.48833592534993Q244.2426127527216 397.48833592534993 236.18662519440124 383.5536547433904Q229.43701399688956 372.23172628304826 229.43701399688956 354.81337480559876Q229.43701399688956 351.76516329704515 240.5412130637636 344.144634525661Q251.86314152410574 336.74183514774495 255.78227060653188 336.74183514774495Q262.7496111975116 336.74183514774495 275.59564541213064 351.1119751166408Q288.4416796267496 365.6998444790047 288.4416796267496 372.8849144634526Z" fill="#091315" />
+        </svg>
+        <span class="brand-title">Baluard</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Main Navigation">
+        <a href="#architecture" class="nav-link" data-i18n="nav-arch">Architecture</a>
+        <a href="#features" class="nav-link" data-i18n="nav-features">Capabilities</a>
+        <a href="#security" class="nav-link" data-i18n="nav-security">Security Model</a>
+        <a href="#download" class="nav-link" data-i18n="nav-download">Download</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="lang-switcher" id="lang-switcher">
+          <button type="button" class="lang-btn" id="lang-btn" aria-expanded="false" aria-haspopup="listbox" aria-label="Change language">
+            <svg class="globe-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+              <path d="M2 12h20"></path>
+            </svg>
+          </button>
+          <div class="lang-dropdown" id="lang-dropdown" role="listbox" aria-label="Select language">
+            <button type="button" class="lang-option active" role="option" aria-selected="true" data-lang="en">
+              <span class="lang-name">English</span>
+              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <button type="button" class="lang-option" role="option" aria-selected="false" data-lang="es">
+              <span class="lang-name">Español</span>
+              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <button type="button" class="lang-option" role="option" aria-selected="false" data-lang="fr">
+              <span class="lang-name">Français</span>
+              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <button type="button" class="lang-option" role="option" aria-selected="false" data-lang="pt">
+              <span class="lang-name">Português (Brasil)</span>
+              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <a href="https://github.com/baluard-org/baluard" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" aria-label="GitHub Repository">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span class="btn-text-source" data-i18n="nav-source">Source</span>
+        </a>
+        <a href="#download" class="btn btn-primary btn-sm"><span data-i18n="nav-get-baluard">Get Baluard</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    
+<div class="white-paper-container">
+  <a href="/" class="paper-back-link">&larr; Back to baluard.app</a>
+  <article class="white-paper-article">
+    <h1 id="baluard-support">Baluard support</h1>
+<p>One page for every Baluard product: the desktop app, the browser extension, the mobile app, and the command line tool. Start here.</p>
+<h2 id="contact-us">Contact us</h2>
+<p>Email <a href="mailto:support@baluard.app">support@baluard.app</a>. One mailbox covers every product. Please tell us three things: the product (desktop, extension, mobile, or CLI), your operating system, and the Baluard version, which you can find in the app settings or with <code>baluard --version</code>. If a bug is hard to describe, attach the log file; logs never contain vault data or keys (see "Debug logs" below for where they live).</p>
+<p>We read every message. Baluard is a small independent project, so please allow a few days for a reply.</p>
+<h2 id="desktop-app-windows-macos-linux">Desktop app (Windows, macOS, Linux)</h2>
+<ul>
+<li>Downloads and release notes: <a rel="external" href="https://github.com/baluard-org/baluard/releases">GitHub Releases</a></li>
+<li>Linux packages: the APT and DNF repositories hosted on this site (<a href="/#download-repo">setup</a>)</li>
+<li>Package signatures use the release key with fingerprint <code>2233 10EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804</code></li>
+</ul>
+<h2 id="browser-extension-chrome-firefox">Browser extension (Chrome, Firefox)</h2>
+<ul>
+<li>The extension needs the Baluard desktop app installed and running. It does nothing by itself: it talks to the app through a local channel on your machine. If the popup reports the app is missing, install or launch the desktop app first.</li>
+<li>Until the store listings are approved, you can load the unpacked build. Follow the <a rel="external" href="https://github.com/baluard-org/baluard/tree/main/browser">extension README</a> in the source repository.</li>
+</ul>
+<h2 id="mobile-android">Mobile (Android)</h2>
+<ul>
+<li>Install the APK from <a rel="external" href="https://github.com/baluard-org/baluard/releases">GitHub Releases</a></li>
+<li>iOS is not available yet</li>
+</ul>
+<h2 id="command-line">Command line</h2>
+<ul>
+<li><code>baluard --help</code> lists every command with its options</li>
+<li>The <a rel="external" href="https://github.com/baluard-org/baluard">source repository</a> carries the full documentation, including the architecture and design records</li>
+</ul>
+<h2 id="sync-and-git-providers">Sync and git providers</h2>
+<ul>
+<li>Sync setup, provider tokens, and troubleshooting live in the <a rel="external" href="https://github.com/baluard-org/baluard/blob/main/docs/dev/git-provider-apps-and-tokens.md">git provider docs</a></li>
+<li>When two devices edit the same entry, the app shows a conflict panel. Your data is never lost: both versions stay available until you pick one or keep both</li>
+</ul>
+<h2 id="debug-logs">Debug logs</h2>
+<p>When something breaks, the logs usually tell us why. Baluard writes them to a local folder on your machine:</p>
+<ul>
+<li>Linux: <code>$XDG_STATE_HOME/baluard/</code> (usually <code>~/.local/state/baluard/</code>)</li>
+<li>macOS: <code>~/Library/Logs/baluard/</code></li>
+<li>Windows: <code>%LOCALAPPDATA%\baluard\logs\</code></li>
+</ul>
+<p>Logs record routing and error details, never vault contents or keys. Run the desktop app with the environment variable <code>BALUARD_DEBUG=1</code> set to capture full detail before sending them.</p>
+<h2 id="security-issues">Security issues</h2>
+<p>Please do not report vulnerabilities to the support mailbox. Use the private process in <a rel="external" href="https://github.com/baluard-org/baluard/blob/main/SECURITY.md">SECURITY.md</a> so we can fix the issue before any public detail. The full security model, including what a sync host can and cannot see, is in the <a href="/security/">security white paper</a>.</p>
+<h2 id="free-software">Free software</h2>
+<p>Baluard is free software under GPL-3.0. There is no company behind a support contract, no telemetry funding the project, and no account to manage. The support mailbox and the public issue tracker are the whole support surface, and both are read by the people who write the code.</p>
+
+  </article>
+</div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-wrap">
+            <svg class="brand-logo-img" viewBox="0 0 512 512" width="34" height="34" aria-hidden="true">
+              <defs>
+                <linearGradient id="shackle-grad-ftr" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ded8fc" />
+                  <stop offset="100%" stop-color="#cfc6f9" />
+                </linearGradient>
+                <linearGradient id="body-grad-ftr" x1="20%" y1="0%" x2="80%" y2="100%">
+                  <stop offset="0%" stop-color="#c5f279" />
+                  <stop offset="50%" stop-color="#b3e55c" />
+                  <stop offset="100%" stop-color="#9dce47" />
+                </linearGradient>
+              </defs>
+              <path d="M 172 205 V 150 C 172 103 209 66 256 66 C 303 66 340 103 340 150 V 205 H 294 V 150 C 294 128 277 111 256 111 C 235 111 218 128 218 150 V 205 Z" fill="url(#shackle-grad-ftr)" />
+              <path d="M 136 205 H 184 V 228 H 228 V 205 H 284 V 228 H 328 V 205 H 376 C 384 205 388 209 388 217 V 405 C 388 424 374 438 355 438 H 157 C 138 438 124 424 124 405 V 217 C 124 209 128 205 136 205 Z" fill="url(#body-grad-ftr)" />
+              <path d="M317.8351477449456 361.56298600311044Q317.8351477449456 347.19284603421465 304.98911353032656 337.6127527216174L281.6920684292379 320.4121306376361L295.6267496111975 309.5256609642302Q303.02954898911355 303.646967340591 303.02954898911355 294.50233281493Q303.02954898911355 280.56765163297047 288.8771384136858 272.07620528771383Q276.68429237947123 264.89113530326597 262.0964230171073 264.89113530326597Q248.59720062208396 264.89113530326597 226.82426127527214 273.38258164852255Q211.800933125972 279.04354587869364 203.09175738724727 282.3094867807154Q194.38258164852255 285.5754276827372 191.98755832037324 286.01088646967344V291.0186625194401Q205.05132192846034 296.8973561430793 205.05132192846034 315.6220839813375V377.45723172628306Q205.05132192846034 383.9891135303266 199.17262830482113 394.0046656298601L193.51166407465007 403.8024883359254V408.37480559875587Q202.00311041990668 404.67340590979785 204.18040435458786 404.0202177293935Q208.09953343701397 402.27838258164854 216.3732503888025 402.27838258164854Q223.12286158631414 402.27838258164854 237.71073094867805 405.3265940902022Q252.29860031104198 408.37480559875587 259.04821150855366 408.37480559875587Q276.248833592535 408.37480559875587 296.27993779160187 393.78693623639197Q317.8351477449456 377.8926905132193 317.8351477449456 361.56298600311044ZM278.6438569206843 294.50233281493Q278.6438569206843 302.99377916018665 269.71695178849143 311.9206842923795Q264.7091757387247 316.9284603421462 250.3390357698289 325.2021772939347Q244.67807153965785 328.4681181959565 240.3234836702955 331.40746500777607Q235.96889580093313 334.3468118195957 232.92068429237946 336.74183514774495Q232.48522550544322 336.3063763608087 231.61430793157075 336.3063763608087Q231.61430793157075 336.3063763608087 229.43701399688956 336.74183514774495L229.00155520995332 319.5412130637636L228.7838258164852 302.1228615863142Q228.34836702954897 290.58320373250393 238.14618973561429 282.3094867807154Q247.50855365474337 274.68895800933126 259.04821150855366 274.68895800933126Q262.9673405909798 274.68895800933126 266.55987558320373 276.3219284603422Q270.15241057542767 277.95489891135304 272.7651632970451 280.67651632970455Q275.3779160186625 283.398133748056 277.01088646967344 286.99066874027994Q278.6438569206843 290.58320373250393 278.6438569206843 294.50233281493ZM288.4416796267496 372.8849144634526Q288.4416796267496 382.4650077760498 279.29704510108866 389.8678071539658Q269.93468118195955 397.48833592534993 260.57231726283044 397.48833592534993Q244.2426127527216 397.48833592534993 236.18662519440124 383.5536547433904Q229.43701399688956 372.23172628304826 229.43701399688956 354.81337480559876Q229.43701399688956 351.76516329704515 240.5412130637636 344.144634525661Q251.86314152410574 336.74183514774495 255.78227060653188 336.74183514774495Q262.7496111975116 336.74183514774495 275.59564541213064 351.1119751166408Q288.4416796267496 365.6998444790047 288.4416796267496 372.8849144634526Z" fill="#091315" />
+            </svg>
+            <span class="brand-title">Baluard</span>
+          </div>
+          <p data-i18n="footer-desc">
+            Git-native, sovereign password manager with padded-bucket encryption and device-identity bootstrapping. Built so your credentials stay on your machines, where no one can take them away. Synced under your terms.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer-col-project">Project</h4>
+          <ul class="footer-links">
+            <li><a href="#download" data-i18n="footer-link-dl">Download Release</a></li>
+            <li><a href="/security/" data-i18n="footer-link-sec">Security White Paper</a></li>
+            <li><a href="/support/" data-i18n="footer-link-support">Support</a></li>
+            <li><a href="/ai-instructions/" data-i18n="footer-link-ai">AI Instructions</a></li>
+            <li><a href="https://github.com/baluard-org/baluard" target="_blank" rel="noopener noreferrer" data-i18n="footer-link-src">Source Code (GitHub)</a></li>
+            <li><a href="https://github.com/baluard-org/baluard/releases" target="_blank" rel="noopener noreferrer" data-i18n="footer-link-rel">Release Notes &amp; Checksums</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer-col-integrity">Integrity &amp; Freedom</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy/" data-i18n="footer-link-privacy">Privacy Policy</a></li>
+            <li><a href="/tos/" data-i18n="footer-link-tos">Terms of Service</a></li>
+            <li><a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" data-i18n="footer-link-lic">License (GPL-3.0)</a></li>
+            <li><a href="https://github.com/baluard-org/baluard/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer" data-i18n="footer-link-vuln">Vulnerability Reporting</a></li>
+            <li><a href="#download-repo" data-i18n="footer-link-pkg">APT &amp; DNF Packages</a></li>
+            <li><span style="color: #64748b; font-size: 0.88rem;">Fingerprint: 2233 10EA BF1A...</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div data-i18n="footer-bottom-lic">
+          Free software under <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0</a>. No trackers, no telemetry, no cloud lock-in.
+        </div>
+        <div class="footer-credit" data-i18n="footer-built-by">
+          Built by <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">Esteban</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/i18n.js" defer></script>
+  
+</body>
+</html>
