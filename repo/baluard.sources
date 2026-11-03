@@ -1,0 +1,6 @@
+Types: deb
+URIs: https://baluard.app/repo
+Suites: stable
+Components: main
+Architectures: amd64
+Signed-By: /usr/share/keyrings/baluard-archive-keyring.asc
