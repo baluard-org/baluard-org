@@ -33,7 +33,7 @@ Deploy: `just build`, commit, push `main`. Pages publishes the repo root.
 ## Gotchas
 
 - Tera scoping: guard `{% if page %}` / `{% if section %}` before ANY dotted access. `default()` does not help — section renders have no `page` var and page renders have no `section`; `default()` only fills undefined leaves of a defined root.
-- Template asset paths must be root-relative (`./assets/...`) because generated HTML lands at different depths (`/`, `/security/`, ...). i18n: translations live in `site/static/assets/i18n.js`; an inline head script resolves localStorage/navigator language before first paint — keep it inline and `i18n.js` deferred.
+- Template asset paths must be root-relative (`./assets/...`) because generated HTML lands at different depths (`/`, `/security/`, ...). i18n: translations live in `site/static/assets/i18n.js`; an inline head script resolves localStorage/navigator language before first paint — keep it inline and `i18n.js` deferred. When the dictionary changes, bump the script URL's `?v=` to the change's unix timestamp (cache-bust; stale dictionaries have rewritten button labels before).
 - SVG rendering must go through `rsvg-convert`, never ImageMagick directly: its builtin SVG parser drops gradient fills and outputs flat black.
 - justfile build order is load-bearing: asset-generation guards (`social-card.png`, `favicon.ico`) run BEFORE `zola build` and before the root `cp` steps, or fresh clones fail.
 - `just check` runs the full external link validation: the main repo went public, so its previously-excluded 404s are gone.
