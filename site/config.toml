@@ -1,6 +1,6 @@
 base_url = "https://baluard.app"
 title = "Baluard | The Git-Native Password Manager"
-description = "Git-native password manager with padded-bucket encryption and multi-platform clients. No server, no account."
+description = "Git-native password manager with padded-bucket encryption. Zero server, zero telemetry, zero trust."
 default_language = "en"
 compile_sass = false
 minify_html = false
