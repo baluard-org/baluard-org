@@ -635,6 +635,15 @@
   }
 
   /* Releases pending: blur every card and badge it until CI ships */
+  .dl-card.dl-card-disabled {
+    pointer-events: none;
+  }
+
+  .dl-card.dl-card-disabled > *:not(.dl-soon-overlay) {
+    filter: blur(6px);
+    user-select: none;
+  }
+
   .dl-options-grid.is-pending-releases .dl-card {
     pointer-events: none;
   }
@@ -1228,7 +1237,7 @@
     </div>
 
     <!-- Download Options Grid -->
-    <div class="dl-options-grid reveal-group is-pending-releases">
+    <div class="dl-options-grid reveal-group">
       <!-- AppImage -->
       <a href="https://github.com/baluard-org/baluard/releases/latest/download/Baluard-x86_64.AppImage" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="appimage">
         <div>
@@ -1238,9 +1247,8 @@
         </div>
         <div class="dl-card-footer">
           <span>Download &darr;</span>
-          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">118 MB</span>
+          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">120 MB</span>
         </div>
-        <div class="dl-soon-overlay"><span data-i18n="dl-coming-soon">Coming soon</span></div>
       </a>
 
       <!-- Debian / Ubuntu -->
@@ -1252,9 +1260,8 @@
         </div>
         <div class="dl-card-footer">
           <span>Download &darr;</span>
-          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">16.4 MB</span>
+          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">18 MB</span>
         </div>
-        <div class="dl-soon-overlay"><span data-i18n="dl-coming-soon">Coming soon</span></div>
       </a>
 
       <!-- Fedora / RHEL -->
@@ -1266,9 +1273,8 @@
         </div>
         <div class="dl-card-footer">
           <span>Download &darr;</span>
-          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">16.4 MB</span>
+          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">18 MB</span>
         </div>
-        <div class="dl-soon-overlay"><span data-i18n="dl-coming-soon">Coming soon</span></div>
       </a>
 
       <!-- CLI Tarball -->
@@ -1280,9 +1286,8 @@
         </div>
         <div class="dl-card-footer">
           <span>Download &darr;</span>
-          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">3.3 MB</span>
+          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">12.6 MB</span>
         </div>
-        <div class="dl-soon-overlay"><span data-i18n="dl-coming-soon">Coming soon</span></div>
       </a>
 
       <!-- Windows -->
