@@ -720,6 +720,10 @@
     position: relative;
   }
 
+  .repo-code-wrap {
+    position: relative;
+  }
+
   .repo-snippet-box pre {
     background: #050608;
     border: 1px solid var(--site-border);
@@ -729,6 +733,35 @@
     line-height: 1.5;
     color: #e2e8f0;
     overflow-x: auto;
+  }
+
+  .repo-copy-btn {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.55rem;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--site-border);
+    color: #94a3b8;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 0.28rem 0.7rem;
+    border-radius: 999px;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .repo-copy-btn:hover {
+    color: #f1f5f9;
+    border-color: #38bdf8;
+  }
+
+  .repo-copy-btn.copied {
+    color: #b3e55c;
+    border-color: #b3e55c;
+    background: rgba(179, 229, 92, 0.08);
   }
 
   /* ── Comprehensive Responsive Breakpoints ────────────────── */
@@ -1309,24 +1342,19 @@
         <!-- APT -->
         <div class="repo-snippet-box">
           <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;">Ubuntu / Debian (APT):</div>
-          <pre><code>curl -fsSL https://baluard.app/repo/baluard-release.asc | sudo gpg &#45;&#45;dearmor -o /usr/share/keyrings/baluard-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/baluard-archive-keyring.gpg] https://baluard.app/repo stable main" | sudo tee /etc/apt/sources.list.d/baluard.list
-sudo apt update &amp;&amp; sudo apt install baluard</code></pre>
+          <div class="repo-code-wrap">
+            <button type="button" class="repo-copy-btn" aria-label="Copy install command"><span data-i18n="copy-btn">Copy</span></button>
+            <pre><code>curl -fsSL https://baluard.app/repo/baluard-release.asc | sudo gpg &#45;&#45;dearmor -o /usr/share/keyrings/baluard-archive-keyring.gpg &amp;&amp; echo "deb [signed-by=/usr/share/keyrings/baluard-archive-keyring.gpg] https://baluard.app/repo stable main" | sudo tee /etc/apt/sources.list.d/baluard.list &amp;&amp; sudo apt update &amp;&amp; sudo apt install baluard</code></pre>
+          </div>
         </div>
 
         <!-- DNF -->
         <div class="repo-snippet-box">
           <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;">Fedora / RHEL / openSUSE (DNF):</div>
-          <pre><code>sudo tee /etc/yum.repos.d/baluard.repo &lt;&lt;'EOF'
-[baluard]
-name=Baluard
-baseurl=https://baluard.app/repo/rpms
-enabled=1
-gpgcheck=1
-repo_gpgcheck=1
-gpgkey=https://baluard.app/repo/baluard-release.asc
-EOF
-sudo dnf install baluard</code></pre>
+          <div class="repo-code-wrap">
+            <button type="button" class="repo-copy-btn" aria-label="Copy install command"><span data-i18n="copy-btn">Copy</span></button>
+            <pre><code>sudo dnf config-manager addrepo --from-repofile=https://baluard.app/repo/baluard.repo &amp;&amp; sudo dnf install baluard</code></pre>
+          </div>
         </div>
 
         <!-- F-Droid -->
@@ -1539,6 +1567,35 @@ sudo dnf install baluard</code></pre>
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
     updateTwist();
+  })();
+
+  // Copy-to-clipboard for the repository install commands
+  (function() {
+    function labels() {
+      var dict = (window.__baluardI18nDict && window.__baluardI18nDict()) || {};
+      return {
+        copy: dict['copy-btn'] || 'Copy',
+        copied: dict['copy-btn-copied'] || 'Copied ✓'
+      };
+    }
+    document.querySelectorAll('.repo-copy-btn').forEach(function(btn) {
+      var timer = null;
+      btn.addEventListener('click', function() {
+        var code = btn.closest('.repo-snippet-box').querySelector('pre code');
+        if (!code || !(navigator.clipboard && navigator.clipboard.writeText)) return;
+        var current = labels();
+        navigator.clipboard.writeText(code.innerText.trim()).then(function() {
+          var label = btn.querySelector('span');
+          label.textContent = current.copied;
+          btn.classList.add('copied');
+          if (timer) clearTimeout(timer);
+          timer = setTimeout(function() {
+            label.textContent = labels().copy;
+            btn.classList.remove('copied');
+          }, 1600);
+        }, function() {});
+      });
+    });
   })();
 </script>
 {% endblock scripts %}
