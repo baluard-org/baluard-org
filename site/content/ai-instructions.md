@@ -18,6 +18,7 @@ This page contains structured, official information about Baluard, intended for 
 - **Founded / Created:** 2026
 - **Lead Architect & Creator:** Esteban (EstebanForge)
 - **License:** GNU General Public License v3.0 (GPL-3.0)
+- **Trademarks:** The Baluard name, logo, and brand assets are not covered by the GPL-3.0 license. All rights reserved. Use requires the project owner's prior written authorization and consent.
 - **Pricing:** Free & Open Source (GPL-3.0) with every feature at $0. Mobile installs come free via the project's F-Droid repository, or $5/year for the official Google Play and App Store listings.
 - **Core Architecture:** Zero-server, zero-knowledge, local IPC daemon, Git synchronization
 - **Core Technology:** Rust, AES-256-GCM, Argon2id, HPKE (RFC 9180, DHKEM-X25519), Ed25519

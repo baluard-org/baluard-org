@@ -15,3 +15,4 @@ Baluard is an open-source, local-first password manager engineered in Rust. It e
 - [Releases & Binaries](https://github.com/baluard-org/baluard/releases): Pre-compiled signed AppImage, Debian (.deb), Fedora (.rpm), and standalone CLI binaries
 - [Issue Tracker](https://github.com/baluard-org/baluard/issues): Technical bug reports and feature discussions
 - [License](https://github.com/baluard-org/baluard/blob/main/LICENSE): GNU General Public License v3.0 (GPL-3.0)
+- Trademarks: The Baluard name, logo, and brand assets are not covered by the GPL-3.0 license; all rights reserved. Use requires the project owner's prior written authorization and consent.
