@@ -8,13 +8,15 @@ path = "tos"
 
 # Terms of service
 
-Effective date: November 1, 2026
+Effective date: November 3, 2026
 
 These terms govern your use of the Baluard website, software, and support channels. By using them, you agree to these terms. If you do not agree, do not use them. Baluard is pre-release software, so please read the sections on backups and warranties carefully.
 
 ## The software and its license
 
 Baluard is free and open-source software. The software is licensed under GPL-3.0; the license text and copyright notices in the source repository govern copying, modification, and redistribution. These terms do not take away rights granted by that license.
+
+The GPL-3.0 license covers the source code only. The Baluard name, logo, and brand assets are not covered by that license; all rights in them are reserved. Do not use the Baluard name or logo without our prior written authorization and consent.
 
 Baluard stores encrypted vaults on your devices and can sync through a git provider you choose. We do not provide a hosted vault, a Baluard account, or a recovery service.
 
