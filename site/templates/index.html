@@ -554,9 +554,21 @@
   /* ── Download Hub ────────────────────────────────────────── */
   .dl-options-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1rem;
     margin-bottom: 2rem;
+  }
+
+  @media (max-width: 860px) {
+    .dl-options-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 560px) {
+    .dl-options-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .dl-card {
