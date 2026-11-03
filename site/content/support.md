@@ -8,7 +8,7 @@ path = "support"
 
 # Baluard support
 
-Effective date: November 1, 2026
+Effective date: November 3, 2026
 
 One page for every Baluard product: the desktop app, the browser extension, the mobile app, and the command line tool. Start here.
 
@@ -32,6 +32,7 @@ We read every message. Baluard is a small independent project, so please allow a
 ## Mobile (Android)
 
 - Install the APK from [GitHub Releases](https://github.com/baluard-org/baluard/releases)
+- F-Droid repository: add `https://baluard.app/fdroid/repo/` under Settings > Repositories in F-Droid
 - iOS is not available yet
 
 ## Command line

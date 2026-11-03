@@ -751,14 +751,19 @@
   <a href="/" class="paper-back-link">&larr; Back to baluard.app</a>
   <article class="white-paper-article">
     <h1 id="privacy-policy">Privacy policy</h1>
-<p>Effective date: November 1, 2026</p>
+<p>Effective date: November 3, 2026</p>
 <p>Baluard is designed so that your passwords, vault contents, and encryption keys stay on your devices. There is no Baluard account, cloud vault, analytics service, advertising tracker, or telemetry system. This policy explains the limited situations in which information is processed.</p>
 <h2 id="information-the-software-processes">Information the software processes</h2>
 <p>The desktop app, browser extension, mobile app, and CLI process the information you put in your vault so they can provide password management, autofill, sync, and related features. Vault contents and encryption keys remain on your devices under normal operation. The software does not send them to us.</p>
 <p>The browser extension reads the address of a page you visit to find matching logins. It sends the site address only to the Baluard software running on your own computer. It does not send browsing history or page contents to us.</p>
-<h2 id="sync-and-third-party-services">Sync and third-party services</h2>
-<p>Sync is optional. If you enable it, your encrypted vault is stored in a git repository that you choose and control. Your git provider receives the encrypted files and the technical metadata needed to operate that repository. Its own privacy policy applies. We do not receive a copy.</p>
-<p>Downloads, source hosting, and store distribution may involve third parties such as GitHub, Google, or Mozilla. Those services can process technical information such as your IP address, device information, and download activity under their own policies.</p>
+<h2 id="network-connections-and-third-party-services">Network connections and third-party services</h2>
+<p>The software connects to external networks only for operations you configure or enable:</p>
+<ul>
+<li><strong>Sync:</strong> Sync is optional. If you enable it, your encrypted vault is stored in a git repository that you choose and control. Your git provider receives the encrypted files and technical metadata needed to operate that repository under its own privacy policy. We do not receive a copy.</li>
+<li><strong>Update checks:</strong> The desktop app can check GitHub Releases for software updates with jittered requests. This check is optional and you can disable it in settings.</li>
+<li><strong>Website icons:</strong> Favicon retrieval is disabled by default. If enabled in settings, the app connects directly to the domain of a saved entry to fetch its icon.</li>
+<li><strong>Third-party distribution:</strong> Downloads, source hosting, and store distribution can involve third parties such as GitHub, Google, or Mozilla. Those services can process technical information such as your IP address, device information, and download activity under their own policies.</li>
+</ul>
 <h2 id="website-information">Website information</h2>
 <p>This website does not use analytics, advertising cookies, or tracking pixels. It can save your language preference in your browser's local storage. That preference stays in your browser.</p>
 <p>The website is hosted by GitHub Pages. When you visit it, GitHub can process standard connection information such as your IP address, requested page, browser, and time of access to deliver and protect the site. We do not receive analytics profiles about you.</p>

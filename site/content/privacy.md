@@ -8,7 +8,7 @@ path = "privacy"
 
 # Privacy policy
 
-Effective date: November 1, 2026
+Effective date: November 3, 2026
 
 Baluard is designed so that your passwords, vault contents, and encryption keys stay on your devices. There is no Baluard account, cloud vault, analytics service, advertising tracker, or telemetry system. This policy explains the limited situations in which information is processed.
 
@@ -18,11 +18,14 @@ The desktop app, browser extension, mobile app, and CLI process the information 
 
 The browser extension reads the address of a page you visit to find matching logins. It sends the site address only to the Baluard software running on your own computer. It does not send browsing history or page contents to us.
 
-## Sync and third-party services
+## Network connections and third-party services
 
-Sync is optional. If you enable it, your encrypted vault is stored in a git repository that you choose and control. Your git provider receives the encrypted files and the technical metadata needed to operate that repository. Its own privacy policy applies. We do not receive a copy.
+The software connects to external networks only for operations you configure or enable:
 
-Downloads, source hosting, and store distribution may involve third parties such as GitHub, Google, or Mozilla. Those services can process technical information such as your IP address, device information, and download activity under their own policies.
+- **Sync:** Sync is optional. If you enable it, your encrypted vault is stored in a git repository that you choose and control. Your git provider receives the encrypted files and technical metadata needed to operate that repository under its own privacy policy. We do not receive a copy.
+- **Update checks:** The desktop app can check GitHub Releases for software updates with jittered requests. This check is optional and you can disable it in settings.
+- **Website icons:** Favicon retrieval is disabled by default. If enabled in settings, the app connects directly to the domain of a saved entry to fetch its icon.
+- **Third-party distribution:** Downloads, source hosting, and store distribution can involve third parties such as GitHub, Google, or Mozilla. Those services can process technical information such as your IP address, device information, and download activity under their own policies.
 
 ## Website information
 

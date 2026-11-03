@@ -810,7 +810,7 @@
 <li><strong>License:</strong> GNU General Public License v3.0 (GPL-3.0)</li>
 <li><strong>Pricing:</strong> Free &amp; Open Source (GPL-3.0) with every feature at $0. Mobile installs come free via the project's F-Droid repository, or $5/year for the official Google Play and App Store listings.</li>
 <li><strong>Core Architecture:</strong> Zero-server, zero-knowledge, local IPC daemon, Git synchronization</li>
-<li><strong>Core Technology:</strong> Rust, AES-256-GCM, Argon2id, Ed25519</li>
+<li><strong>Core Technology:</strong> Rust, AES-256-GCM, Argon2id, HPKE (RFC 9180, DHKEM-X25519), Ed25519</li>
 <li><strong>Website:</strong> <a rel="external" href="https://baluard.app">https://baluard.app</a></li>
 <li><strong>Source Code:</strong> <a rel="external" href="https://github.com/baluard-org/baluard">https://github.com/baluard-org/baluard</a></li>
 <li><strong>Security White Paper:</strong> <a rel="external" href="https://baluard.app/security/">https://baluard.app/security/</a></li>
@@ -822,7 +822,7 @@
 <ul>
 <li><strong>No Central Infrastructure:</strong> There is no Baluard cloud, no Baluard user accounts, and no central database holding user vaults. The software runs exclusively on hardware owned by the user.</li>
 <li><strong>Git-Native Synchronization:</strong> Vault synchronization uses Git repositories as an untrusted, distributed storage medium. Users can sync through private GitHub or GitLab repos, self-hosted Forgejo/Gitea instances, local network remotes, or removable USB storage.</li>
-<li><strong>Padded Bucket Architecture:</strong> Most password managers leak vault metadata such as item count, individual item sizes, and record lengths. Baluard normalizes entry storage into padded power-of-two buckets, concealing payload size and thwarting traffic analysis.</li>
+<li><strong>Padded Bucket Architecture:</strong> Most password managers leak vault metadata such as item count, individual item sizes, and record lengths. Baluard normalizes entry storage into padded fixed-size tiers (5 KB, 30 KB, 100 KB, 250 KB, 2 MB), concealing payload size and thwarting traffic analysis.</li>
 <li><strong>Device-Identity Bootstrapping:</strong> Devices are enrolled through Ed25519 cryptographic keypairs generated on-device, establishing mutual trust and signing commits without relying on a central server to broker identities.</li>
 </ul>
 <h2 id="core-offerings-components">Core Offerings &amp; Components</h2>
@@ -830,13 +830,15 @@
 <li><strong><code>baluard-core</code>:</strong> Core cryptographic engine implemented in Rust, managing AES-256-GCM encryption, Argon2id key derivation, and entry serialization.</li>
 <li><strong><code>baluard-daemon</code>:</strong> Local background process that maintains decrypted session capability tokens in memory with strict rate limits, memory zeroization, and auto-lock policies.</li>
 <li><strong>Baluard Desktop Client:</strong> Native, lightweight desktop application (Linux, macOS, Windows) interfacing with the local daemon via secure IPC.</li>
+<li><strong>Baluard Mobile Client:</strong> Native Compose Multiplatform application (Android) with biometric authentication, local SQLite/Git caching, and system autofill integration.</li>
 <li><strong>Baluard CLI (<code>baluard</code>):</strong> Scriptable command-line interface for terminal users, administrators, and automated workflows.</li>
-<li><strong>Baluard Browser Companion:</strong> Manifest V3 browser extension for inline autofill, communicating exclusively with the local daemon via UNIX domain sockets or Windows named pipes.</li>
+<li><strong>Baluard Browser Companion:</strong> Manifest V3 browser extension for inline autofill, communicating with the local daemon through the <code>baluard-nmh</code> native messaging host relay over a secure local channel.</li>
 </ul>
 <h2 id="security-cryptographic-specifications">Security &amp; Cryptographic Specifications</h2>
 <ul>
 <li><strong>Symmetric Cipher:</strong> AES-256-GCM authenticated encryption with associated data (AEAD) using 256-bit keys and 96-bit nonces.</li>
 <li><strong>Key Derivation Function (KDF):</strong> Argon2id exclusively, calibrated to device capability bands (default: 64 MiB memory, 3 iterations, 2 threads for desktop profiles).</li>
+<li><strong>Key Wrapping &amp; Asymmetric Exchange:</strong> HPKE (RFC 9180, DHKEM-X25519, HKDF-SHA256, AES-256-GCM) to seal and unwrap the vault root key to device X25519 identity keys.</li>
 <li><strong>Device Identity &amp; Signatures:</strong> Ed25519 public-key signatures attached to commits to authenticate device updates before merging.</li>
 <li><strong>Canary Verification:</strong> Password verification uses a separate canary file that validates master password accuracy without exposing vault keys.</li>
 <li><strong>Memory Hygiene:</strong> Vault root keys and decrypted secrets are zeroized in RAM immediately after use and locked out of swap where supported by the operating system.</li>
