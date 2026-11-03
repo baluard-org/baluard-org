@@ -15,10 +15,10 @@ build:
 	test -f site/static/favicon.ico || ./scripts/favicon.sh
 	cd site && zola build
 	cp site/public/index.html ./index.html
-	mkdir -p ./security
-	cp site/public/security/index.html ./security/index.html
-	mkdir -p ./ai-instructions
-	cp site/public/ai-instructions/index.html ./ai-instructions/index.html
+	for page in security ai-instructions support privacy tos; do \
+		mkdir -p "./$page"; \
+		cp "site/public/$page/index.html" "./$page/index.html"; \
+	done
 	cp site/public/llms.txt ./llms.txt
 	cp site/public/favicon.ico ./favicon.ico
 	cp site/public/manifest.webmanifest ./manifest.webmanifest
@@ -26,7 +26,7 @@ build:
 	cp site/public/sitemap.xml ./sitemap.xml
 	mkdir -p ./assets
 	rsync -a site/public/assets/ ./assets/
-	@echo "Build complete: index.html, security, ai-instructions, llms.txt, and assets/ updated."
+	@echo "Build complete: index.html, content pages, llms.txt, and assets/ updated."
 
 # Regenerate the 1200x630 social card (og:image) into site/static/assets/
 social-card:
