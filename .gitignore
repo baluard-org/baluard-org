@@ -10,6 +10,7 @@ site/public/
 *.dmg
 *.pkg
 *.apk
+!fdroid/repo/*.apk
 *.tar.gz
 *.tar.xz
 *.tar.bz2
