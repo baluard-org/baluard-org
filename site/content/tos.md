@@ -8,7 +8,7 @@ path = "tos"
 
 # Terms of service
 
-Effective date: November 3, 2026
+Effective date: November 1, 2026
 
 These terms govern your use of the Baluard website, software, and support channels. By using them, you agree to these terms. If you do not agree, do not use them. Baluard is pre-release software, so please read the sections on backups and warranties carefully.
 
