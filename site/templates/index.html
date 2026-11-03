@@ -1344,17 +1344,19 @@
           <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;">Ubuntu / Debian (APT):</div>
           <div class="repo-code-wrap">
             <button type="button" class="repo-copy-btn" aria-label="Copy install command"><span data-i18n="copy-btn">Copy</span></button>
-            <pre><code>curl -fsSL https://baluard.app/repo/baluard-release.asc | sudo gpg &#45;&#45;dearmor -o /usr/share/keyrings/baluard-archive-keyring.gpg &amp;&amp; echo "deb [signed-by=/usr/share/keyrings/baluard-archive-keyring.gpg] https://baluard.app/repo stable main" | sudo tee /etc/apt/sources.list.d/baluard.list &amp;&amp; sudo apt update &amp;&amp; sudo apt install baluard</code></pre>
+            <pre><code>sudo curl -fsSL -o /usr/share/keyrings/baluard-archive-keyring.asc https://baluard.app/repo/baluard-release.asc &amp;&amp; curl -fsSL https://baluard.app/repo/baluard.sources | sudo tee /etc/apt/sources.list.d/baluard.sources &amp;&amp; sudo apt update &amp;&amp; sudo apt install baluard</code></pre>
           </div>
+          <p style="font-size: 0.82rem; color: #64748b; margin-top: 0.3rem;">Uses the deb822 format (default on Ubuntu 24.04+ and Debian 13+). The armored key is used directly — no dearmor step.</p>
         </div>
 
         <!-- DNF -->
         <div class="repo-snippet-box">
-          <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;">Fedora / RHEL / openSUSE (DNF):</div>
+          <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;">Fedora (DNF):</div>
           <div class="repo-code-wrap">
             <button type="button" class="repo-copy-btn" aria-label="Copy install command"><span data-i18n="copy-btn">Copy</span></button>
             <pre><code>sudo dnf config-manager addrepo --from-repofile=https://baluard.app/repo/baluard.repo &amp;&amp; sudo dnf install baluard</code></pre>
           </div>
+          <p style="font-size: 0.82rem; color: #64748b; margin-top: 0.3rem;">Fedora 41+ (dnf 5). On RHEL and clones (dnf 4): <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://baluard.app/repo/baluard.repo</code></p>
         </div>
 
         <!-- F-Droid -->
