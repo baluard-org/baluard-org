@@ -34,16 +34,8 @@ social-card:
 
 # Sync security white paper markdown from the main Baluard repository
 sync-paper:
-	python3 -c '\
-	fm = """+++\n\
-	title = "Baluard Security White Paper"\n\
-	description = "How Baluard protects your data: the security white paper."\n\
-	template = "security.html"\n\
-	slug = "security"\n\
-	path = "security"\n\
-	+++\n\n"""; \
-	with open("../baluard/docs/security/security-white-paper.md") as src, open("site/content/security.md", "w") as dst: \
-	    dst.write(fm + src.read())'
+	@printf '+++\ntitle = "Baluard Security White Paper"\ndescription = "How Baluard protects your data: the security white paper."\ntemplate = "security.html"\nslug = "security"\npath = "security"\n+++\n\n' > site/content/security.md
+	@cat ../baluard/docs/security/security-white-paper.md >> site/content/security.md
 	@just build
 	@echo "Security white paper synchronized from ../baluard/docs/security/security-white-paper.md."
 
