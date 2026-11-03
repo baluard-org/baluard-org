@@ -39,9 +39,9 @@ sync-paper:
 	@just build
 	@echo "Security white paper synchronized from ../baluard/docs/security/security-white-paper.md."
 
-# External links are skipped: ai-instructions.md targets the main repo, which stays private until launch
+# The main repo went public, so external link validation runs in full
 check:
-	cd site && zola check --skip-external-links
+	cd site && zola check
 
 # Clean temporary Zola build cache
 clean:
