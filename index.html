@@ -1150,6 +1150,10 @@
     margin-bottom: 2rem;
   }
 
+  .dl-options-grid-two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   @media (max-width: 860px) {
     .dl-options-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2024,7 +2028,7 @@ sudo dnf install baluard</code></pre>
         MV3 companions that talk directly to the local `baluard-daemon` via native messaging. Strict origin matching, zero remote telemetry.
       </p>
 
-      <div class="dl-options-grid reveal-group is-pending-releases">
+      <div class="dl-options-grid dl-options-grid-two reveal-group is-pending-releases">
         <!-- Firefox Extension -->
         <div class="dl-card dl-card-disabled reveal-on-scroll">
           <div>
