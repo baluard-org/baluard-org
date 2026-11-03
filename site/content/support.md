@@ -8,6 +8,8 @@ path = "support"
 
 # Baluard support
 
+Effective date: November 1, 2026
+
 One page for every Baluard product: the desktop app, the browser extension, the mobile app, and the command line tool. Start here.
 
 ## Contact us

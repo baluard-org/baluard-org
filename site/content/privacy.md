@@ -8,7 +8,7 @@ path = "privacy"
 
 # Privacy policy
 
-Effective date: November 3, 2026
+Effective date: November 1, 2026
 
 Baluard is designed so that your passwords, vault contents, and encryption keys stay on your devices. There is no Baluard account, cloud vault, analytics service, advertising tracker, or telemetry system. This policy explains the limited situations in which information is processed.
 
