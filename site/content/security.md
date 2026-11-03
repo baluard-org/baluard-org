@@ -22,7 +22,7 @@ This choice has honest costs, and the paper names them where they exist. Sync co
 
 ## 2. Security principles
 
-The principles below decide every design dispute in the codebase. The [architecture decision records](../adr/index.md) carry the reasoning per decision when you want the history.
+The principles below decide every design dispute in the codebase. The [architecture decision records](https://github.com/baluard-org/baluard/tree/main/docs/adr) carry the reasoning per decision when you want the history.
 
 - Zero-server, zero-knowledge. Keys are generated, used, and destroyed on your devices. No ciphertext ever passes through infrastructure we control, because no such infrastructure exists.
 - Least trust in the remote. The sync backend is treated as hostile at every layer: it stores only padded ciphertext, and on enrolled vaults every commit carries a device signature that the receiving side verifies before accepting.

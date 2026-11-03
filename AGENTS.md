@@ -36,8 +36,8 @@ Deploy: `just build`, commit, push `main`. Pages publishes the repo root.
 - Template asset paths must be root-relative (`./assets/...`) because generated HTML lands at different depths (`/`, `/security/`, ...). i18n: translations live in `site/static/assets/i18n.js`; an inline head script resolves localStorage/navigator language before first paint — keep it inline and `i18n.js` deferred.
 - SVG rendering must go through `rsvg-convert`, never ImageMagick directly: its builtin SVG parser drops gradient fills and outputs flat black.
 - justfile build order is load-bearing: asset-generation guards (`social-card.png`, `favicon.ico`) run BEFORE `zola build` and before the root `cp` steps, or fresh clones fail.
-- `just check` skips external links because `ai-instructions.md` intentionally links the private `github.com/baluard-org/baluard` (3 known 404s until that repo goes public; remove the flag then).
-- `just sync-paper` clobbers two hand adaptations in `site/content/security.md` — re-apply after running: (1) the ADR cross-reference must stay a markdown link to `../adr/index.md`; (2) `docs/linux-repositories.md` must read `docs/dev/linux-repositories.md`.
+- `just check` runs the full external link validation: the main repo went public, so its previously-excluded 404s are gone.
+- `just sync-paper` clobbers two hand adaptations in `site/content/security.md` — re-apply after running: (1) the ADR cross-reference must be a markdown link to `https://github.com/baluard-org/baluard/tree/main/docs/adr` (the source file uses the repo-relative `../adr/index.md`, which is correct on GitHub but dead on the site); (2) `docs/linux-repositories.md` must read `docs/dev/linux-repositories.md`.
 - Crypto claims site-wide: AES-256-GCM with 96-bit nonces. Never write ChaCha20-Poly1305; no ChaCha exists in the product.
 - App version shown on the site comes from `[extra].version` in `site/config.toml`; sync it when the product releases.
 
