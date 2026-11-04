@@ -32,3 +32,9 @@ Thumbs.db
 
 # F-Droid index signature jars (the global git ignore excludes *.jar)
 !fdroid/repo/*.jar
+
+# apt/dnf pool binaries: the package repos on baluard.app/repo serve these
+# from this tree; ignoring them 404s every apt/dnf install (metadata ships,
+# the package download fails)
+!repo/pool/**/*.deb
+!repo/rpms/*.rpm
