@@ -41,6 +41,7 @@
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="canonical" href="https://baluard.app/privacy/">
   <meta name="theme-color" content="#07090d">
+  <meta name="color-scheme" content="dark">
 
   <!-- Open Graph / Meta -->
   <meta property="og:type" content="website">
@@ -85,6 +86,7 @@
     }
 
     :root {
+      color-scheme: dark;
       /* Website Theme: Deep Obsidian & Electric Blue Sovereign Contrast */
       --site-bg: #07090d;
       --site-bg-surface: #0d1118;
@@ -126,23 +128,6 @@
       --radius-md: 10px;
       --radius-lg: 14px;
       --radius-xl: 20px;
-    }
-
-    @media (prefers-color-scheme: light) {
-      :root {
-        --site-bg: #f8fafc;
-        --site-bg-surface: #ffffff;
-        --site-bg-elevated: #f1f5f9;
-        --site-border: #e2e8f0;
-        --site-border-subtle: #cbd5e1;
-        --site-border-glow: #0284c7;
-        --site-text: #0f172a;
-        --site-text-secondary: #475569;
-        --site-text-muted: #64748b;
-        --site-accent: #0284c7;
-        --site-accent-btn: #0284c7;
-        --site-accent-btn-hover: #0369a1;
-      }
     }
 
     *, *::before, *::after {
@@ -299,12 +284,6 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--site-border);
-    }
-
-    @media (prefers-color-scheme: light) {
-      header.site-header {
-        background: rgba(248, 250, 252, 0.9);
-      }
     }
 
     .nav-inner {
