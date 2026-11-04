@@ -457,70 +457,6 @@
     document.documentElement.classList.remove('i18n-pending');
   }
 
-  function resolveLatestReleases() {
-    var CACHE_KEY = 'baluard_latest_release_cache';
-    var CACHE_TTL = 3600000; // 1 hour
-
-    function applyReleaseData(release) {
-      if (!release || !release.assets) return;
-
-      var typeMap = {
-        appimage: /\.AppImage$/i,
-        deb: /\.deb$/i,
-        rpm: /\.rpm$/i,
-        cli: /baluard-cli.*\.tar\.gz$/i,
-        manifest: /SHA256SUMS$/i
-      };
-
-      for (var type in typeMap) {
-        var regex = typeMap[type];
-        for (var i = 0; i < release.assets.length; i++) {
-          var asset = release.assets[i];
-          if (regex.test(asset.name)) {
-            var card = document.querySelector('[data-dl-type="' + type + '"]');
-            if (card) {
-              card.href = asset.browser_download_url;
-              var sizeEl = card.querySelector('.dl-size');
-              if (sizeEl && asset.size) {
-                var mb = (asset.size / (1024 * 1024)).toFixed(1);
-                sizeEl.textContent = mb + ' MB';
-              }
-            }
-            break;
-          }
-        }
-      }
-    }
-
-    try {
-      var cached = sessionStorage.getItem(CACHE_KEY);
-      if (cached) {
-        var parsed = JSON.parse(cached);
-        if (Date.now() - parsed.timestamp < CACHE_TTL) {
-          applyReleaseData(parsed.data);
-          return;
-        }
-      }
-    } catch (e) {}
-
-    fetch('https://api.github.com/repos/baluard-org/baluard/releases/latest', {
-      headers: { 'Accept': 'application/vnd.github.v3+json' }
-    })
-      .then(function (res) {
-        if (!res.ok) throw new Error('Release fetch status: ' + res.status);
-        return res.json();
-      })
-      .then(function (data) {
-        applyReleaseData(data);
-        try {
-          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data: data }));
-        } catch (e) {}
-      })
-      .catch(function () {
-        // Fallback: stay with native /releases/latest/download/ URLs
-      });
-  }
-
   function initLangSwitcher() {
     var btn = document.getElementById('lang-btn');
     var dropdown = document.getElementById('lang-dropdown');
@@ -572,7 +508,7 @@
 
     var current = getSavedLanguage();
     setLanguage(current);
-    resolveLatestReleases();
+    try { sessionStorage.removeItem('baluard_latest_release_cache'); } catch (e) {}
   }
 
   // Dynamic labels (copy buttons) read the active dictionary at call time.
