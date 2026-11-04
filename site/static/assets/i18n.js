@@ -29,7 +29,7 @@
       'arch-node-p-2': 'Your phone and computer pair directly with each other like two people swapping keys face-to-face. No central account, no corporate sign-in, and no company server in the middle.',
       'arch-node-tag-3': 'LAYER 3 / HOW VAULTS SYNC',
       'arch-node-h4-3': 'Sync Through Your Own Notebook',
-      'arch-node-p-3': 'Sync your vault through a private Git repo, your home server, or a USB drive. The remote host sees only scrambled ciphertext. Even a total breach of the sync host exposes zero passwords.',
+      'arch-node-p-3': '<a href="/what-the-git/">Sync your vault through a private Git repo</a>, your home server, or a USB drive. The remote host sees only scrambled ciphertext. Even a total breach of the sync host exposes zero passwords.',
 
       'cap-eyebrow': 'Sovereign Capabilities',
       'cap-heading': 'Engineered for sovereignty and longevity.',
@@ -50,6 +50,8 @@
       'cap4-desc': 'Native browser integration for Firefox, Chrome, and Chromium-based browsers. Autofill credentials, capture new logins, and sign into WebAuthn passkeys directly through local daemon IPC.',
       'cap4-s1': 'Direct local socket communication with zero cloud telemetry or analytics',
       'cap4-s2': 'Full commit history preservation for audit and rollback',
+      'cap-merge-title': 'Git 3-Way Merge Conflict Resolution',
+      'cap-merge-desc': '<a href="/what-the-git/">Because Baluard is built on Git</a>, concurrent edits on two offline devices never overwrite each other. When divergent changes occur, Baluard lets you inspect and resolve discrepancies field-by-field.',
 
       'cli-eyebrow': 'First-Class CLI',
       'cli-heading': 'Scriptable, daemon-backed terminal client.',
@@ -157,7 +159,7 @@
       'arch-node-p-2': 'Tu teléfono y tu computadora se vinculan directamente entre sí, como dos personas entregándose una llave en mano. Sin cuenta central, sin inicio de sesión corporativo y sin servidores en el medio.',
       'arch-node-tag-3': 'CAPA 3 / CÓMO SE SINCRONIZAN TUS BÓVEDAS',
       'arch-node-h4-3': 'Sincroniza a Través de tu Propio Cuaderno',
-      'arch-node-p-3': 'Sincroniza mediante un repositorio Git privado, tu servidor doméstico o una unidad USB. El servidor remoto solo ve datos cifrados ilegibles. Incluso si vulneran el servidor de sincronización por completo, no exponen ninguna contraseña.',
+      'arch-node-p-3': '<a href="/what-the-git/">Sincroniza mediante un repositorio Git privado</a>, tu servidor doméstico o una unidad USB. El servidor remoto solo ve datos cifrados ilegibles. Incluso si vulneran el servidor de sincronización por completo, no exponen ninguna contraseña.',
 
       'cap-eyebrow': 'Capacidades Soberanas',
       'cap-heading': 'Diseñado para la soberanía y la longevidad.',
@@ -178,6 +180,8 @@
       'cap4-desc': 'Integración nativa con Firefox, Chrome y navegadores basados en Chromium. Autocompleta credenciales, captura nuevos inicios de sesión y firma con passkeys WebAuthn directamente vía IPC del demonio local.',
       'cap4-s1': 'Comunicación por socket local directo sin telemetría ni análisis en la nube',
       'cap4-s2': 'Conservación del historial completo de commits para auditoría y reversión',
+      'cap-merge-title': 'Resolución de conflictos Git con fusión de tres vías',
+      'cap-merge-desc': '<a href="/what-the-git/">Como Baluard está construido sobre Git</a>, las ediciones simultáneas en dos dispositivos sin conexión nunca se sobrescriben entre sí. Cuando hay cambios divergentes, Baluard te permite inspeccionar y resolver las discrepancias campo por campo.',
 
       'cli-eyebrow': 'CLI de Primer Nivel',
       'cli-heading': 'Cliente de terminal programable respaldado por demonio.',
@@ -285,7 +289,7 @@
       'arch-node-p-2': 'Votre téléphone et votre ordinateur s\'associent directement entre eux, comme deux personnes échangeant une clé en face à face. Aucun compte central, aucune connexion d\'entreprise et aucun serveur au milieu.',
       'arch-node-tag-3': 'COUCHE 3 / SYNCHRONISATION DES COFFRES',
       'arch-node-h4-3': 'Synchronisation via Votre Propre Carnet',
-      'arch-node-p-3': 'Synchronisez via un dépôt Git privé, votre serveur personnel ou une clé USB. Le serveur distant ne voit que des blocs chiffrés illisibles. Même un piratage total du serveur n\'expose aucun mot de passe.',
+      'arch-node-p-3': '<a href="/what-the-git/">Synchronisez via un dépôt Git privé</a>, votre serveur personnel ou une clé USB. Le serveur distant ne voit que des blocs chiffrés illisibles. Même un piratage total du serveur n\'expose aucun mot de passe.',
 
       'cap-eyebrow': 'Capacités Souveraines',
       'cap-heading': 'Conçu pour la souveraineté et la longévité.',
@@ -306,6 +310,8 @@
       'cap4-desc': 'Intégration native à Firefox, Chrome et aux navigateurs basés sur Chromium. Remplit vos identifiants, capture les nouvelles connexions et signe avec les passkeys WebAuthn directement via l\'IPC du démon local.',
       'cap4-s1': 'Communication directe par socket local, sans télémétrie ni analyse cloud',
       'cap4-s2': 'Conservation de l\'historique complet des commits pour audit et retour arrière',
+      'cap-merge-title': 'Résolution des conflits Git par fusion à trois voies',
+      'cap-merge-desc': '<a href="/what-the-git/">Baluard étant construit sur Git</a>, les modifications simultanées sur deux appareils hors ligne ne s\'écrasent jamais l\'une l\'autre. En cas de changements divergents, Baluard vous permet d\'inspecter et de résoudre les différences champ par champ.',
 
       'cli-eyebrow': 'CLI de Premier Ordre',
       'cli-heading': 'Client terminal scriptable adossé à un démon.',
@@ -413,7 +419,7 @@
       'arch-node-p-2': 'Seu celular e computador se conectam diretamente um ao outro, como duas pessoas trocando uma chave em mãos. Sem conta central, sem login corporativo e sem servidor da empresa no meio.',
       'arch-node-tag-3': 'CAMADA 3 / COMO OS COFRES SINCRONIZAM',
       'arch-node-h4-3': 'Sincronização Através do Seu Próprio Caderno',
-      'arch-node-p-3': 'Sincronize por um repositório Git privado, seu servidor doméstico ou um pen drive USB. O servidor remoto enxerga apenas texto cifrado ilegível. Mesmo uma invasão total do servidor não expõe nenhuma senha.',
+      'arch-node-p-3': '<a href="/what-the-git/">Sincronize por um repositório Git privado</a>, seu servidor doméstico ou um pen drive USB. O servidor remoto enxerga apenas texto cifrado ilegível. Mesmo uma invasão total do servidor não expõe nenhuma senha.',
 
       'cap-eyebrow': 'Capacidades Soberanas',
       'cap-heading': 'Projetado para soberania e longevidade.',
@@ -434,6 +440,8 @@
       'cap4-desc': 'Integração nativa com Firefox, Chrome e navegadores baseados em Chromium. Preenche credenciais, captura novos logins e assina com passkeys WebAuthn diretamente via IPC do daemon local.',
       'cap4-s1': 'Comunicação direta por socket local sem telemetria ou análise na nuvem',
       'cap4-s2': 'Preservação do histórico completo de commits para auditoria e reversão',
+      'cap-merge-title': 'Resolução de conflitos Git com mesclagem de três vias',
+      'cap-merge-desc': '<a href="/what-the-git/">Como o Baluard é construído sobre o Git</a>, edições simultâneas em dois dispositivos offline nunca se sobrescrevem. Quando há mudanças divergentes, o Baluard permite inspecionar e resolver as diferenças campo por campo.',
 
       'cli-eyebrow': 'CLI de Primeira Linha',
       'cli-heading': 'Cliente de terminal programável com suporte a daemon.',
