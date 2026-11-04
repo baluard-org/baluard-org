@@ -1223,6 +1223,13 @@
     margin-bottom: 0.3rem;
   }
 
+  .dl-card-name img {
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-right: 0.45rem;
+    vertical-align: -0.18em;
+  }
+
   .dl-card-desc {
     font-size: 0.85rem;
     color: var(--site-text-secondary);
@@ -1960,9 +1967,9 @@
       <!-- AppImage -->
       <a href="https://github.com/baluard-org/baluard/releases/latest/download/Baluard-amd64.AppImage" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="appimage">
         <div>
-          <div class="dl-card-tag" data-i18n="dl-appimage-tag">Linux</div>
+          <div class="dl-card-tag" data-i18n="dl-appimage-tag">AppImage</div>
         <span class="badge-beta" aria-label="beta release">beta</span>
-          <div class="dl-card-name" data-i18n="dl-appimage-name">AppImage</div>
+          <div class="dl-card-name"><img src="./assets/logo-linux.svg" alt="" width="20" height="20"><span data-i18n="dl-appimage-name">Linux</span></div>
           <div class="dl-card-desc" data-i18n="dl-appimage-desc">Single universal executable for any modern Linux distribution. Self-contained.</div>
         </div>
         <div class="dl-card-footer">
@@ -1977,9 +1984,9 @@
       <!-- Windows -->
       <a href="https://github.com/baluard-org/baluard/releases/latest/download/Baluard-amd64-setup.exe" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="windows">
         <div>
-          <div class="dl-card-tag" data-i18n="dl-windows-tag">Windows</div>
+          <div class="dl-card-tag" data-i18n="dl-windows-tag">Installer</div>
         <span class="badge-beta" aria-label="beta release">beta</span>
-          <div class="dl-card-name" data-i18n="dl-windows-name">Windows Installer</div>
+          <div class="dl-card-name"><img src="./assets/logo-windows.svg" alt="" width="20" height="20"><span data-i18n="dl-windows-name">Windows</span></div>
           <div class="dl-card-desc" data-i18n="dl-windows-desc">NSIS setup for Windows 11 x64. Bundles the Baluard daemon and CLI.</div>
         </div>
         <div class="dl-card-footer">
@@ -1991,12 +1998,9 @@
       <!-- macOS -->
       <div class="dl-card dl-card-disabled reveal-on-scroll">
         <div>
-          <div class="dl-card-tag" data-i18n="dl-macos-tag">macOS</div>
-          <div class="dl-card-name" data-i18n="dl-macos-name">macOS Client</div>
+          <div class="dl-card-tag" data-i18n="dl-macos-tag">In development</div>
+          <div class="dl-card-name"><img src="./assets/logo-macos.svg" alt="" width="20" height="20"><span data-i18n="dl-macos-name">macOS</span></div>
           <div class="dl-card-desc" data-i18n="dl-macos-desc">Touch ID keychain integration and native Apple Silicon build.</div>
-        </div>
-        <div class="dl-card-footer">
-          <span style="color: var(--site-text-muted);" data-i18n="dl-macos-status">In development</span>
         </div>
         <div class="dl-soon-overlay"><span data-i18n="dl-coming-soon">Coming soon</span></div>
       </div>
@@ -2176,7 +2180,7 @@
     </div>
   </footer>
 
-  <script src="/assets/i18n.js?v=1793794707" defer></script>
+  <script src="/assets/i18n.js?v=1793795182" defer></script>
   
 <script>
   // Apple-Style Scroll Reveal Observer & Hero Entrance Timer
