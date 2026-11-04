@@ -21,7 +21,7 @@
 
       'arch-eyebrow': 'Zero-Server Architecture',
       'arch-heading': 'Why the architecture is the security model.',
-      'arch-lede': "Most password managers store everyone's vaults in one giant cloud database. If that company gets breached or sold, your passwords are exposed. Baluard works like a personal safe in your home: your passwords stay on your own hardware, so there is no central database to break into.",
+      'arch-lede': "Most password managers store everyone's vaults in one giant cloud database. If that company gets breached or sold, your encrypted passwords and unencrypted metadata end up in new hands. Baluard works like a personal safe in your home: your passwords stay on your own hardware, so there is no central database to break into.",
       'arch-node-tag-1': 'LAYER 1 / WHERE YOUR DATA LIVES',
       'arch-node-h4-1': 'A Safe in Your Home',
       'arch-node-p-1': 'Your vault stays on your physical phone and computer, encrypted with a key only you hold. Every entry is padded to identical size so observers cannot guess what is inside.',
