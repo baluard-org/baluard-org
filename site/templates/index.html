@@ -1063,9 +1063,9 @@
 <section id="features" class="content-section">
   <div class="container">
     <div class="section-intro reveal-on-scroll">
-      <div class="section-eyebrow">Sovereign Capabilities</div>
-      <h2 class="section-heading">Engineered for sovereignty and longevity.</h2>
-      <p class="section-lede">
+      <div class="section-eyebrow" data-i18n="cap-eyebrow">Sovereign Capabilities</div>
+      <h2 class="section-heading" data-i18n="cap-heading">Engineered for sovereignty and longevity.</h2>
+      <p class="section-lede" data-i18n="cap-lede">
         Built for autonomy, durability, and device-level custody.
       </p>
     </div>
@@ -1074,38 +1074,38 @@
     <div class="capabilities-grid reveal-group">
       <div class="feature-panel reveal-on-scroll">
         <div class="feature-panel-header">
-          <h3>Hardware Key Vault Sealing</h3>
-          <p>
+          <h3 data-i18n="cap1-title">Hardware Key Vault Sealing</h3>
+          <p data-i18n="cap1-desc">
             Enroll a YubiKey or FIDO2 hardware token to seal the entire vault. Even if an adversary extracts your master password, the vault refuses to decrypt without a physical touch on your security key.
           </p>
         </div>
         <ul class="feature-spec-list">
           <li class="spec-item">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Hardware challenge-response via FIDO2 hmac-secret</span>
+            <span data-i18n="cap1-s1">Hardware challenge-response via FIDO2 hmac-secret</span>
           </li>
           <li class="spec-item">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Canary verification validates authentication state without exposing master keys</span>
+            <span data-i18n="cap1-s2">Canary verification validates authentication state without exposing master keys</span>
           </li>
         </ul>
       </div>
 
       <div class="feature-panel reveal-on-scroll">
         <div class="feature-panel-header">
-          <h3>All 9 Cipher Types + Passkeys</h3>
-          <p>
+          <h3 data-i18n="cap2-title">All 9 Cipher Types + Passkeys</h3>
+          <p data-i18n="cap2-desc">
             Store logins (with embedded passkeys), cards, identities, SSH keys, bank accounts, driver licenses, passports, secure notes, and code signing keys.
           </p>
         </div>
         <ul class="feature-spec-list">
           <li class="spec-item">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>RFC 6238 compliant integrated TOTP code generator</span>
+            <span data-i18n="cap2-s1">RFC 6238 compliant integrated TOTP code generator</span>
           </li>
           <li class="spec-item">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Native SSH and code signing key storage with public key export</span>
+            <span data-i18n="cap2-s2">Native SSH and code signing key storage with public key export</span>
           </li>
         </ul>
       </div>
@@ -1115,34 +1115,34 @@
     <div class="capabilities-grid-reverse reveal-group">
       <div class="feature-panel reveal-on-scroll">
         <div class="feature-panel-header">
-          <h3>Spaces &amp; Family Collaboration</h3>
-          <p>
+          <h3 data-i18n="cap3-title">Spaces &amp; Family Collaboration</h3>
+          <p data-i18n="cap3-desc">
             Share specific credential collections with family or team members without a central identity provider. Uses cryptographic invite codes and device-to-device grants.
           </p>
         </div>
         <ul class="feature-spec-list">
           <li class="spec-item">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Phrase-only emergency recovery kit for estate and family continuity</span>
+            <span data-i18n="cap3-s1">Phrase-only emergency recovery kit for estate and family continuity</span>
           </li>
           <li class="spec-item">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Role-based access grants: Owner, Admin, Editor, and Viewer</span>
+            <span data-i18n="cap3-s2">Role-based access grants: Owner, Admin, Editor, and Viewer</span>
           </li>
         </ul>
       </div>
 
       <div class="feature-panel reveal-on-scroll">
         <div class="feature-panel-header">
-          <h3>Browser Extension &amp; Autofill</h3>
-          <p>
+          <h3 data-i18n="cap4-title">Browser Extension &amp; Autofill</h3>
+          <p data-i18n="cap4-desc">
             Native browser integration for Firefox, Chrome, and Chromium-based browsers. Autofill credentials, capture new logins, and sign into WebAuthn passkeys directly through local daemon IPC.
           </p>
         </div>
         <ul class="feature-spec-list">
           <li class="spec-item">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Direct local socket communication with zero cloud telemetry or analytics</span>
+            <span data-i18n="cap4-s1">Direct local socket communication with zero cloud telemetry or analytics</span>
           </li>
           <li class="spec-item">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -1178,7 +1178,7 @@
           </li>
           <li class="spec-item">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Full commit history preservation for audit and rollback</span>
+            <span data-i18n="cap4-s2">Full commit history preservation for audit and rollback</span>
           </li>
         </ul>
       </div>
@@ -1282,13 +1282,13 @@
       <!-- AppImage -->
       <a href="https://github.com/baluard-org/baluard/releases/latest/download/Baluard-amd64.AppImage" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="appimage">
         <div>
-          <div class="dl-card-tag">Recommended / Linux</div>
+          <div class="dl-card-tag" data-i18n="dl-appimage-tag">Recommended / Linux</div>
         <span class="badge-beta" aria-label="beta release">beta</span>
-          <div class="dl-card-name">AppImage</div>
-          <div class="dl-card-desc">Single universal executable for any modern Linux distribution. Self-contained.</div>
+          <div class="dl-card-name" data-i18n="dl-appimage-name">AppImage</div>
+          <div class="dl-card-desc" data-i18n="dl-appimage-desc">Single universal executable for any modern Linux distribution. Self-contained.</div>
         </div>
         <div class="dl-card-footer">
-          <span>Download &darr;</span>
+          <span data-i18n="dl-card-download">Download &darr;</span>
           <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">120 MB</span>
         </div>
       </a>
@@ -1299,13 +1299,13 @@
       <!-- Windows -->
       <a href="https://github.com/baluard-org/baluard/releases/latest/download/Baluard-amd64-setup.exe" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="windows">
         <div>
-          <div class="dl-card-tag">Beta / Windows</div>
+          <div class="dl-card-tag" data-i18n="dl-windows-tag">Beta / Windows</div>
         <span class="badge-beta" aria-label="beta release">beta</span>
-          <div class="dl-card-name">Windows Installer</div>
-          <div class="dl-card-desc">NSIS setup for Windows 11 x64. Bundles the Baluard daemon and CLI.</div>
+          <div class="dl-card-name" data-i18n="dl-windows-name">Windows Installer</div>
+          <div class="dl-card-desc" data-i18n="dl-windows-desc">NSIS setup for Windows 11 x64. Bundles the Baluard daemon and CLI.</div>
         </div>
         <div class="dl-card-footer">
-          <span>Download &darr;</span>
+          <span data-i18n="dl-card-download">Download &darr;</span>
           <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">12.3 MB</span>
         </div>
       </a>
@@ -1313,18 +1313,18 @@
       <!-- macOS -->
       <div class="dl-card dl-card-disabled reveal-on-scroll">
         <div>
-          <div class="dl-card-tag">macOS</div>
-          <div class="dl-card-name">macOS Client</div>
-          <div class="dl-card-desc">Touch ID keychain integration and native Apple Silicon build.</div>
+          <div class="dl-card-tag" data-i18n="dl-macos-tag">macOS</div>
+          <div class="dl-card-name" data-i18n="dl-macos-name">macOS Client</div>
+          <div class="dl-card-desc" data-i18n="dl-macos-desc">Touch ID keychain integration and native Apple Silicon build.</div>
         </div>
         <div class="dl-card-footer">
-          <span style="color: var(--site-text-muted);">In development</span>
+          <span style="color: var(--site-text-muted);" data-i18n="dl-macos-status">In development</span>
         </div>
         <div class="dl-soon-overlay"><span data-i18n="dl-coming-soon">Coming soon</span></div>
       </div>
     </div>
 
-    <p style="text-align: center; color: var(--site-text-muted); font-size: 0.85rem; margin-top: 1.1rem;">
+    <p data-i18n="dl-note" style="text-align: center; color: var(--site-text-muted); font-size: 0.85rem; margin-top: 1.1rem;">
       Beta builds of deb, rpm, and the CLI tarball also live in the
       <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">GitHub releases</a>.
     </p>
@@ -1332,37 +1332,37 @@
     <!-- Package Manager Setup Details -->
     <details class="repo-accordion reveal-on-scroll" id="download-repo">
       <summary>
-        <span>Prefer system updates via APT or DNF? (Ubuntu, Debian, Fedora)</span>
-        <span style="color: #38bdf8; font-size: 0.88rem;">View repository instructions &darr;</span>
+        <span data-i18n="repo-summary">Prefer system updates via APT or DNF? (Ubuntu, Debian, Fedora)</span>
+        <span style="color: #38bdf8; font-size: 0.88rem;" data-i18n="repo-open">View repository instructions &darr;</span>
       </summary>
       <div class="repo-accordion-body">
-        <p style="color: #94a3b8; margin: 1rem 0 0.5rem; font-size: 0.92rem;">
+        <p data-i18n="repo-intro" style="color: #94a3b8; margin: 1rem 0 0.5rem; font-size: 0.92rem;">
           Install from the official repository to pull beta updates directly through your system package manager.
         </p>
 
         <!-- APT -->
         <div class="repo-snippet-box">
-          <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;">Ubuntu / Debian (APT):</div>
+          <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;" data-i18n="repo-apt-label">Ubuntu / Debian (APT):</div>
           <div class="repo-code-wrap">
             <button type="button" class="repo-copy-btn" aria-label="Copy install command"><span data-i18n="copy-btn">Copy</span></button>
             <pre><code>sudo curl -fsSL -o /usr/share/keyrings/baluard-archive-keyring.asc https://baluard.app/repo/baluard-release.asc &amp;&amp; curl -fsSL https://baluard.app/repo/baluard.sources | sudo tee /etc/apt/sources.list.d/baluard.sources &amp;&amp; sudo apt update &amp;&amp; sudo apt install baluard</code></pre>
           </div>
-          <p style="font-size: 0.82rem; color: #64748b; margin-top: 0.3rem;">Uses the deb822 format (default on Ubuntu 24.04+ and Debian 13+). The armored key is used directly — no dearmor step.</p>
+          <p data-i18n="repo-apt-note" style="font-size: 0.82rem; color: #64748b; margin-top: 0.3rem;">Uses the deb822 format (default on Ubuntu 24.04+ and Debian 13+). The armored key is used directly, no dearmor step.</p>
         </div>
 
         <!-- DNF -->
         <div class="repo-snippet-box">
-          <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;">Fedora (DNF):</div>
+          <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;" data-i18n="repo-dnf-label">Fedora (DNF):</div>
           <div class="repo-code-wrap">
             <button type="button" class="repo-copy-btn" aria-label="Copy install command"><span data-i18n="copy-btn">Copy</span></button>
             <pre><code>sudo dnf config-manager addrepo --from-repofile=https://baluard.app/repo/baluard.repo &amp;&amp; sudo dnf install baluard</code></pre>
           </div>
-          <p style="font-size: 0.82rem; color: #64748b; margin-top: 0.3rem;">Fedora 41+ (dnf 5). On RHEL and clones (dnf 4): <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://baluard.app/repo/baluard.repo</code></p>
+          <p data-i18n="repo-dnf-note" style="font-size: 0.82rem; color: #64748b; margin-top: 0.3rem;">Fedora 41+ (dnf 5). On RHEL and clones (dnf 4): <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://baluard.app/repo/baluard.repo</code></p>
         </div>
 
         <!-- F-Droid moved to its own accordion below -->
 
-        <p style="font-size: 0.85rem; color: #64748b;">
+        <p data-i18n="repo-fingerprint" style="font-size: 0.85rem; color: #64748b;">
           Repository signing key fingerprint: <code style="color: #b3e55c;">223310EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804</code>. Always verify this fingerprint before trusting repository imports.
         </p>
       </div>
@@ -1371,27 +1371,27 @@
     <!-- Android F-Droid -->
     <details class="repo-accordion reveal-on-scroll" id="download-fdroid">
       <summary>
-        <span>On Android? The free and open-source build lives on F-Droid.</span>
-        <span style="color: #38bdf8; font-size: 0.88rem;">View F-Droid instructions &darr;</span>
+        <span data-i18n="fd-summary">On Android? The free and open-source build lives on F-Droid.</span>
+        <span style="color: #38bdf8; font-size: 0.88rem;" data-i18n="fd-open">View F-Droid instructions &darr;</span>
       </summary>
       <div class="repo-accordion-body">
-        <p style="color: #94a3b8; margin: 1rem 0 0.5rem; font-size: 0.92rem;">
+        <p data-i18n="fd-intro" style="color: #94a3b8; margin: 1rem 0 0.5rem; font-size: 0.92rem;">
           The F-Droid distribution is free and open-source software: the build is compiled and signed by the F-Droid repository infrastructure, and updates arrive through the F-Droid client itself.
         </p>
 
         <div class="repo-snippet-box">
-          <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;">Android (F-Droid):</div>
-          <p style="color: #94a3b8; font-size: 0.92rem;">With F-Droid installed, open <a href="https://baluard.app/fdroid/repo/">https://baluard.app/fdroid/repo/</a> on your phone and tap <strong>Add to F-Droid</strong>.</p>
-          <p style="color: #94a3b8; font-size: 0.92rem;">Or add it by hand: in F-Droid, open Settings &gt; Repositories, tap <strong>+</strong>, paste the URL, and enter the fingerprint below so the repository shows as verified.</p>
-          <p style="font-size: 0.85rem; color: #64748b;">Repository fingerprint: <code style="color: #b3e55c;">1CE90DCFE0FB1003F2F66999257B5E6F074E46EE453FB0D44F8CF8E13E6EEAAB</code></p>
+          <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;" data-i18n="fd-label">Android (F-Droid):</div>
+          <p data-i18n="fd-link-line" style="color: #94a3b8; font-size: 0.92rem;">With F-Droid installed, open <a href="https://baluard.app/fdroid/repo/">https://baluard.app/fdroid/repo/</a> on your phone and tap <strong>Add to F-Droid</strong>.</p>
+          <p data-i18n="fd-manual" style="color: #94a3b8; font-size: 0.92rem;">Or add it by hand: in F-Droid, open Settings &gt; Repositories, tap <strong>+</strong>, paste the URL, and enter the fingerprint below so the repository shows as verified.</p>
+          <p data-i18n="fd-fingerprint" style="font-size: 0.85rem; color: #64748b;">Repository fingerprint: <code style="color: #b3e55c;">1CE90DCFE0FB1003F2F66999257B5E6F074E46EE453FB0D44F8CF8E13E6EEAAB</code></p>
         </div>
       </div>
     </details>
 
     <!-- Browser Extensions Section -->
     <div class="reveal-on-scroll" style="margin-top: 3rem;">
-      <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--site-text); margin-bottom: 0.5rem;">Browser Extensions</h3>
-      <p style="color: var(--site-text-secondary); font-size: 0.95rem; margin-bottom: 1.25rem;">
+      <h3 data-i18n="ext-heading" style="font-size: 1.35rem; font-weight: 700; color: var(--site-text); margin-bottom: 0.5rem;">Browser Extensions</h3>
+      <p data-i18n="ext-lede" style="color: var(--site-text-secondary); font-size: 0.95rem; margin-bottom: 1.25rem;">
         MV3 companions that talk directly to the local `baluard-daemon` via native messaging. Strict origin matching, zero remote telemetry.
       </p>
 
@@ -1400,11 +1400,11 @@
         <div class="dl-card dl-card-disabled reveal-on-scroll">
           <div>
             <div class="dl-card-tag">Firefox / LibreWolf / Floorp</div>
-            <div class="dl-card-name">Firefox Add-on</div>
-            <div class="dl-card-desc">MV3 extension with native messaging host bridge and origin matching.</div>
+            <div class="dl-card-name" data-i18n="ext-ff-name">Firefox Add-on</div>
+            <div class="dl-card-desc" data-i18n="ext-ff-desc">MV3 extension with native messaging host bridge and origin matching.</div>
           </div>
           <div class="dl-card-footer">
-            <span style="color: var(--site-text-muted);">Add-on store listing pending</span>
+            <span style="color: var(--site-text-muted);" data-i18n="ext-ff-status">Add-on store listing pending</span>
             <span style="font-family: var(--font-mono); font-size: 0.75rem;">MV3</span>
           </div>
           <div class="dl-soon-overlay"><span data-i18n="dl-coming-soon">Coming soon</span></div>
@@ -1414,11 +1414,11 @@
         <div class="dl-card dl-card-disabled reveal-on-scroll">
           <div>
             <div class="dl-card-tag">Chrome / Brave / Edge / Vivaldi</div>
-            <div class="dl-card-name">Chromium Extension</div>
-            <div class="dl-card-desc">MV3 companion with inline autofill and local capability-token authentication.</div>
+            <div class="dl-card-name" data-i18n="ext-ch-name">Chromium Extension</div>
+            <div class="dl-card-desc" data-i18n="ext-ch-desc">MV3 companion with inline autofill and local capability-token authentication.</div>
           </div>
           <div class="dl-card-footer">
-            <span style="color: var(--site-text-muted);">Web Store listing pending</span>
+            <span style="color: var(--site-text-muted);" data-i18n="ext-ch-status">Web Store listing pending</span>
             <span style="font-family: var(--font-mono); font-size: 0.75rem;">MV3</span>
           </div>
           <div class="dl-soon-overlay"><span data-i18n="dl-coming-soon">Coming soon</span></div>
@@ -1426,7 +1426,7 @@
       </div>
     </div>
 
-    <div style="margin-top: 1.5rem; text-align: center; font-size: 0.9rem; color: #64748b;">
+    <div data-i18n="ext-note" style="margin-top: 1.5rem; text-align: center; font-size: 0.9rem; color: #64748b;">
       Every release includes a <a href="https://github.com/baluard-org/baluard/releases/latest/download/SHA256SUMS" target="_blank" rel="noopener noreferrer" data-dl-type="manifest">signed SHA256SUMS manifest</a> with cryptographic signatures.
     </div>
   </div>
