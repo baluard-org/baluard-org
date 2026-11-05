@@ -106,7 +106,7 @@
       'ext-ff-status': 'Add-on store listing pending',
       'ext-ch-name': 'Chromium Extension',
       'ext-ch-desc': 'MV3 companion with inline autofill and local capability-token authentication.',
-      'ext-ch-status': 'Web Store listing pending',
+      'ext-ch-status': 'Install from Chrome Web Store &rarr;',
       'ext-note': 'Every release includes a <a href="https://github.com/baluard-org/baluard/releases/latest/download/SHA256SUMS" target="_blank" rel="noopener noreferrer" data-dl-type="manifest">signed SHA256SUMS manifest</a> with cryptographic signatures.',
 
       'copy-btn': 'Copy',
@@ -236,7 +236,7 @@
       'ext-ff-status': 'Publicación en la tienda de complementos pendiente',
       'ext-ch-name': 'Extensión Chromium',
       'ext-ch-desc': 'Extensión MV3 con autocompletado en línea y autenticación local por token de capacidad.',
-      'ext-ch-status': 'Publicación en tiendas pendiente',
+      'ext-ch-status': 'Instalar desde Chrome Web Store &rarr;',
       'ext-note': 'Cada release incluye un <a href="https://github.com/baluard-org/baluard/releases/latest/download/SHA256SUMS" target="_blank" rel="noopener noreferrer" data-dl-type="manifest">manifiesto SHA256SUMS firmado</a> con firmas criptográficas.',
 
       'copy-btn': 'Copiar',
@@ -366,7 +366,7 @@
       'ext-ff-status': 'Publication sur le magasin de modules en attente',
       'ext-ch-name': 'Extension Chromium',
       'ext-ch-desc': 'Extension MV3 avec remplissage automatique intégré et authentification par jeton de capacité locale.',
-      'ext-ch-status': 'Publication sur les stores en attente',
+      'ext-ch-status': 'Installer depuis le Chrome Web Store &rarr;',
       'ext-note': 'Chaque release inclut un <a href="https://github.com/baluard-org/baluard/releases/latest/download/SHA256SUMS" target="_blank" rel="noopener noreferrer" data-dl-type="manifest">manifeste SHA256SUMS signé</a> avec signatures cryptographiques.',
 
       'copy-btn': 'Copier',
@@ -496,7 +496,7 @@
       'ext-ff-status': 'Publicação na loja de extensões pendente',
       'ext-ch-name': 'Extensão Chromium',
       'ext-ch-desc': 'Extensão MV3 com preenchimento automático integrado e autenticação local por token de capacidade.',
-      'ext-ch-status': 'Listagem nas lojas pendente',
+      'ext-ch-status': 'Instalar pela Chrome Web Store &rarr;',
       'ext-note': 'Cada release inclui um <a href="https://github.com/baluard-org/baluard/releases/latest/download/SHA256SUMS" target="_blank" rel="noopener noreferrer" data-dl-type="manifest">manifesto SHA256SUMS assinado</a> com assinaturas criptográficas.',
 
       'copy-btn': 'Copiar',
