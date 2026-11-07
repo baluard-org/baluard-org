@@ -8,7 +8,7 @@ Codename: stable
 Architectures: amd64
 Components: main
 Description: Baluard package repository
-Date: Sat, 07 Nov 2026 18:16:22 UTC
+Date: Sat, 07 Nov 2026 19:05:54 UTC
 MD5Sum:
  59306419f7ce6cafd3cd0fbb92dd92a6 6882 main/binary-amd64/Packages
  533becc7562d1e11de3e214406c2eeff 1928 main/binary-amd64/Packages.gz
@@ -20,8 +20,8 @@ SHA512:
  a839bb5ad6cf16f74f6a325fbbd1d1aa9a3e64c98544f4d809b29021cb68a44972128e1a4fcdb34322e366eae233f7addbebfcbeb528fcd567d439e1ee265f14 1928 main/binary-amd64/Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iHUEARYKAB0WIQQiMxDqvxq2/ua93z4qUx1U5tdIBAUCau9q9gAKCRAqUx1U5tdI
-BCrlAQCVcPoTvfLaHJQ0SFXHEcVLItVYv8h82cL5dZPOjoCi1QD9EsAfQyAGoewU
-kI6YZZCkF7ADCupNFpJx2AjsEB/qSQo=
-=cgDV
+iHUEARYKAB0WIQQiMxDqvxq2/ua93z4qUx1U5tdIBAUCau92kgAKCRAqUx1U5tdI
+BNqDAQDwRD8NNkLk+4YR4hi6pL/9SsVjk7DOJ3sC1nT64bmc+wD/Sfwt5dIjtBHq
+4R/ScwiApdvkhJiwOT80cv2QmIACJwA=
+=uN29
 -----END PGP SIGNATURE-----
