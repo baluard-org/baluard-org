@@ -38,11 +38,12 @@ We read every message. Baluard is a small independent project, so please allow a
 ## Command line
 
 - `baluard --help` lists every command with its options
-- The [source repository](https://github.com/baluard-org/baluard) carries the full documentation, including the architecture and design records
+- The [documentation site](https://docs.baluard.app) covers installation, syncing, and moving from other password managers
+- The [source repository](https://github.com/baluard-org/baluard) carries the architecture and design records
 
 ## Sync and git providers
 
-- Sync setup, provider tokens, and troubleshooting live in the [git provider docs](https://github.com/baluard-org/baluard/blob/main/docs/dev/git-provider-apps-and-tokens.md)
+- Sync setup and troubleshooting live in the [documentation](https://docs.baluard.app/introduction/syncing-your-vault/)
 - When two devices edit the same entry, the app shows a conflict panel. Your data is never lost: both versions stay available until you pick one or keep both
 
 ## Debug logs
