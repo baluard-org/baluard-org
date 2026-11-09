@@ -8,20 +8,20 @@ Codename: stable
 Architectures: amd64
 Components: main
 Description: Baluard package repository
-Date: Mon, 09 Nov 2026 14:13:53 UTC
+Date: Mon, 09 Nov 2026 15:36:21 UTC
 MD5Sum:
- 39ea9e11ad6605068f56c9051e2d7e35 11012 main/binary-amd64/Packages
- 259c24cce0ca7f7c1a2061cd09d65955 2881 main/binary-amd64/Packages.gz
+ d3c321ed6b9adf19425bd45332f49e64 11700 main/binary-amd64/Packages
+ 1412f75d73fed7832eeffa9f15aa2bb0 3035 main/binary-amd64/Packages.gz
 SHA256:
- cb130124fdef5be27b5219144b5511d11faa4a59d7826660884ea94567f4b784 11012 main/binary-amd64/Packages
- 61cf30afc38c3632bd562a7080330c1cadee062295e8ea7b97b28b7082637256 2881 main/binary-amd64/Packages.gz
+ 3c0b0d4c03c205fc9a98099a4d45b23fad0f1fcc99e0a9fa4941150d50902f75 11700 main/binary-amd64/Packages
+ d30b1b6b0d6084102d73de6a79631e9d90b5439bbf0cc44458d4f36d0969438e 3035 main/binary-amd64/Packages.gz
 SHA512:
- 1a5cfd5c8e175035684318ada8de852118193f6ec2aa68ba6d1113964e2ff0fde00e97e2171cf6bede75c380d0f006393f550030020801f6c46fad27551e2d40 11012 main/binary-amd64/Packages
- 175c7483d10e23b4b1f96cc1ec3c3ececad2ffef26237ab800b9b3538594c6ffab6a394be04e647596f7f5c2df0b31e640562328235be5f5ccb8ce45458a81e7 2881 main/binary-amd64/Packages.gz
+ a8d608444d51cb3f9a810ca1d876e7d18da9932741dd61db0cae1ae68ac8cbe8867f20f3868c1983ee0d5a8780823858b7c5f8421bb939e564f11fe7dc98a8cf 11700 main/binary-amd64/Packages
+ 8d021d8322c2ffd3c3a6200057115e0563706f261f5184ea39f6aae43c3a086d37d3d6def48e68a681601da833077283d6102ea8cd4f2718c83d7ec938bc611e 3035 main/binary-amd64/Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iHUEARYKAB0WIQQiMxDqvxq2/ua93z4qUx1U5tdIBAUCavHVIQAKCRAqUx1U5tdI
-BDhmAQC5doxJPpq3TSINmXK/6eL4J/33HW1BYtwil0WHaGbsSgD+OifjOJks1VgL
-i4Hv2Gsrs8v+3hFz8ta//xt8yrLDXAw=
-=I7AW
+iHUEARYKAB0WIQQiMxDqvxq2/ua93z4qUx1U5tdIBAUCavHodQAKCRAqUx1U5tdI
+BLPEAQCEue2+e7yc5SLPBnvdRVvt3vyyMG4ivVRwe/txNdR4MQEAyH3XQFcC9efv
+SjSDvtdmD5kLO3Zy8hPdBZ7oGcz6hgc=
+=kdYP
 -----END PGP SIGNATURE-----
