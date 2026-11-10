@@ -1,0 +1,50 @@
+name: deploy-pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Assemble the deploy artifact
+        run: |
+          mkdir -p /tmp/_site
+          # Exclusion-based assembly: everything deploys except authoring
+          # machinery, so new top-level pages and repo trees are never
+          # silently dropped.
+          rsync -a ./ /tmp/_site/ \
+            --exclude .git/ \
+            --exclude .github/ \
+            --exclude site/ \
+            --exclude scripts/ \
+            --exclude justfile \
+            --exclude README.md \
+            --exclude LICENSE
+          touch /tmp/_site/.nojekyll
+      - name: Upload the artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: /tmp/_site
+          retention-days: 1
+      - id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          timeout: 1800000
