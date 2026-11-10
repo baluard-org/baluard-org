@@ -82,7 +82,7 @@
       'dl-card-download': 'Download &darr;',
       'dl-note': 'Beta builds of deb, rpm, and the CLI tarball also live in the <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">GitHub releases</a>.',
 
-      'repo-summary': 'Prefer system updates via APT or DNF? (Ubuntu, Debian, Fedora)',
+      'repo-summary': 'Prefer system updates via your package manager? (Ubuntu, Debian, Fedora, Arch)',
       'repo-open': 'View repository instructions &darr;',
       'repo-intro': 'Install from the official repository to pull beta updates directly through your system package manager.',
       'repo-apt-label': 'Ubuntu / Debian (APT):',
@@ -216,7 +216,7 @@
       'dl-card-download': 'Descargar &darr;',
       'dl-note': 'Las compilaciones beta de deb, rpm y el tarball del CLI también están disponibles en las <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">releases de GitHub</a>.',
 
-      'repo-summary': '¿Prefieres actualizaciones del sistema vía APT o DNF? (Ubuntu, Debian, Fedora)',
+      'repo-summary': '¿Prefieres actualizaciones del sistema mediante tu gestor de paquetes? (Ubuntu, Debian, Fedora, Arch)',
       'repo-open': 'Ver instrucciones del repositorio &darr;',
       'repo-intro': 'Instala desde el repositorio oficial para recibir actualizaciones beta directamente en tu gestor de paquetes del sistema.',
       'repo-apt-label': 'Ubuntu / Debian (APT):',
@@ -350,7 +350,7 @@
       'dl-card-download': 'Télécharger &darr;',
       'dl-note': 'Les builds bêta de deb, rpm et de l\'archive CLI sont aussi disponibles dans les <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">releases GitHub</a>.',
 
-      'repo-summary': 'Vous préférez les mises à jour système via APT ou DNF ? (Ubuntu, Debian, Fedora)',
+      'repo-summary': 'Vous préférez les mises à jour système via votre gestionnaire de paquets ? (Ubuntu, Debian, Fedora, Arch)',
       'repo-open': 'Voir les instructions du dépôt &darr;',
       'repo-intro': 'Installez depuis le dépôt officiel pour recevoir les mises à jour bêta directement dans votre gestionnaire de paquets système.',
       'repo-apt-label': 'Ubuntu / Debian (APT) :',
@@ -484,7 +484,7 @@
       'dl-card-download': 'Baixar &darr;',
       'dl-note': 'Os builds beta de deb, rpm e do tarball do CLI também estão disponíveis nas <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">releases do GitHub</a>.',
 
-      'repo-summary': 'Prefere atualizações do sistema via APT ou DNF? (Ubuntu, Debian, Fedora)',
+      'repo-summary': 'Prefere atualizações do sistema pelo gerenciador de pacotes? (Ubuntu, Debian, Fedora, Arch)',
       'repo-open': 'Ver instruções do repositório &darr;',
       'repo-intro': 'Instale pelo repositório oficial para receber atualizações beta diretamente no seu gerenciador de pacotes do sistema.',
       'repo-apt-label': 'Ubuntu / Debian (APT):',
