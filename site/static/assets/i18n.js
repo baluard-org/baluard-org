@@ -89,6 +89,9 @@
       'repo-apt-note': 'Uses the deb822 format (default on Ubuntu 24.04+ and Debian 13+). The armored key is used directly, no dearmor step.',
       'repo-dnf-label': 'Fedora (DNF):',
       'repo-dnf-note': 'Fedora 41+ (dnf 5). On RHEL and clones (dnf 4): <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://baluard.app/repo/baluard.repo</code>',
+      'repo-arch-label': 'Arch Linux (pacman):',
+      'repo-arch-note': 'Pacman verifies the repository database and package signatures before installing. Requires pacman 6 or newer.',
+
       'repo-fingerprint': 'Repository signing key fingerprint: <code style="color: #b3e55c;">223310EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804</code>. Always verify this fingerprint before trusting repository imports.',
 
       'fd-summary': 'On Android? The free and open-source build lives on F-Droid.',
@@ -220,6 +223,9 @@
       'repo-apt-note': 'Usa el formato deb822 (predeterminado en Ubuntu 24.04+ y Debian 13+). La clave blindada se usa directamente, sin paso de dearmor.',
       'repo-dnf-label': 'Fedora (DNF):',
       'repo-dnf-note': 'Fedora 41+ (dnf 5). En RHEL y clones (dnf 4): <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://baluard.app/repo/baluard.repo</code>',
+      'repo-arch-label': 'Arch Linux (pacman):',
+      'repo-arch-note': 'Pacman verifica las firmas de la base de datos y de los paquetes antes de instalar. Requiere pacman 6 o superior.',
+
       'repo-fingerprint': 'Huella digital de la clave de firma del repositorio: <code style="color: #b3e55c;">223310EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804</code>. Verifica siempre esta huella antes de confiar en importaciones de repositorios.',
 
       'fd-summary': '¿En Android? La compilación libre y de código abierto está disponible en F-Droid.',
@@ -351,6 +357,9 @@
       'repo-apt-note': 'Utilise le format deb822 (par défaut sur Ubuntu 24.04+ et Debian 13+). La clé blindée est utilisée directement, sans étape dearmor.',
       'repo-dnf-label': 'Fedora (DNF) :',
       'repo-dnf-note': 'Fedora 41+ (dnf 5). Sur RHEL et ses clones (dnf 4) : <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://baluard.app/repo/baluard.repo</code>',
+      'repo-arch-label': 'Arch Linux (pacman) :',
+      'repo-arch-note': 'Pacman vérifie les signatures de la base de données et des paquets avant l\'installation. Nécessite pacman 6 ou supérieur.',
+
       'repo-fingerprint': 'Empreinte de la clé de signature du dépôt : <code style="color: #b3e55c;">223310EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804</code>. Vérifiez toujours cette empreinte avant de faire confiance à des imports de dépôt.',
 
       'fd-summary': 'Sur Android ? Le build libre et open source est disponible sur F-Droid.',
@@ -482,6 +491,9 @@
       'repo-apt-note': 'Usa o formato deb822 (padrão no Ubuntu 24.04+ e Debian 13+). A chave blindada é usada diretamente, sem etapa de dearmor.',
       'repo-dnf-label': 'Fedora (DNF):',
       'repo-dnf-note': 'Fedora 41+ (dnf 5). No RHEL e clones (dnf 4): <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://baluard.app/repo/baluard.repo</code>',
+      'repo-arch-label': 'Arch Linux (pacman):',
+      'repo-arch-note': 'O pacman verifica as assinaturas do banco de dados e dos pacotes antes de instalar. Requer pacman 6 ou superior.',
+
       'repo-fingerprint': 'Impressão digital da chave de assinatura do repositório: <code style="color: #b3e55c;">223310EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804</code>. Verifique sempre esta impressão antes de confiar em importações de repositório.',
 
       'fd-summary': 'No Android? O build livre e de código aberto está disponível no F-Droid.',

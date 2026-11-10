@@ -2006,6 +2006,16 @@
           <p data-i18n="repo-dnf-note" style="font-size: 0.82rem; color: #64748b; margin-top: 0.3rem;">Fedora 41+ (dnf 5). On RHEL and clones (dnf 4): <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://baluard.app/repo/baluard.repo</code></p>
         </div>
 
+        <!-- Arch (pacman) -->
+        <div class="repo-snippet-box">
+          <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;" data-i18n="repo-arch-label">Arch Linux (pacman):</div>
+          <div class="repo-code-wrap">
+            <button type="button" class="repo-copy-btn" aria-label="Copy install command"><span data-i18n="copy-btn">Copy</span></button>
+            <pre><code>curl -fsSL https://baluard.app/repo/baluard-release.asc | sudo pacman-key --add - &amp;&amp; sudo pacman-key --lsign-key 223310EABF1AB6FEE6BDDF3E2A531D54E6D74804 &amp;&amp; curl -fsSL https://baluard.app/repo/arch/baluard.conf | sudo tee /etc/pacman.d/baluard.conf &gt; /dev/null &amp;&amp; echo "Include = /etc/pacman.d/baluard.conf" | sudo tee -a /etc/pacman.conf &gt; /dev/null &amp;&amp; sudo pacman -Syu baluard</code></pre>
+          </div>
+          <p data-i18n="repo-arch-note" style="font-size: 0.82rem; color: #64748b; margin-top: 0.3rem;">Pacman verifies the repository database and package signatures before installing. Requires pacman 6 or newer.</p>
+        </div>
+
         <!-- F-Droid moved to its own accordion below -->
 
         <p data-i18n="repo-fingerprint" style="font-size: 0.85rem; color: #64748b;">
@@ -2144,7 +2154,7 @@
     </div>
   </footer>
 
-  <script src="/assets/i18n.js?v=1794095099" defer></script>
+  <script src="/assets/i18n.js?v=1794269177" defer></script>
   
 <script>
   // Apple-Style Scroll Reveal Observer & Hero Entrance Timer
