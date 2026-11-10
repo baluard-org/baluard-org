@@ -1334,7 +1334,7 @@
           <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;" data-i18n="repo-apt-label">Ubuntu / Debian (APT):</div>
           <div class="repo-code-wrap">
             <button type="button" class="repo-copy-btn" aria-label="Copy install command"><span data-i18n="copy-btn">Copy</span></button>
-            <pre><code>sudo curl -fsSL -o /usr/share/keyrings/baluard-archive-keyring.asc https://baluard.app/repo/baluard-release.asc &amp;&amp; curl -fsSL https://baluard.app/repo/baluard.sources | sudo tee /etc/apt/sources.list.d/baluard.sources &amp;&amp; sudo apt update &amp;&amp; sudo apt install baluard</code></pre>
+            <pre><code>sudo curl -fsSL -o /usr/share/keyrings/baluard-archive-keyring.asc https://packages.baluard.app/baluard-release.asc &amp;&amp; curl -fsSL https://packages.baluard.app/baluard.sources | sudo tee /etc/apt/sources.list.d/baluard.sources &amp;&amp; sudo apt update &amp;&amp; sudo apt install baluard</code></pre>
           </div>
           <p data-i18n="repo-apt-note" style="font-size: 0.82rem; color: #64748b; margin-top: 0.3rem;">Uses the deb822 format (default on Ubuntu 24.04+ and Debian 13+). The armored key is used directly, no dearmor step.</p>
         </div>
@@ -1344,9 +1344,9 @@
           <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;" data-i18n="repo-dnf-label">Fedora (DNF):</div>
           <div class="repo-code-wrap">
             <button type="button" class="repo-copy-btn" aria-label="Copy install command"><span data-i18n="copy-btn">Copy</span></button>
-            <pre><code>sudo dnf config-manager addrepo --from-repofile=https://baluard.app/repo/baluard.repo &amp;&amp; sudo dnf install baluard</code></pre>
+            <pre><code>sudo dnf config-manager addrepo --from-repofile=https://packages.baluard.app/baluard.repo &amp;&amp; sudo dnf install baluard</code></pre>
           </div>
-          <p data-i18n="repo-dnf-note" style="font-size: 0.82rem; color: #64748b; margin-top: 0.3rem;">Fedora 41+ (dnf 5). On RHEL and clones (dnf 4): <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://baluard.app/repo/baluard.repo</code></p>
+          <p data-i18n="repo-dnf-note" style="font-size: 0.82rem; color: #64748b; margin-top: 0.3rem;">Fedora 41+ (dnf 5). On RHEL and clones (dnf 4): <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://packages.baluard.app/baluard.repo</code></p>
         </div>
 
         <!-- Arch (pacman) -->
@@ -1354,7 +1354,7 @@
           <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;" data-i18n="repo-arch-label">Arch Linux (pacman):</div>
           <div class="repo-code-wrap">
             <button type="button" class="repo-copy-btn" aria-label="Copy install command"><span data-i18n="copy-btn">Copy</span></button>
-            <pre><code>curl -fsSL https://baluard.app/repo/baluard-release.asc | sudo pacman-key --add - &amp;&amp; sudo pacman-key --lsign-key 223310EABF1AB6FEE6BDDF3E2A531D54E6D74804 &amp;&amp; curl -fsSL https://baluard.app/repo/arch/baluard.conf | sudo tee /etc/pacman.d/baluard.conf &gt; /dev/null &amp;&amp; echo "Include = /etc/pacman.d/baluard.conf" | sudo tee -a /etc/pacman.conf &gt; /dev/null &amp;&amp; sudo pacman -Syu baluard</code></pre>
+            <pre><code>curl -fsSL https://packages.baluard.app/baluard-release.asc | sudo pacman-key --add - &amp;&amp; sudo pacman-key --lsign-key 223310EABF1AB6FEE6BDDF3E2A531D54E6D74804 &amp;&amp; curl -fsSL https://packages.baluard.app/arch/baluard.conf | sudo tee /etc/pacman.d/baluard.conf &gt; /dev/null &amp;&amp; echo "Include = /etc/pacman.d/baluard.conf" | sudo tee -a /etc/pacman.conf &gt; /dev/null &amp;&amp; sudo pacman -Syu baluard</code></pre>
           </div>
           <p data-i18n="repo-arch-note" style="font-size: 0.82rem; color: #64748b; margin-top: 0.3rem;">Pacman verifies the repository database and package signatures before installing. Requires pacman 6 or newer.</p>
         </div>
@@ -1380,7 +1380,7 @@
 
         <div class="repo-snippet-box">
           <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;" data-i18n="fd-label">Android (F-Droid):</div>
-          <p data-i18n="fd-link-line" style="color: #94a3b8; font-size: 0.92rem;">With F-Droid installed, open <a href="https://baluard.app/fdroid/repo/">https://baluard.app/fdroid/repo/</a> on your phone and tap <strong>Add to F-Droid</strong>.</p>
+          <p data-i18n="fd-link-line" style="color: #94a3b8; font-size: 0.92rem;">With F-Droid installed, open <a href="https://packages.baluard.app/fdroid/repo/">https://packages.baluard.app/fdroid/repo/</a> on your phone and tap <strong>Add to F-Droid</strong>.</p>
           <p data-i18n="fd-manual" style="color: #94a3b8; font-size: 0.92rem;">Or add it by hand: in F-Droid, open Settings &gt; Repositories, tap <strong>+</strong>, paste the URL, and enter the fingerprint below so the repository shows as verified.</p>
           <p data-i18n="fd-fingerprint" style="font-size: 0.85rem; color: #64748b;">Repository fingerprint: <code style="color: #b3e55c;">1CE90DCFE0FB1003F2F66999257B5E6F074E46EE453FB0D44F8CF8E13E6EEAAB</code></p>
         </div>

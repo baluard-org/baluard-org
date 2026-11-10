@@ -88,7 +88,7 @@
       'repo-apt-label': 'Ubuntu / Debian (APT):',
       'repo-apt-note': 'Uses the deb822 format (default on Ubuntu 24.04+ and Debian 13+). The armored key is used directly, no dearmor step.',
       'repo-dnf-label': 'Fedora (DNF):',
-      'repo-dnf-note': 'Fedora 41+ (dnf 5). On RHEL and clones (dnf 4): <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://baluard.app/repo/baluard.repo</code>',
+      'repo-dnf-note': 'Fedora 41+ (dnf 5). On RHEL and clones (dnf 4): <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://packages.baluard.app/baluard.repo</code>',
       'repo-arch-label': 'Arch Linux (pacman):',
       'repo-arch-note': 'Pacman verifies the repository database and package signatures before installing. Requires pacman 6 or newer.',
 
@@ -98,7 +98,7 @@
       'fd-open': 'View F-Droid instructions &darr;',
       'fd-intro': 'The F-Droid distribution is free and open-source software: the build is compiled and signed by the F-Droid repository infrastructure, and updates arrive through the F-Droid client itself.',
       'fd-label': 'Android (F-Droid):',
-      'fd-link-line': 'With F-Droid installed, open <a href="https://baluard.app/fdroid/repo/">https://baluard.app/fdroid/repo/</a> on your phone and tap <strong>Add to F-Droid</strong>.',
+      'fd-link-line': 'With F-Droid installed, open <a href="https://packages.baluard.app/fdroid/repo/">https://packages.baluard.app/fdroid/repo/</a> on your phone and tap <strong>Add to F-Droid</strong>.',
       'fd-manual': 'Or add it by hand: in F-Droid, open Settings &gt; Repositories, tap <strong>+</strong>, paste the URL, and enter the fingerprint below so the repository shows as verified.',
       'fd-fingerprint': 'Repository fingerprint: <code style="color: #b3e55c;">1CE90DCFE0FB1003F2F66999257B5E6F074E46EE453FB0D44F8CF8E13E6EEAAB</code>',
 
@@ -222,7 +222,7 @@
       'repo-apt-label': 'Ubuntu / Debian (APT):',
       'repo-apt-note': 'Usa el formato deb822 (predeterminado en Ubuntu 24.04+ y Debian 13+). La clave blindada se usa directamente, sin paso de dearmor.',
       'repo-dnf-label': 'Fedora (DNF):',
-      'repo-dnf-note': 'Fedora 41+ (dnf 5). En RHEL y clones (dnf 4): <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://baluard.app/repo/baluard.repo</code>',
+      'repo-dnf-note': 'Fedora 41+ (dnf 5). En RHEL y clones (dnf 4): <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://packages.baluard.app/baluard.repo</code>',
       'repo-arch-label': 'Arch Linux (pacman):',
       'repo-arch-note': 'Pacman verifica las firmas de la base de datos y de los paquetes antes de instalar. Requiere pacman 6 o superior.',
 
@@ -232,7 +232,7 @@
       'fd-open': 'Ver instrucciones de F-Droid &darr;',
       'fd-intro': 'La distribución de F-Droid es software libre y de código abierto: la compilación la realiza y firma la infraestructura del repositorio de F-Droid, y las actualizaciones llegan a través del propio cliente de F-Droid.',
       'fd-label': 'Android (F-Droid):',
-      'fd-link-line': 'Con F-Droid instalado, abre <a href="https://baluard.app/fdroid/repo/">https://baluard.app/fdroid/repo/</a> en tu teléfono y toca <strong>Add to F-Droid</strong>.',
+      'fd-link-line': 'Con F-Droid instalado, abre <a href="https://packages.baluard.app/fdroid/repo/">https://packages.baluard.app/fdroid/repo/</a> en tu teléfono y toca <strong>Add to F-Droid</strong>.',
       'fd-manual': 'O agrégala a mano: en F-Droid, abre Ajustes &gt; Repositorios, toca <strong>+</strong>, pega la URL e ingresa la huella digital de abajo para que el repositorio aparezca como verificado.',
       'fd-fingerprint': 'Huella digital del repositorio: <code style="color: #b3e55c;">1CE90DCFE0FB1003F2F66999257B5E6F074E46EE453FB0D44F8CF8E13E6EEAAB</code>',
 
@@ -356,7 +356,7 @@
       'repo-apt-label': 'Ubuntu / Debian (APT) :',
       'repo-apt-note': 'Utilise le format deb822 (par défaut sur Ubuntu 24.04+ et Debian 13+). La clé blindée est utilisée directement, sans étape dearmor.',
       'repo-dnf-label': 'Fedora (DNF) :',
-      'repo-dnf-note': 'Fedora 41+ (dnf 5). Sur RHEL et ses clones (dnf 4) : <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://baluard.app/repo/baluard.repo</code>',
+      'repo-dnf-note': 'Fedora 41+ (dnf 5). Sur RHEL et ses clones (dnf 4) : <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://packages.baluard.app/baluard.repo</code>',
       'repo-arch-label': 'Arch Linux (pacman) :',
       'repo-arch-note': 'Pacman vérifie les signatures de la base de données et des paquets avant l\'installation. Nécessite pacman 6 ou supérieur.',
 
@@ -366,7 +366,7 @@
       'fd-open': 'Voir les instructions F-Droid &darr;',
       'fd-intro': 'La distribution F-Droid est un logiciel libre et open source : le build est compilé et signé par l\'infrastructure du dépôt F-Droid, et les mises à jour arrivent via le client F-Droid lui-même.',
       'fd-label': 'Android (F-Droid) :',
-      'fd-link-line': 'Avec F-Droid installé, ouvrez <a href="https://baluard.app/fdroid/repo/">https://baluard.app/fdroid/repo/</a> sur votre téléphone et touchez <strong>Add to F-Droid</strong>.',
+      'fd-link-line': 'Avec F-Droid installé, ouvrez <a href="https://packages.baluard.app/fdroid/repo/">https://packages.baluard.app/fdroid/repo/</a> sur votre téléphone et touchez <strong>Add to F-Droid</strong>.',
       'fd-manual': 'Ou ajoutez-le à la main : dans F-Droid, ouvrez Paramètres &gt; Dépôts, touchez <strong>+</strong>, collez l\'URL et saisissez l\'empreinte ci-dessous pour que le dépôt apparaisse comme vérifié.',
       'fd-fingerprint': 'Empreinte du dépôt : <code style="color: #b3e55c;">1CE90DCFE0FB1003F2F66999257B5E6F074E46EE453FB0D44F8CF8E13E6EEAAB</code>',
 
@@ -490,7 +490,7 @@
       'repo-apt-label': 'Ubuntu / Debian (APT):',
       'repo-apt-note': 'Usa o formato deb822 (padrão no Ubuntu 24.04+ e Debian 13+). A chave blindada é usada diretamente, sem etapa de dearmor.',
       'repo-dnf-label': 'Fedora (DNF):',
-      'repo-dnf-note': 'Fedora 41+ (dnf 5). No RHEL e clones (dnf 4): <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://baluard.app/repo/baluard.repo</code>',
+      'repo-dnf-note': 'Fedora 41+ (dnf 5). No RHEL e clones (dnf 4): <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://packages.baluard.app/baluard.repo</code>',
       'repo-arch-label': 'Arch Linux (pacman):',
       'repo-arch-note': 'O pacman verifica as assinaturas do banco de dados e dos pacotes antes de instalar. Requer pacman 6 ou superior.',
 
@@ -500,7 +500,7 @@
       'fd-open': 'Ver instruções do F-Droid &darr;',
       'fd-intro': 'A distribuição F-Droid é software livre e de código aberto: o build é compilado e assinado pela infraestrutura do repositório F-Droid, e as atualizações chegam pelo próprio cliente F-Droid.',
       'fd-label': 'Android (F-Droid):',
-      'fd-link-line': 'Com o F-Droid instalado, abra <a href="https://baluard.app/fdroid/repo/">https://baluard.app/fdroid/repo/</a> no seu celular e toque em <strong>Add to F-Droid</strong>.',
+      'fd-link-line': 'Com o F-Droid instalado, abra <a href="https://packages.baluard.app/fdroid/repo/">https://packages.baluard.app/fdroid/repo/</a> no seu celular e toque em <strong>Add to F-Droid</strong>.',
       'fd-manual': 'Ou adicione à mão: no F-Droid, abra Configurações &gt; Repositórios, toque em <strong>+</strong>, cole a URL e informe a impressão digital abaixo para que o repositório apareça como verificado.',
       'fd-fingerprint': 'Impressão digital do repositório: <code style="color: #b3e55c;">1CE90DCFE0FB1003F2F66999257B5E6F074E46EE453FB0D44F8CF8E13E6EEAAB</code>',
 
