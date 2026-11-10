@@ -69,7 +69,7 @@
 
       'dl-eyebrow': 'Download Center',
       'dl-heading': 'Get Baluard for your platforms.',
-      'dl-lede': 'Stand-alone binaries with cryptographic release checksums. No account creation, no cloud activation. This is a beta release.',
+      'dl-lede': 'Stand-alone binaries with cryptographic release checksums. No account creation, no cloud activation.',
       'dl-appimage-tag': 'AppImage',
       'dl-appimage-name': 'Linux',
       'dl-appimage-desc': 'Single universal executable for any modern Linux distribution. Self-contained.',
@@ -84,7 +84,7 @@
 
       'repo-summary': 'Prefer system updates via your package manager? (Ubuntu, Debian, Fedora, Arch)',
       'repo-open': 'View repository instructions &darr;',
-      'repo-intro': 'Install from the official repository to pull beta updates directly through your system package manager.',
+      'repo-intro': 'Install from the official repository to pull updates directly through your system package manager.',
       'repo-apt-label': 'Ubuntu / Debian (APT):',
       'repo-apt-note': 'Uses the deb822 format (default on Ubuntu 24.04+ and Debian 13+). The armored key is used directly, no dearmor step.',
       'repo-dnf-label': 'Fedora (DNF):',
@@ -203,7 +203,7 @@
 
       'dl-eyebrow': 'Centro de Descargas',
       'dl-heading': 'Obtén Baluard para tus plataformas.',
-      'dl-lede': 'Binarios independientes con checksums criptográficos. Sin creación de cuentas ni activación en la nube. Esta es una versión beta.',
+      'dl-lede': 'Binarios independientes con checksums criptográficos. Sin creación de cuentas ni activación en la nube.',
       'dl-appimage-tag': 'AppImage',
       'dl-appimage-name': 'Linux',
       'dl-appimage-desc': 'Un único ejecutable universal para cualquier distribución Linux moderna. Autocontenido.',
@@ -218,7 +218,7 @@
 
       'repo-summary': '¿Prefieres actualizaciones del sistema mediante tu gestor de paquetes? (Ubuntu, Debian, Fedora, Arch)',
       'repo-open': 'Ver instrucciones del repositorio &darr;',
-      'repo-intro': 'Instala desde el repositorio oficial para recibir actualizaciones beta directamente en tu gestor de paquetes del sistema.',
+      'repo-intro': 'Instala desde el repositorio oficial para recibir actualizaciones directamente en tu gestor de paquetes del sistema.',
       'repo-apt-label': 'Ubuntu / Debian (APT):',
       'repo-apt-note': 'Usa el formato deb822 (predeterminado en Ubuntu 24.04+ y Debian 13+). La clave blindada se usa directamente, sin paso de dearmor.',
       'repo-dnf-label': 'Fedora (DNF):',
@@ -471,7 +471,7 @@
 
       'dl-eyebrow': 'Central de Downloads',
       'dl-heading': 'Obtenha o Baluard para suas plataformas.',
-      'dl-lede': 'Binários independentes com checksums criptográficos. Sem criação de conta, sem ativação na nuvem. Esta é uma versão beta.',
+      'dl-lede': 'Binários independentes com checksums criptográficos. Sem criação de conta, sem ativação na nuvem.',
       'dl-appimage-tag': 'AppImage',
       'dl-appimage-name': 'Linux',
       'dl-appimage-desc': 'Um único executável universal para qualquer distribuição Linux moderna. Autocontido.',
@@ -486,7 +486,7 @@
 
       'repo-summary': 'Prefere atualizações do sistema pelo gerenciador de pacotes? (Ubuntu, Debian, Fedora, Arch)',
       'repo-open': 'Ver instruções do repositório &darr;',
-      'repo-intro': 'Instale pelo repositório oficial para receber atualizações beta diretamente no seu gerenciador de pacotes do sistema.',
+      'repo-intro': 'Instale pelo repositório oficial para receber atualizações diretamente no seu gerenciador de pacotes do sistema.',
       'repo-apt-label': 'Ubuntu / Debian (APT):',
       'repo-apt-note': 'Usa o formato deb822 (padrão no Ubuntu 24.04+ e Debian 13+). A chave blindada é usada diretamente, sem etapa de dearmor.',
       'repo-dnf-label': 'Fedora (DNF):',
