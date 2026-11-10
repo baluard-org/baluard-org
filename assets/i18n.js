@@ -80,7 +80,7 @@
       'dl-macos-name': 'macOS',
       'dl-macos-desc': 'Touch ID keychain integration and native Apple Silicon build.',
       'dl-card-download': 'Download &darr;',
-      'dl-note': 'Beta builds of deb, rpm, and the CLI tarball also live in the <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">GitHub releases</a>.',
+      'dl-note': 'Builds for Linux (deb, rpm, Arch) and the CLI tarball (Linux & macOS) also live in the <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">GitHub releases</a>.',
 
       'repo-summary': 'Prefer system updates via your package manager? (Ubuntu, Debian, Fedora, Arch)',
       'repo-open': 'View repository instructions &darr;',
@@ -214,7 +214,7 @@
       'dl-macos-name': 'macOS',
       'dl-macos-desc': 'Integración de llavero con Touch ID y compilación nativa para Apple Silicon.',
       'dl-card-download': 'Descargar &darr;',
-      'dl-note': 'Las compilaciones beta de deb, rpm y el tarball del CLI también están disponibles en las <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">releases de GitHub</a>.',
+      'dl-note': 'Las compilaciones para Linux (deb, rpm, Arch) y el tarball del CLI (Linux y macOS) también están disponibles en las <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">releases de GitHub</a>.',
 
       'repo-summary': '¿Prefieres actualizaciones del sistema mediante tu gestor de paquetes? (Ubuntu, Debian, Fedora, Arch)',
       'repo-open': 'Ver instrucciones del repositorio &darr;',
@@ -348,7 +348,7 @@
       'dl-macos-name': 'macOS',
       'dl-macos-desc': 'Intégration au trousseau avec Touch ID et compilation native pour Apple Silicon.',
       'dl-card-download': 'Télécharger &darr;',
-      'dl-note': 'Les builds bêta de deb, rpm et de l\'archive CLI sont aussi disponibles dans les <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">releases GitHub</a>.',
+      'dl-note': 'Les builds pour Linux (deb, rpm, Arch) et l\'archive CLI (Linux et macOS) sont aussi disponibles dans les <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">releases GitHub</a>.',
 
       'repo-summary': 'Vous préférez les mises à jour système via votre gestionnaire de paquets ? (Ubuntu, Debian, Fedora, Arch)',
       'repo-open': 'Voir les instructions du dépôt &darr;',
@@ -482,7 +482,7 @@
       'dl-macos-name': 'macOS',
       'dl-macos-desc': 'Integração ao chaveiro com Touch ID e compilação nativa para Apple Silicon.',
       'dl-card-download': 'Baixar &darr;',
-      'dl-note': 'Os builds beta de deb, rpm e do tarball do CLI também estão disponíveis nas <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">releases do GitHub</a>.',
+      'dl-note': 'Os builds para Linux (deb, rpm, Arch) e o tarball do CLI (Linux e macOS) também estão disponíveis nas <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">releases do GitHub</a>.',
 
       'repo-summary': 'Prefere atualizações do sistema pelo gerenciador de pacotes? (Ubuntu, Debian, Fedora, Arch)',
       'repo-open': 'Ver instruções do repositório &darr;',
