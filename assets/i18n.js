@@ -20,7 +20,7 @@
 
       'arch-eyebrow': 'Zero-Server Architecture',
       'arch-heading': 'Why the architecture is the security model.',
-      'arch-lede': "Most password managers store everyone's vaults in one giant cloud database. If that company gets breached or sold, your encrypted passwords and unencrypted metadata end up in new hands. Baluard works like a personal safe in your home: your passwords stay on your own hardware, so there is no central database to break into.",
+      'arch-lede': "Most password managers store everyone's vaults in one giant cloud database. If that company gets breached or sold to another company or a private equity firm, your encrypted passwords and unencrypted metadata end up in new hands. Hands that might not care about your data safety or independence. Baluard works like a personal safe in your home: your passwords stay on your own hardware, so there is no central database to break into.",
       'arch-node-tag-1': 'LAYER 1 / WHERE YOUR DATA LIVES',
       'arch-node-h4-1': 'A Safe in Your Home',
       'arch-node-p-1': 'Your vault stays on your physical phone and computer, encrypted with a key only you hold. Every entry is padded to identical size so observers cannot guess what is inside.',
@@ -171,7 +171,7 @@
 
       'arch-eyebrow': 'Arquitectura Sin Servidor',
       'arch-heading': 'Por qué la arquitectura es el modelo de seguridad.',
-      'arch-lede': 'La mayoría de los gestores guardan las bóvedas de todos en una base de datos central en la nube. Si esa empresa sufre un ataque o es vendida, tus contraseñas cifradas y tus metadatos sin cifrar terminan en otras manos. Baluard funciona como una caja fuerte en tu propia casa: tus contraseñas se quedan en tu hardware, por lo que no existe una base de datos central que vulnerar.',
+      'arch-lede': 'La mayoría de los gestores guardan las bóvedas de todos en una base de datos central en la nube. Si esa empresa sufre un ataque o la venden a otra compañía o a un fondo de capital privado, tus contraseñas cifradas y tus metadatos sin cifrar terminan en otras manos. Manos que quizá no se preocupen por la seguridad de tus datos ni por tu independencia. Baluard funciona como una caja fuerte en tu propia casa: tus contraseñas se quedan en tu hardware, por lo que no existe una base de datos central que vulnerar.',
       'arch-node-tag-1': 'CAPA 1 / DÓNDE VIVEN TUS DATOS',
       'arch-node-h4-1': 'Una Caja Fuerte en tu Casa',
       'arch-node-p-1': 'Tu bóveda permanece en tu teléfono y computadora físicos, cifrada con una clave que solo tú tienes. Cada entrada se estandariza a un tamaño idéntico para que nadie pueda adivinar qué hay dentro.',
@@ -322,7 +322,7 @@
 
       'arch-eyebrow': 'Architecture Sans Serveur',
       'arch-heading': 'Pourquoi l\'architecture est le modèle de sécurité.',
-      'arch-lede': 'La plupart des gestionnaires stockent tous les coffres dans une base de données cloud unique. Si cette entreprise est piratée ou rachetée, vos mots de passe chiffrés et vos métadonnées non chiffrées se retrouvent entre de nouvelles mains. Baluard fonctionne comme un coffre-fort chez vous : vos mots de passe restent sur votre propre matériel, sans base de données centrale à compromettre.',
+      'arch-lede': 'La plupart des gestionnaires stockent tous les coffres dans une base de données cloud unique. Si cette entreprise est piratée ou rachetée par une autre société ou un fonds de capital-investissement, vos mots de passe chiffrés et vos métadonnées non chiffrées se retrouvent entre de nouvelles mains. Des mains qui ne se soucient peut-être pas de la sécurité de vos données ni de votre indépendance. Baluard fonctionne comme un coffre-fort chez vous : vos mots de passe restent sur votre propre matériel, sans base de données centrale à compromettre.',
       'arch-node-tag-1': 'COUCHE 1 / OÙ VIVENT VOS DONNÉES',
       'arch-node-h4-1': 'Un Coffre-Fort Chez Vous',
       'arch-node-p-1': 'Votre coffre reste sur vos appareils physiques, chiffré par une clé que vous êtes seul à détenir. Chaque entrée a une taille identique pour empêcher quiconque de deviner son contenu.',
@@ -470,7 +470,7 @@
 
       'arch-eyebrow': 'Arquitetura Sem Servidor',
       'arch-heading': 'Por que a arquitetura é o modelo de segurança.',
-      'arch-lede': 'A maioria dos gerenciadores guarda os cofres de todos em um banco de dados central na nuvem. Se essa empresa for invadida ou vendida, suas senhas criptografadas e seus metadados não criptografados acabam em outras mãos. O Baluard funciona como um cofre na sua casa: suas senhas ficam no seu próprio hardware, portanto não existe um banco de dados central para violar.',
+      'arch-lede': 'A maioria dos gerenciadores guarda os cofres de todos em um banco de dados central na nuvem. Se essa empresa é invadida ou vendida para outra empresa ou para um fundo de private equity, suas senhas criptografadas e seus metadados não criptografados acabam em outras mãos. Mãos que talvez não se importem com a segurança dos seus dados nem com a sua independência. O Baluard funciona como um cofre na sua casa: suas senhas ficam no seu próprio hardware, portanto não existe um banco de dados central para violar.',
       'arch-node-tag-1': 'CAMADA 1 / ONDE SEUS DADOS FICAM',
       'arch-node-h4-1': 'Um Cofre na Sua Casa',
       'arch-node-p-1': 'Seu cofre fica no seu celular e computador físicos, criptografado com uma chave que apenas você possui. Cada registro é preenchido com tamanho idêntico para que ninguém descubra o que há dentro.',
