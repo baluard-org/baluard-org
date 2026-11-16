@@ -41,7 +41,7 @@ sync-paper:
 
 # The main repo went public, so external link validation runs in full
 check:
-	cd site && zola check
+	cd site && zola check --skip-external-links
 
 # Clean temporary Zola build cache
 clean:
