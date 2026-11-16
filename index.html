@@ -1328,6 +1328,11 @@
     text-decoration: underline;
   }
 
+  .dl-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
   .dl-modal-btn {
     display: inline-block;
     font-family: var(--font-mono);
@@ -2093,8 +2098,10 @@
         <button class="dl-modal-x" type="button" data-modal-close aria-label="Close">&times;</button>
         <h4 id="dl-modal-title" data-i18n="dl-win-modal-title">Heads up: Windows SmartScreen</h4>
         <p data-i18n="dl-win-modal-hint">The installer is unsigned, so Windows SmartScreen may show &ldquo;Windows protected your PC&rdquo; on first run. Choose More info, then Run anyway. Your download has started.</p>
-        <a id="dl-modal-docs-link" class="dl-modal-link" href="https://docs.baluard.app/introduction/install/windows-smartscreen/" data-i18n="dl-win-modal-link">Full walkthrough in the docs &rarr;</a><br>
-        <button class="dl-modal-btn" type="button" data-modal-close data-i18n="dl-win-modal-close">Got it</button>
+        <a id="dl-modal-docs-link" class="dl-modal-link" href="https://docs.baluard.app/introduction/install/windows-smartscreen/" data-i18n="dl-win-modal-link">Full walkthrough in the docs &rarr;</a>
+        <div class="dl-modal-actions">
+          <button class="dl-modal-btn" type="button" data-modal-close data-i18n="dl-win-modal-close">Got it</button>
+        </div>
       </div>
     </div>
 
