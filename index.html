@@ -2097,7 +2097,7 @@
       <div class="dl-modal-card" tabindex="-1">
         <button class="dl-modal-x" type="button" data-modal-close aria-label="Close">&times;</button>
         <h4 id="dl-modal-title" data-i18n="dl-win-modal-title">Heads up: Windows SmartScreen</h4>
-        <p data-i18n="dl-win-modal-hint">The installer is unsigned, so Windows SmartScreen may show &ldquo;Windows protected your PC&rdquo; on first run. Choose More info, then Run anyway. Your download has started.</p>
+        <p id="dl-modal-hint" data-i18n="dl-win-modal-hint">The installer is unsigned, so Windows SmartScreen may show &ldquo;Windows protected your PC&rdquo; on first run. Choose More info, then Run anyway. Your download has started.</p>
         <a id="dl-modal-docs-link" class="dl-modal-link" href="https://docs.baluard.app/introduction/install/windows-smartscreen/" data-i18n="dl-win-modal-link">Full walkthrough in the docs &rarr;</a>
         <div class="dl-modal-actions">
           <button class="dl-modal-btn" type="button" data-modal-close data-i18n="dl-win-modal-close">Got it</button>
@@ -2284,7 +2284,7 @@
     </div>
   </footer>
 
-  <script src="/assets/i18n.js?v=1794849487" defer></script>
+  <script src="/assets/i18n.js?v=1794849883" defer></script>
   
 <script>
   // Apple-Style Scroll Reveal Observer & Hero Entrance Timer
@@ -2467,23 +2467,48 @@
       });
     });
   })();
-  // SmartScreen hint modal: opens alongside the Windows download (default anchor
-  // behavior stays, so the file downloads while the hint shows)
+  // Download hint modals: one config-driven dialog serves every card with a
+  // CONFIG entry (Windows SmartScreen, macOS Gatekeeper, ...). Strings live in
+  // i18n.js and resolve at open time, so language switches need no re-render.
   (function() {
     var modal = document.getElementById('dl-modal');
-    var card = document.querySelector('[data-dl-type="windows"]');
-    if (!modal || !card) return;
+    if (!modal) return;
 
-    var DOCS = {
-      en: 'https://docs.baluard.app/introduction/install/windows-smartscreen/',
-      es: 'https://docs.baluard.app/es/introduction/install/windows-smartscreen/'
+    var DOCS = 'https://docs.baluard.app/';
+    var CONFIG = {
+      windows: {
+        keys: { title: 'dl-win-modal-title', hint: 'dl-win-modal-hint', link: 'dl-win-modal-link' },
+        docs: { en: DOCS + 'introduction/install/windows-smartscreen/', es: DOCS + 'es/introduction/install/windows-smartscreen/' }
+      },
+      macos: {
+        keys: { title: 'dl-macos-modal-title', hint: 'dl-macos-modal-hint', link: 'dl-macos-modal-link' },
+        docs: { en: DOCS + 'introduction/install/macos-gatekeeper/', es: DOCS + 'es/introduction/install/macos-gatekeeper/' }
+      }
+    };
+
+    var els = {
+      title: modal.querySelector('#dl-modal-title'),
+      hint: modal.querySelector('#dl-modal-hint'),
+      link: modal.querySelector('#dl-modal-docs-link')
     };
     var lastFocus = null;
 
-    function openModal() {
+    function fill(platform) {
+      var cfg = CONFIG[platform];
+      var dict = window.__baluardI18nDict ? window.__baluardI18nDict() : {};
+      els.title.innerHTML = dict[cfg.keys.title] || '';
+      els.hint.innerHTML = dict[cfg.keys.hint] || '';
+      els.link.innerHTML = dict[cfg.keys.link] || '';
+      els.link.setAttribute('href', cfg.docs[currentLang()] || cfg.docs.en);
+    }
+
+    function currentLang() {
+      return (document.documentElement.lang || 'en').slice(0, 2);
+    }
+
+    function openModal(platform) {
       lastFocus = document.activeElement;
-      var lang = (document.documentElement.lang || 'en').slice(0, 2);
-      modal.querySelector('#dl-modal-docs-link').setAttribute('href', DOCS[lang] || DOCS.en);
+      fill(platform);
       modal.classList.add('is-open');
       document.documentElement.style.overflow = 'hidden';
       modal.querySelector('.dl-modal-card').focus();
@@ -2495,7 +2520,11 @@
       if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
     }
 
-    card.addEventListener('click', openModal);
+    Object.keys(CONFIG).forEach(function(platform) {
+      var card = document.querySelector('[data-dl-type="' + platform + '"]');
+      if (card) card.addEventListener('click', function() { openModal(platform); });
+    });
+
     modal.addEventListener('click', function(e) {
       if (e.target.closest('[data-modal-close]')) closeModal();
     });
