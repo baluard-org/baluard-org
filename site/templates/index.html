@@ -670,6 +670,94 @@
     white-space: nowrap;
   }
 
+  /* SmartScreen hint modal */
+  .dl-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .dl-modal.is-open {
+    display: flex;
+  }
+
+  .dl-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(4, 6, 10, 0.7);
+    backdrop-filter: blur(4px);
+  }
+
+  .dl-modal-card {
+    position: relative;
+    width: 100%;
+    max-width: 30rem;
+    background: var(--site-bg-surface);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 1.5rem 1.3rem;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+    outline: none;
+  }
+
+  .dl-modal-card h4 {
+    margin: 0 0 0.7rem;
+    font-size: 1.05rem;
+    color: var(--site-heading, inherit);
+  }
+
+  .dl-modal-card p {
+    margin: 0 0 1.1rem;
+    color: var(--site-text-muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .dl-modal-x {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.65rem;
+    background: none;
+    border: none;
+    color: var(--site-text-muted);
+    font-size: 1.35rem;
+    line-height: 1;
+    padding: 0.3rem;
+    cursor: pointer;
+  }
+
+  .dl-modal-link {
+    display: inline-block;
+    color: #38bdf8;
+    text-decoration: none;
+    font-size: 0.92rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .dl-modal-link:hover {
+    text-decoration: underline;
+  }
+
+  .dl-modal-btn {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    border: 1px solid var(--site-accent);
+    color: var(--site-accent);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .dl-modal-btn:hover {
+    background: rgba(56, 189, 248, 0.08);
+  }
+
   /* Package Manager Details */
   .repo-accordion {
     background: var(--site-bg-surface);
@@ -1341,6 +1429,18 @@
       <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">GitHub releases</a>.
     </p>
 
+    <!-- SmartScreen hint modal (opens on Windows download click) -->
+    <div class="dl-modal" id="dl-modal" role="dialog" aria-modal="true" aria-labelledby="dl-modal-title">
+      <div class="dl-modal-backdrop" data-modal-close></div>
+      <div class="dl-modal-card" tabindex="-1">
+        <button class="dl-modal-x" type="button" data-modal-close aria-label="Close">&times;</button>
+        <h4 id="dl-modal-title" data-i18n="dl-win-modal-title">Heads up: Windows SmartScreen</h4>
+        <p data-i18n="dl-win-modal-hint">The installer is unsigned, so Windows SmartScreen may show &ldquo;Windows protected your PC&rdquo; on first run. Choose More info, then Run anyway. Your download has started.</p>
+        <a id="dl-modal-docs-link" class="dl-modal-link" href="https://docs.baluard.app/introduction/install/windows-smartscreen/" data-i18n="dl-win-modal-link">Full walkthrough in the docs &rarr;</a><br>
+        <button class="dl-modal-btn" type="button" data-modal-close data-i18n="dl-win-modal-close">Got it</button>
+      </div>
+    </div>
+
     <!-- Package Manager Setup Details -->
     <details class="repo-accordion reveal-on-scroll" id="download-repo">
       <summary>
@@ -1633,6 +1733,42 @@
           }, 1600);
         }, function() {});
       });
+    });
+  })();
+  // SmartScreen hint modal: opens alongside the Windows download (default anchor
+  // behavior stays, so the file downloads while the hint shows)
+  (function() {
+    var modal = document.getElementById('dl-modal');
+    var card = document.querySelector('[data-dl-type="windows"]');
+    if (!modal || !card) return;
+
+    var DOCS = {
+      en: 'https://docs.baluard.app/introduction/install/windows-smartscreen/',
+      es: 'https://docs.baluard.app/es/introduction/install/windows-smartscreen/'
+    };
+    var lastFocus = null;
+
+    function openModal() {
+      lastFocus = document.activeElement;
+      var lang = (document.documentElement.lang || 'en').slice(0, 2);
+      modal.querySelector('#dl-modal-docs-link').setAttribute('href', DOCS[lang] || DOCS.en);
+      modal.classList.add('is-open');
+      document.documentElement.style.overflow = 'hidden';
+      modal.querySelector('.dl-modal-card').focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove('is-open');
+      document.documentElement.style.overflow = '';
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+    }
+
+    card.addEventListener('click', openModal);
+    modal.addEventListener('click', function(e) {
+      if (e.target.closest('[data-modal-close]')) closeModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
     });
   })();
 </script>
