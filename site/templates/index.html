@@ -638,46 +638,6 @@
     color: var(--site-accent);
   }
 
-  .dl-card-disabled {
-    opacity: 0.55;
-    cursor: not-allowed;
-  }
-
-  .dl-card-disabled:hover {
-    border-color: var(--site-border);
-    transform: none;
-  }
-
-  .dl-card.dl-card-disabled {
-    pointer-events: none;
-  }
-
-  .dl-card.dl-card-disabled > *:not(.dl-soon-overlay) {
-    filter: blur(6px);
-    user-select: none;
-  }
-
-  .dl-soon-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .dl-soon-overlay span {
-    padding: 0.45rem 1rem;
-    border: 1px solid var(--site-accent);
-    border-radius: 999px;
-    background: rgba(7, 9, 13, 0.78);
-    color: var(--site-accent);
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    white-space: nowrap;
-  }
-
   /* Package Manager Details */
   .repo-accordion {
     background: var(--site-bg-surface);
@@ -1303,14 +1263,17 @@
       </a>
 
       <!-- macOS -->
-      <div class="dl-card dl-card-disabled reveal-on-scroll">
+      <a href="https://github.com/baluard-org/baluard/releases/latest/download/Baluard-macos-aarch64-non-notarized.zip" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="macos">
         <div>
-          <div class="dl-card-tag" data-i18n="dl-macos-tag">In development</div>
+          <div class="dl-card-tag" data-i18n="dl-macos-tag">Zip</div>
           <div class="dl-card-name"><img src="./assets/logo-macos.svg" alt="" width="20" height="20"><span data-i18n="dl-macos-name">macOS</span></div>
-          <div class="dl-card-desc" data-i18n="dl-macos-desc">Touch ID keychain integration and native Apple Silicon build.</div>
+          <div class="dl-card-desc" data-i18n="dl-macos-desc">Zip for Apple Silicon Macs on macOS 15+. Not notarized; Gatekeeper asks once on first launch.</div>
         </div>
-        <div class="dl-soon-overlay"><span data-i18n="dl-coming-soon">Coming soon</span></div>
-      </div>
+        <div class="dl-card-footer">
+          <span data-i18n="dl-card-download">Download &darr;</span>
+          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">20 MB</span>
+        </div>
+      </a>
     </div>
 
     <p data-i18n="dl-note" style="text-align: center; color: var(--site-text-muted); font-size: 0.85rem; margin-top: 1.1rem;">

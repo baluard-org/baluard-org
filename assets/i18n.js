@@ -76,9 +76,9 @@
       'dl-windows-tag': 'Installer',
       'dl-windows-name': 'Windows',
       'dl-windows-desc': 'NSIS setup for Windows 11 x64. Bundles the Baluard daemon and CLI.',
-      'dl-macos-tag': 'In development',
+      'dl-macos-tag': 'Zip',
       'dl-macos-name': 'macOS',
-      'dl-macos-desc': 'Touch ID keychain integration and native Apple Silicon build.',
+      'dl-macos-desc': 'Zip for Apple Silicon Macs on macOS 15+. Not notarized; Gatekeeper asks once on first launch.',
       'dl-card-download': 'Download &darr;',
       'dl-note': 'Builds for Linux (deb, rpm, Arch) and the CLI tarball (Linux & macOS) also live in the <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">GitHub releases</a>.',
 
@@ -114,7 +114,6 @@
 
       'copy-btn': 'Copy',
       'copy-btn-copied': 'Copied \u2713',
-      'dl-coming-soon': 'Coming soon',
 
       'footer-desc': "Git-native, sovereign password manager with padded-bucket encryption and device-identity bootstrapping. Built so your credentials stay on your machines, where no one can take them away. Synced under your terms.",
       'footer-col-project': 'Project',
@@ -210,9 +209,9 @@
       'dl-windows-tag': 'Instalador',
       'dl-windows-name': 'Windows',
       'dl-windows-desc': 'Instalador NSIS para Windows 11 x64. Incluye el demonio y el CLI de Baluard.',
-      'dl-macos-tag': 'En desarrollo',
+      'dl-macos-tag': 'Zip',
       'dl-macos-name': 'macOS',
-      'dl-macos-desc': 'Integración de llavero con Touch ID y compilación nativa para Apple Silicon.',
+      'dl-macos-desc': 'Zip para Macs con Apple Silicon en macOS 15+. Sin notarizar; Gatekeeper pregunta una vez en el primer arranque.',
       'dl-card-download': 'Descargar &darr;',
       'dl-note': 'Las compilaciones para Linux (deb, rpm, Arch) y el tarball del CLI (Linux y macOS) también están disponibles en las <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">releases de GitHub</a>.',
 
@@ -248,7 +247,6 @@
 
       'copy-btn': 'Copiar',
       'copy-btn-copied': 'Copiado \u2713',
-      'dl-coming-soon': 'Próximamente',
 
       'footer-desc': 'Gestor de contraseñas soberano nativo en git con cifrado en buckets con relleno y arranque por identidad de dispositivo. Construido para que tus credenciales permanezcan en tus máquinas, donde nadie te las puede quitar. Sincronizado bajo tus términos.',
       'footer-col-project': 'Proyecto',
@@ -344,9 +342,9 @@
       'dl-windows-tag': 'Installateur',
       'dl-windows-name': 'Windows',
       'dl-windows-desc': 'Installation NSIS pour Windows 11 x64. Inclut le démon et le CLI Baluard.',
-      'dl-macos-tag': 'En développement',
+      'dl-macos-tag': 'Zip',
       'dl-macos-name': 'macOS',
-      'dl-macos-desc': 'Intégration au trousseau avec Touch ID et compilation native pour Apple Silicon.',
+      'dl-macos-desc': 'Zip pour Mac Apple Silicon sous macOS 15+. Non notarié ; Gatekeeper demande une fois au premier lancement.',
       'dl-card-download': 'Télécharger &darr;',
       'dl-note': 'Les builds pour Linux (deb, rpm, Arch) et l\'archive CLI (Linux et macOS) sont aussi disponibles dans les <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">releases GitHub</a>.',
 
@@ -382,7 +380,6 @@
 
       'copy-btn': 'Copier',
       'copy-btn-copied': 'Copi\u00e9 \u2713',
-      'dl-coming-soon': 'Bientôt disponible',
 
       'footer-desc': 'Gestionnaire de mots de passe souverain natif sous git avec chiffrement par compartiments à taille constante (padded buckets) et identité par appareil. Conçu pour que vos identifiants restent sur vos machines, où nul ne peut vous les enlever. Synchronisé selon vos propres conditions.',
       'footer-col-project': 'Projet',
@@ -478,9 +475,9 @@
       'dl-windows-tag': 'Instalador',
       'dl-windows-name': 'Windows',
       'dl-windows-desc': 'Instalador NSIS para Windows 11 x64. Inclui o daemon e o CLI do Baluard.',
-      'dl-macos-tag': 'Em desenvolvimento',
+      'dl-macos-tag': 'Zip',
       'dl-macos-name': 'macOS',
-      'dl-macos-desc': 'Integração ao chaveiro com Touch ID e compilação nativa para Apple Silicon.',
+      'dl-macos-desc': 'Zip para Macs com Apple Silicon no macOS 15+. Sem notarização; o Gatekeeper pergunta uma vez na primeira abertura.',
       'dl-card-download': 'Baixar &darr;',
       'dl-note': 'Os builds para Linux (deb, rpm, Arch) e o tarball do CLI (Linux e macOS) também estão disponíveis nas <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">releases do GitHub</a>.',
 
@@ -516,7 +513,6 @@
 
       'copy-btn': 'Copiar',
       'copy-btn-copied': 'Copiado \u2713',
-      'dl-coming-soon': 'Em breve',
 
       'footer-desc': 'Gerenciador de senhas soberano nativo em git com criptografia em buckets preenchidos (padding) e inicialização por identidade de dispositivo. Construído para que suas credenciais permaneçam em suas máquinas, onde ninguém pode tirá-las. Sincronizado sob seus próprios termos.',
       'footer-col-project': 'Projeto',

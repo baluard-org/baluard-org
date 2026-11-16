@@ -13,7 +13,9 @@ Requires `zola` (0.23.x) and `just`. All tasks go through the justfile:
 - `just sync-paper` — rebuild `site/content/security.md` from `../baluard/docs/security/security-white-paper.md`, then build
 - `just clean` — remove `site/public`
 
-No test suite exists. `just check` is the only validation gate. Run `just build` before committing content/template changes: the root-level files ARE the deploy artifact.
+No test suite exists. `just check` is the only validation gate.
+
+**Local CI: always build before you push, no exceptions.** GitHub Pages deploys `main` directly and there is no CI to catch problems, so the pushed tree must already be compiled and verified locally: run `just check` and `just build` and confirm both are green before every commit and push. Never push and wait for CI to find out. The root-level files ARE the deploy artifact.
 
 ## Architecture
 
