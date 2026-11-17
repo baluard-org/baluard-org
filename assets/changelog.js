@@ -63,11 +63,15 @@
     return { intro: intro.join(' '), sections: sections };
   }
 
+  // Keep the page light: render the newest 10 releases only, with the full
+  // history linked at the bottom. The file is newest-first.
+  var MAX_RELEASES = 10;
+
   function render(parsed) {
     var mount = document.getElementById('changelog-versions');
     var label = (LABELS[window.__baluardLang] || LABELS.en).latest;
     var html = '';
-    parsed.sections.forEach(function (s, i) {
+    parsed.sections.slice(0, MAX_RELEASES).forEach(function (s, i) {
       var id = 'v-' + s.version.replace(/[^0-9A-Za-z.-]/g, '').replace(/\./g, '-');
       html += '<section class="cl-release" id="' + esc(id) + '">';
       html += '<h2 class="cl-version"><span class="cl-number">' + esc(s.version) + '</span>';
@@ -89,6 +93,8 @@
       throw new Error('no releases parsed from the changelog');
     }
     mount.innerHTML = html;
+    var full = document.getElementById('changelog-full');
+    if (full) { full.hidden = false; }
   }
 
   function show(which) {
