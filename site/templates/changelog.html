@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block head_extra %}
+<style>
+  .changelog-container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 6rem;
+  }
+
+  .cl-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.88rem;
+    color: var(--site-accent);
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
+
+  .cl-back:hover {
+    text-decoration: underline;
+  }
+
+  .cl-heading {
+    font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    color: var(--site-text);
+  }
+
+  .cl-sub {
+    color: var(--site-text-secondary);
+    font-size: 1.02rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .cl-status {
+    color: var(--site-text-muted);
+    font-size: 0.95rem;
+  }
+
+  .cl-error {
+    background: var(--site-bg-elevated);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    color: var(--site-text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  .cl-error a {
+    color: var(--site-accent);
+    font-weight: 500;
+  }
+
+  .cl-release {
+    border-bottom: 1px solid var(--site-border-subtle);
+    padding: 1.75rem 0 2rem;
+  }
+
+  .cl-release:first-child {
+    padding-top: 0.5rem;
+  }
+
+  .cl-version {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 1.55rem;
+    line-height: 1.2;
+  }
+
+  .cl-number {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--site-text);
+  }
+
+  .cl-latest {
+    background: var(--app-primary);
+    color: var(--app-primary-text);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-radius: 999px;
+    padding: 0.18rem 0.6rem;
+    align-self: center;
+  }
+
+  .cl-date {
+    color: var(--site-text-muted);
+    font-size: 0.92rem;
+    font-family: var(--font-mono);
+  }
+
+  .cl-items {
+    list-style: none;
+    padding: 0;
+  }
+
+  .cl-items li {
+    position: relative;
+    padding-left: 1.4rem;
+    margin-bottom: 0.7rem;
+    color: var(--site-text-secondary);
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .cl-items li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 7px;
+    height: 7px;
+    border-radius: 2px;
+    background: var(--site-accent);
+    opacity: 0.75;
+  }
+
+  .cl-items code {
+    font-size: 0.85em;
+  }
+</style>
+{% endblock head_extra %}
+
+{% block content %}
+<div class="changelog-container">
+  <a href="/" class="cl-back">&larr; Back to baluard.app</a>
+  <h1 class="cl-heading" data-i18n="changelog-title">Changelog</h1>
+  <p class="cl-sub" data-i18n="changelog-sub">Notable user-facing changes for every release, synced live from the source repository.</p>
+  <p id="changelog-loading" class="cl-status" data-i18n="changelog-loading">Loading the changelog from GitHub…</p>
+  <div id="changelog-error" class="cl-error" hidden>
+    <span data-i18n="changelog-error">Could not load the changelog from GitHub.</span>
+    <a href="https://github.com/baluard-org/baluard/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" data-i18n="changelog-error-link">Read it there instead &rarr;</a>
+  </div>
+  <noscript>
+    <div class="cl-error">
+      JavaScript is off, so the live changelog cannot load.
+      <a href="https://github.com/baluard-org/baluard/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Read it on GitHub &rarr;</a>
+    </div>
+  </noscript>
+  <div id="changelog-versions" class="cl-releases" aria-live="polite"></div>
+</div>
+<script src="/assets/changelog.js?v=1794929100" defer></script>
+{% endblock content %}

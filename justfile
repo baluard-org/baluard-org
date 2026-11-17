@@ -15,7 +15,7 @@ build:
 	test -f site/static/favicon.ico || ./scripts/favicon.sh
 	cd site && zola build
 	cp site/public/index.html ./index.html
-	for page in security ai-instructions support privacy tos what-the-git; do \
+	for page in security ai-instructions support privacy tos what-the-git changelog; do \
 		mkdir -p "./$page"; \
 		cp "site/public/$page/index.html" "./$page/index.html"; \
 	done

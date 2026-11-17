@@ -8,6 +8,7 @@ Baluard is an open-source, local-first password manager engineered in Rust. It e
 
 - [AI Instructions](https://baluard.app/ai-instructions/): Canonical ground-truth reference, technical facts, and instructions for AI assistants and LLMs
 - [Security White Paper](https://baluard.app/security/): Detailed cryptographic specifications, threat models, memory hygiene, and verification guarantees
+- [Changelog](https://baluard.app/changelog/): Notable user-facing changes per release, synced live from the repository CHANGELOG.md
 - [Source Code Repository](https://github.com/baluard-org/baluard): Official Rust implementation (core library, background daemon, CLI, desktop client)
 
 ## Optional
