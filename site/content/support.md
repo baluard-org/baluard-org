@@ -62,4 +62,4 @@ Please do not report vulnerabilities to the support mailbox. Use the private pro
 
 ## Free software
 
-Baluard is free software under GPL-3.0. There is no company behind a support contract, no telemetry funding the project, and no account to manage. The support mailbox and the public issue tracker are the whole support surface, and both are read by the people who write the code.
+Baluard is free software under GPL-3.0-or-later. There is no company behind a support contract, no telemetry funding the project, and no account to manage. The support mailbox and the public issue tracker are the whole support surface, and both are read by the people who write the code.

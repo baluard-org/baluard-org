@@ -10,7 +10,7 @@ path = "security"
 
 This paper describes how Baluard protects your data, in enough detail to check our claims against the source code. It covers the 0.1.0 release. Every mechanism named here exists in the repository you can read; where a claim depends on deeper detail, we link the document that carries it.
 
-Baluard is a local-first password manager: your vault lives on your devices as encrypted files, and nothing in the product's normal operation talks to a Baluard server, because there is no Baluard server. Sync, when you enable it, rides any ordinary git host, and that host stores only ciphertext. Baluard is free software under GPL-3.0 and we built it as an independent project; section 12 covers assurance: what we have verified, what we still owe, and how to report a vulnerability.
+Baluard is a local-first password manager: your vault lives on your devices as encrypted files, and nothing in the product's normal operation talks to a Baluard server, because there is no Baluard server. Sync, when you enable it, rides any ordinary git host, and that host stores only ciphertext. Baluard is free software under GPL-3.0-or-later and we built it as an independent project; section 12 covers assurance: what we have verified, what we still owe, and how to report a vulnerability.
 
 ## 1. Why the architecture is the security model
 
@@ -22,7 +22,7 @@ This choice has honest costs, and the paper names them where they exist. Sync co
 
 ## 2. Security principles
 
-The principles below decide every design dispute in the codebase. The [architecture decision records](https://github.com/baluard-org/baluard/tree/main/docs/adr) carry the reasoning per decision when you want the history.
+The principles below decide every design dispute in the codebase. The [architecture decision records](../adr/index.md) carry the reasoning per decision when you want the history.
 
 - Zero-server, zero-knowledge. Keys are generated, used, and destroyed on your devices. No ciphertext ever passes through infrastructure we control, because no such infrastructure exists.
 - Least trust in the remote. The sync backend is treated as hostile at every layer: it stores only padded ciphertext, and on enrolled vaults every commit carries a device signature that the receiving side verifies before accepting.
@@ -30,7 +30,7 @@ The principles below decide every design dispute in the codebase. The [architect
 - Fail closed. Missing keys, unknown formats, mismatched hardware, expired grants, and torn writes all refuse the operation. Every unlock path verifies the master password before any optional work runs.
 - One credential. The app collects exactly one secret in its life: your master password. Any second password prompt is treated as phishing-shaped and is forbidden in the UI.
 - Memory hygiene. Key material is zeroized when it is no longer needed, the vault root key is kept out of swap where the OS allows it, and lock purges keys from every active session.
-- Readable source over attestations. The full source is public under GPL-3.0. Section 12 is explicit about the assurance work still owed.
+- Readable source over attestations. The full source is public under GPL-3.0-or-later. Section 12 is explicit about the assurance work still owed.
 
 ## 3. Protecting the vault
 
@@ -101,6 +101,8 @@ Lost master password means lost vault; no product can undo that, and Baluard has
 
 Key material uses a zeroize-on-drop discipline across the codebase: keys wipe themselves when they leave scope, lock wipes sessions, and the process-global caches that hold signing keys clear on lock. The root key is additionally locked with mlock where the platform supports it. The call is best-effort (Windows has no equivalent path, and memory limits can decline the lock), which is why zeroization-on-lock does the real work. Logs carry no secrets by construction, and debug output is redacted.
 
+The same discipline covers stored item content. Every decrypted payload struct (login passwords and TOTP seeds, card numbers and PINs, government IDs, SSH and signing private keys, passkey material, custom-field values, password history, and the entry name and notes) wipes itself on drop, and the SSH agent parses decrypted entries into typed views whose secret fields are zeroizing buffers, so no decrypted JSON tree is ever fanned out into unmanaged heap copies. The boundary in print: JSON serialization still produces transient plaintext copies while a payload crosses the wire to a client; those buffers live for the length of one IPC write and are the next thing to shrink, not a property to add.
+
 ### Post-quantum posture
 
 The symmetric bulk of the vault is quantum-safe: AES-256 and Argon2id have no quantum shortcut that matters, and entry keys are symmetric. The asymmetric layer is the exposed surface, and one piece of it deserves its own sentence: the recovery escrow publishes an X25519 public key in plaintext inside every synced vault, which makes it the highest-value harvest-now, decrypt-later target in the design. Rotating the recovery phrase rotates that key, and the migration plan, a hybrid post-quantum KEM landing inside the existing rotation paths for the escrow, the device key wraps, and the Ed25519 signatures, is written down in post-quantum-readiness.md.
@@ -159,7 +161,9 @@ Sync rides HTTPS or SSH with standard host verification, and every payload is en
 
 ### The browser extension
 
-Browser extensions are the classic password-manager attack surface, so the extension holds the weakest credential in the system: a paired bridge token, distinct from any session token, that permits a narrow allowlist of actions and nothing else. Fill requests return the username and password for one entry at a time; when the request names a page, the daemon checks that page's origin server-side before answering, so a credential stored for one site cannot be fetched for a lookalike page. Requests from the extension's own pages (the popup) carry no URL and skip that check; a compromised extension can therefore read what the cap allows, and the cap is the backstop. The response strips notes, history, custom fields, passkeys, and TOTP seeds by construction. Read volume is capped, over-cap reads revoke the pairing automatically, and the token itself expires after four hours. Writes go through a daemon-side gate that accepts exactly what a form manager may write: the username, password, notes, and TOTP seed of an entry. Everything else, passkey material and URI lists included, is refused by the daemon.
+Browser extensions are the classic password-manager attack surface, so the extension holds the weakest credential in the system: a paired bridge token, distinct from any session token, that permits a narrow allowlist of actions and nothing else. Fill requests return the username and password for one entry at a time; when the request names a page, the daemon checks that page's origin server-side before answering, so a credential stored for one site cannot be fetched for a lookalike page. Requests from the extension's own pages (the popup) carry no URL and skip that check; a compromised extension can therefore read what the cap allows, and the cap is the backstop. The response strips notes, history, custom fields, passkeys, and TOTP seeds by construction. Read volume and on-demand passkey signatures are capped, over-cap use revokes the pairing automatically, and the token itself expires after four hours. Writes go through a daemon-side gate that accepts exactly what a form manager may write: the username, password, notes, and TOTP seed of an entry. Everything else, passkey material and URI lists included, is refused by the daemon.
+
+Browser passkeys are opt-in and intercepted separately from fills: the service worker decides on its own whether a ceremony may claim user verification, the daemon accepts that decision but never the page's, and unlocking the vault or picking a credential is what counts as the verification gesture in the browser, where the mobile app asks for the master password when a site demands it. Both paths grant genuine verification; this note records where each gesture happens so the difference stays intentional.
 
 ### Agent access
 
@@ -183,7 +187,7 @@ Named residuals: trust on first use at the first clone; the passphrase identity 
 
 ## 12. Assurance, and what is still owed
 
-This is the section hosted vendors fill with certification logos, and honesty is worth more than logos. Baluard 0.1.0 has no third-party security audit, no formal certification, and no bug bounty. It has a single maintainer, public source under GPL-3.0, a recorded architecture-decision history, and a development process that treated adversarial review (of the whole repository, of every security-critical wave, with fixes landed red-first and re-reviewed) as part of the work rather than a launch checkbox. That process found and fixed real defects; it is not a substitute for outside eyes.
+This is the section hosted vendors fill with certification logos, and honesty is worth more than logos. Baluard 0.1.0 has no third-party security audit, no formal certification, and no bug bounty. It has a single maintainer, public source under GPL-3.0-or-later, a recorded architecture-decision history, and a development process that treated adversarial review (of the whole repository, of every security-critical wave, with fixes landed red-first and re-reviewed) as part of the work rather than a launch checkbox. That process found and fixed real defects; it is not a substitute for outside eyes.
 
 What we owe the project next, in order: enforcing the dependency audit in CI, a Windows Authenticode certificate and a macOS Developer ID, and an independent code audit before we call 1.0 security-hardened. The disclosure policy itself is written down in SECURITY.md at the repository root, with the acknowledgement and coordination commitments beside it. If you find a vulnerability, please report it privately through GitHub security advisories on the repository; we will credit every reporter who wants credit, and none who does not.
 

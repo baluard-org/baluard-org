@@ -16,7 +16,7 @@
       'hero-btn-paper': 'Security White Paper &rarr;',
       'trust-offline': '100% Offline Capable',
       'trust-noserver': 'Zero Central Servers',
-      'trust-license': 'GPL-3.0 Free Software',
+      'trust-license': 'GPL-3.0-or-later Free Software',
 
       'arch-eyebrow': 'Zero-Server Architecture',
       'arch-heading': 'Why the architecture is the security model.',
@@ -154,10 +154,10 @@
       'footer-col-integrity': 'Integrity &amp; Freedom',
       'footer-link-privacy': 'Privacy Policy',
       'footer-link-tos': 'Terms of Service',
-      'footer-link-lic': 'License (GPL-3.0)',
+      'footer-link-lic': 'License (GPL-3.0-or-later)',
       'footer-link-vuln': 'Vulnerability Reporting',
       'footer-link-pkg': 'APT &amp; DNF Packages',
-      'footer-bottom-lic': 'Free software under <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0</a>. No trackers, no telemetry, no cloud lock-in.',
+      'footer-bottom-lic': 'Free software under <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0-or-later</a>. No trackers, no telemetry, no cloud lock-in.',
       'footer-built-by': 'Built by <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">Esteban</a>'
     },
 
@@ -175,7 +175,7 @@
       'hero-btn-paper': 'Libro Blanco de Seguridad &rarr;',
       'trust-offline': '100% Funcional sin conexión',
       'trust-noserver': 'Cero Servidores Centrales',
-      'trust-license': 'Software Libre GPL-3.0',
+      'trust-license': 'Software Libre GPL-3.0-or-later',
 
       'arch-eyebrow': 'Arquitectura Sin Servidor',
       'arch-heading': 'Por qué la arquitectura es el modelo de seguridad.',
@@ -313,10 +313,10 @@
       'footer-col-integrity': 'Integridad y Libertad',
       'footer-link-privacy': 'Política de Privacidad',
       'footer-link-tos': 'Términos del Servicio',
-      'footer-link-lic': 'Licencia (GPL-3.0)',
+      'footer-link-lic': 'Licencia (GPL-3.0-or-later)',
       'footer-link-vuln': 'Reporte de Vulnerabilidades',
       'footer-link-pkg': 'Paquetes APT y DNF',
-      'footer-bottom-lic': 'Software libre bajo <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0</a>. Sin rastreadores, sin telemetría, sin dependencia de la nube.',
+      'footer-bottom-lic': 'Software libre bajo <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0-or-later</a>. Sin rastreadores, sin telemetría, sin dependencia de la nube.',
       'footer-built-by': 'Construido por <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">Esteban</a>'
     },
 
@@ -334,7 +334,7 @@
       'hero-btn-paper': 'Livre Blanc de Sécurité &rarr;',
       'trust-offline': '100% Utilisable Hors Ligne',
       'trust-noserver': 'Zéro Serveur Central',
-      'trust-license': 'Logiciel Libre GPL-3.0',
+      'trust-license': 'Logiciel Libre GPL-3.0-or-later',
 
       'arch-eyebrow': 'Architecture Sans Serveur',
       'arch-heading': 'Pourquoi l\'architecture est le modèle de sécurité.',
@@ -469,10 +469,10 @@
       'footer-col-integrity': 'Intégrité et Liberté',
       'footer-link-privacy': 'Politique de Confidentialité',
       'footer-link-tos': 'Conditions d\'Utilisation',
-      'footer-link-lic': 'Licence (GPL-3.0)',
+      'footer-link-lic': 'Licence (GPL-3.0-or-later)',
       'footer-link-vuln': 'Signalement de Vulnérabilités',
       'footer-link-pkg': 'Paquets APT &amp; DNF',
-      'footer-bottom-lic': 'Logiciel libre sous <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0</a>. Aucun traqueur, aucune télémétrie, aucun verrouillage cloud.',
+      'footer-bottom-lic': 'Logiciel libre sous <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0-or-later</a>. Aucun traqueur, aucune télémétrie, aucun verrouillage cloud.',
       'footer-built-by': 'Conçu par <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">Esteban</a>'
     },
 
@@ -490,7 +490,7 @@
       'hero-btn-paper': 'Relatório de Segurança &rarr;',
       'trust-offline': '100% Funcional Offline',
       'trust-noserver': 'Zero Servidores Centrais',
-      'trust-license': 'Software Livre GPL-3.0',
+      'trust-license': 'Software Livre GPL-3.0-or-later',
 
       'arch-eyebrow': 'Arquitetura Sem Servidor',
       'arch-heading': 'Por que a arquitetura é o modelo de segurança.',
@@ -625,10 +625,10 @@
       'footer-col-integrity': 'Integridade e Liberdade',
       'footer-link-privacy': 'Política de Privacidade',
       'footer-link-tos': 'Termos de Serviço',
-      'footer-link-lic': 'Licença (GPL-3.0)',
+      'footer-link-lic': 'Licença (GPL-3.0-or-later)',
       'footer-link-vuln': 'Relatório de Vulnerabilidades',
       'footer-link-pkg': 'Pacotes APT e DNF',
-      'footer-bottom-lic': 'Software livre sob licença <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0</a>. Sem rastreadores, sem telemetria, sem bloqueio de nuvem.',
+      'footer-bottom-lic': 'Software livre sob licença <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0-or-later</a>. Sem rastreadores, sem telemetria, sem bloqueio de nuvem.',
       'footer-built-by': 'Construído por <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">Esteban</a>'
     }
   };
