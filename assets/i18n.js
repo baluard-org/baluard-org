@@ -210,7 +210,7 @@
       'cap3-s1': 'Kit de recuperación de emergencia solo con frase para la continuidad familiar y patrimonial',
       'cap3-s2': 'Autorizaciones de acceso por rol: Propietario, Administrador, Editor y Lector',
       'cap4-title': 'Extensión de Navegador y Autocompletado',
-      'cap4-desc': 'Integración nativa con Firefox, Chrome y navegadores basados en Chromium. Autocompleta credenciales, captura nuevos inicios de sesión y firma con passkeys WebAuthn directamente vía IPC del demonio local.',
+      'cap4-desc': 'Integración nativa con Firefox, Chrome y navegadores basados en Chromium. Autocompleta credenciales, captura nuevos inicios de sesión y firma con passkeys WebAuthn directamente por IPC del servicio local.',
       'cap4-s1': 'Comunicación por socket local directo sin telemetría ni análisis en la nube',
       'cap4-s2': 'Conservación del historial completo de commits para auditoría y reversión',
       'cap-merge-title': 'Resolución de conflictos Git con fusión de tres vías',
@@ -240,7 +240,7 @@
       'dl-appimage-desc': 'Un único ejecutable universal para cualquier distribución Linux moderna. Autocontenido.',
       'dl-windows-tag': 'Instalador',
       'dl-windows-name': 'Windows',
-      'dl-windows-desc': 'Instalador NSIS para Windows 11 x64. Incluye el demonio y el CLI de Baluard.',
+      'dl-windows-desc': 'Instalador NSIS para Windows 11 x64. Incluye el servicio en segundo plano y el CLI de Baluard.',
       'dl-macos-tag': '.app',
       'dl-macos-name': 'macOS',
       'dl-macos-desc': 'Zip para Macs con Apple Silicon en macOS 15+. Sin notarizar; Gatekeeper pregunta una vez en el primer arranque.',
@@ -256,12 +256,12 @@
       'dl-macos-modal-link': 'Guía completa en la documentación &rarr;',
       'dl-macos-modal-close': 'Entendido',
       'dl-linux-modal-title': 'Aviso: AppImage de Linux',
-      'dl-linux-modal-hint': 'El navegador puede guardar el archivo sin el bit de ejecución, y el AppImage necesita FUSE (libfuse2) para arrancar. No se añade solo al menú de aplicaciones; eso lo hacen AppManager o Gear Lever. Tu descarga ya comenzó.',
+      'dl-linux-modal-hint': 'El navegador puede guardar el archivo sin el bit de ejecución, y el AppImage necesita FUSE (libfuse2) para arrancar. No se agrega solo al menú de aplicaciones; eso lo hacen AppManager o Gear Lever. Tu descarga ya comenzó.',
       'dl-linux-modal-link': 'Guía completa en la documentación &rarr;',
       'dl-ios-tag': 'En desarrollo',
       'dl-ios-name': 'iOS',
       'dl-ios-desc': 'Aplicación iOS nativa con el mismo formato de bóveda cifrado.',
-      'dl-coming-soon': 'Pronto',
+      'dl-coming-soon': 'Próximamente',
       'dl-card-download': 'Descargar &darr;',
       'dl-note': 'Las compilaciones para Linux (deb, rpm, Arch) y el tarball del CLI (Linux y macOS) también están disponibles en las <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">releases de GitHub</a>.',
 
@@ -325,7 +325,7 @@
       'footer-link-vuln': 'Reporte de Vulnerabilidades',
       'footer-link-pkg': 'Paquetes APT y DNF',
       'footer-bottom-lic': 'Software libre bajo <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0-or-later</a>. Sin rastreadores, sin telemetría, sin dependencia de la nube.',
-      'footer-built-by': 'Construido por <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">Esteban</a>'
+      'footer-built-by': 'Creado por <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">Esteban</a>'
     },
 
     fr: {
