@@ -1080,43 +1080,61 @@
   .calm-note {
     margin: 2.5rem 0 0;
     width: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
     align-items: center;
-    gap: 1.25rem;
-    padding: 1.15rem 1.35rem;
+    gap: 2rem;
+    padding: 1.5rem 2rem;
     border-radius: var(--radius-lg);
     background: var(--site-bg-surface);
     border: 1px solid var(--site-border);
   }
 
   .calm-note-img {
-    width: 84px;
-    height: 84px;
-    border-radius: 0.75rem;
+    width: 100%;
+    height: 220px;
+    border-radius: var(--radius-md);
     object-fit: cover;
     object-position: center 42%;
-    flex-shrink: 0;
+    display: block;
     border: 1px solid var(--site-border-subtle);
   }
 
   .calm-note-title {
-    font-size: 1rem;
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
     font-weight: 700;
     color: var(--site-text);
-    margin: 0 0 0.25rem;
+    margin: 0 0 0.55rem;
+    line-height: 1.2;
   }
 
   .calm-note-caption {
-    font-size: 0.88rem;
+    font-size: clamp(1rem, 1.4vw, 1.12rem);
     color: var(--site-text-secondary);
-    line-height: 1.5;
+    line-height: 1.6;
     margin: 0;
   }
 
-  @media (max-width: 520px) {
+  @media (max-width: 680px) {
     .calm-note {
-      flex-direction: column;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 1.35rem;
+      padding: 1.25rem;
       text-align: center;
+    }
+
+    .calm-note-img {
+      width: 100%;
+      height: 100%;
+      min-height: 220px;
+    }
+
+    .calm-note > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0.5rem 0.25rem;
     }
   }
     font-size: 0.95rem;
@@ -2171,11 +2189,11 @@
       </div>
     </div>
     <figure class="calm-note reveal-on-scroll">
-      <img src="./assets/calm-cat.jpg" alt="A calm sleeping tuxedo cat, photo by PhilCreates" title="Photo by PhilCreates" width="84" height="84" loading="lazy" decoding="async" class="calm-note-img">
+      <img src="./assets/calm-cat.jpg" alt="A calm sleeping tuxedo cat, photo by PhilCreates" title="Photo by PhilCreates" width="640" height="440" loading="lazy" decoding="async" class="calm-note-img">
       <div>
         <h3 class="calm-note-title" data-i18n="calm-title">Safe, secure, calm.</h3>
         <p class="calm-note-caption" data-i18n="calm-caption">Your vault stays with you, encrypted on your own hardware, with no central server to worry about.</p>
-        <figcaption class="calm-note-credit" style="margin-top: 0.35rem; font-size: 0.72rem; color: var(--site-text-muted); font-family: var(--font-mono);">Photo: PhilCreates</figcaption>
+        <figcaption class="calm-note-credit" style="margin-top: 0.65rem; font-size: 0.78rem; color: var(--site-text-muted); font-family: var(--font-mono);">Photo: PhilCreates</figcaption>
       </div>
     </figure>
   </div>
