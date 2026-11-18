@@ -533,7 +533,7 @@
       'cap3-s1': 'Kit de recuperação de emergência somente com frase para continuidade familiar e patrimonial',
       'cap3-s2': 'Concessões de acesso por papel: Proprietário, Administrador, Editor e Leitor',
       'cap4-title': 'Extensão para Navegador e Preenchimento Automático',
-      'cap4-desc': 'Integração nativa com Firefox, Chrome e navegadores baseados em Chromium. Preenche credenciais, captura novos logins e assina com passkeys WebAuthn diretamente via IPC do daemon local.',
+      'cap4-desc': 'Integração nativa com Firefox, Chrome e navegadores baseados em Chromium. Preenche credenciais, captura novos logins e assina com passkeys WebAuthn diretamente por IPC do serviço local.',
       'cap4-s1': 'Comunicação direta por socket local sem telemetria ou análise na nuvem',
       'cap4-s2': 'Preservação do histórico completo de commits para auditoria e reversão',
       'cap-merge-title': 'Resolução de conflitos Git com mesclagem de três vias',
@@ -563,7 +563,7 @@
       'dl-appimage-desc': 'Um único executável universal para qualquer distribuição Linux moderna. Autocontido.',
       'dl-windows-tag': 'Instalador',
       'dl-windows-name': 'Windows',
-      'dl-windows-desc': 'Instalador NSIS para Windows 11 x64. Inclui o daemon e o CLI do Baluard.',
+      'dl-windows-desc': 'Instalador NSIS para Windows 11 x64. Inclui o serviço em segundo plano e o CLI do Baluard.',
       'dl-macos-tag': '.app',
       'dl-macos-name': 'macOS',
       'dl-macos-desc': 'Zip para Macs com Apple Silicon no macOS 15+. Sem notarização; o Gatekeeper pergunta uma vez na primeira abertura.',
@@ -602,7 +602,7 @@
       'fd-intro': 'A distribuição F-Droid é software livre e de código aberto: o build é compilado e assinado pela infraestrutura do repositório F-Droid, e as atualizações chegam pelo próprio cliente F-Droid.',
       'fd-label': 'Android (F-Droid):',
       'fd-link-line': 'Com o F-Droid instalado, abra <a href="https://packages.baluard.app/fdroid/repo/">https://packages.baluard.app/fdroid/repo/</a> no seu celular e toque em <strong>Add to F-Droid</strong>.',
-      'fd-manual': 'Ou adicione à mão: no F-Droid, abra Configurações &gt; Repositórios, toque em <strong>+</strong>, cole a URL e informe a impressão digital abaixo para que o repositório apareça como verificado.',
+      'fd-manual': 'Ou adicione manualmente: no F-Droid, abra Configurações &gt; Repositórios, toque em <strong>+</strong>, cole a URL e informe a impressão digital abaixo para que o repositório apareça como verificado.',
       'fd-fingerprint': 'Impressão digital do repositório: <code style="color: #b3e55c;">1CE90DCFE0FB1003F2F66999257B5E6F074E46EE453FB0D44F8CF8E13E6EEAAB</code>',
 
       'ext-heading': 'Extensões para Navegador',
@@ -644,8 +644,8 @@
       'footer-link-lic': 'Licença (GPL-3.0-or-later)',
       'footer-link-vuln': 'Relatório de Vulnerabilidades',
       'footer-link-pkg': 'Pacotes APT e DNF',
-      'footer-bottom-lic': 'Software livre sob licença <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0-or-later</a>. Sem rastreadores, sem telemetria, sem bloqueio de nuvem.',
-      'footer-built-by': 'Construído por <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">Esteban</a>'
+      'footer-bottom-lic': 'Software livre sob licença <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0-or-later</a>. Sem rastreadores, sem telemetria, sem dependência de nuvem.',
+      'footer-built-by': 'Criado por <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">Esteban</a>'
     }
   };
 
