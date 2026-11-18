@@ -66,6 +66,8 @@
       'spec-t3': 'Asymmetric Sealing',
       'spec-t4': 'Commit Integrity',
       'spec-t5': 'Memory Hygiene',
+      'calm-title': 'Safe, secure, calm.',
+      'calm-caption': 'Your vault stays with you, encrypted on your own hardware, with no central server to worry about.',
 
       'dl-eyebrow': 'Download Center',
       'dl-heading': 'Get Baluard for your platforms.',
@@ -227,6 +229,8 @@
       'spec-t3': 'Sellado Asimétrico',
       'spec-t4': 'Integridad de Commits',
       'spec-t5': 'Higiene de Memoria',
+      'calm-title': 'Seguro, protegido, tranquilo.',
+      'calm-caption': 'Tu bóveda se queda contigo, cifrada en tu propio hardware, sin ningún servidor central del que preocuparte.',
 
       'dl-eyebrow': 'Centro de Descargas',
       'dl-heading': 'Obtén Baluard para tus plataformas.',
@@ -388,6 +392,8 @@
       'spec-t3': 'Scellement Asymétrique',
       'spec-t4': 'Intégrité des Commits',
       'spec-t5': 'Hygiène de la Mémoire',
+      'calm-title': 'Sûr, sécurisé, serein.',
+      'calm-caption': 'Votre coffre reste avec vous, chiffré sur votre propre matériel, sans aucun serveur central dont vous soucier.',
 
       'dl-eyebrow': 'Centre de Téléchargement',
       'dl-heading': 'Obtenez Baluard pour vos plateformes.',
@@ -546,6 +552,8 @@
       'spec-t3': 'Selamento Assimétrico',
       'spec-t4': 'Integridade dos Commits',
       'spec-t5': 'Higiene de Memória',
+      'calm-title': 'Seguro, protegido, tranquilo.',
+      'calm-caption': 'Seu cofre fica com você, criptografado no seu próprio hardware, sem nenhum servidor central para se preocupar.',
 
       'dl-eyebrow': 'Central de Downloads',
       'dl-heading': 'Obtenha o Baluard para suas plataformas.',
