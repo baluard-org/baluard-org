@@ -11,7 +11,7 @@
       'nav-get-baluard': 'Get Baluard',
 
       'hero-title': 'No one can take it away. Including us.',
-      'hero-pitch': 'Your passwords stay on your devices and sync through storage you control. No accounts to lock, no central database to breach, and no middleman reading along.',
+      'hero-pitch': 'Your passwords stay on your devices and sync through storage you control. No central server to breach, no account to lock, and AI agents can use secrets without ever reading them.',
       'hero-btn-download': 'Download',
       'hero-btn-paper': 'Security White Paper &rarr;',
       'trust-offline': '100% Offline Capable',
@@ -170,7 +170,7 @@
       'nav-get-baluard': 'Obtener Baluard',
 
       'hero-title': 'Nadie te lo puede quitar. Ni siquiera nosotros.',
-      'hero-pitch': 'Tus contraseñas se quedan en tus dispositivos y se sincronizan a través de almacenamiento bajo tu control. Sin cuentas que bloquear, sin bases de datos centrales que vulnerar y sin intermediarios leyendo tus datos.',
+      'hero-pitch': 'Tus contraseñas se quedan en tus dispositivos y se sincronizan en almacenamiento bajo tu control. Sin servidor central que vulnerar, sin cuenta que bloquear, y agentes de IA pueden usar secretos sin leerlos jamás.',
       'hero-btn-download': 'Descargar',
       'hero-btn-paper': 'Libro Blanco de Seguridad &rarr;',
       'trust-offline': '100% Funcional sin conexión',
@@ -329,7 +329,7 @@
       'nav-get-baluard': 'Obtenir Baluard',
 
       'hero-title': 'Personne ne peut vous le retirer. Même pas nous.',
-      'hero-pitch': 'Vos mots de passe restent sur vos appareils et se synchronisent via le stockage que vous contrôlez. Aucun compte à verrouiller, aucune base de données centrale à pirater et aucun intermédiaire pour vous espionner.',
+      'hero-pitch': 'Vos mots de passe restent sur vos appareils et se synchronisent via le stockage que vous contrôlez. Aucun serveur central à pirater, aucun compte à verrouiller, et des agents IA peuvent utiliser vos secrets sans jamais les lire.',
       'hero-btn-download': 'Télécharger',
       'hero-btn-paper': 'Livre Blanc de Sécurité &rarr;',
       'trust-offline': '100% Utilisable Hors Ligne',
@@ -485,7 +485,7 @@
       'nav-get-baluard': 'Obter Baluard',
 
       'hero-title': 'Ninguém pode tirar de você. Nem mesmo nós.',
-      'hero-pitch': 'Suas senhas permanecem em seus dispositivos e se sincronizam pelo armazenamento sob seu controle. Sem contas para bloquear, sem banco de dados central para invadir e sem intermediários lendo seus dados.',
+      'hero-pitch': 'Suas senhas ficam nos seus dispositivos e sincronizam em armazenamento sob seu controle. Sem servidor central para invadir, sem conta para bloquear, e agentes de IA podem usar segredos sem nunca lê-los.',
       'hero-btn-download': 'Baixar',
       'hero-btn-paper': 'Relatório de Segurança &rarr;',
       'trust-offline': '100% Funcional Offline',
