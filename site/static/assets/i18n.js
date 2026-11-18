@@ -403,7 +403,7 @@
       'dl-appimage-desc': 'Un unique exécutable universel pour toute distribution Linux moderne. Autonome.',
       'dl-windows-tag': 'Installateur',
       'dl-windows-name': 'Windows',
-      'dl-windows-desc': 'Installation NSIS pour Windows 11 x64. Inclut le démon et le CLI Baluard.',
+      'dl-windows-desc': 'Installation NSIS pour Windows 11 x64. Inclut le service d\'arrière-plan et le CLI Baluard.',
       'dl-macos-tag': '.app',
       'dl-macos-name': 'macOS',
       'dl-macos-desc': 'Zip pour Mac Apple Silicon sous macOS 15+. Non notarié ; Gatekeeper demande une fois au premier lancement.',
@@ -442,7 +442,7 @@
       'fd-intro': 'La distribution F-Droid est un logiciel libre et open source : le build est compilé et signé par l\'infrastructure du dépôt F-Droid, et les mises à jour arrivent via le client F-Droid lui-même.',
       'fd-label': 'Android (F-Droid) :',
       'fd-link-line': 'Avec F-Droid installé, ouvrez <a href="https://packages.baluard.app/fdroid/repo/">https://packages.baluard.app/fdroid/repo/</a> sur votre téléphone et touchez <strong>Add to F-Droid</strong>.',
-      'fd-manual': 'Ou ajoutez-le à la main : dans F-Droid, ouvrez Paramètres &gt; Dépôts, touchez <strong>+</strong>, collez l\'URL et saisissez l\'empreinte ci-dessous pour que le dépôt apparaisse comme vérifié.',
+      'fd-manual': 'Ou ajoutez-le manuellement : dans F-Droid, ouvrez Paramètres &gt; Dépôts, touchez <strong>+</strong>, collez l\'URL et saisissez l\'empreinte ci-dessous pour que le dépôt apparaisse comme vérifié.',
       'fd-fingerprint': 'Empreinte du dépôt : <code style="color: #b3e55c;">1CE90DCFE0FB1003F2F66999257B5E6F074E46EE453FB0D44F8CF8E13E6EEAAB</code>',
 
       'ext-heading': 'Extensions Navigateur',
