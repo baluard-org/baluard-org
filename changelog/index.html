@@ -732,6 +732,35 @@
   .cl-items code {
     font-size: 0.85em;
   }
+
+  .cl-milestones {
+    margin-top: 2rem;
+    border-top: 1px solid var(--site-border-subtle);
+  }
+
+  .cl-milestone {
+    border-bottom: 1px solid var(--site-border-subtle);
+    padding: 1.4rem 0;
+  }
+
+  .cl-milestone-row {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-size: 1.2rem;
+    line-height: 1.3;
+  }
+
+  .cl-milestone-title {
+    font-weight: 600;
+    color: var(--site-text-secondary);
+  }
+
+  .cl-milestone .cl-date {
+    color: var(--site-text-muted);
+    opacity: 0.85;
+  }
 </style>
 
 </head>
@@ -826,6 +855,20 @@
   <p id="changelog-full" class="cl-full" hidden>
     <a href="https://github.com/baluard-org/baluard/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" data-i18n="changelog-view-full">View the full changelog on GitHub &rarr;</a>
   </p>
+  <div class="cl-milestones">
+    <article class="cl-milestone">
+      <div class="cl-milestone-row">
+        <span class="cl-date">2026-11-01</span>
+        <span class="cl-milestone-title" data-i18n="changelog-m1-title">First Beta.</span>
+      </div>
+    </article>
+    <article class="cl-milestone">
+      <div class="cl-milestone-row">
+        <span class="cl-date">2026-04-01</span>
+        <span class="cl-milestone-title" data-i18n="changelog-m2-title">Baluard project is born.</span>
+      </div>
+    </article>
+  </div>
 </div>
 <script src="/assets/changelog.js?v=1794955800" defer></script>
 
@@ -898,7 +941,7 @@
     </div>
   </footer>
 
-  <script src="/assets/i18n.js?v=1795005078" defer></script>
+  <script src="/assets/i18n.js?v=1795005517" defer></script>
   
 </body>
 </html>
