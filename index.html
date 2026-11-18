@@ -1090,6 +1090,25 @@
     border: 1px solid var(--site-border);
   }
 
+  .calm-note-media {
+    position: relative;
+    width: 100%;
+  }
+
+  .calm-note-credit {
+    position: absolute;
+    bottom: 0.45rem;
+    left: 0.5rem;
+    font-size: 0.5rem;
+    line-height: 1.2;
+    font-family: var(--font-mono);
+    color: rgba(255, 255, 255, 0.82);
+    background: rgba(4, 6, 10, 0.65);
+    padding: 0.14rem 0.42rem;
+    border-radius: 0.25rem;
+    pointer-events: none;
+  }
+
   .calm-note-img {
     width: 100%;
     height: 220px;
@@ -2189,11 +2208,13 @@
       </div>
     </div>
     <figure class="calm-note reveal-on-scroll">
-      <img src="./assets/calm-cat.jpg" alt="A calm sleeping tuxedo cat, photo by PhilCreates" title="Photo by PhilCreates" width="640" height="440" loading="lazy" decoding="async" class="calm-note-img">
+      <div class="calm-note-media">
+        <img src="./assets/calm-cat.jpg" alt="A calm sleeping tuxedo cat, photo by PhilCreates" title="Photo by PhilCreates" width="640" height="440" loading="lazy" decoding="async" class="calm-note-img">
+        <figcaption class="calm-note-credit">Photo: PhilCreates</figcaption>
+      </div>
       <div>
         <h3 class="calm-note-title" data-i18n="calm-title">Safe, secure, calm.</h3>
         <p class="calm-note-caption" data-i18n="calm-caption">Your vault stays with you, encrypted on your own hardware, with no central server to worry about.</p>
-        <figcaption class="calm-note-credit" style="margin-top: 0.65rem; font-size: 0.78rem; color: var(--site-text-muted); font-family: var(--font-mono);">Photo: PhilCreates</figcaption>
       </div>
     </figure>
   </div>
