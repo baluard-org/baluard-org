@@ -34,6 +34,8 @@ A notebook only helps if it survives a lost laptop. So Baluard can send the note
 - your own home server,
 - or even a plain USB drive.
 
+Your devices can also skip the storage place entirely. Baluard can move the same save points directly from one of your devices to another, peer to peer, with no server of any kind involved. Same notebook, same scrambled text, handed over device to device.
+
 Other password managers keep everything on the company's servers, and you have to trust that company forever. We do the opposite. Your vault and its notebook live where you decide, and we never receive a copy.
 
 ## But GitHub is not Git
