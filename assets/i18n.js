@@ -11,7 +11,7 @@
       'nav-get-baluard': 'Get Baluard',
 
       'hero-title': 'No one can take it away. Including us.',
-      'hero-pitch': 'Your passwords stay on your devices and sync through storage you control. No central server to breach, no account to lock, and AI agents can use secrets without ever reading them.',
+      'hero-pitch': 'Your passwords stay on your devices and sync through a Git repo you own, or directly between your devices, peer to peer. No central server to breach, no account to lock, and AI agents can use secrets without ever reading them.',
       'hero-btn-download': 'Download',
       'hero-btn-paper': 'Security White Paper &rarr;',
       'trust-offline': '100% Offline Capable',
@@ -28,8 +28,8 @@
       'arch-node-h4-2': 'Keys Exchanged in Person',
       'arch-node-p-2': 'Your phone and computer pair directly with each other like two people swapping keys face-to-face. No central account, no corporate sign-in, and no company server in the middle.',
       'arch-node-tag-3': 'LAYER 3 / HOW VAULTS SYNC',
-      'arch-node-h4-3': 'Sync Through Your Own Notebook',
-      'arch-node-p-3': '<a href="/what-the-git/">Sync your vault through a private Git repo</a>, your home server, or a USB drive. The remote host sees only scrambled ciphertext. Even a total breach of the sync host exposes zero passwords.',
+      'arch-node-h4-3': 'Your Git Repo, or Direct P2P',
+      'arch-node-p-3': '<a href="/what-the-git/">Sync your vault through a private Git repo</a>, your home server, or a USB drive. Or skip the storage host entirely with direct peer-to-peer sync between your enrolled devices. Both paths move signed, encrypted commits only.',
 
       'cap-eyebrow': 'Sovereign Capabilities',
       'cap-heading': 'Engineered for sovereignty and longevity.',
@@ -135,7 +135,7 @@
       'copy-btn': 'Copy',
       'copy-btn-copied': 'Copied \u2713',
 
-      'footer-desc': "Git-native, sovereign password manager with padded-bucket encryption and device-identity bootstrapping. Built so your credentials stay on your machines, where no one can take them away. Synced under your terms.",
+      'footer-desc': "Git-native and peer-to-peer password manager with padded-bucket encryption and device-identity bootstrapping. Built so your credentials stay on your machines, where no one can take them away. Synced under your terms.",
       'footer-col-project': 'Project',
       'footer-link-dl': 'Download Release',
       'footer-link-sec': 'Security White Paper',
@@ -174,7 +174,7 @@
       'nav-get-baluard': 'Obtener Baluard',
 
       'hero-title': 'Nadie te lo puede quitar. Ni siquiera nosotros.',
-      'hero-pitch': 'Tus contraseñas se quedan en tus dispositivos y se sincronizan en almacenamiento bajo tu control. Sin servidor central que vulnerar, sin cuenta que bloquear, y agentes de IA pueden usar secretos sin leerlos jamás.',
+      'hero-pitch': 'Tus contraseñas se quedan en tus dispositivos y se sincronizan a través de un repositorio Git tuyo o directamente entre tus dispositivos vinculados. Sin servidor central que vulnerar, sin cuenta que bloquear, y agentes de IA pueden usar secretos sin leerlos jamás.',
       'hero-btn-download': 'Descargar',
       'hero-btn-paper': 'Libro Blanco de Seguridad &rarr;',
       'trust-offline': '100% Funcional sin conexión',
@@ -191,8 +191,8 @@
       'arch-node-h4-2': 'Intercambio de Claves en Persona',
       'arch-node-p-2': 'Tu teléfono y tu computadora se vinculan directamente entre sí, como dos personas intercambiando llaves en persona. Sin cuenta central, sin inicio de sesión corporativo y sin servidores en el medio.',
       'arch-node-tag-3': 'CAPA 3 / CÓMO SE SINCRONIZAN TUS BÓVEDAS',
-      'arch-node-h4-3': 'Sincroniza a Través de tu Propio Cuaderno',
-      'arch-node-p-3': '<a href="/what-the-git/">Sincroniza mediante un repositorio Git privado</a>, tu servidor doméstico o una unidad USB. El servidor remoto solo ve datos cifrados ilegibles. Incluso si vulneran el servidor de sincronización por completo, no se expone ninguna contraseña.',
+      'arch-node-h4-3': 'Tu Repositorio Git, o P2P Directo',
+      'arch-node-p-3': '<a href="/what-the-git/">Sincroniza mediante un repositorio Git privado</a>, tu servidor doméstico o una unidad USB. O salta el servidor de almacenamiento por completo con sincronización directa entre tus dispositivos vinculados. Ambos caminos mueven solo commits firmados y cifrados.',
 
       'cap-eyebrow': 'Capacidades Soberanas',
       'cap-heading': 'Diseñado para la soberanía y la longevidad.',
@@ -298,7 +298,7 @@
       'copy-btn': 'Copiar',
       'copy-btn-copied': 'Copiado \u2713',
 
-      'footer-desc': 'Gestor de contraseñas soberano nativo en git con cifrado en buckets con relleno y arranque por identidad de dispositivo. Construido para que tus credenciales permanezcan en tus máquinas, donde nadie te las puede quitar. Sincronizado bajo tus términos.',
+      'footer-desc': 'Gestor de contraseñas soberano, nativo en git y entre pares (peer-to-peer), con cifrado en buckets con relleno y arranque por identidad de dispositivo. Construido para que tus credenciales permanezcan en tus máquinas, donde nadie te las puede quitar. Sincronizado bajo tus términos.',
       'footer-col-project': 'Proyecto',
       'footer-link-dl': 'Descargar Versión',
       'footer-link-sec': 'Libro Blanco de Seguridad',
@@ -337,7 +337,7 @@
       'nav-get-baluard': 'Obtenir Baluard',
 
       'hero-title': 'Personne ne peut vous le retirer. Même pas nous.',
-      'hero-pitch': 'Vos mots de passe restent sur vos appareils et se synchronisent via le stockage que vous contrôlez. Aucun serveur central à pirater, aucun compte à verrouiller, et des agents IA peuvent utiliser vos secrets sans jamais les lire.',
+      'hero-pitch': 'Vos mots de passe restent sur vos appareils et se synchronisent via un dépôt Git qui vous appartient ou directement entre vos appareils, en pair-à-pair. Aucun serveur central à pirater, aucun compte à verrouiller, et des agents IA peuvent utiliser vos secrets sans jamais les lire.',
       'hero-btn-download': 'Télécharger',
       'hero-btn-paper': 'Livre Blanc de Sécurité &rarr;',
       'trust-offline': '100% Utilisable Hors Ligne',
@@ -354,8 +354,8 @@
       'arch-node-h4-2': 'Échange de Clés en Main Propre',
       'arch-node-p-2': 'Votre téléphone et votre ordinateur s\'associent directement entre eux, comme deux personnes échangeant une clé en face à face. Aucun compte central, aucune connexion d\'entreprise et aucun serveur intermédiaire.',
       'arch-node-tag-3': 'COUCHE 3 / SYNCHRONISATION DES COFFRES',
-      'arch-node-h4-3': 'Synchronisation via Votre Propre Carnet',
-      'arch-node-p-3': '<a href="/what-the-git/">Synchronisez via un dépôt Git privé</a>, votre serveur personnel ou une clé USB. Le serveur distant ne voit que des blocs chiffrés illisibles. Même un piratage total du serveur n\'expose aucun mot de passe.',
+      'arch-node-h4-3': 'Votre Dépôt Git, ou P2P Direct',
+      'arch-node-p-3': '<a href="/what-the-git/">Synchronisez via un dépôt Git privé</a>, votre serveur personnel ou une clé USB. Ou supprimez complètement l\'hébergeur de stockage avec une synchronisation pair-à-pair directe entre vos appareils inscrits. Les deux chemins ne déplacent que des commits signés et chiffrés.',
 
       'cap-eyebrow': 'Capacités Souveraines',
       'cap-heading': 'Conçu pour la souveraineté et la longévité.',
@@ -458,7 +458,7 @@
       'copy-btn': 'Copier',
       'copy-btn-copied': 'Copi\u00e9 \u2713',
 
-      'footer-desc': 'Gestionnaire de mots de passe souverain natif sous git avec chiffrement par compartiments à taille constante (padded buckets) et identité par appareil. Conçu pour que vos identifiants restent sur vos machines, où nul ne peut vous les enlever. Synchronisé selon vos propres conditions.',
+      'footer-desc': 'Gestionnaire de mots de passe souverain, natif sous git et pair-à-pair, avec chiffrement par compartiments à taille constante (padded buckets) et identité par appareil. Conçu pour que vos identifiants restent sur vos machines, où nul ne peut vous les enlever. Synchronisé selon vos propres conditions.',
       'footer-col-project': 'Projet',
       'footer-link-dl': 'Télécharger la Version',
       'footer-link-sec': 'Livre Blanc de Sécurité',
@@ -497,7 +497,7 @@
       'nav-get-baluard': 'Obter Baluard',
 
       'hero-title': 'Ninguém pode tirar de você. Nem mesmo nós.',
-      'hero-pitch': 'Suas senhas ficam nos seus dispositivos e sincronizam em armazenamento sob seu controle. Sem servidor central para invadir, sem conta para bloquear, e agentes de IA podem usar segredos sem nunca lê-los.',
+      'hero-pitch': 'Suas senhas ficam nos seus dispositivos e sincronizam por um repositório Git seu ou diretamente entre seus dispositivos vinculados. Sem servidor central para invadir, sem conta para bloquear, e agentes de IA podem usar segredos sem nunca lê-los.',
       'hero-btn-download': 'Baixar',
       'hero-btn-paper': 'Relatório de Segurança &rarr;',
       'trust-offline': '100% Funcional Offline',
@@ -514,8 +514,8 @@
       'arch-node-h4-2': 'Troca de Chaves Pessoalmente',
       'arch-node-p-2': 'Seu celular e computador se conectam diretamente um ao outro, como duas pessoas trocando uma chave em mãos. Sem conta central, sem login corporativo e sem servidor da empresa no meio.',
       'arch-node-tag-3': 'CAMADA 3 / COMO OS COFRES SINCRONIZAM',
-      'arch-node-h4-3': 'Sincronização Através do Seu Próprio Caderno',
-      'arch-node-p-3': '<a href="/what-the-git/">Sincronize por um repositório Git privado</a>, seu servidor doméstico ou um pen drive USB. O servidor remoto enxerga apenas texto cifrado ilegível. Mesmo uma invasão total do servidor não expõe nenhuma senha.',
+      'arch-node-h4-3': 'Seu Repositório Git, ou P2P Direto',
+      'arch-node-p-3': '<a href="/what-the-git/">Sincronize por um repositório Git privado</a>, seu servidor doméstico ou um pen drive USB. Ou dispense o servidor de armazenamento com sincronização direta entre seus dispositivos vinculados. Os dois caminhos movem apenas commits assinados e criptografados.',
 
       'cap-eyebrow': 'Capacidades Soberanas',
       'cap-heading': 'Projetado para soberania e longevidade.',
@@ -618,7 +618,7 @@
       'copy-btn': 'Copiar',
       'copy-btn-copied': 'Copiado \u2713',
 
-      'footer-desc': 'Gerenciador de senhas soberano nativo em git com criptografia em buckets preenchidos (padding) e inicialização por identidade de dispositivo. Construído para que suas credenciais permaneçam em suas máquinas, onde ninguém pode tirá-las. Sincronizado sob seus próprios termos.',
+      'footer-desc': 'Gerenciador de senhas soberano, nativo em git e entre pares (peer-to-peer), com criptografia em buckets preenchidos (padding) e inicialização por identidade de dispositivo. Construído para que suas credenciais permaneçam em suas máquinas, onde ninguém pode tirá-las. Sincronizado sob seus próprios termos.',
       'footer-col-project': 'Projeto',
       'footer-link-dl': 'Baixar Versão',
       'footer-link-sec': 'Relatório de Segurança',

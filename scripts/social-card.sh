@@ -45,7 +45,7 @@ magick "$WORK/bg.png" \
   -font site/static/assets/baluard-morris-roman.black.ttf -pointsize 150 -fill '#f1f5f9' \
   -annotate +475+175 'Baluard' \
   -font "$SANS_FONT" -pointsize 45 -fill '#c5f279' -kerning 4 \
-  -annotate +482+285 'THE GIT-NATIVE' \
+  -annotate +482+285 'GIT-NATIVE & P2P' \
   -annotate +482+344 'PASSWORD MANAGER' \
   -pointsize 42 -fill '#94a3b8' -kerning 0 \
   -annotate +482+410 'No one can take it away.' \

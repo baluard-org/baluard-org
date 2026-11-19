@@ -4,8 +4,8 @@
   <!-- Kyle, why did you do it? Don't you see what you've done? 2016 Kyle would be absolutely pissed. You were supposed to be the chosen one... -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Baluard | The Git-Native Password Manager</title>
-  <meta name="description" content="Git-native password manager with padded-bucket encryption. Zero server, zero telemetry, zero trust.">
+  <title>Baluard | The Git-Native &amp; P2P Password Manager</title>
+  <meta name="description" content="Git-native and peer-to-peer password manager with padded-bucket encryption. Zero server, zero telemetry, zero trust.">
 
   <!-- Resolves the display language before first paint; the deferred i18n.js swap would otherwise flash English -->
   <script>
@@ -47,19 +47,19 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Baluard">
   <meta property="og:url" content="https://baluard.app/">
-  <meta property="og:title" content="Baluard | The Git-Native Password Manager">
-  <meta property="og:description" content="Git-native password manager with padded-bucket encryption. Zero server, zero telemetry, zero trust.">
+  <meta property="og:title" content="Baluard | The Git-Native &amp; P2P Password Manager">
+  <meta property="og:description" content="Git-native and peer-to-peer password manager with padded-bucket encryption. Zero server, zero telemetry, zero trust.">
   <meta property="og:image" content="https://baluard.app/assets/social-card.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Baluard, the git-native password manager: lime padlock emblem on a dark teal background, with the tagline: No one can take it away. Including us.">
+  <meta property="og:image:alt" content="Baluard, the git-native and peer-to-peer password manager: lime padlock emblem on a dark teal background, with the tagline: No one can take it away. Including us.">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:site" content="@BaluardApp">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Baluard | The Git-Native Password Manager">
-  <meta name="twitter:description" content="Git-native password manager with padded-bucket encryption. Zero server, zero telemetry, zero trust.">
+  <meta name="twitter:title" content="Baluard | The Git-Native &amp; P2P Password Manager">
+  <meta name="twitter:description" content="Git-native and peer-to-peer password manager with padded-bucket encryption. Zero server, zero telemetry, zero trust.">
   <meta name="twitter:image" content="https://baluard.app/assets/social-card.png">
-  <meta name="twitter:image:alt" content="Baluard, the git-native password manager: lime padlock emblem on a dark teal background, with the tagline: No one can take it away. Including us.">
+  <meta name="twitter:image:alt" content="Baluard, the git-native and peer-to-peer password manager: lime padlock emblem on a dark teal background, with the tagline: No one can take it away. Including us.">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -68,7 +68,7 @@
     "applicationCategory": "SecurityApplication",
     "operatingSystem": "Linux, macOS, Windows",
     "url": "https://baluard.app/",
-    "description": "Git-native password manager with padded-bucket encryption. Zero server, zero telemetry, zero trust.",
+    "description": "Git-native and peer-to-peer password manager with padded-bucket encryption. Zero server, zero telemetry, zero trust.",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
   }
   </script>
@@ -1906,7 +1906,7 @@
       </h1>
 
       <p class="hero-description hero-reveal" data-i18n="hero-pitch">
-        Your passwords stay on your devices and sync through storage you control. No central server to breach, no account to lock, and AI agents can use secrets without ever reading them.
+        Your passwords stay on your devices and sync through a Git repo you own, or directly between your devices, peer to peer. No central server to breach, no account to lock, and AI agents can use secrets without ever reading them.
       </p>
     </div>
 
@@ -1990,7 +1990,7 @@
 
     <div class="arch-diagram-card reveal-on-scroll">
       <div class="arch-infographic">
-        <svg class="arch-svg-desktop" viewBox="0 0 880 185" role="img" aria-label="Zero-server sync flow: Your Device (AES-256-GCM) syncs through Your Git Repo or Folder to Your Other Devices with no Baluard server in the middle">
+        <svg class="arch-svg-desktop" viewBox="0 0 880 185" role="img" aria-label="Zero-server sync flow: Your Device (AES-256-GCM) syncs through Your Git Repo or Folder, or directly peer to peer, to Your Other Devices with no Baluard server in the middle">
           <defs>
             <marker id="arch-arrow-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
               <path d="M 1 2 L 8 5 L 1 8 z" fill="#38bdf8" />
@@ -2026,7 +2026,7 @@
             <path d="M 19 20.2 V 25 M 19 20.2 C 23 20.2 29 20 29 21.8" stroke="#38bdf8" stroke-width="1.5" />
           </g>
           <text x="440" y="80" text-anchor="middle" fill="currentColor" font-size="14.5" font-weight="700" font-family="system-ui, -apple-system, sans-serif">Your Git Repo / Folder</text>
-          <text x="440" y="100" text-anchor="middle" fill="#cbd5e1" font-size="11" font-family="ui-monospace, monospace">GitHub, GitLab, NAS, USB</text>
+          <text x="440" y="100" text-anchor="middle" fill="#cbd5e1" font-size="11" font-family="ui-monospace, monospace">Git host, NAS, folder, or P2P</text>
           <text x="440" y="120" text-anchor="middle" fill="#94a3b8" font-size="11" font-family="system-ui, -apple-system, sans-serif">Encrypted blobs only</text>
 
           <!-- Arrow 2 + verified badge -->
@@ -2056,7 +2056,7 @@
           </g>
           <text x="451" y="166" text-anchor="middle" fill="#fca5a5" font-size="11.5" font-weight="600" font-family="ui-monospace, monospace">No Baluard server in the middle</text>
         </svg>
-        <svg class="arch-svg-mobile" viewBox="0 0 340 470" role="img" aria-label="Zero-server sync flow: Your Device (AES-256-GCM) syncs through Your Git Repo or Folder to Your Other Devices with no Baluard server in the middle">
+        <svg class="arch-svg-mobile" viewBox="0 0 340 470" role="img" aria-label="Zero-server sync flow: Your Device (AES-256-GCM) syncs through Your Git Repo or Folder, or directly peer to peer, to Your Other Devices with no Baluard server in the middle">
           <defs>
             <marker id="arch-m-arrow-d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
               <path d="M 1 2 L 8 5 L 1 8 z" fill="#38bdf8" />
@@ -2092,7 +2092,7 @@
             <path d="M 17 20.2 V 25 M 17 20.2 C 21 20.2 27 20 27 21.8" stroke="#38bdf8" stroke-width="1.5" />
           </g>
           <text x="92" y="195" fill="currentColor" font-size="15" font-weight="700" font-family="system-ui, -apple-system, sans-serif">Your Git Repo / Folder</text>
-          <text x="92" y="217" fill="#cbd5e1" font-size="11.5" font-family="ui-monospace, monospace">GitHub, GitLab, NAS, USB</text>
+          <text x="92" y="217" fill="#cbd5e1" font-size="11.5" font-family="ui-monospace, monospace">Git host, NAS, folder, or P2P</text>
           <text x="92" y="239" fill="#94a3b8" font-size="12" font-family="system-ui, -apple-system, sans-serif">Encrypted blobs only</text>
 
           <!-- Vertical Arrow 2 -->
@@ -2144,11 +2144,11 @@
 
         <div class="arch-node reveal-on-scroll">
           <div class="arch-node-tag" data-i18n="arch-node-tag-3">LAYER 3 / HOW VAULTS SYNC</div>
-          <h4 data-i18n="arch-node-h4-3">Sync Through Your Own Notebook</h4>
+          <h4 data-i18n="arch-node-h4-3">Your Git Repo, or Direct P2P</h4>
           <p data-i18n="arch-node-p-3">
-            <a href="/what-the-git/">Sync your vault through a private Git repo</a>, your home server, or a USB drive. The remote host sees only scrambled ciphertext. Even a total breach of the sync host exposes zero passwords.
+            <a href="/what-the-git/">Sync your vault through a private Git repo</a>, your home server, or a USB drive. Or skip the storage host entirely with direct peer-to-peer sync between your enrolled devices. Both paths move signed, encrypted commits only.
           </p>
-          <div class="arch-node-spec">Git-Native Transport &bull; Signed Commits</div>
+          <div class="arch-node-spec">Git-Native &amp; P2P Transport &bull; Signed Commits</div>
         </div>
       </div>
     </div>
@@ -2632,7 +2632,7 @@
             <span class="brand-title">Baluard</span>
           </div>
           <p data-i18n="footer-desc">
-            Git-native, sovereign password manager with padded-bucket encryption and device-identity bootstrapping. Built so your credentials stay on your machines, where no one can take them away. Synced under your terms.
+            Git-native and peer-to-peer password manager with padded-bucket encryption and device-identity bootstrapping. Built so your credentials stay on your machines, where no one can take them away. Synced under your terms.
           </p>
         </div>
 
@@ -2675,7 +2675,7 @@
     </div>
   </footer>
 
-  <script src="/assets/i18n.js?v=1795039172" defer></script>
+  <script src="/assets/i18n.js?v=1795127485" defer></script>
   
 <script>
   // Apple-Style Scroll Reveal Observer & Hero Entrance Timer
