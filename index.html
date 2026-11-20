@@ -1349,7 +1349,7 @@
   /* ── Download Hub ────────────────────────────────────────── */
   .dl-options-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1rem;
     margin-bottom: 2rem;
   }
@@ -2434,6 +2434,20 @@
         </div>
       </a>
 
+      <!-- Windows portable -->
+      <a href="https://github.com/baluard-org/baluard/releases/latest/download/Baluard-amd64-portable.zip" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="windows-portable">
+        <div>
+          <div class="dl-card-tag" data-i18n="dl-winportable-tag">Portable</div>
+        <span class="badge-beta" aria-label="beta release">beta</span>
+          <div class="dl-card-name"><img src="./assets/logo-windows.svg" alt="" width="20" height="20"><span data-i18n="dl-winportable-name">Windows</span></div>
+          <div class="dl-card-desc" data-i18n="dl-winportable-desc">No install and no admin rights: unzip anywhere, even a USB drive, and run. Vaults live in the folder; updates in-app.</div>
+        </div>
+        <div class="dl-card-footer">
+          <span data-i18n="dl-card-download">Download &darr;</span>
+          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">443 MB</span>
+        </div>
+      </a>
+
       <!-- macOS -->
       <a href="https://github.com/baluard-org/baluard/releases/latest/download/Baluard-macos-aarch64-non-notarized.zip" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="macos">
         <div>
@@ -2869,6 +2883,10 @@
     var CONFIG = {
       windows: {
         keys: { title: 'dl-win-modal-title', hint: 'dl-win-modal-hint', link: 'dl-win-modal-link' },
+        docs: { en: DOCS + 'introduction/install/windows-smartscreen/', es: DOCS + 'es/introduction/install/windows-smartscreen/' }
+      },
+      'windows-portable': {
+        keys: { title: 'dl-winportable-modal-title', hint: 'dl-winportable-modal-hint', link: 'dl-win-modal-link' },
         docs: { en: DOCS + 'introduction/install/windows-smartscreen/', es: DOCS + 'es/introduction/install/windows-smartscreen/' }
       },
       macos: {
