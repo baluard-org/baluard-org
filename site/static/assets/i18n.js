@@ -116,7 +116,7 @@
       'repo-arch-label': 'Arch Linux (pacman):',
       'repo-arch-note': 'Pacman verifies the repository database and package signatures before installing. Requires pacman 6 or newer.',
 
-      'repo-fingerprint': 'Repository signing key fingerprint: <code style="color: #b3e55c;">223310EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804</code>. Always verify this fingerprint before trusting repository imports.',
+      'repo-fingerprint': 'Repository signing key fingerprint: <code style="color: #b3e55c;">2233 10EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804</code>. Always verify this fingerprint before trusting repository imports.',
 
       'fd-summary': 'On Android? The free and open-source build lives on F-Droid.',
       'fd-open': 'View F-Droid instructions &darr;',
@@ -285,7 +285,7 @@
       'repo-arch-label': 'Arch Linux (pacman):',
       'repo-arch-note': 'Pacman verifica las firmas de la base de datos y de los paquetes antes de instalar. Requiere pacman 6 o superior.',
 
-      'repo-fingerprint': 'Huella digital de la clave de firma del repositorio: <code style="color: #b3e55c;">223310EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804</code>. Verifica siempre esta huella antes de confiar en importaciones de repositorios.',
+      'repo-fingerprint': 'Huella digital de la clave de firma del repositorio: <code style="color: #b3e55c;">2233 10EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804</code>. Verifica siempre esta huella antes de confiar en importaciones de repositorios.',
 
       'fd-summary': '¿En Android? La compilación libre y de código abierto está disponible en F-Droid.',
       'fd-open': 'Ver instrucciones de F-Droid &darr;',
@@ -450,7 +450,7 @@
       'repo-arch-label': 'Arch Linux (pacman) :',
       'repo-arch-note': 'Pacman vérifie les signatures de la base de données et des paquets avant l\'installation. Nécessite pacman 6 ou supérieur.',
 
-      'repo-fingerprint': 'Empreinte de la clé de signature du dépôt : <code style="color: #b3e55c;">223310EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804</code>. Vérifiez toujours cette empreinte avant de faire confiance à des imports de dépôt.',
+      'repo-fingerprint': 'Empreinte de la clé de signature du dépôt : <code style="color: #b3e55c;">2233 10EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804</code>. Vérifiez toujours cette empreinte avant de faire confiance à des imports de dépôt.',
 
       'fd-summary': 'Sur Android ? Le build libre et open source est disponible sur F-Droid.',
       'fd-open': 'Voir les instructions F-Droid &darr;',
@@ -615,7 +615,7 @@
       'repo-arch-label': 'Arch Linux (pacman):',
       'repo-arch-note': 'O pacman verifica as assinaturas do banco de dados e dos pacotes antes de instalar. Requer pacman 6 ou superior.',
 
-      'repo-fingerprint': 'Impressão digital da chave de assinatura do repositório: <code style="color: #b3e55c;">223310EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804</code>. Verifique sempre esta impressão antes de confiar em importações de repositório.',
+      'repo-fingerprint': 'Impressão digital da chave de assinatura do repositório: <code style="color: #b3e55c;">2233 10EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804</code>. Verifique sempre esta impressão antes de confiar em importações de repositório.',
 
       'fd-summary': 'No Android? O build livre e de código aberto está disponível no F-Droid.',
       'fd-open': 'Ver instruções do F-Droid &darr;',

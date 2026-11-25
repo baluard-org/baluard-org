@@ -8,4 +8,4 @@ minify_html = false
 [extra]
 version = "0.1.0"
 github_repo = "https://github.com/baluard-org/baluard"
-repo_signing_fingerprint = "223310EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804"
+repo_signing_fingerprint = "2233 10EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804"
