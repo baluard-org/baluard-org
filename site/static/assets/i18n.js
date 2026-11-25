@@ -4,7 +4,7 @@
   var TRANSLATIONS = {
     en: {
       'nav-arch': 'Architecture',
-      'nav-features': 'Capabilities',
+      'nav-features': 'Features',
       'nav-security': 'Security Model',
       'nav-download': 'Download',
       'nav-source': 'Source',
@@ -172,7 +172,7 @@
 
     es: {
       'nav-arch': 'Arquitectura',
-      'nav-features': 'Capacidades',
+      'nav-features': 'Características',
       'nav-security': 'Modelo de Seguridad',
       'nav-download': 'Descargar',
       'nav-source': 'Código',
@@ -341,7 +341,7 @@
 
     fr: {
       'nav-arch': 'Architecture',
-      'nav-features': 'Capacités',
+      'nav-features': 'Fonctionnalités',
       'nav-security': 'Modèle de Sécurité',
       'nav-download': 'Télécharger',
       'nav-source': 'Code Source',
@@ -506,7 +506,7 @@
 
     pt: {
       'nav-arch': 'Arquitetura',
-      'nav-features': 'Capacidades',
+      'nav-features': 'Recursos',
       'nav-security': 'Modelo de Segurança',
       'nav-download': 'Baixar',
       'nav-source': 'Código',
