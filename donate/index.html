@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Kyle, why did you do it? Don't you see what you've done? 2016 Kyle would be absolutely pissed. You were supposed to be the chosen one... -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Donate to Baluard</title>
+  <meta name="description" content="Git-native and peer-to-peer password manager with padded-bucket encryption. Zero server, zero telemetry, zero trust.">
+
+  <!-- Resolves the display language before first paint; the deferred i18n.js swap would otherwise flash English -->
+  <script>
+    (function () {
+      'use strict';
+      var SUPPORTED = ['en', 'es', 'fr', 'pt'];
+      var lang = 'en';
+      try {
+        var saved = localStorage.getItem('baluard_lang');
+        if (saved && SUPPORTED.indexOf(saved) !== -1) {
+          lang = saved;
+        }
+      } catch (e) {}
+      if (lang === 'en') {
+        var nav = (navigator.language || navigator.userLanguage || 'en').slice(0, 2).toLowerCase();
+        if (SUPPORTED.indexOf(nav) !== -1) {
+          lang = nav;
+        }
+      }
+      if (lang !== 'en') {
+        document.documentElement.lang = lang;
+        document.documentElement.classList.add('i18n-pending');
+      }
+      window.__baluardLang = lang;
+    })();
+  </script>
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/assets/baluard-lock-only.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/assets/baluard-lock-l4-svg-64.png">
+  <link rel="apple-touch-icon" href="/assets/baluard-lock-l4-svg-512.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="canonical" href="https://baluard.app/donate/">
+  <meta name="theme-color" content="#07090d">
+  <meta name="color-scheme" content="dark">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Baluard">
+  <meta property="og:url" content="https://baluard.app/donate/">
+  <meta property="og:title" content="Donate to Baluard">
+  <meta property="og:description" content="Support Baluard development through GitHub Sponsors or Ko-fi. Independent, free, open-source password management with zero central servers.">
+  <meta property="og:image" content="https://baluard.app/assets/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Baluard, the git-native and peer-to-peer password manager: lime padlock emblem on a dark teal background, with the tagline: No one can take it away. Including us.">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:site" content="@BaluardApp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Donate to Baluard">
+  <meta name="twitter:description" content="Support Baluard development through GitHub Sponsors or Ko-fi. Independent, free, open-source password management with zero central servers.">
+  <meta name="twitter:image" content="https://baluard.app/assets/social-card.png">
+  <meta name="twitter:image:alt" content="Baluard, the git-native and peer-to-peer password manager: lime padlock emblem on a dark teal background, with the tagline: No one can take it away. Including us.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Baluard",
+    "applicationCategory": "SecurityApplication",
+    "operatingSystem": "Linux, macOS, Windows",
+    "url": "https://baluard.app/",
+    "description": "Git-native and peer-to-peer password manager with padded-bucket encryption. Zero server, zero telemetry, zero trust.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <link rel="help" type="text/plain" href="/llms.txt" title="LLM context">
+
+  <style>
+    @font-face {
+      font-family: 'Morris Roman';
+      src: url('/assets/baluard-morris-roman.black.woff2') format('woff2'),
+           url('/assets/baluard-morris-roman.black.woff') format('woff'),
+           url('/assets/baluard-morris-roman.black.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      color-scheme: dark;
+      /* Website Theme: Deep Obsidian & Electric Blue Sovereign Contrast */
+      --site-bg: #07090d;
+      --site-bg-surface: #0d1118;
+      --site-bg-elevated: #131924;
+      --site-border: #1e2638;
+      --site-border-subtle: #171d2c;
+      --site-border-glow: #2563eb;
+      --site-text: #f1f5f9;
+      --site-text-secondary: #94a3b8;
+      --site-text-muted: #64748b;
+      --site-accent: #38bdf8;
+      --site-accent-btn: #0284c7;
+      --site-accent-btn-hover: #0369a1;
+
+      /* App-specific tokens (Matrix Deep Teal + Lime + Terminal Amber) */
+      --app-bg: #091315;
+      --app-sidebar: #0f2022;
+      --app-list: #14292c;
+      --app-detail: #193236;
+      --app-card: #0b1517;
+      --app-border: #1d3a3d;
+      --app-border-focus: #b3e55c;
+      --app-text: #f3f4f6;
+      --app-text-secondary: #d3ddde;
+      --app-text-muted: #8fa3a6;
+      --app-primary: #b3e55c;
+      --app-primary-hover: #c5f279;
+      --app-primary-text: #102427;
+      --app-accent: #cfc6f9;
+      --app-warning: #fcd34d;
+      --app-success: #10b981;
+      --app-danger: #ef4444;
+
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+      --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --font-logo: 'Morris Roman', serif;
+
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --radius-xl: 20px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--site-bg);
+      color: var(--site-text);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--site-accent);
+      text-decoration: none;
+      transition: color 0.15s ease, opacity 0.15s ease;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    code, pre {
+      font-family: var(--font-mono);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Skip Link for Accessibility */
+    .skip-link {
+      position: absolute;
+      top: -999px;
+      left: 1rem;
+      background: var(--app-primary);
+      color: var(--app-primary-text);
+      padding: 0.5rem 1rem;
+      font-weight: 700;
+      z-index: 1000;
+      border-radius: var(--radius-sm);
+    }
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    /* Buttons */
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.4rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 0.95rem;
+      line-height: 1.2;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--site-accent-btn);
+      color: #ffffff;
+      border-color: var(--site-accent-btn);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary:hover {
+      background: var(--site-accent-btn-hover);
+      border-color: var(--site-accent-btn-hover);
+      transform: translateY(-1px);
+    }
+
+    .badge-beta {
+      position: absolute;
+      top: -10px;
+      right: -12px;
+      padding: 0.22rem 0.55rem;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #f25454, #d93030);
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .btn-ghost {
+      background: var(--site-bg-surface);
+      color: var(--site-text);
+      border-color: var(--site-border);
+    }
+
+    .btn-ghost:hover {
+      background: var(--site-bg-elevated);
+      border-color: var(--site-text-muted);
+      transform: translateY(-1px);
+    }
+
+    .btn-lime {
+      background: var(--app-primary);
+      color: var(--app-primary-text);
+      border-color: var(--app-primary);
+      font-weight: 700;
+    }
+
+    .btn-lime:hover {
+      background: var(--app-primary-hover);
+      border-color: var(--app-primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-sm {
+      padding: 0.45rem 0.85rem;
+      font-size: 0.85rem;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Header & Navigation */
+    header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 13, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--site-border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4.25rem;
+    }
+
+    @media (max-width: 480px) {
+      .nav-inner {
+        height: 3.75rem;
+      }
+      .brand-title {
+        font-size: 1.1rem;
+      }
+      .nav-actions .btn {
+        padding: 0.4rem 0.65rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--site-text);
+      font-weight: 700;
+      font-size: 1.25rem;
+      text-decoration: none;
+    }
+
+    .brand-wrap:hover {
+      text-decoration: none;
+    }
+
+    .brand-logo-img {
+      width: 32px;
+      height: 32px;
+      display: block;
+    }
+
+    .brand-title {
+      font-family: var(--font-logo);
+      font-size: 1.45rem;
+      letter-spacing: 0.02em;
+      font-weight: normal;
+      line-height: 1;
+      color: var(--site-text);
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      color: var(--site-text-secondary);
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--site-text);
+      text-decoration: none;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* Language Switcher */
+    html.i18n-pending [data-i18n] {
+      visibility: hidden;
+    }
+
+    .lang-switcher {
+      position: relative;
+      display: inline-block;
+    }
+
+    .lang-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--site-border);
+      color: var(--site-text-secondary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .lang-btn:hover,
+    .lang-btn[aria-expanded="true"] {
+      background: var(--site-bg-surface);
+      border-color: var(--site-text-muted);
+      color: var(--site-text);
+    }
+
+    .lang-btn:focus-visible {
+      outline: 2px solid var(--site-accent);
+      outline-offset: 2px;
+    }
+
+    .lang-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 195px;
+      background: #11151c;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 12px;
+      padding: 0.4rem;
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(0, 0, 0, 0.3);
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+    }
+
+    .lang-dropdown.is-open {
+      display: flex;
+      animation: langDropdownIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes langDropdownIn {
+      from {
+        opacity: 0;
+        transform: translateY(-6px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .lang-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      border: none;
+      background: transparent;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      font-weight: 500;
+      font-family: inherit;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.12s ease, color 0.12s ease;
+    }
+
+    .lang-option:hover {
+      background: rgba(255, 255, 255, 0.07);
+      color: #ffffff;
+    }
+
+    .lang-option.active {
+      background: rgba(245, 158, 11, 0.12);
+      color: #ffffff;
+    }
+
+    .lang-option .lang-check {
+      color: #f59e0b;
+      display: none;
+      flex-shrink: 0;
+    }
+
+    .lang-option.active .lang-check {
+      display: block;
+    }
+
+    @media (max-width: 680px) {
+      .lang-dropdown {
+        left: 0;
+        right: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .lang-btn {
+        width: 32px;
+        height: 32px;
+      }
+      .nav-actions {
+        gap: 0.45rem;
+      }
+      .btn-text-source {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .site-nav {
+        display: none;
+      }
+    }
+
+    /* Footer */
+    footer.site-footer {
+      border-top: 1px solid var(--site-border);
+      background: var(--site-bg);
+      padding: 3.5rem 0 2.5rem;
+      margin-top: auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    .footer-brand p {
+      color: var(--site-text-secondary);
+      font-size: 0.92rem;
+      margin-top: 0.75rem;
+      max-width: 26rem;
+    }
+
+    .footer-col h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--site-text-muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .footer-links a {
+      color: var(--site-text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--site-text);
+      text-decoration: none;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--site-border-subtle);
+      padding-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--site-text-muted);
+    }
+
+    .footer-credit {
+      margin-left: auto;
+      text-align: right;
+    }
+
+    @media (max-width: 680px) {
+      .footer-bottom {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+      }
+      .footer-credit {
+        text-align: right;
+        align-self: flex-end;
+      }
+    }
+
+    /* Motion Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+  
+<style>
+  .donate-container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 6rem;
+  }
+
+  .donate-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.88rem;
+    color: var(--site-accent);
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
+
+  .donate-back-link:hover {
+    text-decoration: underline;
+  }
+
+  .donate-hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 2.25rem;
+    background: linear-gradient(135deg, var(--site-bg-surface) 0%, var(--app-bg) 100%);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-xl);
+    margin-bottom: 2.5rem;
+  }
+
+  .donate-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(179, 229, 92, 0.1);
+    border: 1px solid rgba(179, 229, 92, 0.3);
+    color: var(--app-primary);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .donate-hero h1 {
+    font-size: clamp(2rem, 4vw, 2.85rem);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    margin-bottom: 0.9rem;
+    color: var(--site-text);
+  }
+
+  .donate-hero p {
+    color: var(--site-text-secondary);
+    font-size: 1.03rem;
+    line-height: 1.65;
+    max-width: 56ch;
+  }
+
+  .donate-emblem {
+    width: 112px;
+    height: 112px;
+    border-radius: var(--radius-xl);
+    background: var(--app-sidebar);
+    border: 1px solid var(--app-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 40px rgba(179, 229, 92, 0.08);
+    flex-shrink: 0;
+  }
+
+  .donate-emblem img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .donate-emblem-heart {
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    background: var(--site-bg-elevated);
+    border: 1px solid var(--site-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f472b6;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .donate-section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--site-text);
+    margin: 2.75rem 0 1.1rem;
+  }
+
+  .donate-channels {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .donate-card {
+    background: var(--site-bg-surface);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .donate-card:hover {
+    border-color: var(--site-border-glow);
+    transform: translateY(-2px);
+  }
+
+  .donate-card-featured {
+    border-color: rgba(56, 189, 248, 0.35);
+    background: linear-gradient(180deg, rgba(2, 132, 199, 0.07) 0%, var(--site-bg-surface) 100%);
+  }
+
+  .donate-card-head {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+  }
+
+  .donate-icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .donate-icon-gh {
+    background: rgba(244, 114, 182, 0.12);
+    border: 1px solid rgba(244, 114, 182, 0.28);
+    color: #f472b6;
+  }
+
+  .donate-icon-kofi {
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.28);
+    color: var(--site-accent);
+  }
+
+  .donate-card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--site-text);
+  }
+
+  .donate-card-sub {
+    font-size: 0.82rem;
+    font-family: var(--font-mono);
+    color: var(--site-text-muted);
+  }
+
+  .donate-card p {
+    color: var(--site-text-secondary);
+    font-size: 0.96rem;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .donate-card .btn {
+    align-self: flex-end;
+    margin-top: 0.25rem;
+  }
+
+  .donate-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .donate-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .donate-mini-card {
+    background: var(--site-bg-surface);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-md);
+    padding: 1.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .donate-mini-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-sm);
+    background: var(--site-bg-elevated);
+    border: 1px solid var(--site-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--app-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .donate-mini-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--site-text);
+  }
+
+  .donate-mini-card p {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--site-text-secondary);
+  }
+
+  .donate-mini-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--site-accent);
+    margin-top: auto;
+    padding-top: 0.35rem;
+  }
+
+  .donate-mini-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 0.35rem;
+  }
+
+  .donate-mini-footer .donate-mini-link {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .donate-stars-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: var(--site-bg-elevated);
+    border: 1px solid var(--site-border);
+    color: var(--app-warning);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 600;
+  }
+
+  .donate-stars-badge[hidden] {
+    display: none;
+  }
+
+  .donate-share-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.38rem;
+    margin-top: auto;
+    padding-top: 0.35rem;
+  }
+
+  .donate-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: var(--radius-sm);
+    background: var(--site-bg-elevated);
+    border: 1px solid var(--site-border);
+    color: var(--site-text-secondary);
+    font-size: 0.76rem;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .donate-share-btn:hover {
+    border-color: var(--site-border-glow);
+    color: var(--site-text);
+    text-decoration: none;
+  }
+
+  @media (max-width: 760px) {
+    .donate-hero {
+      grid-template-columns: 1fr;
+      padding: 1.6rem;
+      gap: 1.5rem;
+    }
+
+    .donate-emblem {
+      width: 84px;
+      height: 84px;
+    }
+
+    .donate-emblem img {
+      width: 46px;
+      height: 46px;
+    }
+
+    .donate-channels,
+    .donate-grid-2,
+    .donate-grid-3 {
+      grid-template-columns: 1fr;
+    }
+
+    .donate-share-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+
+    .donate-share-btn {
+      justify-content: center;
+    }
+  }
+</style>
+
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a href="/" class="brand-wrap" aria-label="Baluard Homepage">
+        <svg class="brand-logo-img" viewBox="0 0 512 512" width="34" height="34" aria-hidden="true">
+          <defs>
+            <linearGradient id="shackle-grad-hdr" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ded8fc" />
+              <stop offset="100%" stop-color="#cfc6f9" />
+            </linearGradient>
+            <linearGradient id="body-grad-hdr" x1="20%" y1="0%" x2="80%" y2="100%">
+              <stop offset="0%" stop-color="#c5f279" />
+              <stop offset="50%" stop-color="#b3e55c" />
+              <stop offset="100%" stop-color="#9dce47" />
+            </linearGradient>
+          </defs>
+          <path d="M 172 205 V 150 C 172 103 209 66 256 66 C 303 66 340 103 340 150 V 205 H 294 V 150 C 294 128 277 111 256 111 C 235 111 218 128 218 150 V 205 Z" fill="url(#shackle-grad-hdr)" />
+          <path d="M 136 205 H 184 V 228 H 228 V 205 H 284 V 228 H 328 V 205 H 376 C 384 205 388 209 388 217 V 405 C 388 424 374 438 355 438 H 157 C 138 438 124 424 124 405 V 217 C 124 209 128 205 136 205 Z" fill="url(#body-grad-hdr)" />
+          <path d="M317.8351477449456 361.56298600311044Q317.8351477449456 347.19284603421465 304.98911353032656 337.6127527216174L281.6920684292379 320.4121306376361L295.6267496111975 309.5256609642302Q303.02954898911355 303.646967340591 303.02954898911355 294.50233281493Q303.02954898911355 280.56765163297047 288.8771384136858 272.07620528771383Q276.68429237947123 264.89113530326597 262.0964230171073 264.89113530326597Q248.59720062208396 264.89113530326597 226.82426127527214 273.38258164852255Q211.800933125972 279.04354587869364 203.09175738724727 282.3094867807154Q194.38258164852255 285.5754276827372 191.98755832037324 286.01088646967344V291.0186625194401Q205.05132192846034 296.8973561430793 205.05132192846034 315.6220839813375V377.45723172628306Q205.05132192846034 383.9891135303266 199.17262830482113 394.0046656298601L193.51166407465007 403.8024883359254V408.37480559875587Q202.00311041990668 404.67340590979785 204.18040435458786 404.0202177293935Q208.09953343701397 402.27838258164854 216.3732503888025 402.27838258164854Q223.12286158631414 402.27838258164854 237.71073094867805 405.3265940902022Q252.29860031104198 408.37480559875587 259.04821150855366 408.37480559875587Q276.248833592535 408.37480559875587 296.27993779160187 393.78693623639197Q317.8351477449456 377.8926905132193 317.8351477449456 361.56298600311044ZM278.6438569206843 294.50233281493Q278.6438569206843 302.99377916018665 269.71695178849143 311.9206842923795Q264.7091757387247 316.9284603421462 250.3390357698289 325.2021772939347Q244.67807153965785 328.4681181959565 240.3234836702955 331.40746500777607Q235.96889580093313 334.3468118195957 232.92068429237946 336.74183514774495Q232.48522550544322 336.3063763608087 231.61430793157075 336.3063763608087Q231.61430793157075 336.3063763608087 229.43701399688956 336.74183514774495L229.00155520995332 319.5412130637636L228.7838258164852 302.1228615863142Q228.34836702954897 290.58320373250393 238.14618973561429 282.3094867807154Q247.50855365474337 274.68895800933126 259.04821150855366 274.68895800933126Q262.9673405909798 274.68895800933126 266.55987558320373 276.3219284603422Q270.15241057542767 277.95489891135304 272.7651632970451 280.67651632970455Q275.3779160186625 283.398133748056 277.01088646967344 286.99066874027994Q278.6438569206843 290.58320373250393 278.6438569206843 294.50233281493ZM288.4416796267496 372.8849144634526Q288.4416796267496 382.4650077760498 279.29704510108866 389.8678071539658Q269.93468118195955 397.48833592534993 260.57231726283044 397.48833592534993Q244.2426127527216 397.48833592534993 236.18662519440124 383.5536547433904Q229.43701399688956 372.23172628304826 229.43701399688956 354.81337480559876Q229.43701399688956 351.76516329704515 240.5412130637636 344.144634525661Q251.86314152410574 336.74183514774495 255.78227060653188 336.74183514774495Q262.7496111975116 336.74183514774495 275.59564541213064 351.1119751166408Q288.4416796267496 365.6998444790047 288.4416796267496 372.8849144634526Z" fill="#091315" />
+        </svg>
+        <span class="brand-title">Baluard</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Main Navigation">
+        <a href="/#architecture" class="nav-link" data-i18n="nav-arch">Architecture</a>
+        <a href="/#features" class="nav-link" data-i18n="nav-features">Features</a>
+        <a href="/#security" class="nav-link" data-i18n="nav-security">Security Model</a>
+        <a href="/#download" class="nav-link" data-i18n="nav-download">Download</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="lang-switcher" id="lang-switcher">
+          <button type="button" class="lang-btn" id="lang-btn" aria-expanded="false" aria-haspopup="listbox" aria-label="Change language">
+            <svg class="globe-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+              <path d="M2 12h20"></path>
+            </svg>
+          </button>
+          <div class="lang-dropdown" id="lang-dropdown" role="listbox" aria-label="Select language">
+            <button type="button" class="lang-option active" role="option" aria-selected="true" data-lang="en">
+              <span class="lang-name">English</span>
+              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <button type="button" class="lang-option" role="option" aria-selected="false" data-lang="es">
+              <span class="lang-name">Español</span>
+              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <button type="button" class="lang-option" role="option" aria-selected="false" data-lang="fr">
+              <span class="lang-name">Français</span>
+              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <button type="button" class="lang-option" role="option" aria-selected="false" data-lang="pt">
+              <span class="lang-name">Português (Brasil)</span>
+              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <a href="https://github.com/baluard-org/baluard" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" aria-label="GitHub Repository">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span class="btn-text-source" data-i18n="nav-source">Source</span>
+        </a>
+        <a href="/#download" class="btn btn-primary btn-sm"><span data-i18n="nav-get-baluard">Get Baluard</span><span class="badge-beta" aria-label="beta release">beta</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    
+<div class="donate-container">
+  <a href="/" class="donate-back-link">&larr; Back to baluard.app</a>
+
+  <section class="donate-hero">
+    <div>
+      <span class="donate-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        GPL-3.0-or-later / Free &amp; Open Source
+      </span>
+      <h1>Donate to Baluard</h1>
+      <p>
+        Baluard never forces you into a subscription, has no trackers, and runs no central servers. Your passwords stay on your own machines. If Baluard saves you time or keeps your credentials safe, consider supporting its development.
+      </p>
+    </div>
+
+    <div class="donate-emblem" aria-hidden="true">
+      <img src="/assets/baluard-lock-only.svg" alt="">
+      <span class="donate-emblem-heart">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </span>
+    </div>
+  </section>
+
+  <h2 class="donate-section-title">Donation channels</h2>
+  <div class="donate-channels">
+    <div class="donate-card donate-card-featured">
+      <div class="donate-card-head">
+        <div class="donate-icon-box donate-icon-gh" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="donate-card-title">GitHub Sponsors</div>
+          <div class="donate-card-sub">@estebanforge</div>
+        </div>
+      </div>
+      <p>
+        Monthly or one-time sponsorship directly through GitHub. Zero platform fees for open-source maintainers.
+      </p>
+      <a class="btn btn-primary" href="https://github.com/sponsors/estebanforge" target="_blank" rel="noopener noreferrer">
+        Sponsor on GitHub &rarr;
+      </a>
+    </div>
+
+    <div class="donate-card">
+      <div class="donate-card-head">
+        <div class="donate-icon-box donate-icon-kofi" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
+            <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
+            <line x1="6" y1="2" x2="6" y2="4"/>
+            <line x1="10" y1="2" x2="10" y2="4"/>
+            <line x1="14" y1="2" x2="14" y2="4"/>
+          </svg>
+        </div>
+        <div>
+          <div class="donate-card-title">Ko-fi</div>
+          <div class="donate-card-sub">ko-fi.com/estebanforge</div>
+        </div>
+      </div>
+      <p>
+        Quick one-time or recurring tip with no GitHub account required.
+      </p>
+      <a class="btn btn-ghost" href="https://ko-fi.com/estebanforge" target="_blank" rel="noopener noreferrer">
+        Support on Ko-fi &rarr;
+      </a>
+    </div>
+  </div>
+
+  <h2 class="donate-section-title">What your support covers</h2>
+  <div class="donate-grid-3">
+    <div class="donate-mini-card">
+      <div class="donate-mini-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+      <h3>Code Signing</h3>
+      <p>Apple Developer and Windows signing certificates so releases pass Gatekeeper and SmartScreen cleanly.</p>
+    </div>
+
+    <div class="donate-mini-card">
+      <div class="donate-mini-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+          <line x1="12" y1="22.08" x2="12" y2="12"/>
+        </svg>
+      </div>
+      <h3>Store &amp; Release Infra</h3>
+      <p>Google Play, Chrome Web Store, and Mozilla Add-ons fees plus package hosting for Linux, macOS, and Windows.</p>
+    </div>
+
+    <div class="donate-mini-card">
+      <div class="donate-mini-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 18 22 12 16 6"/>
+          <polyline points="8 6 2 12 8 18"/>
+        </svg>
+      </div>
+      <h3>Active Development</h3>
+      <p>Engineering time for new features, security hardening, and keeping desktop, mobile, and extensions in sync.</p>
+    </div>
+  </div>
+
+  <h2 class="donate-section-title">Other ways to help</h2>
+  <div class="donate-grid-2">
+    <div class="donate-mini-card">
+      <div class="donate-mini-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+      </div>
+      <h3>Star the repository</h3>
+      <p>Starring on GitHub helps others discover a local-first password manager.</p>
+      <div class="donate-mini-footer">
+        <a class="donate-mini-link" href="https://github.com/baluard-org/baluard" target="_blank" rel="noopener noreferrer">
+          baluard-org/baluard &rarr;
+        </a>
+        <span id="gh-stars-badge" class="donate-stars-badge" hidden></span>
+      </div>
+    </div>
+
+    <div class="donate-mini-card">
+      <div class="donate-mini-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+      </div>
+      <h3>Report bugs</h3>
+      <p>Open an issue when you hit a rough edge or find a bug.</p>
+      <a class="donate-mini-link" href="https://github.com/baluard-org/baluard/issues" target="_blank" rel="noopener noreferrer">
+        Open an issue &rarr;
+      </a>
+    </div>
+
+    <div class="donate-mini-card">
+      <div class="donate-mini-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+      </div>
+      <h3>Share ideas</h3>
+      <p>Join GitHub Discussions to propose features or ask questions.</p>
+      <a class="donate-mini-link" href="https://github.com/baluard-org/baluard/discussions" target="_blank" rel="noopener noreferrer">
+        Join discussions &rarr;
+      </a>
+    </div>
+
+    <div class="donate-mini-card">
+      <div class="donate-mini-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3"/>
+          <circle cx="6" cy="12" r="3"/>
+          <circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+      </div>
+      <h3>Share Baluard</h3>
+      <p>Recommend Baluard to friends or teams looking for a zero-server vault.</p>
+      <div class="donate-share-row">
+        <a class="donate-share-btn" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fbaluard.app%2F&text=Baluard%3A%20an%20open-source%2C%20git-native%20%26%20P2P%20password%20manager.%20Zero%20central%20servers.%20You%20own%20your%20data." target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+          Twitter
+        </a>
+        <a class="donate-share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbaluard.app%2F" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+          </svg>
+          Facebook
+        </a>
+        <a class="donate-share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fbaluard.app%2F" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+          </svg>
+          LinkedIn
+        </a>
+        <a class="donate-share-btn" href="https://wa.me/?text=Baluard%3A%20an%20open-source%2C%20git-native%20%26%20P2P%20password%20manager.%20Zero%20central%20servers.%20You%20own%20your%20data.%20https%3A%2F%2Fbaluard.app%2F" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    'use strict';
+    var badge = document.getElementById('gh-stars-badge');
+    if (!badge) return;
+    var CACHE_KEY = 'baluard_gh_stars';
+    var TTL_MS = 10 * 60 * 1000;
+
+    function render(count) {
+      if (typeof count !== 'number') return;
+      badge.textContent = '\u2605 ' + new Intl.NumberFormat().format(count);
+      badge.hidden = false;
+    }
+
+    try {
+      var cached = JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null');
+      if (cached && typeof cached.count === 'number' && (Date.now() - cached.ts) < TTL_MS) {
+        render(cached.count);
+        return;
+      }
+    } catch (e) {}
+
+    fetch('https://api.github.com/repos/baluard-org/baluard', {
+      headers: { Accept: 'application/vnd.github+json' }
+    })
+      .then(function (res) { return res.ok ? res.json() : null; })
+      .then(function (data) {
+        if (!data || typeof data.stargazers_count !== 'number') return;
+        render(data.stargazers_count);
+        try {
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ count: data.stargazers_count, ts: Date.now() }));
+        } catch (e) {}
+      })
+      .catch(function () {});
+  })();
+</script>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-wrap">
+            <svg class="brand-logo-img" viewBox="0 0 512 512" width="34" height="34" aria-hidden="true">
+              <defs>
+                <linearGradient id="shackle-grad-ftr" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ded8fc" />
+                  <stop offset="100%" stop-color="#cfc6f9" />
+                </linearGradient>
+                <linearGradient id="body-grad-ftr" x1="20%" y1="0%" x2="80%" y2="100%">
+                  <stop offset="0%" stop-color="#c5f279" />
+                  <stop offset="50%" stop-color="#b3e55c" />
+                  <stop offset="100%" stop-color="#9dce47" />
+                </linearGradient>
+              </defs>
+              <path d="M 172 205 V 150 C 172 103 209 66 256 66 C 303 66 340 103 340 150 V 205 H 294 V 150 C 294 128 277 111 256 111 C 235 111 218 128 218 150 V 205 Z" fill="url(#shackle-grad-ftr)" />
+              <path d="M 136 205 H 184 V 228 H 228 V 205 H 284 V 228 H 328 V 205 H 376 C 384 205 388 209 388 217 V 405 C 388 424 374 438 355 438 H 157 C 138 438 124 424 124 405 V 217 C 124 209 128 205 136 205 Z" fill="url(#body-grad-ftr)" />
+              <path d="M317.8351477449456 361.56298600311044Q317.8351477449456 347.19284603421465 304.98911353032656 337.6127527216174L281.6920684292379 320.4121306376361L295.6267496111975 309.5256609642302Q303.02954898911355 303.646967340591 303.02954898911355 294.50233281493Q303.02954898911355 280.56765163297047 288.8771384136858 272.07620528771383Q276.68429237947123 264.89113530326597 262.0964230171073 264.89113530326597Q248.59720062208396 264.89113530326597 226.82426127527214 273.38258164852255Q211.800933125972 279.04354587869364 203.09175738724727 282.3094867807154Q194.38258164852255 285.5754276827372 191.98755832037324 286.01088646967344V291.0186625194401Q205.05132192846034 296.8973561430793 205.05132192846034 315.6220839813375V377.45723172628306Q205.05132192846034 383.9891135303266 199.17262830482113 394.0046656298601L193.51166407465007 403.8024883359254V408.37480559875587Q202.00311041990668 404.67340590979785 204.18040435458786 404.0202177293935Q208.09953343701397 402.27838258164854 216.3732503888025 402.27838258164854Q223.12286158631414 402.27838258164854 237.71073094867805 405.3265940902022Q252.29860031104198 408.37480559875587 259.04821150855366 408.37480559875587Q276.248833592535 408.37480559875587 296.27993779160187 393.78693623639197Q317.8351477449456 377.8926905132193 317.8351477449456 361.56298600311044ZM278.6438569206843 294.50233281493Q278.6438569206843 302.99377916018665 269.71695178849143 311.9206842923795Q264.7091757387247 316.9284603421462 250.3390357698289 325.2021772939347Q244.67807153965785 328.4681181959565 240.3234836702955 331.40746500777607Q235.96889580093313 334.3468118195957 232.92068429237946 336.74183514774495Q232.48522550544322 336.3063763608087 231.61430793157075 336.3063763608087Q231.61430793157075 336.3063763608087 229.43701399688956 336.74183514774495L229.00155520995332 319.5412130637636L228.7838258164852 302.1228615863142Q228.34836702954897 290.58320373250393 238.14618973561429 282.3094867807154Q247.50855365474337 274.68895800933126 259.04821150855366 274.68895800933126Q262.9673405909798 274.68895800933126 266.55987558320373 276.3219284603422Q270.15241057542767 277.95489891135304 272.7651632970451 280.67651632970455Q275.3779160186625 283.398133748056 277.01088646967344 286.99066874027994Q278.6438569206843 290.58320373250393 278.6438569206843 294.50233281493ZM288.4416796267496 372.8849144634526Q288.4416796267496 382.4650077760498 279.29704510108866 389.8678071539658Q269.93468118195955 397.48833592534993 260.57231726283044 397.48833592534993Q244.2426127527216 397.48833592534993 236.18662519440124 383.5536547433904Q229.43701399688956 372.23172628304826 229.43701399688956 354.81337480559876Q229.43701399688956 351.76516329704515 240.5412130637636 344.144634525661Q251.86314152410574 336.74183514774495 255.78227060653188 336.74183514774495Q262.7496111975116 336.74183514774495 275.59564541213064 351.1119751166408Q288.4416796267496 365.6998444790047 288.4416796267496 372.8849144634526Z" fill="#091315" />
+            </svg>
+            <span class="brand-title">Baluard</span>
+          </div>
+          <p data-i18n="footer-desc">
+            Git-native and peer-to-peer password manager with padded-bucket encryption and device-identity bootstrapping. Built so your credentials stay on your machines, where no one can take them away. Synced under your terms.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer-col-project">Project</h4>
+          <ul class="footer-links">
+            <li><a href="/#download" data-i18n="footer-link-dl">Download Release</a></li>
+            <li><a href="/changelog/" data-i18n="footer-link-changelog">Changelog</a></li>
+            <li><a href="/security/" data-i18n="footer-link-sec">Security White Paper</a></li>
+            <li><a href="/what-the-git/" data-i18n="footer-link-git">What the Git?</a></li>
+            <li><a href="/support/" data-i18n="footer-link-support">Support</a></li>
+            <li><a href="/donate/" data-i18n="footer-link-donate">Donate</a></li>
+            <li><a href="https://docs.baluard.app" target="_blank" rel="noopener noreferrer" data-i18n="footer-link-docs">Documentation</a></li>
+            <li><a href="/ai-instructions/" data-i18n="footer-link-ai">AI Instructions</a></li>
+            <li><a href="https://github.com/baluard-org/baluard" target="_blank" rel="noopener noreferrer" data-i18n="footer-link-src">Source Code (GitHub)</a></li>
+            <li><a href="https://github.com/baluard-org/baluard/releases" target="_blank" rel="noopener noreferrer" data-i18n="footer-link-rel">Release Notes &amp; Checksums</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer-col-integrity">Integrity &amp; Freedom</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy/" data-i18n="footer-link-privacy">Privacy Policy</a></li>
+            <li><a href="/tos/" data-i18n="footer-link-tos">Terms of Service</a></li>
+            <li><a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" data-i18n="footer-link-lic">License (GPL-3.0-or-later)</a></li>
+            <li><a href="https://github.com/baluard-org/baluard/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer" data-i18n="footer-link-vuln">Vulnerability Reporting</a></li>
+            <li><a href="/#download-repo" data-i18n="footer-link-pkg">Linux Packages (apt, dnf, pacman)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div data-i18n="footer-bottom-lic">
+          Free software under <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0-or-later</a>. No trackers, no telemetry, no cloud lock-in.
+        </div>
+        <div class="footer-credit" data-i18n="footer-built-by">
+          An <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">EstebanForge</a> Project
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/i18n.js?v=1795611313" defer></script>
+  
+</body>
+</html>

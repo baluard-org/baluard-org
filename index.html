@@ -1,0 +1,2951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Kyle, why did you do it? Don't you see what you've done? 2016 Kyle would be absolutely pissed. You were supposed to be the chosen one... -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Baluard | The Git-Native &amp; P2P Password Manager</title>
+  <meta name="description" content="Git-native and peer-to-peer password manager with padded-bucket encryption. Zero server, zero telemetry, zero trust.">
+
+  <!-- Resolves the display language before first paint; the deferred i18n.js swap would otherwise flash English -->
+  <script>
+    (function () {
+      'use strict';
+      var SUPPORTED = ['en', 'es', 'fr', 'pt'];
+      var lang = 'en';
+      try {
+        var saved = localStorage.getItem('baluard_lang');
+        if (saved && SUPPORTED.indexOf(saved) !== -1) {
+          lang = saved;
+        }
+      } catch (e) {}
+      if (lang === 'en') {
+        var nav = (navigator.language || navigator.userLanguage || 'en').slice(0, 2).toLowerCase();
+        if (SUPPORTED.indexOf(nav) !== -1) {
+          lang = nav;
+        }
+      }
+      if (lang !== 'en') {
+        document.documentElement.lang = lang;
+        document.documentElement.classList.add('i18n-pending');
+      }
+      window.__baluardLang = lang;
+    })();
+  </script>
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/assets/baluard-lock-only.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/assets/baluard-lock-l4-svg-64.png">
+  <link rel="apple-touch-icon" href="/assets/baluard-lock-l4-svg-512.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="canonical" href="https://baluard.app/">
+  <meta name="theme-color" content="#07090d">
+  <meta name="color-scheme" content="dark">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Baluard">
+  <meta property="og:url" content="https://baluard.app/">
+  <meta property="og:title" content="Baluard | The Git-Native &amp; P2P Password Manager">
+  <meta property="og:description" content="Git-native and peer-to-peer password manager with padded-bucket encryption. Zero server, zero telemetry, zero trust.">
+  <meta property="og:image" content="https://baluard.app/assets/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Baluard, the git-native and peer-to-peer password manager: lime padlock emblem on a dark teal background, with the tagline: No one can take it away. Including us.">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:site" content="@BaluardApp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Baluard | The Git-Native &amp; P2P Password Manager">
+  <meta name="twitter:description" content="Git-native and peer-to-peer password manager with padded-bucket encryption. Zero server, zero telemetry, zero trust.">
+  <meta name="twitter:image" content="https://baluard.app/assets/social-card.png">
+  <meta name="twitter:image:alt" content="Baluard, the git-native and peer-to-peer password manager: lime padlock emblem on a dark teal background, with the tagline: No one can take it away. Including us.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Baluard",
+    "applicationCategory": "SecurityApplication",
+    "operatingSystem": "Linux, macOS, Windows",
+    "url": "https://baluard.app/",
+    "description": "Git-native and peer-to-peer password manager with padded-bucket encryption. Zero server, zero telemetry, zero trust.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <link rel="help" type="text/plain" href="/llms.txt" title="LLM context">
+
+  <style>
+    @font-face {
+      font-family: 'Morris Roman';
+      src: url('/assets/baluard-morris-roman.black.woff2') format('woff2'),
+           url('/assets/baluard-morris-roman.black.woff') format('woff'),
+           url('/assets/baluard-morris-roman.black.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      color-scheme: dark;
+      /* Website Theme: Deep Obsidian & Electric Blue Sovereign Contrast */
+      --site-bg: #07090d;
+      --site-bg-surface: #0d1118;
+      --site-bg-elevated: #131924;
+      --site-border: #1e2638;
+      --site-border-subtle: #171d2c;
+      --site-border-glow: #2563eb;
+      --site-text: #f1f5f9;
+      --site-text-secondary: #94a3b8;
+      --site-text-muted: #64748b;
+      --site-accent: #38bdf8;
+      --site-accent-btn: #0284c7;
+      --site-accent-btn-hover: #0369a1;
+
+      /* App-specific tokens (Matrix Deep Teal + Lime + Terminal Amber) */
+      --app-bg: #091315;
+      --app-sidebar: #0f2022;
+      --app-list: #14292c;
+      --app-detail: #193236;
+      --app-card: #0b1517;
+      --app-border: #1d3a3d;
+      --app-border-focus: #b3e55c;
+      --app-text: #f3f4f6;
+      --app-text-secondary: #d3ddde;
+      --app-text-muted: #8fa3a6;
+      --app-primary: #b3e55c;
+      --app-primary-hover: #c5f279;
+      --app-primary-text: #102427;
+      --app-accent: #cfc6f9;
+      --app-warning: #fcd34d;
+      --app-success: #10b981;
+      --app-danger: #ef4444;
+
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+      --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --font-logo: 'Morris Roman', serif;
+
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --radius-xl: 20px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--site-bg);
+      color: var(--site-text);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--site-accent);
+      text-decoration: none;
+      transition: color 0.15s ease, opacity 0.15s ease;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    code, pre {
+      font-family: var(--font-mono);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Skip Link for Accessibility */
+    .skip-link {
+      position: absolute;
+      top: -999px;
+      left: 1rem;
+      background: var(--app-primary);
+      color: var(--app-primary-text);
+      padding: 0.5rem 1rem;
+      font-weight: 700;
+      z-index: 1000;
+      border-radius: var(--radius-sm);
+    }
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    /* Buttons */
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.4rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 0.95rem;
+      line-height: 1.2;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--site-accent-btn);
+      color: #ffffff;
+      border-color: var(--site-accent-btn);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary:hover {
+      background: var(--site-accent-btn-hover);
+      border-color: var(--site-accent-btn-hover);
+      transform: translateY(-1px);
+    }
+
+    .badge-beta {
+      position: absolute;
+      top: -10px;
+      right: -12px;
+      padding: 0.22rem 0.55rem;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #f25454, #d93030);
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .btn-ghost {
+      background: var(--site-bg-surface);
+      color: var(--site-text);
+      border-color: var(--site-border);
+    }
+
+    .btn-ghost:hover {
+      background: var(--site-bg-elevated);
+      border-color: var(--site-text-muted);
+      transform: translateY(-1px);
+    }
+
+    .btn-lime {
+      background: var(--app-primary);
+      color: var(--app-primary-text);
+      border-color: var(--app-primary);
+      font-weight: 700;
+    }
+
+    .btn-lime:hover {
+      background: var(--app-primary-hover);
+      border-color: var(--app-primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-sm {
+      padding: 0.45rem 0.85rem;
+      font-size: 0.85rem;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Header & Navigation */
+    header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 13, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--site-border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4.25rem;
+    }
+
+    @media (max-width: 480px) {
+      .nav-inner {
+        height: 3.75rem;
+      }
+      .brand-title {
+        font-size: 1.1rem;
+      }
+      .nav-actions .btn {
+        padding: 0.4rem 0.65rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--site-text);
+      font-weight: 700;
+      font-size: 1.25rem;
+      text-decoration: none;
+    }
+
+    .brand-wrap:hover {
+      text-decoration: none;
+    }
+
+    .brand-logo-img {
+      width: 32px;
+      height: 32px;
+      display: block;
+    }
+
+    .brand-title {
+      font-family: var(--font-logo);
+      font-size: 1.45rem;
+      letter-spacing: 0.02em;
+      font-weight: normal;
+      line-height: 1;
+      color: var(--site-text);
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      color: var(--site-text-secondary);
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--site-text);
+      text-decoration: none;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* Language Switcher */
+    html.i18n-pending [data-i18n] {
+      visibility: hidden;
+    }
+
+    .lang-switcher {
+      position: relative;
+      display: inline-block;
+    }
+
+    .lang-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--site-border);
+      color: var(--site-text-secondary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .lang-btn:hover,
+    .lang-btn[aria-expanded="true"] {
+      background: var(--site-bg-surface);
+      border-color: var(--site-text-muted);
+      color: var(--site-text);
+    }
+
+    .lang-btn:focus-visible {
+      outline: 2px solid var(--site-accent);
+      outline-offset: 2px;
+    }
+
+    .lang-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 195px;
+      background: #11151c;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 12px;
+      padding: 0.4rem;
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(0, 0, 0, 0.3);
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+    }
+
+    .lang-dropdown.is-open {
+      display: flex;
+      animation: langDropdownIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes langDropdownIn {
+      from {
+        opacity: 0;
+        transform: translateY(-6px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .lang-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      border: none;
+      background: transparent;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      font-weight: 500;
+      font-family: inherit;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.12s ease, color 0.12s ease;
+    }
+
+    .lang-option:hover {
+      background: rgba(255, 255, 255, 0.07);
+      color: #ffffff;
+    }
+
+    .lang-option.active {
+      background: rgba(245, 158, 11, 0.12);
+      color: #ffffff;
+    }
+
+    .lang-option .lang-check {
+      color: #f59e0b;
+      display: none;
+      flex-shrink: 0;
+    }
+
+    .lang-option.active .lang-check {
+      display: block;
+    }
+
+    @media (max-width: 680px) {
+      .lang-dropdown {
+        left: 0;
+        right: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .lang-btn {
+        width: 32px;
+        height: 32px;
+      }
+      .nav-actions {
+        gap: 0.45rem;
+      }
+      .btn-text-source {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .site-nav {
+        display: none;
+      }
+    }
+
+    /* Footer */
+    footer.site-footer {
+      border-top: 1px solid var(--site-border);
+      background: var(--site-bg);
+      padding: 3.5rem 0 2.5rem;
+      margin-top: auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    .footer-brand p {
+      color: var(--site-text-secondary);
+      font-size: 0.92rem;
+      margin-top: 0.75rem;
+      max-width: 26rem;
+    }
+
+    .footer-col h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--site-text-muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .footer-links a {
+      color: var(--site-text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--site-text);
+      text-decoration: none;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--site-border-subtle);
+      padding-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--site-text-muted);
+    }
+
+    .footer-credit {
+      margin-left: auto;
+      text-align: right;
+    }
+
+    @media (max-width: 680px) {
+      .footer-bottom {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+      }
+      .footer-credit {
+        text-align: right;
+        align-self: flex-end;
+      }
+    }
+
+    /* Motion Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+  
+<style>
+  /* ── Hero Section ────────────────────────────────────────── */
+  .hero-section {
+    padding: 3rem 0 3.5rem;
+    position: relative;
+  }
+
+  .hero-header {
+    max-width: 820px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-footer {
+    max-width: 820px;
+    margin: 3rem auto 0;
+    text-align: center;
+  }
+
+  .hero-badge-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.35rem 0.9rem;
+    background: var(--site-bg-surface);
+    border: 1px solid var(--site-border);
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    color: var(--site-text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--app-primary);
+    box-shadow: 0 0 8px var(--app-primary);
+  }
+
+  .hero-title {
+    font-size: clamp(2.3rem, 5.2vw, 3.8rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    color: var(--site-text);
+    margin-bottom: 1.25rem;
+    text-wrap: balance;
+  }
+
+  .hero-description {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    line-height: 1.6;
+    color: var(--site-text-secondary);
+    max-width: 44rem;
+    margin: 0 auto;
+    text-wrap: pretty;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .hero-cta-group .btn {
+    min-width: 224px;
+    justify-content: center;
+  }
+
+  .trust-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.8rem;
+    flex-wrap: wrap;
+    font-size: 0.88rem;
+    color: var(--site-text-muted);
+  }
+
+  .trust-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .trust-item svg {
+    color: var(--app-primary);
+  }
+
+  /* ── Multi-Platform Device Showcase (Desktop + Mobile) ────── */
+  .showcase-scene {
+    position: relative;
+    max-width: 1140px;
+    margin: 1rem auto 0;
+    perspective: 1800px;
+    perspective-origin: 50% 50%;
+  }
+
+  .showcase-pivot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    transform-style: preserve-3d;
+    transform-origin: center center;
+  }
+
+  /* Linux Desktop Window */
+  .showcase-desktop {
+    flex: 1 1 760px;
+    max-width: 800px;
+    background: #0d1719;
+    border: 1px solid rgba(179, 229, 92, 0.18);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 28px 70px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(179, 229, 92, 0.05);
+    transform: rotateY(20deg) rotateX(3deg);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  }
+
+  .showcase-desktop:hover {
+    transform: rotateY(15deg) rotateX(1deg);
+  }
+
+  .desktop-titlebar {
+    background: #0b1416;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    user-select: none;
+  }
+
+  .linux-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .control-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+  }
+  .dot-red { background: #ef4444; opacity: 0.85; }
+  .dot-yellow { background: #facc15; opacity: 0.85; }
+  .dot-green { background: #10b981; opacity: 0.85; }
+
+  .desktop-titlebar-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--site-text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .titlebar-shield-icon {
+    color: var(--site-accent);
+  }
+
+  .desktop-titlebar-status {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.74rem;
+    font-family: var(--font-mono);
+    color: var(--site-accent);
+  }
+
+  .sync-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--site-accent);
+    animation: pulse-green 2.5s infinite;
+  }
+
+  @keyframes pulse-green {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.9); }
+  }
+
+  .desktop-screen {
+    position: relative;
+    background: #080f11;
+    line-height: 0;
+  }
+
+  .desktop-screen-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Pixel Smartphone Chassis */
+  .showcase-mobile {
+    flex: 0 0 270px;
+    width: 270px;
+    transform: rotateY(-20deg) rotateX(4deg) translateZ(30px) translateY(14px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  }
+
+  .showcase-mobile:hover {
+    transform: rotateY(-22deg) rotateX(2deg) translateZ(40px) translateY(10px);
+  }
+
+  .pixel-phone {
+    background: #000000;
+    border: 2.5px solid #203035;
+    border-radius: 36px;
+    padding: 5px;
+    line-height: 0;
+    box-shadow: 0 32px 75px -10px rgba(0, 0, 0, 0.85), 0 0 35px rgba(179, 229, 92, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  }
+
+  .pixel-screen {
+    position: relative;
+    border-radius: 31px;
+    overflow: hidden;
+    line-height: 0;
+    background: #000000;
+  }
+
+  .pixel-camera {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #04080a;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), inset 0 0 2px rgba(255, 255, 255, 0.15);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .mobile-screen-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ── Core Architecture Section ───────────────────────────── */
+  section.content-section {
+    padding: 5.5rem 0;
+    border-top: 1px solid var(--site-border);
+  }
+
+  .section-intro {
+    max-width: 720px;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-eyebrow {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--site-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-heading {
+    font-size: clamp(1.8rem, 3.8vw, 2.6rem);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+    color: var(--site-text);
+    margin-bottom: 1rem;
+    text-wrap: balance;
+  }
+
+  .section-lede {
+    font-size: 1.12rem;
+    line-height: 1.6;
+    color: var(--site-text-secondary);
+    text-wrap: pretty;
+  }
+
+  .arch-diagram-card {
+    background: var(--site-bg-surface);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .arch-flow-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    position: relative;
+  }
+
+  @media (max-width: 860px) {
+    .arch-flow-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .arch-node {
+    background: var(--site-bg-elevated);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .arch-node-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--app-primary);
+    font-weight: 600;
+  }
+
+  .arch-node h4 {
+    font-size: 1.15rem;
+    color: var(--site-text);
+    font-weight: 700;
+  }
+
+  .arch-node p {
+    font-size: 0.92rem;
+    color: var(--site-text-secondary);
+    line-height: 1.55;
+    flex-grow: 1;
+  }
+
+  .arch-node-spec {
+    display: inline-block;
+    align-self: flex-start;
+    margin-top: 0.85rem;
+    padding: 0.25rem 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--site-accent);
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: var(--radius-sm);
+    line-height: 1.4;
+  }
+
+  /* ── Deep Capabilities (Asymmetrical) ────────────────────── */
+  .capabilities-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 1.75rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .capabilities-grid-reverse {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 1.75rem;
+  }
+
+  @media (max-width: 860px) {
+    .capabilities-grid, .capabilities-grid-reverse {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .feature-panel {
+    background: var(--site-bg-surface);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .feature-panel-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .feature-panel-header h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--site-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-panel-header p {
+    color: var(--site-text-secondary);
+  }
+
+  .feature-visual {
+    margin: 1.15rem 0 1.35rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--site-border);
+    background: var(--site-bg-elevated);
+    padding: 0.9rem;
+    overflow: hidden;
+  }
+
+  .ext-shots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    align-items: start;
+  }
+
+  .ext-shots img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    border: 1px solid var(--site-border-subtle);
+    display: block;
+  }
+
+  @media (max-width: 640px) {
+    .ext-shots {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .agent-mock {
+    border-left: 3px solid #f59e0b;
+    padding: 0.85rem 1rem;
+    border-radius: 0.5rem;
+    background: rgba(15, 23, 42, 0.65);
+    font-size: 0.8rem;
+  }
+
+  .agent-mock-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--site-text);
+    margin-bottom: 0.35rem;
+  }
+
+  .agent-mock-sub {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--site-text-muted);
+    margin-bottom: 0.6rem;
+  }
+
+  .agent-mock-box {
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid var(--site-border-subtle);
+    border-radius: 0.35rem;
+    padding: 0.45rem 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--site-text-secondary);
+    margin-bottom: 0.55rem;
+  }
+
+  .agent-mock-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.65rem;
+  }
+
+  .agent-mock-btn {
+    flex: 1;
+    text-align: center;
+    padding: 0.38rem 0.5rem;
+    border-radius: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    border: 1px solid var(--site-border);
+    color: var(--site-text-secondary);
+  }
+
+  .agent-mock-btn-primary {
+    border-color: var(--site-accent);
+    color: var(--site-accent);
+    background: rgba(56, 189, 248, 0.08);
+  }
+
+  .calm-note {
+    margin: 2.5rem 0 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.5rem 2rem;
+    border-radius: var(--radius-lg);
+    background: var(--site-bg-surface);
+    border: 1px solid var(--site-border);
+  }
+
+  .calm-note-media {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+  }
+
+  .calm-note-credit {
+    position: absolute;
+    bottom: 0.45rem;
+    left: 0.5rem;
+    font-size: 0.5rem;
+    line-height: 1.2;
+    font-family: var(--font-mono);
+    color: rgba(255, 255, 255, 0.82);
+    background: rgba(4, 6, 10, 0.65);
+    padding: 0.14rem 0.42rem;
+    border-radius: 0.25rem;
+    pointer-events: none;
+  }
+
+  .arch-infographic {
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--site-border-subtle);
+  }
+
+  .arch-infographic svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .arch-svg-mobile {
+    display: none !important;
+  }
+
+  @media (max-width: 720px) {
+    .arch-svg-desktop {
+      display: none !important;
+    }
+
+    .arch-svg-mobile {
+      display: block !important;
+      max-width: 340px;
+      margin: 0 auto;
+    }
+  }
+
+  .calm-note-img {
+    width: 100%;
+    height: 220px;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    object-position: center 82%;
+    display: block;
+    border: 1px solid var(--site-border-subtle);
+  }
+
+  .calm-note-title {
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+    font-weight: 700;
+    color: var(--site-text);
+    margin: 0 0 0.55rem;
+    line-height: 1.2;
+  }
+
+  .calm-note-caption {
+    font-size: clamp(1rem, 1.4vw, 1.12rem);
+    color: var(--site-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (max-width: 680px) {
+    .calm-note {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 1.35rem;
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .calm-note-media {
+      height: 100%;
+      min-height: 220px;
+    }
+
+    .calm-note-img {
+      width: 100%;
+      height: 100%;
+      min-height: 220px;
+    }
+
+    .calm-note > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0.5rem 0.25rem;
+    }
+  }
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .feature-spec-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .spec-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    color: var(--site-text-secondary);
+  }
+
+  .spec-item svg {
+    color: var(--app-primary);
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+  }
+
+  /* ── Interactive CLI Section ─────────────────────────────── */
+  .terminal-wrapper {
+    background: #050608;
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    font-family: var(--font-mono);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  }
+
+  .terminal-tabs {
+    display: flex;
+    align-items: center;
+    background: #090c12;
+    border-bottom: 1px solid var(--site-border);
+    overflow-x: auto;
+  }
+
+  .term-tab {
+    padding: 0.65rem 1.1rem;
+    background: transparent;
+    border: none;
+    border-right: 1px solid var(--site-border);
+    color: var(--site-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.12s;
+    white-space: nowrap;
+  }
+
+  .term-tab:hover {
+    color: var(--site-text);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .term-tab.active {
+    color: var(--app-primary);
+    background: #050608;
+    border-bottom: 1px solid #050608;
+    font-weight: 600;
+  }
+
+  .terminal-screen {
+    padding: 1.5rem;
+    min-height: 280px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #e2e8f0;
+    overflow-x: auto;
+  }
+
+  .term-line {
+    margin-bottom: 0.25rem;
+  }
+
+  .term-prompt {
+    color: var(--app-primary);
+    font-weight: 700;
+  }
+
+  .term-out-dim {
+    color: #64748b;
+  }
+
+  .term-out-highlight {
+    color: var(--app-primary);
+  }
+
+  .term-out-warning {
+    color: var(--app-warning);
+  }
+
+  /* ── Security White Paper Banner ─────────────────────────── */
+  .security-feature-card {
+    background: var(--site-bg-surface);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-xl);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (max-width: 860px) {
+    .security-feature-card {
+      grid-template-columns: minmax(0, 1fr);
+      padding: 2rem;
+    }
+  }
+
+  .crypto-spec-card {
+    background: var(--site-bg-elevated);
+    border: 1px solid var(--site-border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .crypto-spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .crypto-spec-table td {
+    padding: 0.65rem 0.75rem;
+    border-bottom: 1px solid var(--site-border-subtle);
+  }
+
+  .crypto-spec-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .crypto-spec-table .spec-name {
+    color: var(--site-text-muted);
+    font-weight: 500;
+  }
+
+  .crypto-spec-table .spec-value {
+    font-family: var(--font-mono);
+    color: var(--app-primary);
+    text-align: right;
+    word-break: break-word;
+  }
+
+  /* ── Download Hub ────────────────────────────────────────── */
+  .dl-options-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .dl-options-grid-two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 860px) {
+    .dl-options-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 560px) {
+    .dl-options-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .dl-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    background: var(--site-bg-surface);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-md);
+    padding: 1.3rem;
+    color: var(--site-text);
+    transition: all 0.15s ease;
+  }
+
+  .dl-card .badge-beta {
+    top: -11px;
+    right: -11px;
+    font-size: 0.68rem;
+    padding: 0.3rem 0.7rem;
+  }
+
+  .dl-card:hover {
+    border-color: var(--site-accent);
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  .dl-card-tag {
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    color: var(--site-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+
+  .dl-card-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .dl-card-name img {
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-right: 0.45rem;
+    vertical-align: -0.18em;
+  }
+
+  .dl-card-desc {
+    font-size: 0.85rem;
+    color: var(--site-text-secondary);
+    margin-bottom: 1rem;
+  }
+
+  .dl-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--site-accent);
+  }
+
+  .dl-card-disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .dl-card.dl-card-disabled > *:not(.dl-soon-overlay) {
+    filter: blur(6px);
+    user-select: none;
+  }
+
+  .dl-soon-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dl-soon-overlay span {
+    padding: 0.45rem 1rem;
+    border: 1px solid var(--site-accent);
+    border-radius: 999px;
+    background: rgba(7, 9, 13, 0.78);
+    color: var(--site-accent);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  /* SmartScreen hint modal */
+  .dl-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .dl-modal.is-open {
+    display: flex;
+  }
+
+  .dl-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(4, 6, 10, 0.7);
+    backdrop-filter: blur(4px);
+  }
+
+  .dl-modal-card {
+    position: relative;
+    width: 100%;
+    max-width: 30rem;
+    background: var(--site-bg-surface);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 1.5rem 1.3rem;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+    outline: none;
+  }
+
+  .dl-modal-card h4 {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin: 0 2rem 0.95rem 0;
+    padding: 0.32rem 0.8rem;
+    border-radius: 999px;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: #fca5a5;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.3;
+  }
+
+  .dl-modal-card h4::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ef4444;
+    flex-shrink: 0;
+  }
+
+  .dl-modal-card p {
+    margin: 0 0 1.1rem;
+    color: var(--site-text-muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .dl-modal-x {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.65rem;
+    background: none;
+    border: none;
+    color: var(--site-text-muted);
+    font-size: 1.35rem;
+    line-height: 1;
+    padding: 0.3rem;
+    cursor: pointer;
+  }
+
+  .dl-modal-link {
+    display: inline-block;
+    color: #38bdf8;
+    text-decoration: none;
+    font-size: 0.92rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .dl-modal-link:hover {
+    text-decoration: underline;
+  }
+
+  .dl-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .dl-modal-btn {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    border: 1px solid var(--site-accent);
+    color: var(--site-accent);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .dl-modal-btn:hover {
+    background: rgba(56, 189, 248, 0.08);
+  }
+
+  /* Package Manager Details */
+  .repo-accordion {
+    background: var(--site-bg-surface);
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-lg);
+    margin-top: 1.5rem;
+    overflow: hidden;
+  }
+
+  .repo-accordion summary {
+    padding: 1.1rem 1.4rem;
+    font-weight: 600;
+    font-size: 0.98rem;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .repo-accordion summary:hover {
+    background: var(--site-bg-elevated);
+  }
+
+  .repo-accordion-body {
+    padding: 0 1.4rem 1.5rem;
+    border-top: 1px solid var(--site-border-subtle);
+  }
+
+  .repo-snippet-box {
+    margin: 1rem 0;
+    position: relative;
+  }
+
+  .repo-code-wrap {
+    position: relative;
+  }
+
+  .repo-snippet-box pre {
+    background: #050608;
+    border: 1px solid var(--site-border);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.1rem;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: #e2e8f0;
+    overflow-x: auto;
+  }
+
+  .repo-copy-btn {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.55rem;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--site-border);
+    color: #94a3b8;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 0.28rem 0.7rem;
+    border-radius: 999px;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .repo-copy-btn:hover {
+    color: #f1f5f9;
+    border-color: #38bdf8;
+  }
+
+  .repo-copy-btn.copied {
+    color: #b3e55c;
+    border-color: #b3e55c;
+    background: rgba(179, 229, 92, 0.08);
+  }
+
+  /* ── Comprehensive Responsive Breakpoints ────────────────── */
+  @media (max-width: 860px) {
+    .showcase-scene {
+      margin-top: 0.75rem;
+      perspective: 900px;
+      overflow: visible;
+    }
+    .showcase-pivot {
+      flex-direction: column;
+      transform: none !important;
+      gap: 3rem;
+      transform-style: preserve-3d;
+    }
+    .showcase-mobile {
+      order: 1;
+      flex: 0 0 auto;
+      width: 250px;
+      margin: 0 auto;
+      transform: perspective(850px) rotateY(-20deg) rotateX(4deg);
+      transform-origin: center center;
+      transition: box-shadow 0.3s ease;
+    }
+    .showcase-desktop {
+      order: 2;
+      flex: 0 0 auto;
+      width: 86%;
+      max-width: 520px;
+      margin: 0 auto;
+      transform: perspective(850px) rotateY(24deg) rotateX(4deg);
+      transform-origin: center center;
+      transition: box-shadow 0.3s ease;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .showcase-mobile {
+      width: 230px;
+      transform: perspective(700px) rotateY(-20deg) rotateX(4deg);
+    }
+    .showcase-desktop {
+      width: 88%;
+      transform: perspective(700px) rotateY(22deg) rotateX(4deg);
+    }
+  }
+
+  @media (max-width: 680px) {
+    .showcase-scene {
+      margin-top: 0.5rem;
+    }
+    .desktop-titlebar-status {
+      display: none;
+    }
+    .desktop-titlebar-title {
+      font-size: 0.74rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .showcase-mobile {
+      width: 240px;
+    }
+    .hero-cta-group .btn {
+      width: 100%;
+      min-width: 0;
+    }
+    .trust-strip {
+      flex-direction: column;
+      gap: 0.6rem;
+      align-items: flex-start;
+      margin: 0 auto;
+      display: inline-flex;
+    }
+    .arch-diagram-card {
+      padding: 1.5rem 1.25rem;
+    }
+    .feature-panel {
+      padding: 1.5rem 1.25rem;
+    }
+    .terminal-screen {
+      padding: 1.1rem 0.9rem;
+      font-size: 0.8rem;
+    }
+    .security-feature-card {
+      padding: 1.5rem 1.15rem;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+      overflow: hidden;
+    }
+    .security-feature-card > div {
+      min-width: 0;
+      max-width: 100%;
+    }
+    .security-feature-card h2 {
+      font-size: 1.65rem !important;
+    }
+    .security-feature-card .btn {
+      width: 100%;
+      min-width: 0;
+      white-space: normal;
+      text-align: center;
+      padding: 0.8rem 1rem;
+      font-size: 0.9rem;
+      line-height: 1.35;
+    }
+    .crypto-spec-card {
+      padding: 0.85rem 0.65rem;
+    }
+    .crypto-spec-table {
+      font-size: 0.78rem;
+    }
+    .crypto-spec-table td {
+      padding: 0.55rem 0.35rem;
+    }
+  }
+
+  /* ── Apple-Style Scroll Reveal System ─────────────────────── */
+  @media (prefers-reduced-motion: no-preference) {
+    html.js-reveal-ready .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    html.js-reveal-ready .reveal-on-scroll.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+      will-change: auto;
+    }
+
+    /* Hero section: 500ms initial delay before entrance cascade */
+    html.js-reveal-ready .hero-reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    html.js-reveal-ready .hero-reveal.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+      will-change: auto;
+    }
+
+    html.js-reveal-ready .hero-title.hero-reveal { transition-delay: 0s; }
+    html.js-reveal-ready .hero-description.hero-reveal { transition-delay: 0.12s; }
+    html.js-reveal-ready .showcase-scene.hero-reveal { transition-delay: 0.24s; }
+    html.js-reveal-ready .hero-cta-group.hero-reveal { transition-delay: 0.36s; }
+    html.js-reveal-ready .trust-strip.hero-reveal { transition-delay: 0.48s; }
+
+    /* Staggered cascades for grouped cards */
+    html.js-reveal-ready .reveal-group > .reveal-on-scroll:nth-child(1) { transition-delay: 0.04s; }
+    html.js-reveal-ready .reveal-group > .reveal-on-scroll:nth-child(2) { transition-delay: 0.12s; }
+    html.js-reveal-ready .reveal-group > .reveal-on-scroll:nth-child(3) { transition-delay: 0.20s; }
+    html.js-reveal-ready .reveal-group > .reveal-on-scroll:nth-child(4) { transition-delay: 0.28s; }
+    html.js-reveal-ready .reveal-group > .reveal-on-scroll:nth-child(5) { transition-delay: 0.36s; }
+    html.js-reveal-ready .reveal-group > .reveal-on-scroll:nth-child(6) { transition-delay: 0.44s; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-on-scroll,
+    .hero-reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a href="/" class="brand-wrap" aria-label="Baluard Homepage">
+        <svg class="brand-logo-img" viewBox="0 0 512 512" width="34" height="34" aria-hidden="true">
+          <defs>
+            <linearGradient id="shackle-grad-hdr" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ded8fc" />
+              <stop offset="100%" stop-color="#cfc6f9" />
+            </linearGradient>
+            <linearGradient id="body-grad-hdr" x1="20%" y1="0%" x2="80%" y2="100%">
+              <stop offset="0%" stop-color="#c5f279" />
+              <stop offset="50%" stop-color="#b3e55c" />
+              <stop offset="100%" stop-color="#9dce47" />
+            </linearGradient>
+          </defs>
+          <path d="M 172 205 V 150 C 172 103 209 66 256 66 C 303 66 340 103 340 150 V 205 H 294 V 150 C 294 128 277 111 256 111 C 235 111 218 128 218 150 V 205 Z" fill="url(#shackle-grad-hdr)" />
+          <path d="M 136 205 H 184 V 228 H 228 V 205 H 284 V 228 H 328 V 205 H 376 C 384 205 388 209 388 217 V 405 C 388 424 374 438 355 438 H 157 C 138 438 124 424 124 405 V 217 C 124 209 128 205 136 205 Z" fill="url(#body-grad-hdr)" />
+          <path d="M317.8351477449456 361.56298600311044Q317.8351477449456 347.19284603421465 304.98911353032656 337.6127527216174L281.6920684292379 320.4121306376361L295.6267496111975 309.5256609642302Q303.02954898911355 303.646967340591 303.02954898911355 294.50233281493Q303.02954898911355 280.56765163297047 288.8771384136858 272.07620528771383Q276.68429237947123 264.89113530326597 262.0964230171073 264.89113530326597Q248.59720062208396 264.89113530326597 226.82426127527214 273.38258164852255Q211.800933125972 279.04354587869364 203.09175738724727 282.3094867807154Q194.38258164852255 285.5754276827372 191.98755832037324 286.01088646967344V291.0186625194401Q205.05132192846034 296.8973561430793 205.05132192846034 315.6220839813375V377.45723172628306Q205.05132192846034 383.9891135303266 199.17262830482113 394.0046656298601L193.51166407465007 403.8024883359254V408.37480559875587Q202.00311041990668 404.67340590979785 204.18040435458786 404.0202177293935Q208.09953343701397 402.27838258164854 216.3732503888025 402.27838258164854Q223.12286158631414 402.27838258164854 237.71073094867805 405.3265940902022Q252.29860031104198 408.37480559875587 259.04821150855366 408.37480559875587Q276.248833592535 408.37480559875587 296.27993779160187 393.78693623639197Q317.8351477449456 377.8926905132193 317.8351477449456 361.56298600311044ZM278.6438569206843 294.50233281493Q278.6438569206843 302.99377916018665 269.71695178849143 311.9206842923795Q264.7091757387247 316.9284603421462 250.3390357698289 325.2021772939347Q244.67807153965785 328.4681181959565 240.3234836702955 331.40746500777607Q235.96889580093313 334.3468118195957 232.92068429237946 336.74183514774495Q232.48522550544322 336.3063763608087 231.61430793157075 336.3063763608087Q231.61430793157075 336.3063763608087 229.43701399688956 336.74183514774495L229.00155520995332 319.5412130637636L228.7838258164852 302.1228615863142Q228.34836702954897 290.58320373250393 238.14618973561429 282.3094867807154Q247.50855365474337 274.68895800933126 259.04821150855366 274.68895800933126Q262.9673405909798 274.68895800933126 266.55987558320373 276.3219284603422Q270.15241057542767 277.95489891135304 272.7651632970451 280.67651632970455Q275.3779160186625 283.398133748056 277.01088646967344 286.99066874027994Q278.6438569206843 290.58320373250393 278.6438569206843 294.50233281493ZM288.4416796267496 372.8849144634526Q288.4416796267496 382.4650077760498 279.29704510108866 389.8678071539658Q269.93468118195955 397.48833592534993 260.57231726283044 397.48833592534993Q244.2426127527216 397.48833592534993 236.18662519440124 383.5536547433904Q229.43701399688956 372.23172628304826 229.43701399688956 354.81337480559876Q229.43701399688956 351.76516329704515 240.5412130637636 344.144634525661Q251.86314152410574 336.74183514774495 255.78227060653188 336.74183514774495Q262.7496111975116 336.74183514774495 275.59564541213064 351.1119751166408Q288.4416796267496 365.6998444790047 288.4416796267496 372.8849144634526Z" fill="#091315" />
+        </svg>
+        <span class="brand-title">Baluard</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Main Navigation">
+        <a href="/#architecture" class="nav-link" data-i18n="nav-arch">Architecture</a>
+        <a href="/#features" class="nav-link" data-i18n="nav-features">Features</a>
+        <a href="/#security" class="nav-link" data-i18n="nav-security">Security Model</a>
+        <a href="/#download" class="nav-link" data-i18n="nav-download">Download</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="lang-switcher" id="lang-switcher">
+          <button type="button" class="lang-btn" id="lang-btn" aria-expanded="false" aria-haspopup="listbox" aria-label="Change language">
+            <svg class="globe-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+              <path d="M2 12h20"></path>
+            </svg>
+          </button>
+          <div class="lang-dropdown" id="lang-dropdown" role="listbox" aria-label="Select language">
+            <button type="button" class="lang-option active" role="option" aria-selected="true" data-lang="en">
+              <span class="lang-name">English</span>
+              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <button type="button" class="lang-option" role="option" aria-selected="false" data-lang="es">
+              <span class="lang-name">Español</span>
+              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <button type="button" class="lang-option" role="option" aria-selected="false" data-lang="fr">
+              <span class="lang-name">Français</span>
+              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <button type="button" class="lang-option" role="option" aria-selected="false" data-lang="pt">
+              <span class="lang-name">Português (Brasil)</span>
+              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <a href="https://github.com/baluard-org/baluard" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" aria-label="GitHub Repository">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span class="btn-text-source" data-i18n="nav-source">Source</span>
+        </a>
+        <a href="/#download" class="btn btn-primary btn-sm"><span data-i18n="nav-get-baluard">Get Baluard</span><span class="badge-beta" aria-label="beta release">beta</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    
+<!-- ── HERO SECTION ────────────────────────────────────────── -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-header">
+      <h1 class="hero-title hero-reveal" data-i18n="hero-title">
+        No one can take it away. Including us.
+      </h1>
+
+      <p class="hero-description hero-reveal" data-i18n="hero-pitch">
+        Your passwords stay on your devices and sync through a Git repo you own, or directly between your devices, peer to peer. No central server to breach, no account to lock, and AI agents can use secrets without ever reading them.
+      </p>
+    </div>
+
+    <!-- ── DUAL PLATFORM SHOWCASE (DESKTOP + MOBILE) ─────────── -->
+    <div class="showcase-scene hero-reveal" id="app-showcase" aria-label="Baluard Desktop and Mobile Applications Preview">
+      <div class="showcase-pivot">
+        <!-- Linux Desktop Window -->
+        <div class="showcase-desktop">
+          <div class="desktop-titlebar" aria-hidden="true">
+            <div class="linux-controls">
+              <span class="control-dot dot-red"></span>
+              <span class="control-dot dot-yellow"></span>
+              <span class="control-dot dot-green"></span>
+            </div>
+            <div class="desktop-titlebar-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="titlebar-shield-icon" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.5-8 11-4.5-1.5-8-6-8-11V5l8-3z"/></svg>
+              <span>Baluard: personal-vault.git</span>
+            </div>
+            <div class="desktop-titlebar-status">
+              <span class="sync-dot"></span>
+              <span>SYNCED (HEAD 4f29a0b)</span>
+            </div>
+          </div>
+          <div class="desktop-screen">
+            <img src="/assets/desktop-totp-dark.png" alt="Baluard desktop password vault application interface" width="1200" height="700" loading="lazy" decoding="async" class="desktop-screen-img">
+          </div>
+        </div>
+
+        <!-- Pixel Smartphone Frame -->
+        <div class="showcase-mobile">
+          <div class="pixel-phone">
+            <div class="pixel-screen">
+              <div class="pixel-camera" aria-hidden="true"></div>
+              <img src="/assets/mobile-vault-dark.png" alt="Baluard mobile password vault application interface" width="1080" height="2340" loading="lazy" decoding="async" class="mobile-screen-img">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-footer">
+      <div class="hero-cta-group hero-reveal">
+        <a href="/security/" class="btn btn-ghost">
+          <span data-i18n="hero-btn-paper">Security White Paper &rarr;</span>
+        </a>
+        <a href="#download" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="hero-btn-download">Download</span>
+          <span class="badge-beta" aria-label="beta release">beta</span>
+        </a>
+      </div>
+
+      <div class="trust-strip hero-reveal">
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-i18n="trust-offline">100% Offline Capable</span>
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-i18n="trust-noserver">Zero Central Servers</span>
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-i18n="trust-license">GPL-3.0-or-later Free Software</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ARCHITECTURE SECTION ────────────────────────────────── -->
+<section id="architecture" class="content-section">
+  <div class="container">
+    <div class="section-intro reveal-on-scroll">
+      <div class="section-eyebrow" data-i18n="arch-eyebrow">Zero-Server Architecture</div>
+      <h2 class="section-heading" data-i18n="arch-heading">Why the architecture is the security model.</h2>
+      <p class="section-lede" data-i18n="arch-lede">
+        Most password managers store everyone's vaults in one giant cloud database. If that company gets breached or sold to another company or a private equity firm, your encrypted passwords and unencrypted metadata end up in new hands. Hands that might not care about your data safety or independence. Baluard works like a personal safe in your home: your passwords stay on your own hardware, so there is no central database to break into.
+      </p>
+    </div>
+
+    <div class="arch-diagram-card reveal-on-scroll">
+      <div class="arch-infographic">
+        <svg class="arch-svg-desktop" viewBox="0 0 880 185" role="img" aria-label="Zero-server sync flow: Your Device (AES-256-GCM) syncs through Your Git Repo or Folder, or directly peer to peer, to Your Other Devices with no Baluard server in the middle">
+          <defs>
+            <marker id="arch-arrow-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 1 2 L 8 5 L 1 8 z" fill="#38bdf8" />
+            </marker>
+            <marker id="arch-arrow-l" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 9 2 L 2 5 L 9 8 z" fill="#38bdf8" />
+            </marker>
+          </defs>
+
+          <!-- Left node: Your Device (Laptop + Lock icon) -->
+          <rect x="8" y="12" width="224" height="122" rx="12" fill="rgba(56, 189, 248, 0.06)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.2" />
+          <g transform="translate(96, 24)" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="4" width="36" height="24" rx="3" fill="rgba(56, 189, 248, 0.1)" />
+            <path d="M 2 32 H 46" />
+            <rect x="19" y="13" width="10" height="8" rx="1.5" fill="#0f172a" />
+            <path d="M 21 13 v-2.5 a 3 3 0 0 1 6 0 V 13" />
+          </g>
+          <text x="120" y="80" text-anchor="middle" fill="currentColor" font-size="14.5" font-weight="700" font-family="system-ui, -apple-system, sans-serif">Your Device</text>
+          <text x="120" y="100" text-anchor="middle" fill="#38bdf8" font-size="11.5" font-family="ui-monospace, monospace">AES-256-GCM</text>
+          <text x="120" y="120" text-anchor="middle" fill="#94a3b8" font-size="11" font-family="system-ui, -apple-system, sans-serif">Keys stay local</text>
+
+          <!-- Arrow 1 + sealed packet icon -->
+          <line x1="242" y1="73" x2="318" y2="73" stroke="#38bdf8" stroke-width="1.8" marker-start="url(#arch-arrow-l)" marker-end="url(#arch-arrow-r)" />
+          <rect x="264" y="46" width="32" height="16" rx="4" fill="#0f172a" stroke="rgba(56, 189, 248, 0.45)" stroke-width="1" />
+          <text x="280" y="57" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="ui-monospace, monospace">0x..</text>
+
+          <!-- Center node: Your Git Repo / Folder (Folder + Git branch icon) -->
+          <rect x="328" y="12" width="224" height="122" rx="12" fill="rgba(148, 163, 184, 0.05)" stroke="rgba(148, 163, 184, 0.35)" stroke-width="1.2" stroke-dasharray="5 4" />
+          <g transform="translate(416, 24)" fill="none" stroke="#cbd5e1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 4 8 a 3 3 0 0 1 3 -3 h 10 l 4 4 h 20 a 3 3 0 0 1 3 3 v 18 a 3 3 0 0 1 -3 3 H 7 a 3 3 0 0 1 -3 -3 z" fill="rgba(148, 163, 184, 0.1)" />
+            <circle cx="19" cy="18" r="2.2" fill="#38bdf8" stroke="none" />
+            <circle cx="29" cy="24" r="2.2" fill="#38bdf8" stroke="none" />
+            <path d="M 19 20.2 V 25 M 19 20.2 C 23 20.2 29 20 29 21.8" stroke="#38bdf8" stroke-width="1.5" />
+          </g>
+          <text x="440" y="80" text-anchor="middle" fill="currentColor" font-size="14.5" font-weight="700" font-family="system-ui, -apple-system, sans-serif">Your Git Repo / Folder</text>
+          <text x="440" y="100" text-anchor="middle" fill="#cbd5e1" font-size="11" font-family="ui-monospace, monospace">Git host, NAS, folder, or P2P</text>
+          <text x="440" y="120" text-anchor="middle" fill="#94a3b8" font-size="11" font-family="system-ui, -apple-system, sans-serif">Encrypted blobs only</text>
+
+          <!-- Arrow 2 + verified badge -->
+          <line x1="562" y1="73" x2="638" y2="73" stroke="#38bdf8" stroke-width="1.8" marker-start="url(#arch-arrow-l)" marker-end="url(#arch-arrow-r)" />
+          <rect x="577" y="46" width="46" height="16" rx="4" fill="#0f172a" stroke="rgba(56, 189, 248, 0.45)" stroke-width="1" />
+          <text x="600" y="57" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="ui-monospace, monospace">signed</text>
+
+          <!-- Right node: Your Other Devices (Phone + Terminal icon) -->
+          <rect x="648" y="12" width="224" height="122" rx="12" fill="rgba(56, 189, 248, 0.06)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.2" />
+          <g transform="translate(734, 24)" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="3" width="18" height="30" rx="3" fill="rgba(56, 189, 248, 0.1)" />
+            <line x1="11" y1="28" x2="15" y2="28" />
+            <rect x="26" y="7" width="22" height="22" rx="3" fill="rgba(56, 189, 248, 0.08)" />
+            <polyline points="31 15 35 18 31 21" stroke-width="1.5" />
+            <line x1="37" y1="21" x2="43" y2="21" stroke-width="1.5" />
+          </g>
+          <text x="760" y="80" text-anchor="middle" fill="currentColor" font-size="14.5" font-weight="700" font-family="system-ui, -apple-system, sans-serif">Your Other Devices</text>
+          <text x="760" y="100" text-anchor="middle" fill="#38bdf8" font-size="11.5" font-family="ui-monospace, monospace">Desktop, Mobile, CLI</text>
+          <text x="760" y="120" text-anchor="middle" fill="#94a3b8" font-size="11" font-family="system-ui, -apple-system, sans-serif">Offline-capable copy</text>
+
+          <!-- Bottom callout pill with crossed-out server icon -->
+          <rect x="292" y="148" width="296" height="28" rx="14" fill="rgba(239, 68, 68, 0.1)" stroke="rgba(239, 68, 68, 0.35)" stroke-width="1" />
+          <g transform="translate(306, 154)" fill="none" stroke="#ef4444" stroke-width="1.6" stroke-linecap="round">
+            <rect x="2" y="2" width="12" height="5" rx="1" />
+            <rect x="2" y="9" width="12" height="5" rx="1" />
+            <line x1="1" y1="15" x2="15" y2="1" />
+          </g>
+          <text x="451" y="166" text-anchor="middle" fill="#fca5a5" font-size="11.5" font-weight="600" font-family="ui-monospace, monospace">No Baluard server in the middle</text>
+        </svg>
+        <svg class="arch-svg-mobile" viewBox="0 0 340 470" role="img" aria-label="Zero-server sync flow: Your Device (AES-256-GCM) syncs through Your Git Repo or Folder, or directly peer to peer, to Your Other Devices with no Baluard server in the middle">
+          <defs>
+            <marker id="arch-m-arrow-d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 1 2 L 8 5 L 1 8 z" fill="#38bdf8" />
+            </marker>
+            <marker id="arch-m-arrow-u" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 9 2 L 2 5 L 9 8 z" fill="#38bdf8" />
+            </marker>
+          </defs>
+
+          <!-- Top node: Your Device -->
+          <rect x="14" y="8" width="312" height="104" rx="12" fill="rgba(56, 189, 248, 0.06)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.2" />
+          <g transform="translate(30, 42)" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="4" width="36" height="24" rx="3" fill="rgba(56, 189, 248, 0.1)" />
+            <path d="M 0 32 H 44" />
+            <rect x="17" y="13" width="10" height="8" rx="1.5" fill="#0f172a" />
+            <path d="M 19 13 v-2.5 a 3 3 0 0 1 6 0 V 13" />
+          </g>
+          <text x="92" y="45" fill="currentColor" font-size="15" font-weight="700" font-family="system-ui, -apple-system, sans-serif">Your Device</text>
+          <text x="92" y="67" fill="#38bdf8" font-size="12" font-family="ui-monospace, monospace">AES-256-GCM</text>
+          <text x="92" y="89" fill="#94a3b8" font-size="12" font-family="system-ui, -apple-system, sans-serif">Keys stay local</text>
+
+          <!-- Vertical Arrow 1 -->
+          <line x1="170" y1="118" x2="170" y2="152" stroke="#38bdf8" stroke-width="1.8" marker-start="url(#arch-m-arrow-u)" marker-end="url(#arch-m-arrow-d)" />
+          <rect x="184" y="126" width="84" height="18" rx="4" fill="#0f172a" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1" />
+          <text x="226" y="138" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="ui-monospace, monospace">ciphertext</text>
+
+          <!-- Center node: Your Git Repo / Folder -->
+          <rect x="14" y="158" width="312" height="104" rx="12" fill="rgba(148, 163, 184, 0.05)" stroke="rgba(148, 163, 184, 0.35)" stroke-width="1.2" stroke-dasharray="5 4" />
+          <g transform="translate(30, 192)" fill="none" stroke="#cbd5e1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 2 8 a 3 3 0 0 1 3 -3 h 10 l 4 4 h 20 a 3 3 0 0 1 3 3 v 18 a 3 3 0 0 1 -3 3 H 5 a 3 3 0 0 1 -3 -3 z" fill="rgba(148, 163, 184, 0.1)" />
+            <circle cx="17" cy="18" r="2.2" fill="#38bdf8" stroke="none" />
+            <circle cx="27" cy="24" r="2.2" fill="#38bdf8" stroke="none" />
+            <path d="M 17 20.2 V 25 M 17 20.2 C 21 20.2 27 20 27 21.8" stroke="#38bdf8" stroke-width="1.5" />
+          </g>
+          <text x="92" y="195" fill="currentColor" font-size="15" font-weight="700" font-family="system-ui, -apple-system, sans-serif">Your Git Repo / Folder</text>
+          <text x="92" y="217" fill="#cbd5e1" font-size="11.5" font-family="ui-monospace, monospace">Git host, NAS, folder, or P2P</text>
+          <text x="92" y="239" fill="#94a3b8" font-size="12" font-family="system-ui, -apple-system, sans-serif">Encrypted blobs only</text>
+
+          <!-- Vertical Arrow 2 -->
+          <line x1="170" y1="268" x2="170" y2="302" stroke="#38bdf8" stroke-width="1.8" marker-start="url(#arch-m-arrow-u)" marker-end="url(#arch-m-arrow-d)" />
+          <rect x="184" y="276" width="64" height="18" rx="4" fill="#0f172a" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1" />
+          <text x="216" y="288" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="ui-monospace, monospace">signed</text>
+
+          <!-- Bottom node: Your Other Devices -->
+          <rect x="14" y="308" width="312" height="104" rx="12" fill="rgba(56, 189, 248, 0.06)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.2" />
+          <g transform="translate(28, 342)" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="18" height="30" rx="3" fill="rgba(56, 189, 248, 0.1)" />
+            <line x1="9" y1="28" x2="13" y2="28" />
+            <rect x="24" y="7" width="22" height="22" rx="3" fill="rgba(56, 189, 248, 0.08)" />
+            <polyline points="29 15 33 18 29 21" stroke-width="1.5" />
+            <line x1="35" y1="21" x2="41" y2="21" stroke-width="1.5" />
+          </g>
+          <text x="92" y="345" fill="currentColor" font-size="15" font-weight="700" font-family="system-ui, -apple-system, sans-serif">Your Other Devices</text>
+          <text x="92" y="367" fill="#38bdf8" font-size="12" font-family="ui-monospace, monospace">Desktop, Mobile, CLI</text>
+          <text x="92" y="389" fill="#94a3b8" font-size="12" font-family="system-ui, -apple-system, sans-serif">Offline-capable copy</text>
+
+          <!-- Bottom callout pill -->
+          <rect x="22" y="428" width="296" height="30" rx="15" fill="rgba(239, 68, 68, 0.1)" stroke="rgba(239, 68, 68, 0.35)" stroke-width="1" />
+          <g transform="translate(36, 435)" fill="none" stroke="#ef4444" stroke-width="1.6" stroke-linecap="round">
+            <rect x="2" y="2" width="12" height="5" rx="1" />
+            <rect x="2" y="9" width="12" height="5" rx="1" />
+            <line x1="1" y1="15" x2="15" y2="1" />
+          </g>
+          <text x="181" y="447" text-anchor="middle" fill="#fca5a5" font-size="11.5" font-weight="600" font-family="ui-monospace, monospace">No Baluard server in the middle</text>
+        </svg>
+      </div>
+      <div class="arch-flow-grid reveal-group">
+        <div class="arch-node reveal-on-scroll">
+          <div class="arch-node-tag" data-i18n="arch-node-tag-1">LAYER 1 / WHERE YOUR DATA LIVES</div>
+          <h4 data-i18n="arch-node-h4-1">A Safe in Your Home</h4>
+          <p data-i18n="arch-node-p-1">
+            Your vault stays on your physical phone and computer, encrypted with a key only you hold. Every entry is padded to identical size so observers cannot guess what is inside.
+          </p>
+          <div class="arch-node-spec">AES-256-GCM &bull; Argon2id &bull; Size-Padded</div>
+        </div>
+
+        <div class="arch-node reveal-on-scroll">
+          <div class="arch-node-tag" data-i18n="arch-node-tag-2">LAYER 2 / HOW DEVICES CONNECT</div>
+          <h4 data-i18n="arch-node-h4-2">Keys Exchanged in Person</h4>
+          <p data-i18n="arch-node-p-2">
+            Your phone and computer pair directly with each other like two people swapping keys face-to-face. No central account, no corporate sign-in, and no company server in the middle.
+          </p>
+          <div class="arch-node-spec">Ed25519 Device Keys &bull; Local IPC Tokens</div>
+        </div>
+
+        <div class="arch-node reveal-on-scroll">
+          <div class="arch-node-tag" data-i18n="arch-node-tag-3">LAYER 3 / HOW VAULTS SYNC</div>
+          <h4 data-i18n="arch-node-h4-3">Your Git Repo, or Direct P2P</h4>
+          <p data-i18n="arch-node-p-3">
+            <a href="/what-the-git/">Sync your vault through a private Git repo</a>, your home server, or a USB drive. Or skip the storage host entirely with direct peer-to-peer sync between your enrolled devices. Both paths move signed, encrypted commits only.
+          </p>
+          <div class="arch-node-spec">Git-Native &amp; P2P Transport &bull; Signed Commits</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CORE CAPABILITIES ───────────────────────────────────── -->
+<section id="features" class="content-section">
+  <div class="container">
+    <div class="section-intro reveal-on-scroll">
+      <div class="section-eyebrow" data-i18n="cap-eyebrow">Sovereign Capabilities</div>
+      <h2 class="section-heading" data-i18n="cap-heading">Engineered for sovereignty and longevity.</h2>
+      <p class="section-lede" data-i18n="cap-lede">
+        Built for autonomy, durability, and device-level custody.
+      </p>
+    </div>
+
+    <!-- Capability 1 -->
+    <div class="capabilities-grid reveal-group">
+      <div class="feature-panel reveal-on-scroll">
+        <div class="feature-panel-header">
+          <h3 data-i18n="cap1-title">Built for LLM Agents, Safely</h3>
+          <p data-i18n="cap1-desc">
+            Let AI coding agents run commands with your credentials without ever seeing a secret. The daemon spawns the command, injects approved fields, and scrubs any leaked secret bytes from stdout and stderr. Agents can sign in to services with your approval, and your credentials are never seen by or sent to any LLM provider.
+          </p>
+        </div>
+        <div class="feature-visual" aria-label="Baluard agent credential approval prompt preview">
+          <div class="agent-mock">
+            <div class="agent-mock-head">
+              <span>Credential request</span>
+              <span style="color: #fbbf24;">15m grant</span>
+            </div>
+            <div class="agent-mock-sub">local agent &middot; /usr/bin/gh</div>
+            <div class="agent-mock-box">publish release &middot; baluard://GitHub/password</div>
+            <div class="agent-mock-actions">
+              <span class="agent-mock-btn">Deny</span>
+              <span class="agent-mock-btn agent-mock-btn-primary">Approve for 15 minutes</span>
+            </div>
+          </div>
+        </div>
+        <ul class="feature-spec-list">
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-i18n="cap1-s1">Process-bound, 15-minute default grants (configurable) with explicit human approval</span>
+          </li>
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-i18n="cap1-s2">Hash-chained local audit log records every command and grant</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="feature-panel reveal-on-scroll">
+        <div class="feature-panel-header">
+          <h3 data-i18n="cap2-title">Hardware Key Vault Sealing</h3>
+          <p data-i18n="cap2-desc">
+            Enroll a YubiKey or FIDO2 hardware token to seal the entire vault. Even if an adversary extracts your master password, the vault refuses to decrypt without a physical touch on your security key.
+          </p>
+        </div>
+        <ul class="feature-spec-list">
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-i18n="cap2-s1">Hardware challenge-response via FIDO2 hmac-secret</span>
+          </li>
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-i18n="cap2-s2">Canary verification validates authentication state without exposing master keys</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Capability 2 -->
+    <div class="capabilities-grid-reverse reveal-group">
+      <div class="feature-panel reveal-on-scroll">
+        <div class="feature-panel-header">
+          <h3 data-i18n="cap3-title">Spaces &amp; Family Collaboration</h3>
+          <p data-i18n="cap3-desc">
+            Share specific credential collections with family or team members without a central identity provider. Uses cryptographic invite codes and device-to-device grants.
+          </p>
+        </div>
+        <ul class="feature-spec-list">
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-i18n="cap3-s1">Phrase-only emergency recovery kit for estate and family continuity</span>
+          </li>
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-i18n="cap3-s2">Role-based access grants: Owner, Admin, Editor, and Viewer</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="feature-panel reveal-on-scroll">
+        <div class="feature-panel-header">
+          <h3 data-i18n="cap4-title">Browser Extension &amp; Autofill</h3>
+          <p data-i18n="cap4-desc">
+            Native browser integration for Firefox, Chrome, and Chromium-based browsers. Autofill credentials, capture new logins, and sign into WebAuthn passkeys directly through local daemon IPC.
+          </p>
+        </div>
+        <div class="feature-visual ext-shots">
+          <img src="./assets/extension-popup-dark.png" alt="Baluard browser extension popup showing matched entry and Fill/Copy actions" loading="lazy" decoding="async">
+          <img src="./assets/extension-inline-dark.png" alt="Baluard inline autofill menu inside a login form" loading="lazy" decoding="async">
+        </div>
+        <ul class="feature-spec-list">
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-i18n="cap4-s1">Direct local socket communication with zero cloud telemetry or analytics</span>
+          </li>
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Instant domain matching and one-click TOTP code filling</span>
+          </li>
+        </ul>
+        <div style="display: flex; gap: 0.75rem; margin-top: 1.25rem; flex-wrap: wrap;">
+          <a class="btn btn-ghost btn-sm" href="https://chromewebstore.google.com/detail/nmkmfkmdhbifkjdhioejeoegcjpaiijl" target="_blank" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 2.18c5.42 0 9.82 4.4 9.82 9.82 0 1.95-.57 3.77-1.56 5.31l-4.57-7.91h-3.69l4.57 7.91a9.78 9.78 0 0 1-4.57 1.13c-5.42 0-9.82-4.4-9.82-9.82 0-2.31.8-4.44 2.14-6.13l3.69 6.39h3.69l-3.69-6.39a9.74 9.74 0 0 1 3.99-.31z"/></svg>
+            <span>Chromium Extension</span>
+          </a>
+          <a class="btn btn-ghost btn-sm" href="https://addons.mozilla.org/firefox/addon/baluard/" target="_blank" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 6.628 5.373 12 12 12s12-5.372 12-12c0-6.627-5.373-12-12-12zm7.74 8.58c-.375 1.547-1.144 3.013-2.144 4.143-1.077 1.217-2.476 2.062-4.04 2.443-1.564.38-3.208.232-4.686-.423a6.837 6.837 0 0 1-3.238-3.084 7.026 7.026 0 0 1-.84-3.79c.14-1.332.697-2.584 1.583-3.56.886-.977 2.072-1.636 3.37-1.874 1.298-.238 2.637-.024 3.805.607 1.168.631 2.115 1.624 2.69 2.824.288.6.48 1.242.57 1.902a4.42 4.42 0 0 1-.03 1.408c-.12.593-.38 1.15-.75 1.62-.37.47-.85.83-1.39 1.05a3.17 3.17 0 0 1-1.63.19 3.04 3.04 0 0 1-1.42-.64 2.87 2.87 0 0 1-.88-1.3 3.02 3.02 0 0 1-.08-1.57c.12-.52.39-.99.78-1.35.39-.36.88-.58 1.4-.64.52-.06 1.05.05 1.5.31.45.26.79.67.97 1.16.09.25.13.51.12.77a1.67 1.67 0 0 1-.41 1.03c-.2.22-.48.36-.78.41-.3.05-.62-.01-.88-.16a1.44 1.44 0 0 1-.55-.65 1.55 1.55 0 0 1-.08-.85c.07-.3.23-.57.47-.76.24-.19.54-.28.84-.26.3.02.58.15.78.36.2.21.3.49.28.78a1.05 1.05 0 0 1-.36.72c-.18.15-.42.22-.66.19a.88.88 0 0 1-.56-.37.94.94 0 0 1-.14-.66c.05-.24.2-.44.41-.56.21-.12.47-.13.7-.03.23.1.39.3.44.54.05.24-.03.49-.2.67-.17.18-.42.26-.66.21-.24-.05-.44-.21-.53-.44a.58.58 0 0 1 .05-.56c.09-.15.25-.23.42-.23.17 0 .33.08.42.23z"/></svg>
+            <span>Firefox Add-on</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Capability 3 -->
+    <div class="capabilities-grid" style="margin-top: 1.5rem;">
+      <div class="feature-panel reveal-on-scroll" style="grid-column: 1 / -1;">
+        <div class="feature-panel-header">
+          <h3 data-i18n="cap-merge-title">Git 3-Way Merge Conflict Resolution</h3>
+          <p data-i18n="cap-merge-desc">
+            <a href="/what-the-git/">Because Baluard is built on Git</a>, concurrent edits on two offline devices never overwrite each other. When divergent changes occur, Baluard lets you inspect and resolve discrepancies field-by-field.
+          </p>
+        </div>
+        <ul class="feature-spec-list">
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Preserves divergent offline edits without silent overwrites</span>
+          </li>
+          <li class="spec-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-i18n="cap4-s2">Full commit history preservation for audit and rollback</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── INTERACTIVE TERMINAL SECTION ────────────────────────── -->
+<section id="cli" class="content-section">
+  <div class="container">
+    <div class="section-intro reveal-on-scroll">
+      <div class="section-eyebrow" data-i18n="cli-eyebrow">First-Class CLI</div>
+      <h2 class="section-heading" data-i18n="cli-heading">Scriptable, daemon-backed terminal client.</h2>
+      <p class="section-lede" data-i18n="cli-lede">
+        The `baluard` CLI gives you 45 commands with daemon-first speed and an offline `&#45;&#45;direct` fallback. Perfect for dev environments, headless servers, and CI pipelines.
+      </p>
+    </div>
+
+    <div class="terminal-wrapper reveal-on-scroll">
+      <div class="terminal-tabs" role="tablist">
+        <button type="button" class="term-tab active" role="tab" aria-selected="true" onclick="switchTermTab('init', this)">baluard init</button>
+        <button type="button" class="term-tab" role="tab" aria-selected="false" onclick="switchTermTab('add', this)">baluard add login</button>
+        <button type="button" class="term-tab" role="tab" aria-selected="false" onclick="switchTermTab('totp', this)">baluard totp</button>
+        <button type="button" class="term-tab" role="tab" aria-selected="false" onclick="switchTermTab('health', this)">baluard health</button>
+      </div>
+
+      <div class="terminal-screen" id="term-output-area">
+        <div class="term-line"><span class="term-prompt">$</span> baluard init &#45;&#45;slug personal &#45;&#45;name "Personal Vault"</div>
+        <div class="term-line term-out-dim">Creating vault at ~/.local/share/baluard/vaults/personal...</div>
+        <div class="term-line term-out-highlight">&check; Vault created successfully. (ID: 59f73ad5-047d-8cb7-7635)</div>
+        <div class="term-line term-out-warning">=== RECOVERY PHRASE (Write on paper; never stored on servers) ===</div>
+        <div class="term-line term-out-dim">damp bean volume uncover census awesome</div>
+        <div class="term-line term-out-dim">hood under taxi ranch profit onion</div>
+        <div class="term-line term-out-dim">grace afford minimum shy invest face</div>
+        <div class="term-line term-out-dim">search say evoke merry slush finish</div>
+        <div class="term-line term-out-warning">=== END RECOVERY PHRASE ===</div>
+        <div class="term-line">Trust fingerprint: <span class="term-out-highlight">933b91a8f07c57e348b5f642766da756cac7c8ad</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECURITY WHITE PAPER SUMMARY ────────────────────────── -->
+<section id="security" class="content-section">
+  <div class="container">
+    <div class="security-feature-card reveal-on-scroll">
+      <div>
+        <div class="section-eyebrow" style="color: #b3e55c;" data-i18n="sec-eyebrow">Auditable Assurance</div>
+        <h2 style="font-size: 2rem; color: var(--site-text); margin-bottom: 1rem; font-weight: 800;" data-i18n="sec-heading">
+          Read the Security White Paper
+        </h2>
+        <p style="color: var(--site-text-secondary); line-height: 1.6; margin-bottom: 1.75rem;" data-i18n="sec-lede">
+          Baluard publishes its complete cryptographic architecture and threat model. Everything claimed on this site can be verified in public source code and audited directly.
+        </p>
+        <a href="/security/" class="btn btn-primary">
+          <span data-i18n="sec-btn">Read the White Paper (Full 13 Sections) &rarr;</span>
+        </a>
+      </div>
+
+      <div class="crypto-spec-card">
+        <table class="crypto-spec-table">
+          <tr>
+            <td class="spec-name" data-i18n="spec-t1">Vault Cipher</td>
+            <td class="spec-value">AES-256-GCM (Authenticated)</td>
+          </tr>
+          <tr>
+            <td class="spec-name" data-i18n="spec-t2">Key Derivation (KDF)</td>
+            <td class="spec-value">Argon2id (m=64 MiB, t=3, p=2)</td>
+          </tr>
+          <tr>
+            <td class="spec-name" data-i18n="spec-t3">Asymmetric Sealing</td>
+            <td class="spec-value">HPKE (RFC 9180, DHKEM-X25519)</td>
+          </tr>
+          <tr>
+            <td class="spec-name" data-i18n="spec-t4">Commit Integrity</td>
+            <td class="spec-value">Ed25519 Device Signatures</td>
+          </tr>
+          <tr>
+            <td class="spec-name" data-i18n="spec-t5">Memory Hygiene</td>
+            <td class="spec-value">Zeroize on Drop &amp; Lock</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <figure class="calm-note reveal-on-scroll">
+      <div class="calm-note-media">
+        <img src="./assets/calm-cat.jpg" alt="A calm sleeping tuxedo cat, photo by PhilCreates" title="Photo by PhilCreates" width="640" height="440" loading="lazy" decoding="async" class="calm-note-img">
+        <figcaption class="calm-note-credit">Photo: PhilCreates</figcaption>
+      </div>
+      <div>
+        <h3 class="calm-note-title" data-i18n="calm-title">Safe, secure, calm.</h3>
+        <p class="calm-note-caption" data-i18n="calm-caption">Your vault stays with you, encrypted on your own hardware, with no central server to worry about.</p>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ── DOWNLOAD & REPOSITORY SECTION ───────────────────────── -->
+<section id="download" class="content-section">
+  <div class="container">
+    <div class="section-intro reveal-on-scroll">
+      <div class="section-eyebrow" data-i18n="dl-eyebrow">Download Center</div>
+      <h2 class="section-heading" data-i18n="dl-heading">Get Baluard for your platforms.</h2>
+      <p class="section-lede" data-i18n="dl-lede">
+        Stand-alone binaries with cryptographic release checksums. No account creation, no cloud activation.
+      </p>
+    </div>
+
+    <!-- Download Options Grid -->
+    <div class="dl-options-grid reveal-group">
+      <!-- AppImage -->
+      <a href="https://github.com/baluard-org/baluard/releases/latest/download/Baluard-amd64.AppImage" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="appimage">
+        <div>
+          <div class="dl-card-tag" data-i18n="dl-appimage-tag">AppImage</div>
+        <span class="badge-beta" aria-label="beta release">beta</span>
+          <div class="dl-card-name"><img src="./assets/logo-linux.svg" alt="" width="20" height="20"><span data-i18n="dl-appimage-name">Linux</span></div>
+          <div class="dl-card-desc" data-i18n="dl-appimage-desc">Single universal executable for any modern Linux distribution. Self-contained.</div>
+        </div>
+        <div class="dl-card-footer">
+          <span data-i18n="dl-card-download">Download &darr;</span>
+          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">120 MB</span>
+        </div>
+      </a>
+
+
+
+
+      <!-- Windows -->
+      <a href="https://github.com/baluard-org/baluard/releases/latest/download/Baluard-amd64-setup.exe" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="windows">
+        <div>
+          <div class="dl-card-tag" data-i18n="dl-windows-tag">Installer</div>
+        <span class="badge-beta" aria-label="beta release">beta</span>
+          <div class="dl-card-name"><img src="./assets/logo-windows.svg" alt="" width="20" height="20"><span data-i18n="dl-windows-name">Windows</span></div>
+          <div class="dl-card-desc" data-i18n="dl-windows-desc">NSIS setup for Windows 11 x64. Bundles the Baluard daemon and CLI.</div>
+        </div>
+        <div class="dl-card-footer">
+          <span data-i18n="dl-card-download">Download &darr;</span>
+          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">12.3 MB</span>
+        </div>
+      </a>
+
+      <!-- Windows portable -->
+      <a href="https://github.com/baluard-org/baluard/releases/latest/download/Baluard-amd64-portable.zip" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="windows-portable">
+        <div>
+          <div class="dl-card-tag" data-i18n="dl-winportable-tag">Portable</div>
+        <span class="badge-beta" aria-label="beta release">beta</span>
+          <div class="dl-card-name"><img src="./assets/logo-windows.svg" alt="" width="20" height="20"><span data-i18n="dl-winportable-name">Windows</span></div>
+          <div class="dl-card-desc" data-i18n="dl-winportable-desc">No install and no admin rights: unzip anywhere, even a USB drive, and run. Vaults live in the folder; updates in-app.</div>
+        </div>
+        <div class="dl-card-footer">
+          <span data-i18n="dl-card-download">Download &darr;</span>
+          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">443 MB</span>
+        </div>
+      </a>
+
+      <!-- macOS -->
+      <a href="https://github.com/baluard-org/baluard/releases/latest/download/Baluard-macos-aarch64-non-notarized.zip" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="macos">
+        <div>
+          <div class="dl-card-tag" data-i18n="dl-macos-tag">.app</div>
+        <span class="badge-beta" aria-label="beta release">beta</span>
+          <div class="dl-card-name"><img src="./assets/logo-macos.svg" alt="" width="20" height="20"><span data-i18n="dl-macos-name">macOS</span></div>
+          <div class="dl-card-desc" data-i18n="dl-macos-desc">Zip for Apple Silicon Macs on macOS 15+. Not notarized; Gatekeeper asks once on first launch.</div>
+        </div>
+        <div class="dl-card-footer">
+          <span data-i18n="dl-card-download">Download &darr;</span>
+          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">20 MB</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Mobile -->
+    <div class="dl-options-grid dl-options-grid-two">
+      <!-- Android -->
+      <a href="https://play.google.com/store/apps/details?id=app.baluard.mobile" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="android">
+        <div>
+          <div class="dl-card-tag" data-i18n="dl-android-tag">Google Play</div>
+        <span class="badge-beta" aria-label="closed beta">closed beta</span>
+          <div class="dl-card-name"><img src="./assets/logo-android.svg" alt="" width="20" height="20"><span data-i18n="dl-android-name">Android</span></div>
+          <div class="dl-card-desc" data-i18n="dl-android-desc">Native Android app with system-wide autofill and git synchronization.</div>
+        </div>
+        <div class="dl-card-footer">
+          <span data-i18n="dl-card-download">Download &darr;</span>
+          <span class="dl-size" style="font-family: var(--font-mono); font-size: 0.75rem;">27 MB</span>
+        </div>
+      </a>
+
+      <!-- iOS -->
+      <div class="dl-card dl-card-disabled reveal-on-scroll">
+        <div>
+          <div class="dl-card-tag" data-i18n="dl-ios-tag">In development</div>
+          <div class="dl-card-name"><img src="./assets/logo-macos.svg" alt="" width="20" height="20"><span data-i18n="dl-ios-name">iOS</span></div>
+          <div class="dl-card-desc" data-i18n="dl-ios-desc">Native iOS app with the same encrypted vault format.</div>
+        </div>
+        <div class="dl-soon-overlay"><span data-i18n="dl-coming-soon">Coming soon</span></div>
+      </div>
+    </div>
+
+    <p data-i18n="dl-note" style="text-align: center; color: var(--site-text-muted); font-size: 0.85rem; margin-top: 1.1rem;">
+      Builds for Linux (deb, rpm, Arch) and the CLI tarball (Linux &amp; macOS) also live in the
+      <a href="https://github.com/baluard-org/baluard/releases" style="color: #38bdf8;">GitHub releases</a>.
+    </p>
+
+    <!-- SmartScreen hint modal (opens on Windows download click) -->
+    <div class="dl-modal" id="dl-modal" role="dialog" aria-modal="true" aria-labelledby="dl-modal-title">
+      <div class="dl-modal-backdrop" data-modal-close></div>
+      <div class="dl-modal-card" tabindex="-1">
+        <button class="dl-modal-x" type="button" data-modal-close aria-label="Close">&times;</button>
+        <h4 id="dl-modal-title" data-i18n="dl-win-modal-title">Heads up: Windows SmartScreen</h4>
+        <p id="dl-modal-hint" data-i18n="dl-win-modal-hint">The installer is unsigned, so Windows SmartScreen may show &ldquo;Windows protected your PC&rdquo; on first run. Choose More info, then Run anyway. Your download has started.</p>
+        <a id="dl-modal-docs-link" class="dl-modal-link" href="https://docs.baluard.app/install/windows-smartscreen/" data-i18n="dl-win-modal-link">Full walkthrough in the docs &rarr;</a>
+        <div class="dl-modal-actions">
+          <button class="dl-modal-btn" type="button" data-modal-close data-i18n="dl-win-modal-close">Got it</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Package Manager Setup Details -->
+    <details class="repo-accordion reveal-on-scroll" id="download-repo">
+      <summary>
+        <span data-i18n="repo-summary">Prefer system updates via your package manager? (Ubuntu, Debian, Fedora, Arch)</span>
+        <span style="color: #38bdf8; font-size: 0.88rem;" data-i18n="repo-open">View repository instructions &darr;</span>
+      </summary>
+      <div class="repo-accordion-body">
+        <p data-i18n="repo-intro" style="color: #94a3b8; margin: 1rem 0 0.5rem; font-size: 0.92rem;">
+          Install from the official repository to pull updates directly through your system package manager.
+        </p>
+
+        <!-- APT -->
+        <div class="repo-snippet-box">
+          <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;" data-i18n="repo-apt-label">Ubuntu / Debian (APT):</div>
+          <div class="repo-code-wrap">
+            <button type="button" class="repo-copy-btn" aria-label="Copy install command"><span data-i18n="copy-btn">Copy</span></button>
+            <pre><code>sudo curl -fsSL -o /usr/share/keyrings/baluard-archive-keyring.asc https://packages.baluard.app/baluard-release.asc &amp;&amp; curl -fsSL https://packages.baluard.app/baluard.sources | sudo tee /etc/apt/sources.list.d/baluard.sources &amp;&amp; sudo apt update &amp;&amp; sudo apt install baluard</code></pre>
+          </div>
+          <p data-i18n="repo-apt-note" style="font-size: 0.82rem; color: #64748b; margin-top: 0.3rem;">Uses the deb822 format (default on Ubuntu 24.04+ and Debian 13+). The armored key is used directly, no dearmor step.</p>
+        </div>
+
+        <!-- DNF -->
+        <div class="repo-snippet-box">
+          <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;" data-i18n="repo-dnf-label">Fedora (DNF):</div>
+          <div class="repo-code-wrap">
+            <button type="button" class="repo-copy-btn" aria-label="Copy install command"><span data-i18n="copy-btn">Copy</span></button>
+            <pre><code>sudo dnf config-manager addrepo --from-repofile=https://packages.baluard.app/baluard.repo &amp;&amp; sudo dnf install baluard</code></pre>
+          </div>
+          <p data-i18n="repo-dnf-note" style="font-size: 0.82rem; color: #64748b; margin-top: 0.3rem;">Fedora 41+ (dnf 5). On RHEL and clones (dnf 4): <code style="color: #94a3b8;">sudo dnf config-manager --add-repo=https://packages.baluard.app/baluard.repo</code></p>
+        </div>
+
+        <!-- Arch (pacman) -->
+        <div class="repo-snippet-box">
+          <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;" data-i18n="repo-arch-label">Arch Linux (pacman):</div>
+          <div class="repo-code-wrap">
+            <button type="button" class="repo-copy-btn" aria-label="Copy install command"><span data-i18n="copy-btn">Copy</span></button>
+            <pre><code>curl -fsSL https://packages.baluard.app/baluard-release.asc | sudo pacman-key --add - &amp;&amp; sudo pacman-key --lsign-key 223310EABF1AB6FEE6BDDF3E2A531D54E6D74804 &amp;&amp; curl -fsSL https://packages.baluard.app/arch/baluard.conf | sudo tee /etc/pacman.d/baluard.conf &gt; /dev/null &amp;&amp; echo "Include = /etc/pacman.d/baluard.conf" | sudo tee -a /etc/pacman.conf &gt; /dev/null &amp;&amp; sudo pacman -Syu baluard</code></pre>
+          </div>
+          <p data-i18n="repo-arch-note" style="font-size: 0.82rem; color: #64748b; margin-top: 0.3rem;">Pacman verifies the repository database and package signatures before installing. Requires pacman 6 or newer.</p>
+        </div>
+
+        <!-- F-Droid moved to its own accordion below -->
+
+        <p data-i18n="repo-fingerprint" style="font-size: 0.85rem; color: #64748b;">
+          Repository signing key fingerprint: <code style="color: #b3e55c;">2233 10EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804</code>. Always verify this fingerprint before trusting repository imports.
+        </p>
+      </div>
+    </details>
+
+    <!-- Android F-Droid -->
+    <details class="repo-accordion reveal-on-scroll" id="download-fdroid">
+      <summary>
+        <span data-i18n="fd-summary">On Android? The free and open-source build lives on F-Droid.</span>
+        <span style="color: #38bdf8; font-size: 0.88rem;" data-i18n="fd-open">View F-Droid instructions &darr;</span>
+      </summary>
+      <div class="repo-accordion-body">
+        <p data-i18n="fd-intro" style="color: #94a3b8; margin: 1rem 0 0.5rem; font-size: 0.92rem;">
+          The F-Droid distribution is free and open-source software: the build is compiled and signed by the F-Droid repository infrastructure, and updates arrive through the F-Droid client itself.
+        </p>
+
+        <div class="repo-snippet-box">
+          <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #f1f5f9;" data-i18n="fd-label">Android (F-Droid):</div>
+          <p data-i18n="fd-link-line" style="color: #94a3b8; font-size: 0.92rem;">With F-Droid installed, open <a href="https://packages.baluard.app/fdroid/repo/">https://packages.baluard.app/fdroid/repo/</a> on your phone and tap <strong>Add to F-Droid</strong>.</p>
+          <p data-i18n="fd-manual" style="color: #94a3b8; font-size: 0.92rem;">Or add it by hand: in F-Droid, open Settings &gt; Repositories, tap <strong>+</strong>, paste the URL, and enter the fingerprint below so the repository shows as verified.</p>
+          <p data-i18n="fd-fingerprint" style="font-size: 0.85rem; color: #64748b;">Repository fingerprint: <code style="color: #b3e55c;">1CE90DCFE0FB1003F2F66999257B5E6F074E46EE453FB0D44F8CF8E13E6EEAAB</code></p>
+        </div>
+      </div>
+    </details>
+
+    <!-- Browser Extensions Section -->
+    <div class="reveal-on-scroll" style="margin-top: 3rem;">
+      <h3 data-i18n="ext-heading" style="font-size: 1.35rem; font-weight: 700; color: var(--site-text); margin-bottom: 0.5rem;">Browser Extensions</h3>
+      <p data-i18n="ext-lede" style="color: var(--site-text-secondary); font-size: 0.95rem; margin-bottom: 1.25rem;">
+        MV3 companions that talk directly to the local `baluard-daemon` via native messaging. Strict origin matching, zero remote telemetry.
+      </p>
+
+      <div class="dl-options-grid dl-options-grid-two reveal-group">
+        <!-- Firefox Extension -->
+        <a href="https://addons.mozilla.org/firefox/addon/baluard/" target="_blank" rel="noopener noreferrer" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="firefox">
+          <div>
+            <div class="dl-card-tag">Firefox / LibreWolf / Floorp</div>
+            <div class="dl-card-name"><img src="./assets/logo-firefox.svg" alt="" width="20" height="20"><span data-i18n="ext-ff-name">Firefox Add-on</span></div>
+            <div class="dl-card-desc" data-i18n="ext-ff-desc">MV3 extension with native messaging host bridge and origin matching.</div>
+          </div>
+          <div class="dl-card-footer">
+            <span data-i18n="ext-ff-status">Install from Mozilla Add-ons &rarr;</span>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem;">MV3</span>
+          </div>
+        </a>
+
+        <!-- Chrome / Chromium Extension -->
+        <a href="https://chromewebstore.google.com/detail/nmkmfkmdhbifkjdhioejeoegcjpaiijl" target="_blank" rel="noopener noreferrer" class="dl-card reveal-on-scroll" tabindex="-1" data-dl-type="chrome">
+          <div>
+            <div class="dl-card-tag">Chrome / Brave / Edge / Vivaldi</div>
+            <div class="dl-card-name"><img src="./assets/logo-chromium.svg" alt="" width="20" height="20"><span data-i18n="ext-ch-name">Chromium Extension</span></div>
+            <div class="dl-card-desc" data-i18n="ext-ch-desc">MV3 companion with inline autofill and local capability-token authentication.</div>
+          </div>
+          <div class="dl-card-footer">
+            <span data-i18n="ext-ch-status">Install from Chrome Web Store &rarr;</span>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem;">MV3</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div data-i18n="ext-note" style="margin-top: 1.5rem; text-align: center; font-size: 0.9rem; color: #64748b;">
+      Every release includes a <a href="https://github.com/baluard-org/baluard/releases/latest/download/SHA256SUMS" target="_blank" rel="noopener noreferrer" data-dl-type="manifest">signed SHA256SUMS manifest</a> with cryptographic signatures.
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-wrap">
+            <svg class="brand-logo-img" viewBox="0 0 512 512" width="34" height="34" aria-hidden="true">
+              <defs>
+                <linearGradient id="shackle-grad-ftr" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ded8fc" />
+                  <stop offset="100%" stop-color="#cfc6f9" />
+                </linearGradient>
+                <linearGradient id="body-grad-ftr" x1="20%" y1="0%" x2="80%" y2="100%">
+                  <stop offset="0%" stop-color="#c5f279" />
+                  <stop offset="50%" stop-color="#b3e55c" />
+                  <stop offset="100%" stop-color="#9dce47" />
+                </linearGradient>
+              </defs>
+              <path d="M 172 205 V 150 C 172 103 209 66 256 66 C 303 66 340 103 340 150 V 205 H 294 V 150 C 294 128 277 111 256 111 C 235 111 218 128 218 150 V 205 Z" fill="url(#shackle-grad-ftr)" />
+              <path d="M 136 205 H 184 V 228 H 228 V 205 H 284 V 228 H 328 V 205 H 376 C 384 205 388 209 388 217 V 405 C 388 424 374 438 355 438 H 157 C 138 438 124 424 124 405 V 217 C 124 209 128 205 136 205 Z" fill="url(#body-grad-ftr)" />
+              <path d="M317.8351477449456 361.56298600311044Q317.8351477449456 347.19284603421465 304.98911353032656 337.6127527216174L281.6920684292379 320.4121306376361L295.6267496111975 309.5256609642302Q303.02954898911355 303.646967340591 303.02954898911355 294.50233281493Q303.02954898911355 280.56765163297047 288.8771384136858 272.07620528771383Q276.68429237947123 264.89113530326597 262.0964230171073 264.89113530326597Q248.59720062208396 264.89113530326597 226.82426127527214 273.38258164852255Q211.800933125972 279.04354587869364 203.09175738724727 282.3094867807154Q194.38258164852255 285.5754276827372 191.98755832037324 286.01088646967344V291.0186625194401Q205.05132192846034 296.8973561430793 205.05132192846034 315.6220839813375V377.45723172628306Q205.05132192846034 383.9891135303266 199.17262830482113 394.0046656298601L193.51166407465007 403.8024883359254V408.37480559875587Q202.00311041990668 404.67340590979785 204.18040435458786 404.0202177293935Q208.09953343701397 402.27838258164854 216.3732503888025 402.27838258164854Q223.12286158631414 402.27838258164854 237.71073094867805 405.3265940902022Q252.29860031104198 408.37480559875587 259.04821150855366 408.37480559875587Q276.248833592535 408.37480559875587 296.27993779160187 393.78693623639197Q317.8351477449456 377.8926905132193 317.8351477449456 361.56298600311044ZM278.6438569206843 294.50233281493Q278.6438569206843 302.99377916018665 269.71695178849143 311.9206842923795Q264.7091757387247 316.9284603421462 250.3390357698289 325.2021772939347Q244.67807153965785 328.4681181959565 240.3234836702955 331.40746500777607Q235.96889580093313 334.3468118195957 232.92068429237946 336.74183514774495Q232.48522550544322 336.3063763608087 231.61430793157075 336.3063763608087Q231.61430793157075 336.3063763608087 229.43701399688956 336.74183514774495L229.00155520995332 319.5412130637636L228.7838258164852 302.1228615863142Q228.34836702954897 290.58320373250393 238.14618973561429 282.3094867807154Q247.50855365474337 274.68895800933126 259.04821150855366 274.68895800933126Q262.9673405909798 274.68895800933126 266.55987558320373 276.3219284603422Q270.15241057542767 277.95489891135304 272.7651632970451 280.67651632970455Q275.3779160186625 283.398133748056 277.01088646967344 286.99066874027994Q278.6438569206843 290.58320373250393 278.6438569206843 294.50233281493ZM288.4416796267496 372.8849144634526Q288.4416796267496 382.4650077760498 279.29704510108866 389.8678071539658Q269.93468118195955 397.48833592534993 260.57231726283044 397.48833592534993Q244.2426127527216 397.48833592534993 236.18662519440124 383.5536547433904Q229.43701399688956 372.23172628304826 229.43701399688956 354.81337480559876Q229.43701399688956 351.76516329704515 240.5412130637636 344.144634525661Q251.86314152410574 336.74183514774495 255.78227060653188 336.74183514774495Q262.7496111975116 336.74183514774495 275.59564541213064 351.1119751166408Q288.4416796267496 365.6998444790047 288.4416796267496 372.8849144634526Z" fill="#091315" />
+            </svg>
+            <span class="brand-title">Baluard</span>
+          </div>
+          <p data-i18n="footer-desc">
+            Git-native and peer-to-peer password manager with padded-bucket encryption and device-identity bootstrapping. Built so your credentials stay on your machines, where no one can take them away. Synced under your terms.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer-col-project">Project</h4>
+          <ul class="footer-links">
+            <li><a href="/#download" data-i18n="footer-link-dl">Download Release</a></li>
+            <li><a href="/changelog/" data-i18n="footer-link-changelog">Changelog</a></li>
+            <li><a href="/security/" data-i18n="footer-link-sec">Security White Paper</a></li>
+            <li><a href="/what-the-git/" data-i18n="footer-link-git">What the Git?</a></li>
+            <li><a href="/support/" data-i18n="footer-link-support">Support</a></li>
+            <li><a href="/donate/" data-i18n="footer-link-donate">Donate</a></li>
+            <li><a href="https://docs.baluard.app" target="_blank" rel="noopener noreferrer" data-i18n="footer-link-docs">Documentation</a></li>
+            <li><a href="/ai-instructions/" data-i18n="footer-link-ai">AI Instructions</a></li>
+            <li><a href="https://github.com/baluard-org/baluard" target="_blank" rel="noopener noreferrer" data-i18n="footer-link-src">Source Code (GitHub)</a></li>
+            <li><a href="https://github.com/baluard-org/baluard/releases" target="_blank" rel="noopener noreferrer" data-i18n="footer-link-rel">Release Notes &amp; Checksums</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer-col-integrity">Integrity &amp; Freedom</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy/" data-i18n="footer-link-privacy">Privacy Policy</a></li>
+            <li><a href="/tos/" data-i18n="footer-link-tos">Terms of Service</a></li>
+            <li><a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" data-i18n="footer-link-lic">License (GPL-3.0-or-later)</a></li>
+            <li><a href="https://github.com/baluard-org/baluard/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer" data-i18n="footer-link-vuln">Vulnerability Reporting</a></li>
+            <li><a href="/#download-repo" data-i18n="footer-link-pkg">Linux Packages (apt, dnf, pacman)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div data-i18n="footer-bottom-lic">
+          Free software under <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0-or-later</a>. No trackers, no telemetry, no cloud lock-in.
+        </div>
+        <div class="footer-credit" data-i18n="footer-built-by">
+          An <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">EstebanForge</a> Project
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/i18n.js?v=1795611313" defer></script>
+  
+<script>
+  // Apple-Style Scroll Reveal Observer & Hero Entrance Timer
+  (function() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    document.documentElement.classList.add('js-reveal-ready');
+
+    // 500ms initial wait so users clearly experience the hero entrance
+    setTimeout(() => {
+      document.querySelectorAll('.hero-reveal').forEach(el => {
+        el.classList.add('is-revealed');
+      });
+    }, 500);
+
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal-on-scroll').forEach(el => el.classList.add('is-revealed'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.08
+    });
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+  })();
+  // Terminal Tab Switching
+  const termSnippets = {
+    init: [
+      '<div class="term-line"><span class="term-prompt">$</span> baluard init &#45;&#45;slug personal &#45;&#45;name "Personal Vault"</div>',
+      '<div class="term-line term-out-dim">Creating vault at ~/.local/share/baluard/vaults/personal...</div>',
+      '<div class="term-line term-out-highlight">&check; Vault created successfully. (ID: 59f73ad5-047d-8cb7-7635)</div>',
+      '<div class="term-line term-out-warning">=== RECOVERY PHRASE (Write on paper; never stored on servers) ===</div>',
+      '<div class="term-line term-out-dim">damp bean volume uncover census awesome</div>',
+      '<div class="term-line term-out-dim">hood under taxi ranch profit onion</div>',
+      '<div class="term-line term-out-dim">grace afford minimum shy invest face</div>',
+      '<div class="term-line term-out-dim">search say evoke merry slush finish</div>',
+      '<div class="term-line term-out-warning">=== END RECOVERY PHRASE ===</div>',
+      '<div class="term-line">Trust fingerprint: <span class="term-out-highlight">933b91a8f07c57e348b5f642766da756cac7c8ad</span></div>'
+    ],
+    add: [
+      '<div class="term-line"><span class="term-prompt">$</span> baluard add login &#45;&#45;name "GitLab Self-Hosted" &#45;&#45;username "sysadmin" &#45;&#45;uri "https://gitlab.internal"</div>',
+      '<div class="term-line term-out-dim">Connecting to daemon socket at /run/user/1000/baluard/baluard.sock...</div>',
+      '<div class="term-line term-out-dim">Enter Password: [hidden]</div>',
+      '<div class="term-line term-out-dim">Padded bucket: Tier 1 (allocated 5,120 bytes)</div>',
+      '<div class="term-line term-out-highlight">&check; Entry committed and sealed: 052d88ba-b91f-40b3-9a17-0621d32e540d</div>',
+      '<div class="term-line term-out-dim">Signed git commit created with device key: 83447d37-e3e5</div>'
+    ],
+    totp: [
+      '<div class="term-line"><span class="term-prompt">$</span> baluard totp "GitHub Production"</div>',
+      '<div class="term-line term-out-dim">Deriving current 30s timestep for HMAC-SHA1...</div>',
+      '<div class="term-line term-out-highlight" style="font-size: 1.25rem; font-weight: 700; margin: 0.5rem 0;">829 411</div>',
+      '<div class="term-line term-out-dim">Valid for 22 seconds remaining.</div>'
+    ],
+    health: [
+      '<div class="term-line"><span class="term-prompt">$</span> baluard health</div>',
+      '<div class="term-line term-out-dim">Checking vault integrity and credential health...</div>',
+      '<div class="term-line">- Ciphers scanned: 100 entries</div>',
+      '<div class="term-line">- Reused passwords: <span class="term-out-highlight">0</span></div>',
+      '<div class="term-line">- Weak passwords: <span class="term-out-highlight">0</span></div>',
+      '<div class="term-line">- Missing 2FA: <span class="term-out-warning">3 logins</span></div>',
+      '<div class="term-line term-out-highlight">&check; Vault health check completed. No critical vulnerabilities found.</div>'
+    ]
+  };
+
+  function switchTermTab(tabKey, targetEl) {
+    document.querySelectorAll('.term-tab').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+    });
+    if (targetEl) {
+      targetEl.classList.add('active');
+      targetEl.setAttribute('aria-selected', 'true');
+    }
+
+    const outputEl = document.getElementById('term-output-area');
+    if (outputEl && termSnippets[tabKey]) {
+      outputEl.innerHTML = termSnippets[tabKey].join('');
+    }
+  }
+
+  // ── Isometric Scroll-Twist Animation ─────────────────────────
+  (function initIsometricScrollTwist() {
+    const scene = document.getElementById('app-showcase');
+    if (!scene) return;
+    const desktop = scene.querySelector('.showcase-desktop');
+    const mobile = scene.querySelector('.showcase-mobile');
+    if (!desktop || !mobile) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    let ticking = false;
+
+    function updateTwist() {
+      ticking = false;
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+      const isMobile = window.innerWidth <= 860;
+      const isNarrowMobile = window.innerWidth <= 480;
+
+      // Scroll progress starts immediately at 0 when at top of page,
+      // reaching full twist-back at 450px of scroll
+      const scrollRange = isMobile ? 420 : 480;
+      const progress = Math.max(0, Math.min(1, scrollY / scrollRange));
+
+      if (isMobile) {
+        // Desktop window (order 2): starts at 24deg (or 22deg narrow), twists back by 20deg towards 4deg
+        const startDeskY = isNarrowMobile ? 22 : 24;
+        const deskY = startDeskY - (progress * (isNarrowMobile ? 18 : 20));
+        const deskX = 4 - (progress * 3);
+
+        // Mobile phone (order 1): starts at -20deg, twists back to -5deg
+        const mobY = -20 + (progress * 15);
+        const mobX = 4 - (progress * 3);
+
+        const persp = isNarrowMobile ? '700px' : '850px';
+        mobile.style.transform = `perspective(${persp}) rotateY(${mobY.toFixed(2)}deg) rotateX(${mobX.toFixed(2)}deg)`;
+        desktop.style.transform = `perspective(${persp}) rotateY(${deskY.toFixed(2)}deg) rotateX(${deskX.toFixed(2)}deg)`;
+      } else {
+        // Desktop viewport twist:
+        // Desktop window: starts at 22deg, twists back by 16deg towards 6deg
+        const deskY = 22 - (progress * 16);
+        const deskX = 4 - (progress * 3);
+
+        // Mobile phone: starts at -20deg, twists back to -5deg
+        const mobY = -20 + (progress * 15);
+        const mobX = 4 - (progress * 3);
+
+        desktop.style.transform = `rotateY(${deskY.toFixed(2)}deg) rotateX(${deskX.toFixed(2)}deg)`;
+        mobile.style.transform = `rotateY(${mobY.toFixed(2)}deg) rotateX(${mobX.toFixed(2)}deg) translateZ(30px) translateY(14px)`;
+      }
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(updateTwist);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    updateTwist();
+  })();
+
+  // Copy-to-clipboard for the repository install commands
+  (function() {
+    function labels() {
+      var dict = (window.__baluardI18nDict && window.__baluardI18nDict()) || {};
+      return {
+        copy: dict['copy-btn'] || 'Copy',
+        copied: dict['copy-btn-copied'] || 'Copied ✓'
+      };
+    }
+    document.querySelectorAll('.repo-copy-btn').forEach(function(btn) {
+      var timer = null;
+      btn.addEventListener('click', function() {
+        var code = btn.closest('.repo-snippet-box').querySelector('pre code');
+        if (!code || !(navigator.clipboard && navigator.clipboard.writeText)) return;
+        var current = labels();
+        navigator.clipboard.writeText(code.innerText.trim()).then(function() {
+          var label = btn.querySelector('span');
+          label.textContent = current.copied;
+          btn.classList.add('copied');
+          if (timer) clearTimeout(timer);
+          timer = setTimeout(function() {
+            label.textContent = labels().copy;
+            btn.classList.remove('copied');
+          }, 1600);
+        }, function() {});
+      });
+    });
+  })();
+  // Download hint modals: one config-driven dialog serves every card with a
+  // CONFIG entry (Windows SmartScreen, macOS Gatekeeper, ...). Strings live in
+  // i18n.js and resolve at open time, so language switches need no re-render.
+  (function() {
+    var modal = document.getElementById('dl-modal');
+    if (!modal) return;
+
+    var DOCS = 'https://docs.baluard.app/';
+    var CONFIG = {
+      windows: {
+        keys: { title: 'dl-win-modal-title', hint: 'dl-win-modal-hint', link: 'dl-win-modal-link' },
+        docs: { en: DOCS + 'install/windows-smartscreen/', es: DOCS + 'es/install/windows-smartscreen/' }
+      },
+      'windows-portable': {
+        keys: { title: 'dl-winportable-modal-title', hint: 'dl-winportable-modal-hint', link: 'dl-win-modal-link' },
+        docs: { en: DOCS + 'install/windows-smartscreen/', es: DOCS + 'es/install/windows-smartscreen/' }
+      },
+      macos: {
+        keys: { title: 'dl-macos-modal-title', hint: 'dl-macos-modal-hint', link: 'dl-macos-modal-link' },
+        docs: { en: DOCS + 'install/macos-gatekeeper/', es: DOCS + 'es/install/macos-gatekeeper/' }
+      },
+      appimage: {
+        keys: { title: 'dl-linux-modal-title', hint: 'dl-linux-modal-hint', link: 'dl-linux-modal-link' },
+        docs: { en: DOCS + 'install/linux-appimage/', es: DOCS + 'es/install/linux-appimage/' }
+      }
+    };
+
+    var els = {
+      title: modal.querySelector('#dl-modal-title'),
+      hint: modal.querySelector('#dl-modal-hint'),
+      link: modal.querySelector('#dl-modal-docs-link')
+    };
+    var lastFocus = null;
+
+    function fill(platform) {
+      var cfg = CONFIG[platform];
+      var dict = window.__baluardI18nDict ? window.__baluardI18nDict() : {};
+      els.title.innerHTML = dict[cfg.keys.title] || '';
+      els.hint.innerHTML = dict[cfg.keys.hint] || '';
+      els.link.innerHTML = dict[cfg.keys.link] || '';
+      els.link.setAttribute('href', cfg.docs[currentLang()] || cfg.docs.en);
+    }
+
+    function currentLang() {
+      return (document.documentElement.lang || 'en').slice(0, 2);
+    }
+
+    function openModal(platform) {
+      lastFocus = document.activeElement;
+      fill(platform);
+      modal.classList.add('is-open');
+      document.documentElement.style.overflow = 'hidden';
+      modal.querySelector('.dl-modal-card').focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove('is-open');
+      document.documentElement.style.overflow = '';
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+    }
+
+    Object.keys(CONFIG).forEach(function(platform) {
+      var card = document.querySelector('[data-dl-type="' + platform + '"]');
+      if (card) card.addEventListener('click', function() { openModal(platform); });
+    });
+
+    modal.addEventListener('click', function(e) {
+      if (e.target.closest('[data-modal-close]')) closeModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+  })();
+</script>
+
+</body>
+</html>
