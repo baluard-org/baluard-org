@@ -30,7 +30,7 @@ No test suite exists. `just check` is the only validation gate.
 - `fdroid/` — F-Droid repo metadata; `*.apk` is gitignored everywhere except `fdroid/repo/`
 - `CNAME` — Pages custom domain
 
-Deploy: `just build`, commit, push `main`. Pages publishes the repo root.
+Deploy: `just build`, commit, push `main`, then `gh workflow run deploy-pages.yml` from the repo root and watch the run. The workflow is dispatch-only: pushing `main` does NOT deploy, so the live site updates only when you trigger it after your pushes.
 
 ## Gotchas
 
@@ -41,6 +41,7 @@ Deploy: `just build`, commit, push `main`. Pages publishes the repo root.
 - `just check` runs the full external link validation: the main repo went public, so its previously-excluded 404s are gone.
 - `just sync-paper` clobbers two hand adaptations in `site/content/security.md` — re-apply after running: (1) the ADR cross-reference must be a markdown link to `https://github.com/baluard-org/baluard/tree/main/docs/adr` (the source file uses the repo-relative `../adr/index.md`, which is correct on GitHub but dead on the site); (2) `docs/linux-repositories.md` must read `docs/dev/linux-repositories.md`.
 - Crypto claims site-wide: AES-256-GCM with 96-bit nonces. Never write ChaCha20-Poly1305; no ChaCha exists in the product.
+- Deploy runs fail with "Found 0 artifacts" / "Fetching artifact metadata failed" from a GitHub artifact-API glitch while every status component shows operational. Just re-dispatch (`gh workflow run deploy-pages.yml`); every dispatch retry has gone green where the automated run failed.
 - App version shown on the site comes from `[extra].version` in `site/config.toml`; sync it when the product releases.
 
 ## Commits
