@@ -188,6 +188,12 @@
     margin-top: 0.25rem;
   }
 
+  .donate-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
   .donate-grid-3 {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -258,6 +264,7 @@
     }
 
     .donate-channels,
+    .donate-grid-2,
     .donate-grid-3 {
       grid-template-columns: 1fr;
     }
@@ -378,7 +385,7 @@
   </div>
 
   <h2 class="donate-section-title">Other ways to help</h2>
-  <div class="donate-grid-3">
+  <div class="donate-grid-2">
     <div class="donate-mini-card">
       <div class="donate-mini-icon" aria-hidden="true">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -400,10 +407,23 @@
           <line x1="12" y1="16" x2="12.01" y2="16"/>
         </svg>
       </div>
-      <h3>Report bugs &amp; ideas</h3>
-      <p>Open an issue when you hit a rough edge or want to suggest an improvement.</p>
+      <h3>Report bugs</h3>
+      <p>Open an issue when you hit a rough edge or find a bug.</p>
       <a class="donate-mini-link" href="https://github.com/baluard-org/baluard/issues" target="_blank" rel="noopener noreferrer">
         Open an issue &rarr;
+      </a>
+    </div>
+
+    <div class="donate-mini-card">
+      <div class="donate-mini-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+      </div>
+      <h3>Share ideas</h3>
+      <p>Join GitHub Discussions to propose features or ask questions.</p>
+      <a class="donate-mini-link" href="https://github.com/baluard-org/baluard/discussions" target="_blank" rel="noopener noreferrer">
+        Join discussions &rarr;
       </a>
     </div>
 
