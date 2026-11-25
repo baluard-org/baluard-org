@@ -246,6 +246,68 @@
     padding-top: 0.35rem;
   }
 
+  .donate-mini-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 0.35rem;
+  }
+
+  .donate-mini-footer .donate-mini-link {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .donate-stars-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: var(--site-bg-elevated);
+    border: 1px solid var(--site-border);
+    color: var(--app-warning);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 600;
+  }
+
+  .donate-stars-badge[hidden] {
+    display: none;
+  }
+
+  .donate-share-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 0.35rem;
+  }
+
+  .donate-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: var(--radius-sm);
+    background: var(--site-bg-elevated);
+    border: 1px solid var(--site-border);
+    color: var(--site-text-secondary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .donate-share-btn:hover {
+    border-color: var(--site-border-glow);
+    color: var(--site-text);
+    text-decoration: none;
+  }
+
   @media (max-width: 760px) {
     .donate-hero {
       grid-template-columns: 1fr;
@@ -394,9 +456,12 @@
       </div>
       <h3>Star the repository</h3>
       <p>Starring on GitHub helps others discover a local-first password manager.</p>
-      <a class="donate-mini-link" href="https://github.com/baluard-org/baluard" target="_blank" rel="noopener noreferrer">
-        baluard-org/baluard &rarr;
-      </a>
+      <div class="donate-mini-footer">
+        <a class="donate-mini-link" href="https://github.com/baluard-org/baluard" target="_blank" rel="noopener noreferrer">
+          baluard-org/baluard &rarr;
+        </a>
+        <span id="gh-stars-badge" class="donate-stars-badge" hidden></span>
+      </div>
     </div>
 
     <div class="donate-mini-card">
@@ -439,7 +504,69 @@
       </div>
       <h3>Share Baluard</h3>
       <p>Recommend Baluard to friends or teams looking for a zero-server vault.</p>
+      <div class="donate-share-row">
+        <a class="donate-share-btn" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fbaluard.app%2F&text=Baluard%20%E2%80%94%20git-native%2C%20open-source%20password%20manager%20with%20zero%20central%20servers." target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+          Twitter
+        </a>
+        <a class="donate-share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbaluard.app%2F" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+          </svg>
+          Facebook
+        </a>
+        <a class="donate-share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fbaluard.app%2F" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+          </svg>
+          LinkedIn
+        </a>
+        <a class="donate-share-btn" href="https://wa.me/?text=Baluard%20%E2%80%94%20git-native%2C%20open-source%20password%20manager%20with%20zero%20central%20servers.%20https%3A%2F%2Fbaluard.app%2F" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+          WhatsApp
+        </a>
+      </div>
     </div>
   </div>
 </div>
+<script>
+  (function () {
+    'use strict';
+    var badge = document.getElementById('gh-stars-badge');
+    if (!badge) return;
+    var CACHE_KEY = 'baluard_gh_stars';
+    var TTL_MS = 10 * 60 * 1000;
+
+    function render(count) {
+      if (typeof count !== 'number') return;
+      badge.textContent = '\u2605 ' + new Intl.NumberFormat().format(count);
+      badge.hidden = false;
+    }
+
+    try {
+      var cached = JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null');
+      if (cached && typeof cached.count === 'number' && (Date.now() - cached.ts) < TTL_MS) {
+        render(cached.count);
+        return;
+      }
+    } catch (e) {}
+
+    fetch('https://api.github.com/repos/baluard-org/baluard', {
+      headers: { Accept: 'application/vnd.github+json' }
+    })
+      .then(function (res) { return res.ok ? res.json() : null; })
+      .then(function (data) {
+        if (!data || typeof data.stargazers_count !== 'number') return;
+        render(data.stargazers_count);
+        try {
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ count: data.stargazers_count, ts: Date.now() }));
+        } catch (e) {}
+      })
+      .catch(function () {});
+  })();
+</script>
 {% endblock content %}
