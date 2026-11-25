@@ -63,15 +63,30 @@
     return { intro: intro.join(' '), sections: sections };
   }
 
+  function compareSemverDesc(a, b) {
+    var pa = a.version.split('-');
+    var pb = b.version.split('-');
+    var ca = pa[0].split('.').map(Number);
+    var cb = pb[0].split('.').map(Number);
+    for (var i = 0; i < 3; i++) {
+      if (ca[i] !== cb[i]) { return cb[i] - ca[i]; }
+    }
+    if (!pa[1] && pb[1]) { return -1; }
+    if (pa[1] && !pb[1]) { return 1; }
+    if (pa[1] && pb[1] && pa[1] !== pb[1]) { return pa[1] < pb[1] ? 1 : -1; }
+    return 0;
+  }
+
   // Keep the page light: render the newest 10 releases only, with the full
-  // history linked at the bottom. The file is newest-first.
+  // history linked at the bottom.
   var MAX_RELEASES = 10;
 
   function render(parsed) {
     var mount = document.getElementById('changelog-versions');
     var label = (LABELS[window.__baluardLang] || LABELS.en).latest;
     var html = '';
-    parsed.sections.slice(0, MAX_RELEASES).forEach(function (s, i) {
+    var sorted = parsed.sections.slice().sort(compareSemverDesc);
+    sorted.slice(0, MAX_RELEASES).forEach(function (s, i) {
       var id = 'v-' + s.version.replace(/[^0-9A-Za-z.-]/g, '').replace(/\./g, '-');
       html += '<section class="cl-release" id="' + esc(id) + '">';
       html += '<h2 class="cl-version"><span class="cl-number">' + esc(s.version) + '</span>';
@@ -108,14 +123,24 @@
     loading.hidden = true;
   }
 
-  fetch(SOURCE, { headers: { Accept: 'text/plain' } })
+  var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+  var timer = controller ? setTimeout(function () { controller.abort(); }, 6000) : null;
+
+  fetch(SOURCE, {
+    headers: { Accept: 'text/plain' },
+    signal: controller ? controller.signal : undefined
+  })
     .then(function (response) {
       if (!response.ok) { throw new Error('HTTP ' + response.status); }
       return response.text();
     })
     .then(function (markdown) {
+      if (timer) { clearTimeout(timer); }
       render(parse(markdown));
       show('done');
     })
-    .catch(function () { show('error'); });
+    .catch(function () {
+      if (timer) { clearTimeout(timer); }
+      show('error');
+    });
 })();
