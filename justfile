@@ -9,24 +9,25 @@ default:
 serve:
 	cd site && zola serve -p 1111
 
-# Build the site with Zola and stage static files to repository root for GitHub Pages
+# Build the site with Zola. Output stays in site/public; the repo root carries sources only.
 build:
 	test -f site/static/assets/social-card.png || ./scripts/social-card.sh
 	test -f site/static/favicon.ico || ./scripts/favicon.sh
 	cd site && zola build
-	cp site/public/index.html ./index.html
-	for page in security ai-instructions support privacy tos what-the-git changelog; do \
-		mkdir -p "./$page"; \
-		cp "site/public/$page/index.html" "./$page/index.html"; \
-	done
-	cp site/public/llms.txt ./llms.txt
-	cp site/public/favicon.ico ./favicon.ico
-	cp site/public/manifest.webmanifest ./manifest.webmanifest
-	cp site/public/robots.txt ./robots.txt
-	cp site/public/sitemap.xml ./sitemap.xml
-	mkdir -p ./assets
-	rsync -a site/public/assets/ ./assets/
-	@echo "Build complete: index.html, content pages, llms.txt, and assets/ updated."
+
+# Build locally and publish site/public to the gh-pages branch (branch-based Pages, no Actions)
+deploy:
+	#!/usr/bin/env bash
+	set -euo pipefail
+	test -f site/static/assets/social-card.png || ./scripts/social-card.sh
+	test -f site/static/favicon.ico || ./scripts/favicon.sh
+	cd site && zola build
+	touch public/.nojekyll
+	cd public
+	git init -q -b gh-pages
+	git add -A
+	git commit -qm "Publish site build"
+	git push -qf "$(git -C ../.. config remote.origin.url)" gh-pages
 
 # Regenerate the 1200x630 social card (og:image) into site/static/assets/
 social-card:

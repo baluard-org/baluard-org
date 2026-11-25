@@ -1,13 +1,14 @@
 # AGENTS.md — baluard-org
 
-Website and package repo for https://baluard.app, deployed by GitHub Pages from the `main` branch root (no CI, all builds local). Zola static site + committed apt/dnf/F-Droid metadata. Sibling of the product repo at `../baluard`; the `Baluard/` workspace parent is not a git repo.
+Website repo for https://baluard.app, served by GitHub Pages from the `gh-pages` branch (no Actions, all builds local). Zola static site; sources live in `site/`, `main` carries no build output. Sibling of the product repo at `../baluard`; the `Baluard/` workspace parent is not a git repo.
 
 ## Commands
 
 Requires `zola` (0.23.x) and `just`. All tasks go through the justfile:
 
 - `just serve` — dev server with live reload at http://127.0.0.1:1111
-- `just build` — `zola build`, then stage generated files to repo root: `index.html`, `<page>/index.html` (security, ai-instructions, support, privacy, tos), `assets/`, `llms.txt`, `favicon.ico`, `manifest.webmanifest`, `robots.txt`, `sitemap.xml`
+- `just build` — `zola build` into `site/public` (guards regenerate the social card and favicon first)
+- `just deploy` — build and force-push `site/public` to the `gh-pages` branch (`CNAME` + `.nojekyll` included)
 - `just check` — template + internal link validation (`--skip-external-links`, see gotchas)
 - `just social-card` — regenerate the 1200x630 og:image via `scripts/social-card.sh`
 - `just sync-paper` — rebuild `site/content/security.md` from `../baluard/docs/security/security-white-paper.md`, then build
@@ -15,11 +16,11 @@ Requires `zola` (0.23.x) and `just`. All tasks go through the justfile:
 
 No test suite exists. `just check` is the only validation gate.
 
-**Local CI: always build before you push, no exceptions.** GitHub Pages deploys `main` directly and there is no CI to catch problems, so the pushed tree must already be compiled and verified locally: run `just check` and `just build` and confirm both are green before every commit and push. Never push and wait for CI to find out. The root-level files ARE the deploy artifact.
+**Local CI: always build before you push, no exceptions.** There is no CI to catch problems, so the pushed tree must already be verified locally: run `just check` and `just build` and confirm both are green before every commit and push. Never push and wait for CI to find out. Publishing is a separate step: `just deploy` builds and force-pushes `site/public` to the `gh-pages` branch (branch-based Pages, no Actions). gh-pages is a build-artifact branch, so its force-push is expected. Pushing `main` never deploys: the live site updates only through `just deploy`; a stale baluard.app almost always means undeployed `main` commits.
 
 ## Architecture
 
-**Generated vs source is the critical boundary.** Everything Zola writes to the repo root is output — never hand-edit root `index.html`, `security/`, `ai-instructions/`, `support/`, `privacy/`, `tos/`, root `assets/`, `llms.txt`, `favicon.ico`, `manifest.webmanifest`, `robots.txt`, `sitemap.xml`. Edit under `site/`, then `just build`.
+**Generated vs source is the critical boundary.** `site/public/` is generated output: never commit it, never edit it. `main` carries sources only; the published artifact lives on `gh-pages` and is replaced wholesale by `just deploy`. Edit under `site/`, then `just build`.
 
 - `site/config.toml` — Zola config: `base_url`, title, description, `[extra]` (version, github_repo, repo signing fingerprint)
 - `site/content/` — markdown pages: `_index.md`, `security.md`, `ai-instructions.md`, `privacy.md`, `support.md`, `tos.md`. Frontmatter must set `title`, `description`, `template`, `slug`, `path` (copy the heredoc in the `sync-paper` recipe)
@@ -28,9 +29,9 @@ No test suite exists. `just check` is the only validation gate.
 - `scripts/` — `social-card.sh`, `favicon.sh` (asset generators invoked by build guards)
 - `repo/` — apt (`dists/`, `pool/`) and dnf (`rpms/`) metadata, `SHA256SUMS` + signature, `baluard-release.asc`. Binaries ship via GitHub Releases, never in this tree
 - `fdroid/` — F-Droid repo metadata; `*.apk` is gitignored everywhere except `fdroid/repo/`
-- `CNAME` — Pages custom domain
+- `site/static/CNAME` — Pages custom domain; must ship in the artifact or the domain detaches from the site
 
-Deploy: `just build`, commit, push `main`, then `gh workflow run deploy-pages.yml` from the repo root and watch the run. The workflow is dispatch-only: pushing `main` does NOT deploy, so the live site updates only when you trigger it after your pushes.
+Deploy: `just deploy` — see the Local CI rule above.
 
 ## Gotchas
 
@@ -41,7 +42,6 @@ Deploy: `just build`, commit, push `main`, then `gh workflow run deploy-pages.ym
 - `just check` runs the full external link validation: the main repo went public, so its previously-excluded 404s are gone.
 - `just sync-paper` clobbers two hand adaptations in `site/content/security.md` — re-apply after running: (1) the ADR cross-reference must be a markdown link to `https://github.com/baluard-org/baluard/tree/main/docs/adr` (the source file uses the repo-relative `../adr/index.md`, which is correct on GitHub but dead on the site); (2) `docs/linux-repositories.md` must read `docs/dev/linux-repositories.md`.
 - Crypto claims site-wide: AES-256-GCM with 96-bit nonces. Never write ChaCha20-Poly1305; no ChaCha exists in the product.
-- Deploy runs fail with "Found 0 artifacts" / "Fetching artifact metadata failed" from a GitHub artifact-API glitch while every status component shows operational. Just re-dispatch (`gh workflow run deploy-pages.yml`); every dispatch retry has gone green where the automated run failed.
 - App version shown on the site comes from `[extra].version` in `site/config.toml`; sync it when the product releases.
 
 ## Commits

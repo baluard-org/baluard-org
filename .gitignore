@@ -38,3 +38,19 @@ Thumbs.db
 # the package download fails)
 !repo/pool/**/*.deb
 !repo/rpms/*.rpm
+
+# Generated site output: published to gh-pages by `just deploy`, never committed
+/index.html
+/ai-instructions/
+/changelog/
+/privacy/
+/security/
+/support/
+/tos/
+/what-the-git/
+/assets/
+/llms.txt
+/favicon.ico
+/manifest.webmanifest
+/robots.txt
+/sitemap.xml
