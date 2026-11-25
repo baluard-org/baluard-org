@@ -184,7 +184,7 @@
   }
 
   .donate-card .btn {
-    align-self: flex-start;
+    align-self: flex-end;
     margin-top: 0.25rem;
   }
 
@@ -331,6 +331,16 @@
     .donate-grid-2,
     .donate-grid-3 {
       grid-template-columns: 1fr;
+    }
+
+    .donate-share-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+
+    .donate-share-btn {
+      justify-content: center;
     }
   }
 </style>
