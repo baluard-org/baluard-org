@@ -36,7 +36,7 @@
       'cap-lede': 'Built for autonomy, durability, and device-level custody.',
       'cap1-title': 'Built for LLM Agents, Safely',
       'cap1-desc': 'Let AI coding agents run commands with your credentials without ever seeing a secret. The daemon spawns the command, injects approved fields, and scrubs any leaked secret bytes from stdout and stderr. Agents can sign in to services with your approval, and your credentials are never seen by or sent to any LLM provider.',
-      'cap1-s1': 'Process-bound, 5-minute default grants (configurable) with explicit human approval',
+      'cap1-s1': 'Process-bound, 15-minute default grants (configurable) with explicit human approval',
       'cap1-s2': 'Hash-chained local audit log records every command and grant',
       'cap2-title': 'Hardware Key Vault Sealing',
       'cap2-desc': 'Enroll a YubiKey or FIDO2 hardware token to seal the entire vault. Even if an adversary extracts your master password, the vault refuses to decrypt without a physical touch on your security key.',
@@ -55,7 +55,7 @@
 
       'cli-eyebrow': 'First-Class CLI',
       'cli-heading': 'Scriptable, daemon-backed terminal client.',
-      'cli-lede': 'The `baluard` CLI gives you 35 commands with daemon-first speed and an offline `--direct` fallback. Perfect for dev environments, headless servers, and CI pipelines.',
+      'cli-lede': 'The `baluard` CLI gives you 45 commands with daemon-first speed and an offline `--direct` fallback. Perfect for dev environments, headless servers, and CI pipelines.',
 
       'sec-eyebrow': 'Auditable Assurance',
       'sec-heading': 'Read the Security White Paper',
@@ -165,7 +165,7 @@
       'footer-link-tos': 'Terms of Service',
       'footer-link-lic': 'License (GPL-3.0-or-later)',
       'footer-link-vuln': 'Vulnerability Reporting',
-      'footer-link-pkg': 'APT &amp; DNF Packages',
+      'footer-link-pkg': 'Linux Packages (apt, dnf, pacman)',
       'footer-bottom-lic': 'Free software under <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0-or-later</a>. No trackers, no telemetry, no cloud lock-in.',
       'footer-built-by': 'An <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">EstebanForge</a> Project'
     },
@@ -204,7 +204,7 @@
       'cap-lede': 'Construido para la autonomía, la durabilidad y la custodia a nivel de dispositivo.',
       'cap1-title': 'Listo para Agentes de IA, con Seguridad',
       'cap1-desc': 'Permite que agentes de IA ejecuten comandos con tus credenciales sin ver jamás un secreto. El daemon lanza el comando, inyecta los campos aprobados y limpia cualquier secreto filtrado de stdout y stderr. Los agentes pueden iniciar sesión en servicios con tu aprobación, y ningún proveedor de LLM ve ni recibe tus credenciales.',
-      'cap1-s1': 'Permisos de 5 minutos por defecto (configurables) vinculados al proceso con aprobación humana explícita',
+      'cap1-s1': 'Permisos de 15 minutos por defecto (configurables) vinculados al proceso con aprobación humana explícita',
       'cap1-s2': 'Registro de auditoría local encadenado por hash para cada comando y permiso',
       'cap2-title': 'Sellado de Bóveda con Llave de Hardware',
       'cap2-desc': 'Registra una YubiKey o un token de hardware FIDO2 para sellar la bóveda completa. Aunque un adversario extraiga tu contraseña maestra, la bóveda no se descifrará sin un toque físico en tu llave de seguridad.',
@@ -223,7 +223,7 @@
 
       'cli-eyebrow': 'CLI de Primer Nivel',
       'cli-heading': 'Cliente de terminal programable respaldado por demonio.',
-      'cli-lede': 'El CLI de `baluard` te ofrece 35 comandos con velocidad basada en demonio y un modo sin conexión `--direct`. Ideal para entornos dev, servidores headless y pipelines de CI.',
+      'cli-lede': 'El CLI de `baluard` te ofrece 45 comandos con velocidad basada en demonio y un modo sin conexión `--direct`. Ideal para entornos dev, servidores headless y pipelines de CI.',
 
       'sec-eyebrow': 'Garantía Auditable',
       'sec-heading': 'Lee el Libro Blanco de Seguridad',
@@ -334,7 +334,7 @@
       'footer-link-tos': 'Términos del Servicio',
       'footer-link-lic': 'Licencia (GPL-3.0-or-later)',
       'footer-link-vuln': 'Reporte de Vulnerabilidades',
-      'footer-link-pkg': 'Paquetes APT y DNF',
+      'footer-link-pkg': 'Paquetes Linux (apt, dnf, pacman)',
       'footer-bottom-lic': 'Software libre bajo <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0-or-later</a>. Sin rastreadores, sin telemetría, sin dependencia de la nube.',
       'footer-built-by': 'Un proyecto de <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">EstebanForge</a>'
     },
@@ -373,7 +373,7 @@
       'cap-lede': 'Conçu pour l\'autonomie, la durabilité et la garde au niveau de l\'appareil.',
       'cap1-title': 'Prêt pour les Agents IA, en Toute Sécurité',
       'cap1-desc': 'Laissez des agents IA exécuter des commandes avec vos identifiants sans jamais voir un secret. Le daemon lance la commande, injecte les champs approuvés et nettoie tout secret filtré sur stdout et stderr. Les agents peuvent se connecter à des services avec votre approbation, et aucun fournisseur de LLM ne voit ni ne reçoit vos identifiants.',
-      'cap1-s1': 'Autorisations par défaut de 5 minutes (configurables) liées au processus avec approbation humaine explicite',
+      'cap1-s1': 'Autorisations par défaut de 15 minutes (configurables) liées au processus avec approbation humaine explicite',
       'cap1-s2': 'Journal d\'audit local chaîné par hachage pour chaque commande et autorisation',
       'cap2-title': 'Scellement du Coffre par Clé Matérielle',
       'cap2-desc': 'Enregistrez une YubiKey ou un token matériel FIDO2 pour sceller la totalité du coffre. Même si un adversaire extrait votre mot de passe maître, le coffre refuse de se déchiffrer sans contact physique sur votre clé de sécurité.',
@@ -499,7 +499,7 @@
       'footer-link-tos': 'Conditions d\'Utilisation',
       'footer-link-lic': 'Licence (GPL-3.0-or-later)',
       'footer-link-vuln': 'Signalement de Vulnérabilités',
-      'footer-link-pkg': 'Paquets APT &amp; DNF',
+      'footer-link-pkg': 'Paquets Linux (apt, dnf, pacman)',
       'footer-bottom-lic': 'Logiciel libre sous <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0-or-later</a>. Aucun traqueur, aucune télémétrie, aucun verrouillage cloud.',
       'footer-built-by': 'Un projet <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">EstebanForge</a>'
     },
@@ -538,7 +538,7 @@
       'cap-lede': 'Construído para autonomia, durabilidade e custódia no nível do dispositivo.',
       'cap1-title': 'Pronto para Agentes de IA, com Segurança',
       'cap1-desc': 'Deixe agentes de IA executarem comandos com suas credenciais sem nunca ver um segredo. O daemon inicia o comando, injeta os campos aprovados e remove qualquer segredo vazado de stdout e stderr. Os agentes podem entrar em serviços com sua aprovação, e nenhum provedor de LLM vê ou recebe suas credenciais.',
-      'cap1-s1': 'Concessões padrão de 5 minutos (configuráveis) vinculadas ao processo com aprovação humana explícita',
+      'cap1-s1': 'Concessões padrão de 15 minutos (configuráveis) vinculadas ao processo com aprovação humana explícita',
       'cap1-s2': 'Log de auditoria local encadeado por hash registra cada comando e concessão',
       'cap2-title': 'Selamento do Cofre com Chave de Hardware',
       'cap2-desc': 'Cadastre uma YubiKey ou um token de hardware FIDO2 para selar o cofre inteiro. Mesmo que um adversário extraia sua senha mestra, o cofre se recusa a descriptografar sem um toque físico na sua chave de segurança.',
@@ -557,7 +557,7 @@
 
       'cli-eyebrow': 'CLI de Primeira Linha',
       'cli-heading': 'Cliente de terminal programável com suporte a daemon.',
-      'cli-lede': 'O CLI `baluard` oferece 35 comandos com velocidade baseada em daemon e um modo offline `--direct`. Ideal para ambientes de desenvolvimento, servidores headless e pipelines de CI.',
+      'cli-lede': 'O CLI `baluard` oferece 45 comandos com velocidade baseada em daemon e um modo offline `--direct`. Ideal para ambientes de desenvolvimento, servidores headless e pipelines de CI.',
 
       'sec-eyebrow': 'Garantia Auditável',
       'sec-heading': 'Leia o Relatório de Segurança',
@@ -664,7 +664,7 @@
       'footer-link-tos': 'Termos de Serviço',
       'footer-link-lic': 'Licença (GPL-3.0-or-later)',
       'footer-link-vuln': 'Relatório de Vulnerabilidades',
-      'footer-link-pkg': 'Pacotes APT e DNF',
+      'footer-link-pkg': 'Pacotes Linux (apt, dnf, pacman)',
       'footer-bottom-lic': 'Software livre sob licença <a href="https://github.com/baluard-org/baluard/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0-or-later</a>. Sem rastreadores, sem telemetria, sem dependência de nuvem.',
       'footer-built-by': 'Um projeto <a href="https://actitud.xyz" target="_blank" rel="noopener noreferrer">EstebanForge</a>'
     }

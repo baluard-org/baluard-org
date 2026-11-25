@@ -21,13 +21,13 @@ We read every message. Baluard is a small independent project, so please allow a
 ## Desktop app (Windows, macOS, Linux)
 
 - Downloads and release notes: [GitHub Releases](https://github.com/baluard-org/baluard/releases)
-- Linux packages: the APT and DNF repositories hosted on this site ([setup](/#download-repo))
+- Linux packages: the signed apt, dnf, and Arch pacman repositories at [packages.baluard.app](https://packages.baluard.app) ([setup](/#download-repo))
 - Package signatures use the release key with fingerprint `2233 10EA BF1A B6FE E6BD DF3E 2A53 1D54 E6D7 4804`
 
 ## Browser extension (Chrome, Firefox)
 
 - The extension needs the Baluard desktop app installed and running. It does nothing by itself: it talks to the app through a local channel on your machine. If the popup reports the app is missing, install or launch the desktop app first.
-- Until the store listings are approved, you can load the unpacked build. Follow the [extension README](https://github.com/baluard-org/baluard/tree/main/browser) in the source repository.
+- Install it from the [Chrome Web Store](https://chromewebstore.google.com/detail/nmkmfkmdhbifkjdhioejeoegcjpaiijl) or [Mozilla Add-ons](https://addons.mozilla.org/firefox/addon/baluard/). To run an unpacked build instead, follow the [extension README](https://github.com/baluard-org/baluard/tree/main/browser) in the source repository.
 
 ## Mobile (Android)
 
@@ -43,7 +43,7 @@ We read every message. Baluard is a small independent project, so please allow a
 
 ## Sync and git providers
 
-- Sync setup and troubleshooting live in the [documentation](https://docs.baluard.app/introduction/syncing-your-vault/)
+- Sync setup and troubleshooting live in the [documentation](https://docs.baluard.app/sync/syncing-your-vault/)
 - When two devices edit the same entry, the app shows a conflict panel. Your data is never lost: both versions stay available until you pick one or keep both
 
 ## Debug logs

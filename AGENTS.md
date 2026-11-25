@@ -23,13 +23,12 @@ No test suite exists. `just check` is the only validation gate.
 **Generated vs source is the critical boundary.** `site/public/` is generated output: never commit it, never edit it. `main` carries sources only; the published artifact lives on `gh-pages` and is replaced wholesale by `just deploy`. Edit under `site/`, then `just build`.
 
 - `site/config.toml` — Zola config: `base_url`, title, description, `[extra]` (version, github_repo, repo signing fingerprint)
-- `site/content/` — markdown pages: `_index.md`, `security.md`, `ai-instructions.md`, `privacy.md`, `support.md`, `tos.md`. Frontmatter must set `title`, `description`, `template`, `slug`, `path` (copy the heredoc in the `sync-paper` recipe)
+- `site/content/` — markdown pages: `_index.md`, `ai-instructions.md`, `changelog.md`, `donate.md`, `privacy.md`, `security.md`, `support.md`, `tos.md`, `what-the-git.md`. Frontmatter must set `title`, `description`, `template`, `slug`, `path` (copy the heredoc in the `sync-paper` recipe)
 - `site/templates/` — Tera. `base.html` is the shared shell (head, meta/og tags, i18n bootstrap); `index.html` holds the entire homepage markup; `page.html` is the generic content page; `security.html` and `ai-instructions.html` are page-specific
 - `site/static/` — copied verbatim by `zola build`: `assets/` (lock SVGs, Morris Roman fonts, screenshots, `i18n.js`, `social-card.png`), `favicon.ico`, `llms.txt`, `manifest.webmanifest`
 - `scripts/` — `social-card.sh`, `favicon.sh` (asset generators invoked by build guards)
-- `repo/` — apt (`dists/`, `pool/`) and dnf (`rpms/`) metadata, `SHA256SUMS` + signature, `baluard-release.asc`. Binaries ship via GitHub Releases, never in this tree
-- `fdroid/` — F-Droid repo metadata; `*.apk` is gitignored everywhere except `fdroid/repo/`
 - `site/static/CNAME` — Pages custom domain; must ship in the artifact or the domain detaches from the site
+- Package repos live elsewhere: apt/dnf/pacman and F-Droid moved to the sibling `baluard-packages` repo (`packages.baluard.app`); this tree carries no package bytes
 
 Deploy: `just deploy` — see the Local CI rule above.
 
@@ -39,8 +38,8 @@ Deploy: `just deploy` — see the Local CI rule above.
 - Template asset paths must be root-relative (`./assets/...`) because generated HTML lands at different depths (`/`, `/security/`, ...). i18n: translations live in `site/static/assets/i18n.js`; an inline head script resolves localStorage/navigator language before first paint — keep it inline and `i18n.js` deferred. When the dictionary changes, bump the script URL's `?v=` to the change's unix timestamp (cache-bust; stale dictionaries have rewritten button labels before).
 - SVG rendering must go through `rsvg-convert`, never ImageMagick directly: its builtin SVG parser drops gradient fills and outputs flat black.
 - justfile build order is load-bearing: asset-generation guards (`social-card.png`, `favicon.ico`) run BEFORE `zola build` and before the root `cp` steps, or fresh clones fail.
-- `just check` runs the full external link validation: the main repo went public, so its previously-excluded 404s are gone.
-- `just sync-paper` clobbers two hand adaptations in `site/content/security.md` — re-apply after running: (1) the ADR cross-reference must be a markdown link to `https://github.com/baluard-org/baluard/tree/main/docs/adr` (the source file uses the repo-relative `../adr/index.md`, which is correct on GitHub but dead on the site); (2) `docs/linux-repositories.md` must read `docs/dev/linux-repositories.md`.
+- `just check` skips external link validation (`--skip-external-links`); broken relative links that Zola cannot resolve (no `@/` prefix) also escape it, so verify rendered output for new link patterns.
+- `just sync-paper` copies the white paper verbatim from `../baluard/docs/security/security-white-paper.md`; the site-specific adaptations (GitHub links for ADRs and internal docs, the `docs/dev/` path) live in the source file now, so nothing needs re-applying after a sync.
 - Crypto claims site-wide: AES-256-GCM with 96-bit nonces. Never write ChaCha20-Poly1305; no ChaCha exists in the product.
 - App version shown on the site comes from `[extra].version` in `site/config.toml`; sync it when the product releases.
 

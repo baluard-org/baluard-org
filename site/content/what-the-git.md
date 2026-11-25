@@ -52,7 +52,7 @@ Without your master password and your device keys, the notebook is unreadable. T
 
 ## You never touch the terminal
 
-Git normally lives in a black text window full of commands. Not here. The Baluard app does all of it quietly in the background: saving versions, syncing between your phone and your computer, and combining changes from both. Change an entry offline on your laptop while your phone changes a different one? Baluard merges both changes, and nothing is lost. You just use the app. (Developers get a full command line too, with 35 commands, if that is their idea of fun.)
+Git normally lives in a black text window full of commands. Not here. The Baluard app does all of it quietly in the background: saving versions, syncing between your phone and your computer, and combining changes from both. Change an entry offline on your laptop while your phone changes a different one? Baluard merges both changes, and nothing is lost. You just use the app. (Developers get a full command line too, with 45 commands, if that is their idea of fun.)
 
 ## Five words worth knowing
 
