@@ -107,6 +107,8 @@ The same discipline covers stored item content. Every decrypted payload struct (
 
 The symmetric bulk of the vault is quantum-safe: AES-256 and Argon2id have no quantum shortcut that matters, and entry keys are symmetric. The asymmetric layer is the exposed surface, and one piece of it deserves its own sentence: the recovery escrow publishes an X25519 public key in plaintext inside every synced vault, which makes it the highest-value harvest-now, decrypt-later target in the design. Rotating the recovery phrase rotates that key, and the migration plan, a hybrid post-quantum KEM landing inside the existing rotation paths for the escrow, the device key wraps, and the Ed25519 signatures, is written down in [post-quantum-readiness.md](https://github.com/baluard-org/baluard/blob/main/docs/security/post-quantum-readiness.md).
 
+RSA deserves its own sentence because of how often the question comes up: Baluard depends on it nowhere. Vault confidentiality and integrity run entirely on AES-256-GCM, Argon2id, X25519, and Ed25519, and the only RSA in the codebase sits in verification roles at the edge: checking the RSA-signed attestation certificates of FIDO hardware keys, and serving a user's own RSA SSH keys through the agent. A break of RSA, classical factoring or a quantum Shor run, forges neither vault data nor vault history; it would weaken the hardware-genuine attestation signal and expose RSA SSH client keys, which is why Ed25519-only SSH keys are the standing recommendation.
+
 ## 6. Synchronization
 
 Sync is git, and that choice is a security decision as much as an operations one. Your remote (GitHub, GitLab, Codeberg, your own server) receives git commits whose contents are Baluard's padded, encrypted files. There is no Baluard API to attack, no Baluard database to leak, no Baluard outage to wait out.
@@ -201,5 +203,6 @@ Thanks for reading, and to everyone who reviews it harder than we did.
 
 | Date | Changes |
 |---|---|
+| 2026-11-28 | Added the RSA statement to Cryptography: the vault path is RSA-free; RSA exists only in FIDO attestation verification and ssh-agent RSA key support. |
 | 2026-11-25 | Refreshed for the 0.9.0 release line: internal document links now point at the public repository, the package-repository note covers the pacman repo, and the HPKE migration status is current. |
 | 2026-11-01 | Initial publication, covering the 0.1.0 release. |
